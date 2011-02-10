@@ -32,28 +32,40 @@ class Section(models.Model):
         return self.name
 
 
+###################################################################
+
 # ---------------------------------------------------------
 # FORMFIELDS
 # ---------------------------------------------------------
 class FormFields(models.Model):
     label = models.CharField(max_length=256)
-    order = models.CharField(max_length=128)
+    order = models.SmallIntegerField()
     section = models.ForeignKey(Section)
+    field_group = models.ForeignKey(FieldGroup)
+    field_list = models.ForeignKey(FieldList)
+    # ORDEN DENTRO DEL GRUPO AQUI --> Problema muchos nulos
     
+    class Meta:
+        unique_together = ('name', 'section', 'order')
+            
     def __unicode__(self):
         return self.label
 
+###################################################################
+# Falta decir los nulos en todas las clases
+###################################################################
 
 class Instance(models.Model):
-    id = models.CharField(max_length=128)
-    creation_date = models.CharField(max_length=128)
-    signature = models.CharField(max_length=128)    
+    creation_date = models.DateField()
+    modification_date = models.DateField()
+    signature = models.CharField(max_length=128) # TO-DO 
     form = models.ForeignKey(Form)
     
     def __unicode__(self):
         return self.id
     
     
+### FALTA HERENCIA
 class InstanceFields(models.Model):
     instance = models.ForeignKey(Instance)
     form_fields = models.ForeignKey(FormFields)
