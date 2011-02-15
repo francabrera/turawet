@@ -7,22 +7,27 @@ Created on 08/02/2011
 
 from django.views.decorators.csrf import csrf_exempt
 from soaplib.service import soapmethod
-from soaplib.serializers.primitive import Array
+from soaplib.serializers.primitive import Array, Integer
 from soaplib.serializers.binary import Attachment
 from soaplib_handler import DjangoSoapService
 from os.path import exists
-from dummy import Dummy
+from dummy import Dummy, DummyWs
+
+from BeeKeeper.db_models.models import Form
+from models_ws import WsForm
+
 
 class SoapService(DjangoSoapService):
 
-    __tns__ = 'http://localhost:8000/'
+    __tns__ = 'http://localhost:8000/ws_server/'
     
-    @soapmethod(_returns=Dummy)
+    @soapmethod(_returns=DummyWs)
     def get_dummy(self):
         
-        dummy = Dummy("Soy un objeto tonto")
-        return dummy
-    
+        dummy = Dummy("Soy un objeto tonto", 123)
+        dw = DummyWs(dummy)
+        return dw
+
     @soapmethod(_returns=Array(Dummy))
     def get_all_dummies(self):
         
@@ -41,35 +46,32 @@ class SoapService(DjangoSoapService):
         document = Attachment(fileName=file_path)
         return document
     
-    '''
-    
-    '''
+
     @soapmethod(_returns=Array)
     def get_all_forms_preview(self):
-        
-        forms = [] #  
+    
+        forms = [] #  WsForm
         return forms
 
-    '''
-    
-    '''
+    @soapmethod(Integer, _returns=WsForm)
     def get_form_by_id(self, form_id):
-        
-        return
-       
-    '''
+        form = Form.objects.get(id = form_id)
+        wsform = WsForm(form)
+        return wsform
     
-    '''       
+    @soapmethod(Array(Integer), _returns=Array(WsForm))
+    def get_forms_by_ids(self, forms_id):
+        list = []
+        for form_id in forms_id:
+            form = Form.objects.get
+            list.append(WsForm(form))
+        return
+
     def upload_new_form(self, form):
-        
+    
         return
     
-    '''
-    
-    '''
     def upload_new_instance(self):
-    
         return
-    
     
 service = csrf_exempt(SoapService())
