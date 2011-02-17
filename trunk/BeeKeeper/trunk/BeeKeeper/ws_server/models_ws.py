@@ -71,7 +71,7 @@ class ModelsSerializer(ClassSerializer):
     '''
     def __init__(self, *args, **kwargs):
         super(ModelsSerializer, self).__init__()
-               
+
         # for each args read attributes and update wsobjcet
         for source in args:
             if isinstance(source, dict):
@@ -79,10 +79,9 @@ class ModelsSerializer(ClassSerializer):
             else:
                 # if arg is not an dict, take his dict
                 self.__dict__.update(source.__dict__)
-        
+
         # update object also with kwargs
         self.__dict__.update(kwargs)
-
 
 class WsForm(ModelsSerializer):
     class types:
