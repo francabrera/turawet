@@ -30,7 +30,26 @@ class Section(models.Model):
 
     def __unicode__(self):
         return self.name
+    
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
+class FieldList(models.Model):
+    label = models.CharField(max_length=256)
+         
+    def __unicode__(self):
+        return self.label
 
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
+class FieldGroup(models.Model):
+    label = models.CharField(max_length=256)
+    list = models.OneToOneField(FieldList)
+    # ORDEN DENTRO DEL GRUPO AQUI --> Problema muchos nulos
+            
+    def __unicode__(self):
+        return self.label
 
 ###################################################################
 
@@ -39,14 +58,16 @@ class Section(models.Model):
 # ---------------------------------------------------------
 class FormFields(models.Model):
     label = models.CharField(max_length=256)
-    order = models.SmallIntegerField()
+    # Section
+    section_order = models.SmallIntegerField()
     section = models.ForeignKey(Section)
+    # Groups
     field_group = models.ForeignKey(FieldGroup)
-    field_list = models.ForeignKey(FieldList)
+    field_group_order = models.SmallIntegerField()
     # ORDEN DENTRO DEL GRUPO AQUI --> Problema muchos nulos
     
     class Meta:
-        unique_together = ('name', 'section', 'order')
+        unique_together = ('label', 'section', 'section_order')
             
     def __unicode__(self):
         return self.label
@@ -55,6 +76,9 @@ class FormFields(models.Model):
 # Falta decir los nulos en todas las clases
 ###################################################################
 
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
 class Instance(models.Model):
     creation_date = models.DateField()
     modification_date = models.DateField()
@@ -62,13 +86,40 @@ class Instance(models.Model):
     form = models.ForeignKey(Form)
     
     def __unicode__(self):
-        return self.id
+        return self.form.label + " - " + self.creation_date
     
-    
-### FALTA HERENCIA
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
 class InstanceFields(models.Model):
     instance = models.ForeignKey(Instance)
+    instance_order = models.SmallIntegerField()
     form_fields = models.ForeignKey(FormFields)
     
     def __unicode__(self):
-        return self.label
+        return self.form_fields.label
+
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
+class ImageFields(InstanceFields):
+    value = models.ImageField(upload_to = '/')
+    #value = models.ImageField()#(verbose_name, name, width_field, height_field)
+
+    def getImage(self):
+        return self.value
+
+# ---------------------------------------------------------
+# FORMFIELDS
+# -------------------------------------------------------
+class TextFields(InstanceFields):
+    value = models.CharField(max_length=128) # TO-DO
+    
+    def getText(self):
+        return self.value
+# ---------------------------------------------------------
+# FORMFIELDS
+# ---------------------------------------------------------
+#class TextAreaFields(TextFields):
+    #value = models.TextField()
+    
