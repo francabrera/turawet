@@ -10,7 +10,7 @@ class User(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=128)
-  #  members = models.ManyToManyField(Person, through='Membership')
+    #members = models.ManyToManyField(Person, through='Membership')
 
     def __unicode__(self):
         return self.name
