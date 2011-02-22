@@ -71,7 +71,7 @@ class FieldList(models.Model):
 
 
 
-class FormFields(models.Model):
+class FormField(models.Model):
     """Class: `FieldList`. 
        :param label: Field label in the form.
        :param section_order: The order of the field in the current section.
@@ -88,7 +88,7 @@ class FormFields(models.Model):
     section_order = models.SmallIntegerField()
     section = models.ForeignKey(Section)
     # Groups
-    field_group = models.ForeignKey(FieldGroup)
+    field_group = models.ForeignKey(FieldGroup, null=True)
     field_group_order = models.SmallIntegerField(null=True)
     
     class Meta:
@@ -113,12 +113,12 @@ class Instance(models.Model):
     form = models.ForeignKey(Form)
     
     def __unicode__(self):
-        return self.form.label + " - " + self.creation_date
+        return self.form.name + " - " + self.id
     
 
 
-class InstanceFields(models.Model):
-    """Class: `InstanceFields`. 
+class InstanceField(models.Model):
+    """Class: `InstanceField`. 
        :param instance: Instance which this field (value) is related to.
        :param instance_order: Order of this field in the instance.
        :param form_fields: form-field related with this instance-field.
@@ -126,7 +126,7 @@ class InstanceFields(models.Model):
                   of the dynamic fields"""
     instance = models.ForeignKey(Instance)
     instance_order = models.SmallIntegerField()
-    form_fields = models.ForeignKey(FormFields)
+    form_fields = models.ForeignKey(FormField)
     
     class Meta:
         unique_together = ('instance', 'instance_order')
@@ -136,8 +136,8 @@ class InstanceFields(models.Model):
 
 
 
-class ImageFields(InstanceFields):
-    """Class: `ImageFields`. 
+class ImageField(InstanceField):
+    """Class: `ImageField`. 
        :param value: The image itself.
        :todo ImageField parameters"""
     value = models.ImageField(upload_to = '/')
@@ -147,8 +147,8 @@ class ImageFields(InstanceFields):
 
 
 
-class TextFields(InstanceFields):
-    """Class: `TextFields`. 
+class TextField(InstanceField):
+    """Class: `TextField`. 
        :param value: The text itself."""
     value = models.CharField(max_length=128)
     
@@ -158,8 +158,8 @@ class TextFields(InstanceFields):
     
     
 # ---------------------------------------------------------
-# TextAreaFields
+# TextAreaField
 # ---------------------------------------------------------
-#class TextAreaFields(TextFields):
+#class TextAreaField(TextField):
     #value = models.TextField()
     
