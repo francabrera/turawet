@@ -1,0 +1,21 @@
+{% comment %}
+	Esquema basico de la web.
+	Turawet project
+{% endcomment %}
+<html>
+<head>
+
+	<meta http-equiv="Content-Language" content="es">
+	{% block head %}{% endblock %}
+	<title>Turawet-BeeKeeper | {% block title %}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<link rel="stylesheet" type="text/css" href="/css/standard.css">
+	</head>
+	<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" {% block bodyoptions %}{% endblock %}>
+	<a href="/user/"><img src="/img/icono.png"></img>
+	<h1>Administraci&oacute;n del repositorio</h1></a>
+	<h2>{% block section %}{% endblock %}</h2> 
+	{% block content %}{% endblock %}
+
+</body>
+</html>
