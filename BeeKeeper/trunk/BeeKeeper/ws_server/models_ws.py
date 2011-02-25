@@ -83,7 +83,8 @@ class ModelsSerializer(ClassSerializer):
         # update object also with kwargs
         self.__dict__.update(kwargs)
 
-class WsForm(ModelsSerializer):
+class WsFormPreview(ModelsSerializer):
     class types:
-        xml = String
+        name = String
+        version = String
 
