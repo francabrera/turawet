@@ -13,8 +13,8 @@ from soaplib_handler import DjangoSoapService
 from os.path import exists
 from dummy import Dummy, DummyWs
 
-#from BeeKeeper.db_models.models import Form
-from models_ws import WsForm
+from BeeKeeper.db_models.models import Form
+from models_ws import WsFormPreview
 
 
 class SoapService(DjangoSoapService):
@@ -46,13 +46,17 @@ class SoapService(DjangoSoapService):
         document = Attachment(fileName = file_path)
         return document
 
-    '''
-    @soapmethod(_returns=Array)
+
+    @soapmethod(_returns = Array(WsFormPreview))
     def get_all_forms_preview(self):
-       
-        forms = [] #  WsForm
-        return forms
-    '''
+
+        forms = Form.objects.values('name', 'version')
+        wsforms = []
+        for form in forms:
+            wsforms.append(WsFormPreview(form))
+        print wsforms
+        return wsforms
+
     '''
     @soapmethod(Integer, _returns=WsForm)
     def get_form_by_id(self, form_id):
