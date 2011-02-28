@@ -16,13 +16,14 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME':     'XE',
+        'NAME':     'xe',
         'USER':     'turawet',
         'PASSWORD': '4b3j45n3gr45',
         'HOST':     '10.209.2.64',
         'PORT':     '5432',
     }
 }
+
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
