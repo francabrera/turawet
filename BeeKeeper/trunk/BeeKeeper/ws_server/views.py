@@ -7,14 +7,14 @@ Created on 08/02/2011
 
 from django.views.decorators.csrf import csrf_exempt
 from soaplib.service import soapmethod
-from soaplib.serializers.primitive import Array, Integer
+from soaplib.serializers.primitive import Array, Integer, String
 from soaplib.serializers.binary import Attachment
 from soaplib_handler import DjangoSoapService
 from os.path import exists
 from dummy import Dummy, DummyWs
 
 from BeeKeeper.db_models.models import Form
-from models_ws import WsFormPreview
+from models_ws import WsFormPreview, WsForm
 
 
 class SoapService(DjangoSoapService):
@@ -49,21 +49,27 @@ class SoapService(DjangoSoapService):
 
     @soapmethod(_returns = Array(WsFormPreview))
     def get_all_forms_preview(self):
-
+        ''' 
+        :param name: section name. 
+        :param order: section order inside a form.
+        :param form: references the form in which this section is.
+        '''
         forms = Form.objects.values('name', 'version')
+
         wsforms = []
         for form in forms:
             wsforms.append(WsFormPreview(form))
         print wsforms
         return wsforms
 
-    '''
-    @soapmethod(Integer, _returns=WsForm)
-    def get_form_by_id(self, form_id):
-        form = Form.objects.get(id = form_id)
+
+    @soapmethod(String, Integer, _returns = WsForm)
+    def get_form_by_name_version(self, name, version):
+        form = Form.objects.get(name = name, version = version)
         wsform = WsForm(form)
         return wsform
-    
+
+    '''
     @soapmethod(Array(Integer), _returns=Array(WsForm))
     def get_forms_by_ids(self, forms_id):
         list = []

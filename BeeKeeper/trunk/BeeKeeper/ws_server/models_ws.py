@@ -86,5 +86,10 @@ class ModelsSerializer(ClassSerializer):
 class WsFormPreview(ModelsSerializer):
     class types:
         name = String
-        version = String
+        version = Integer
 
+class WsForm(ModelsSerializer):
+    class types:
+        name = String
+        version = Integer
+        xml = String
