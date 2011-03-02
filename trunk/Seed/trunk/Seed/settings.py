@@ -4,7 +4,16 @@ import django
 # calculated paths for django and the site
 # used as starting points for various other paths
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+# CSS paths
+CSS_MODELER_ROOT = os.path.join(PROJECT_DIR, 'modeler', 'css')
+
+# Images paths
+IMAGES_MODELER_ROOT = os.path.join(PROJECT_DIR, 'modeler',
+                                    'templates', 'images')
+# JavaScript paths
+JS_MODELER_ROOT = os.path.join(PROJECT_DIR, 'modeler', 'js')
 
 # Django settings for Seed project.
 
@@ -78,6 +87,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'Seed.urls'
 
 TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, 'templates'),
+    os.path.join(PROJECT_DIR, 'modeler/templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
