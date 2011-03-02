@@ -7,21 +7,25 @@ PROJECT_DIR = os.path.dirname(__file__) # this is not Django setting.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
 MANAGERS = ADMINS
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
+        'ENGINE':   'django.db.backends.oracle',
         'NAME':     'xe',
         'USER':     'turawet',
         'PASSWORD': '4b3j45n3gr45',
         'HOST':     '10.209.2.64',
         'PORT':     '5432',
-    }
+    },
 }
 
 #DATABASES = {

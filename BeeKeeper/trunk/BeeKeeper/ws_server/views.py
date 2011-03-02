@@ -14,7 +14,7 @@ from os.path import exists
 from dummy import Dummy, DummyWs
 
 from BeeKeeper.db_models.models import Form
-from models_ws import WsFormPreview, WsForm
+from models_ws import WsFormPreview, WsXmlForm
 
 
 class SoapService(DjangoSoapService):
@@ -59,15 +59,14 @@ class SoapService(DjangoSoapService):
         wsforms = []
         for form in forms:
             wsforms.append(WsFormPreview(form))
-        print wsforms
         return wsforms
 
 
-    @soapmethod(String, Integer, _returns = WsForm)
-    def get_form_by_name_version(self, name, version):
+    @soapmethod(String, Integer, _returns = WsXmlForm)
+    def get_xmlform_by_name_version(self, name, version):
         form = Form.objects.get(name = name, version = version)
-        wsform = WsForm(form)
-        return wsform
+        ws_xml_form = WsXmlForm(form)
+        return ws_xml_form
 
     '''
     @soapmethod(Array(Integer), _returns=Array(WsForm))
