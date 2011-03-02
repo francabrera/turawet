@@ -26,6 +26,21 @@ var addEvent = (function () {
   }
 })();
 
+
+/*****************************************************************/
+/* Crea un nuevo campo para el formulario                        */
+/*****************************************************************/
+function createNewField(id, name, idDrag, type) {
+	var newField = $('<li />', {
+        text : name,
+        data : { id : idDrag }
+    }).prepend($('<span />', {
+        'class' : 'quantity',
+        text : id
+    }));
+    return newField;
+}
+
 /*****************************************************************/
 /* Menú de campos                                                */
 /*****************************************************************/
@@ -65,21 +80,22 @@ addEvent(myform, 'dragenter', function (evt) {
 addEvent(myform, 'drop', function (evt) {
     if (evt.stopPropagation) evt.stopPropagation();
     // Obtenemos el ID transferido en el DRAG
-    var id = evt.dataTransfer.getData('text');
-    var item = $('#' + id);
+    var idDrag = evt.dataTransfer.getData('text');
+    var item = $('#' + idDrag);
     // Listado de campos del formulario
     var	formList = $("#form ul");
     var lis = $('li', formList);
 
     $("h2").fadeOut('fast');
-
-    var newField = $('<li />', {
-        text : $('p:first', item).text(),
-        data : { id : id }
-    }).prepend($('<span />', {
-        'class' : 'quantity',
-        text : parseInt(lis.length)
-    })).appendTo(formList);
+    
+    // Variables para el nuevo campo
+    var fieldName =  $('p:first', item).text();
+    var id = parseInt(lis.length);
+    // Creamos el nuevo campo
+    var newField = createNewField(id, fieldName, idDrag, '');
+    
+    // Agregamos el campo al formulario
+    newField.appendTo(formList);
 
     /*nuevoCampo.fadeIn('fast');*/
     return false;
