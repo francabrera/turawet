@@ -1,8 +1,8 @@
-'''
-Created on 08/02/2011
-
-@author: nicopernas
-'''
+"""*Database Models* definition module. 
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.2"""
 
 
 from django.views.decorators.csrf import csrf_exempt
@@ -14,7 +14,7 @@ from soaplib_handler import DjangoSoapService
 #from dummy import Dummy, DummyWs
 
 from BeeKeeper.db_models.models import Form
-from models_ws import WsFormPreview, WsXmlForm
+from models_ws import WsFormPreview, WsXmlForm, WsUploadStatus
 
 
 class SoapService(DjangoSoapService):
@@ -68,6 +68,7 @@ class SoapService(DjangoSoapService):
         ws_xml_form = WsXmlForm(form)
         return ws_xml_form
 
+
     @soapmethod(Array(Integer), _returns = Array(WsXmlForm))
     def get_forms_by_ids(self, forms_id):
         forms = []
@@ -75,11 +76,17 @@ class SoapService(DjangoSoapService):
             form = Form.objects.get(id = form_id)
             list.append(WsXmlForm(form))
         return forms
-    '''
+    
+
+    @soapmethod(String, _returns = WsUploadStatus)
     def upload_new_form(self, form):
-    
+        
+        '''
+        b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.');
+        b.save();
+        '''
         return
-    
+    '''
     def upload_new_instance(self):
         return
     '''

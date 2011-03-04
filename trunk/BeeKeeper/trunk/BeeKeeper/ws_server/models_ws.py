@@ -1,8 +1,10 @@
-'''
-Created on 10/02/2011
-
-@author: nicopernas
-'''
+"""*Database Models* definition module. 
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.2"""
+   
+   
 from soaplib.serializers.primitive import *
 from soaplib.serializers.clazz import ClassSerializer
 
@@ -91,3 +93,7 @@ class WsFormPreview(ModelsSerializer):
 class WsXmlForm(ModelsSerializer):
     class types:
         xml = String
+
+class WsUploadStatus(ModelsSerializer):
+    class types:
+        status = Boolean
