@@ -11,6 +11,11 @@
 		<h1>Formulario</h1>
 		<ul></ul>
 		<h2>Arrastra los campos al formulario</h2>
+		<form class="sendform" action="createForm/" method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Enviar" />
+		</form>
 	</div>
     <ul id="fields">
 		<li><a class="item" href="#" id="campo1" draggable="true">
@@ -36,14 +41,7 @@
 			<div>
 				<p><strong>CAMPO4</strong></p>
 			</div>
-		</a></li>
-		<!-- <li>
-			<form action="sendForm/" method="post">{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" value="Submit" />
-			</form>
-		</li> -->
-		
+		</a></li>		
 	</ul>
 </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>

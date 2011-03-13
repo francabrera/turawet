@@ -7,5 +7,5 @@ from django import forms
 
 # Create your models here.
 
-class createForm(forms.Form):
+class NewForm(forms.Form):
     fieldList = forms.CharField()

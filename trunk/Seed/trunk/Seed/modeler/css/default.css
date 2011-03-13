@@ -50,6 +50,9 @@ p { margin:0; }
     width:90%;
     height: 100%;
 }
+.sendform {
+	text-align:center;
+}
 #form ul {
 	padding:0;
     margin:10px 30px;
