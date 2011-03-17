@@ -1,0 +1,76 @@
+
+<!ELEMENT form  ( id | version | name | author | sections )*>
+
+<!ELEMENT id  ( #PCDATA )>
+
+<!ELEMENT version  ( #PCDATA )>
+
+<!ELEMENT name  ( #PCDATA )>
+
+<!ELEMENT author  ( user )>
+
+<!ELEMENT user  ( #PCDATA )>
+
+<!ELEMENT sections  ( section )*>
+
+<!ELEMENT section  ( id | name | text | date | radio | combo | checkbox | images_gallery | video_gallery | audio_gallery | location )*>
+
+<!ELEMENT text  ( id | label | maxlength | required | value )*>
+
+<!ELEMENT label  ( #PCDATA )>
+
+<!ELEMENT maxlength  ( #PCDATA )>
+
+<!ELEMENT required  ( #PCDATA )>
+
+<!ELEMENT value  ( #PCDATA )>
+
+<!ELEMENT date  ( id | label | required | date_value )*>
+
+<!ELEMENT date_value  ( day | month | year )*>
+
+<!ELEMENT day  ( #PCDATA )>
+
+<!ELEMENT month  ( #PCDATA )>
+
+<!ELEMENT year  ( #PCDATA )>
+
+<!ELEMENT radio  ( id | label | required | options )*>
+
+<!ELEMENT options  ( option )*>
+
+<!ELEMENT option  ( label | value | selected )*>
+
+<!ELEMENT selected  ( #PCDATA )>
+
+<!ELEMENT combo  ( id | label | required | options )*>
+
+<!ELEMENT checkbox  ( id | label | required | options )*>
+
+<!ELEMENT images_gallery  ( id | label | images )*>
+
+<!ELEMENT images  ( image )*>
+
+<!ELEMENT image  ( id | title | binary )*>
+
+<!ELEMENT title  ( #PCDATA )>
+
+<!ELEMENT binary  ( #PCDATA )>
+
+<!ELEMENT video_gallery  ( id | label | videos )*>
+
+<!ELEMENT videos  ( video )>
+
+<!ELEMENT video  ( id | title | binary )*>
+
+<!ELEMENT audio_gallery  ( id | label | audios )*>
+
+<!ELEMENT audios  ( audio )>
+
+<!ELEMENT audio  ( id | title | binary )*>
+
+<!ELEMENT location  ( id | label | required | longitude | latitude )*>
+
+<!ELEMENT longitude  ( #PCDATA )>
+
+<!ELEMENT latitude  ( #PCDATA )>

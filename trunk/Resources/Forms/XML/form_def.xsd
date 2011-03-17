@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  
+  <xs:element name="form">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="id"/>
+        <xs:element ref="version"/>
+        <xs:element ref="name"/>
+        <xs:element ref="author"/>
+        <xs:element maxOccurs="unbounded" ref="sections"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="id" type="xs:integer"/>
+  
+  <xs:element name="version" type="xs:integer"/>
+  
+  <xs:element name="name" type="xs:string"/>
+  
+  <xs:element name="author">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="sections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="section"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="section">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="text"/>
+          <xs:element ref="date"/>
+          <xs:element ref="radio"/>
+          <xs:element ref="combo"/>
+          <xs:element ref="checkbox"/>
+          <xs:element ref="image"/>
+          <xs:element ref="video"/>
+          <xs:element ref="audio"/>
+          <xs:element ref="location"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="text">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="maxlength"/>
+        <xs:element ref="required"/>
+        <xs:element ref="value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="label" type="xs:string"/>
+  
+  <xs:element name="maxlength" type="xs:integer"/>
+  
+  <xs:element name="required" type="xs:boolean"/>
+  
+  <xs:element name="value" type="xs:string"/>
+  
+  <xs:element name="date">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="required"/>
+        <xs:element ref="date_value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="date_value">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="day"/>
+        <xs:element ref="month"/>
+        <xs:element ref="year"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="day" type="xs:byte"/>
+  
+  <xs:element name="month" type="xs:byte"/>
+  
+  <xs:element name="year" type="xs:short"/>
+  
+  <xs:element name="radio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="required"/>
+        <xs:element maxOccurs="unbounded" ref="options"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="options">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="option"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="option">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="value"/>
+        <xs:element minOccurs="0" ref="selected"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="selected" type="xs:string"/>
+  <xs:element name="combo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="required"/>
+        <xs:element maxOccurs="unbounded" ref="options"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="checkbox">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="required"/>
+        <xs:element maxOccurs="unbounded" ref="options"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="image">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="video">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="audio">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="location">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="label"/>
+        <xs:element ref="required"/>
+        <xs:element ref="longitude"/>
+        <xs:element ref="latitude"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="longitude" type="xs:string"/>
+  <xs:element name="latitude" type="xs:string"/>
+</xs:schema>
