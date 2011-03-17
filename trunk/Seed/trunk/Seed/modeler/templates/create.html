@@ -11,12 +11,12 @@
 		<h1>Formulario</h1>
 		<ul></ul>
 		<h2>Arrastra los campos al formulario</h2>
-		<form class="sendform" action="createForm/" method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<input type="submit" value="Enviar" />
-		</form>
 	</div>
+	<form class="sendform" action="createForm/" method="post">
+			{% csrf_token %}
+			{{ form.fieldList.as_hidden }}
+			<input type="submit" value="Enviar" />
+	</form>
     <ul id="fields">
 		<li><a class="item" href="#" id="campo1" draggable="true">
 			<img src="images/image1.png" />
