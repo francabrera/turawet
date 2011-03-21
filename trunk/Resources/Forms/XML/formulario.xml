@@ -53,6 +53,7 @@
 					<option>
 						<label>Ingeniería Informática</label>
 						<value>IM</value>
+						<!-- NOTA!!!!: ¿Tipo true/false mejor? -->
 						<selected>selected</selected>
 					</option>
 					<option>
