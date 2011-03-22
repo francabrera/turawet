@@ -16,13 +16,18 @@
 				<id>id</id>
 				<label>Nombre</label>
 				<maxlength>100</maxlength>
-				<required/>
+				<required>true</required>
+				<value>Nicolás Pernas Maradei</value>
 			</text>
 			<date><!-- Elementos tipo fecha -->
 				<id>id</id>
 				<label>Fecha de nacimiento</label>
-				<required/>
-				<format>YYYY/MM/DD</format>
+				<required>true</required>
+				<date_value>
+					<day>14</day>
+					<month>10</month>
+					<year>1986</year>
+				</date_value>
 			</date>
 			<radio><!-- Elementos tipo radio-button -->
 				<id>id</id>
@@ -43,7 +48,7 @@
 			<combo><!-- Elementos tipo combo -->
 				<id>id</id>
 				<label>Estudios</label>
-				<required/>
+				<required>true</required>
 				<options>
 					<option>
 						<label>Ingeniería Informática</label>
@@ -63,23 +68,65 @@
 			<checkbox><!-- Elementos tipo checkbox -->
 				<id>id</id>
 				<label>Idiomas</label>
+				<required>false</required>
+
 			</checkbox>
 			<images_gallery>
 				<id>id</id>
 				<label>Imágenes</label>
+				<images>
+					<image>
+						<id>id</id>
+						<title>IMG_001.jpg</title>
+						<binary>12312311323123</binary>
+					</image>
+					<image>
+						<id>id</id>
+						<title>IMG_002.jpg</title>
+						<binary>12312311323123</binary>
+					</image>
+				</images>
 			</images_gallery>
 			<video_gallery>
 				<id>id</id>
 				<label>Vídeos</label>
+				<videos>
+					<video>
+						<id>id</id>
+						<title>2011_01_10.mpg</title>
+						<binary>12312311323123</binary>
+					</video>
+				</videos>
 			</video_gallery>
 			<audio_gallery>
 				<id>id</id>
 				<label>Sonidos</label>
+				<audios>
+					<audio>
+						<id>id</id>
+						<title>2011_01_10.mp3</title>
+						<binary>12312311323123</binary>
+					</audio>
+				</audios>
 			</audio_gallery>
 			<location>
 				<id>id</id>
 				<label>Localización</label>
+				<required>false</required>
+				<longitude>23.1231</longitude>
+				<latitude>34.33234</latitude>
 			</location>
+		</section>
+		<section>
+			<id>id</id>
+			<name>Segunda sección</name>
+			<text><!-- Elementos tipo texto -->
+				<id>id</id>
+				<label>Comentarios</label>
+				<maxlength>200</maxlength>
+				<required>false</required>
+				<value>Esto es un comentario...</value>
+			</text>
 		</section>
 	</sections>
 </form>
