@@ -28,20 +28,6 @@ var addEvent = (function () {
 
 
 /*****************************************************************/
-/* Crea un nuevo campo para el formulario                        */
-/*****************************************************************/
-function createNewField(id, name, idDrag, type) {
-	var newField = $('<li />', {
-        text : name,
-        data : { id : idDrag }
-    }).prepend($('<span />', {
-        'class' : 'quantity',
-        text : id
-    }));
-    return newField;
-}
-
-/*****************************************************************/
 /* Menú de campos                                                */
 /*****************************************************************/
 var myfields = document.querySelectorAll('#fields > li > .item');

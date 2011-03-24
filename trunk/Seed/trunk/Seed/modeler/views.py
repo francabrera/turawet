@@ -9,13 +9,15 @@ from django.template import RequestContext
 from Seed.modeler.forms import NewForm
 
 def showModeler(request):
+    context = RequestContext(request)
     if request.method == 'POST':
         form = NewForm(request.POST)
         if form.is_valid() :
-            return HttpResponseRedirect('/formList')
+            context['prueba'] = form.cleaned_data['fieldList']
+#        if form.is_valid() :
+#            return HttpResponseRedirect('/formList')
     else:
         form = NewForm()
         
-    context = RequestContext(request)
     context['form'] = form
     return render_to_response('create.html', context)
