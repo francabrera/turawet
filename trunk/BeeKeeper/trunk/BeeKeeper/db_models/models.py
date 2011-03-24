@@ -157,6 +157,14 @@ class TextField(InstanceField):
         return self.value
 
 
+class TextArea(InstanceField):
+    """Class: `TextField`. 
+       :param value: The text itself."""
+    value = models.CharField(max_length = 128)
+
+    def getText(self):
+        return self.value
+
 
 # ---------------------------------------------------------
 # TextAreaField
