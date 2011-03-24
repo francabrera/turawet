@@ -12,9 +12,10 @@
 		<ul></ul>
 		<h2>Arrastra los campos al formulario</h2>
 	</div>
-	<form class="sendform" action="createForm/" method="post">
+	{{ prueba }}
+	<form class="sendform" action="/modeler/" method="post">
 			{% csrf_token %}
-			{{ form.fieldList.as_hidden }}
+			<input type="hidden" name="fieldList" id="id_fieldList" />
 			<input type="submit" value="Enviar" />
 	</form>
     <ul id="fields">
@@ -46,6 +47,7 @@
 </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>
+	<script src="js/fillform.js"></script>
 	<script src="js/dragdrop.js"></script>
 </body>
 </html>
