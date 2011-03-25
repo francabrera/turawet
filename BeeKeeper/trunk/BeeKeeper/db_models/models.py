@@ -73,7 +73,7 @@ class FieldList(models.Model):
 
 
 class FormField(models.Model):
-    """Class: `FieldList`. 
+    """Class: `FormField`. 
        :param label: Field label in the form.
        :param section_order: The order of the field in the current section.
        :param section: The current section.
@@ -157,13 +157,42 @@ class TextField(InstanceField):
         return self.value
 
 
-class TextArea(InstanceField):
-    """Class: `TextField`. 
+
+class TextAreaField(InstanceField):
+    """Class: `TextAreaField`. 
        :param value: The text itself."""
-    value = models.CharField(max_length = 128)
+    value = models.CharField(max_length = 1024)
 
     def getText(self):
         return self.value
+
+
+
+class RadioField(InstanceField):
+    """Class: `TextField`. 
+       :param value: The id of the selected option."""
+    value = models.AutoField() # TIPO DE DATOS ID DE DJANGO
+
+    def getText(self):
+        return self.value
+
+
+class FieldOption(models.Model):
+    """Class: `FieldOption`. 
+       :param label: Field label in the form.
+       :param form_field: The order of the field in the current section.
+       :param section: The current section.
+       :param field_group: A Field could belong to a group.
+       :param field_group_order: The order of the field in the group (if any).
+       :attention The selected option is the first, so we don't have any "selected" field
+                  in any model """
+    label = models.CharField(max_length = 256)
+    # Link
+    form_field = models.ForeignKey(FieldGroup, null = True)
+
+    def __unicode__(self):
+        return self.label
+
 
 
 # ---------------------------------------------------------
