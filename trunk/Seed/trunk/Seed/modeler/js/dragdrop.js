@@ -1,3 +1,10 @@
+/**
+* @fileoverview Funcionalidad Drag and Drop del modelador web
+*
+* @author Turawet Project
+* @version 0.1
+*/
+
 /*****************************************************************/
 /* Función para agregar Listeners a los eventos, IE compatible   */
 /*****************************************************************/

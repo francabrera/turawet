@@ -1,25 +1,65 @@
+/**
+* @fileoverview Definición de clases y variables donde se 
+* 				almacenará el formulario y sus elementos.
+*
+* @author Turawet Project
+* @version 0.1
+*/
+
 /*****************************************************************/
 /* Form classes                                                  */
 /*****************************************************************/
-/* FIELD CLASS */
+/**
+ * Clase campo
+ */
 function Field(name, order) {
 	this.name = name;
 	this.order = order;
+	
+	/**
+	 * Devuelve el XML del campo
+	 */
+	this.toXML = function()
+	{
+		var fieldxml = "<field><order>" + this.order + "</order>";
+		fieldxml += "<name>" + this.name + "</name></field>";
+		return fieldxml;
+	}
+	
 }
-/* -------------- *
+/* -------------- */
 
 
-/* SECTION CLASS */
+/**
+ * Clase sección
+ */
 function Section() {
 	this.name;
 	this.order;
 	this.fields = new Array();
 	
-	function addField(f)    
+	/**
+	 * Añadir campo a la sección
+	 */
+	this.addField = function(f)    
 	{
 	    this.fields.push(f);
 	}
-	this.addField = addField;
+	
+	/**
+	 * Devuelve el XML de la sección con sus campos
+	 */
+	this.toXML = function()
+	{
+		var i;
+		var xml = "<section><order>" + this.order + "</order>";
+		xml += "<name>" + this.order + "</name>";
+		xml += "<fields>";
+		for (i=0;i<this.fields.length;i++)			
+			xml += this.fields[i].toXML();
+		xml += "</fields></section>";
+		return xml;
+	}
 }
 /* -------------- */
 

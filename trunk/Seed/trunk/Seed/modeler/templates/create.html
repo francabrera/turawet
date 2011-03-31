@@ -9,11 +9,10 @@
 <div id="containt">
 	<div id="form">
 		<h1>Formulario</h1>
-		<ul></ul>
+		<ul><li>{{prueba}}</li></ul>
 		<h2>Arrastra los campos al formulario</h2>
 	</div>
-	{{ prueba }}
-	<form class="sendform" action="/modeler/" method="post">
+	<form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
 			{% csrf_token %}
 			<input type="hidden" name="fieldList" id="id_fieldList" />
 			<input type="submit" value="Enviar" />
@@ -49,5 +48,6 @@
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>
 	<script src="js/fillform.js"></script>
 	<script src="js/dragdrop.js"></script>
+	<script src="js/parseform.js"></script>
 </body>
 </html>
