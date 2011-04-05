@@ -23,7 +23,7 @@ DATABASES = {
         'NAME':     'xe',
         'USER':     'turawet',
         'PASSWORD': '4b3j45n3gr45',
-        'HOST':     '10.209.2.64',
+        'HOST':     '10.209.2.96',
         'PORT':     '5432',
     },
 }
