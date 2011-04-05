@@ -171,7 +171,7 @@ class TextAreaField(InstanceField):
 class RadioField(InstanceField):
     """Class: `TextField`. 
        :param value: The id of the selected option."""
-    value = models.AutoField() # TIPO DE DATOS ID DE DJANGO
+    value = models.IntegerField() # TIPO DE DATOS ID DE DJANGO
 
     def getText(self):
         return self.value
