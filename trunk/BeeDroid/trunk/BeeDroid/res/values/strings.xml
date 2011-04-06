@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BeeDroid</string>
+    <string name="forms_name">Formularios disponibles</string>
+    <string name="instance_name">Instancias disponibles</string>
+    <string name="options_name">Opciones</string>
+    
     <string name="menu_forms">Formularios</string>
     <string name="menu_instance">Instancias</string>
     <string name="menu_options">Opciones</string>
+    
+    <string name="msg_temp_form">Esta es la pantalla de los formularios</string>
+    <string name="msg_temp_instance">Esta es la pantalla de las instancias</string>
+    <string name="msg_temp_options">Esta es la pantalla de las opciones</string>
+    
 </resources>
