@@ -13,24 +13,12 @@
 		</activity>
 
 		<activity android:name=".FormsActivity" android:label="@string/forms_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 		
 		<activity android:name=".InstanceActivity" android:label="@string/instance_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 				
-		<activity android:name="activities.OptionsActivity" android:label="@string/options_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
+		<activity android:name="OptionsActivity" android:label="@string/options_name">
 		</activity>
 		
 	</application>
