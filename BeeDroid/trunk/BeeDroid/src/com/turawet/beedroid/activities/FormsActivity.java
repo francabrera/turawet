@@ -1,17 +1,22 @@
 /**
  * 
  */
-package com.turawet.beedroid;
+package com.turawet.beedroid.activities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.turawet.beedroid.BeeDroid;
+import com.turawet.beedroid.R;
+
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -26,7 +31,6 @@ public class FormsActivity extends ListActivity
 	/**
 	 *
 	 */
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -50,13 +54,53 @@ public class FormsActivity extends ListActivity
 		setListAdapter(adapter);
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		// TODO Auto-generated method stub
 		// super.onListItemClick(l, v, position, id);
-		Map<String,String> map = (HashMap<String,String>) l.getItemAtPosition(position);
+		Map<String, String> map = (HashMap<String, String>) l.getItemAtPosition(position);
 		Toast.makeText(this, map.get("title"), Toast.LENGTH_LONG).show();
 	}
 	
+	/**
+	 * 
+	 */
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.forms_menu, menu);
+		return true;
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// Handle item selection
+		switch (item.getItemId())
+		{
+			case R.id.download_forms:
+				return downloadForms();
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private boolean downloadForms()
+	{
+		Intent myIntent = new Intent(FormsActivity.this, DownloadFormsActivity.class);
+		startActivity(myIntent);
+		return true;
+	}
 }
