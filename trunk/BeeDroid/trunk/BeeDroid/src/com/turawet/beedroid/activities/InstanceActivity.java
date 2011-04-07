@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.turawet.beedroid;
+package com.turawet.beedroid.activities;
 
 import com.turawet.beedroid.R;
 
@@ -12,17 +12,17 @@ import android.os.Bundle;
  * @author nicopernas
  * 
  */
-public class OptionsActivity extends Activity
+public class InstanceActivity extends Activity
 {
+
 	/**
-	 *
+	 * 
 	 */
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.options);
+		setContentView(R.layout.instance);
 	}
 	
 }

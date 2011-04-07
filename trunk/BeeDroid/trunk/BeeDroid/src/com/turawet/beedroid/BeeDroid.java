@@ -1,6 +1,9 @@
 package com.turawet.beedroid;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.activities.FormsActivity;
+import com.turawet.beedroid.activities.InstanceActivity;
+import com.turawet.beedroid.activities.OptionsActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class MainActivity extends Activity
+public class BeeDroid extends Activity
 {
 	/**
 	 * Called when the activity is first created.
@@ -59,7 +62,7 @@ public class MainActivity extends Activity
 	 */
 	private boolean loadForms()
 	{
-		Intent myIntent = new Intent(MainActivity.this, FormsActivity.class);
+		Intent myIntent = new Intent(BeeDroid.this, FormsActivity.class);
 		startActivity(myIntent);
 		return true;
 	}
@@ -70,7 +73,7 @@ public class MainActivity extends Activity
 	 */
 	private boolean loadInstance()
 	{
-		Intent myIntent = new Intent(MainActivity.this, InstanceActivity.class);
+		Intent myIntent = new Intent(BeeDroid.this, InstanceActivity.class);
 		startActivity(myIntent);
 		return true;
 	}
@@ -81,7 +84,7 @@ public class MainActivity extends Activity
 	 */
 	private boolean loadOptions()
 	{
-		Intent myIntent = new Intent(MainActivity.this, OptionsActivity.class);
+		Intent myIntent = new Intent(BeeDroid.this, OptionsActivity.class);
 		startActivity(myIntent);
 		return true;
 	}

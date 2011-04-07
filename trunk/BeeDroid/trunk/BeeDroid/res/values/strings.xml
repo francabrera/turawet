@@ -4,10 +4,14 @@
     <string name="forms_name">Formularios disponibles</string>
     <string name="instance_name">Instancias disponibles</string>
     <string name="options_name">Opciones</string>
+    <string name="downloads_forms_name">Descarga de formularios</string>
     
     <string name="menu_forms">Formularios</string>
     <string name="menu_instance">Instancias</string>
     <string name="menu_options">Opciones</string>
+    
+    <string name="empty_form_list">No hay ningún formulario guardado.\nPulsa \"Menú\" para descargarte alguno.</string>
+    <string name="download_forms">Descargar formularios</string>
     
     <string name="msg_temp_form">Esta es la pantalla de los formularios</string>
     <string name="msg_temp_instance">Esta es la pantalla de las instancias</string>
