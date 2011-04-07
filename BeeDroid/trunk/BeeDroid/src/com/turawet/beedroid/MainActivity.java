@@ -1,4 +1,4 @@
-package com.turawet.beedroid.activities;
+package com.turawet.beedroid;
 
 import com.turawet.beedroid.R;
 
@@ -11,7 +11,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity
 {
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -20,6 +22,9 @@ public class MainActivity extends Activity
 		
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -28,6 +33,9 @@ public class MainActivity extends Activity
 		return true;
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -45,6 +53,10 @@ public class MainActivity extends Activity
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private boolean loadForms()
 	{
 		Intent myIntent = new Intent(MainActivity.this, FormsActivity.class);
@@ -52,6 +64,10 @@ public class MainActivity extends Activity
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private boolean loadInstance()
 	{
 		Intent myIntent = new Intent(MainActivity.this, InstanceActivity.class);
@@ -59,6 +75,10 @@ public class MainActivity extends Activity
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private boolean loadOptions()
 	{
 		Intent myIntent = new Intent(MainActivity.this, OptionsActivity.class);
