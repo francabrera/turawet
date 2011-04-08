@@ -6,7 +6,7 @@
 
 #Dump data
 
-from xml.etree.ElementTree import ElementTree, tostring
+from xml.etree.ElementTree import ElementTree, tostring, XML
 from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption
 
 
@@ -70,8 +70,7 @@ def generateModels(xml):
     if xml is None:
         return None
     else:
-        parser = ElementTree()
-        parser.parse(xml)
+        parser = XML(xml)
         #Starting the parsing
         id = parser.find('id')
         version = parser.findtext('version')
@@ -80,7 +79,7 @@ def generateModels(xml):
         # Form model
         form_model = Form(version=version, name=name)
         form_model.save()
-        id.text = form_model.id
+        id.text = ""+form_model.id
         
         #Section
         sections = parser.findall("section")
@@ -89,7 +88,7 @@ def generateModels(xml):
             name = section.findtext("name")
             section_model = Section(name=name, order=i)
             section_model.save()
-            id.text = section_model.id
+            id.text = ""+section_model.id
             #Section fields
             for i, field in section:
                 id = field.find('id')
@@ -98,8 +97,8 @@ def generateModels(xml):
                 field_model.label = field.findtext('label')
                 field_model.required = field.findtext('required')
                 field_model.save()
-                id.text = field_model.id
+                id.text = ""+field_model.id
             
         # Saving the XML in the form table
-        form_model.xml = tostring(parser.getroot)
+        form_model.xml = tostring(parser)
         form_model.save()

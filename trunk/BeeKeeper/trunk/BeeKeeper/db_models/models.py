@@ -6,6 +6,7 @@
 
 # Imports
 from django.db import models
+#from django.core.management.validation import max_length
 
 #--------------------------------------
 # Models classes
@@ -19,7 +20,8 @@ class Form(models.Model):
        :todo: Add the schema_path to the XML"""
     name = models.CharField(max_length = 256)
     version = models.SmallIntegerField()
-    xml = models.XMLField(schema_path = 'NO OLVIDAR')
+    xml = models.CharField(max_length = 16192)
+    active = models.BooleanField()
 
     class Meta:
         unique_together = ('name', 'version')
@@ -41,6 +43,7 @@ class Section(models.Model):
 
     class Meta:
         unique_together = ('name', 'form')
+        ordering = ['form']
 
     def __unicode__(self):
         return self.name
@@ -79,6 +82,8 @@ class FormField(models.Model):
        :param section: The current section.
        :param field_group: A Field could belong to a group.
        :param field_group_order: The order of the field in the group (if any).
+       :param type: Normal or special type
+       :param required: True/False
        :attention The field_group_order is an attribute here
                   because Django that not allow us to have
                   an attribute in a 1:N relationship.
@@ -91,9 +96,12 @@ class FormField(models.Model):
     # Groups
     field_group = models.ForeignKey(FieldGroup, null = True)
     field_group_order = models.SmallIntegerField(null = True)
+    type = models.CharField(max_length = 128)
+    required = models.BooleanField() 
 
     class Meta:
         unique_together = ('label', 'section', 'section_order')
+        ordering = ['section']
 
     def __unicode__(self):
         return self.label
@@ -131,6 +139,7 @@ class InstanceField(models.Model):
 
     class Meta:
         unique_together = ('instance', 'instance_order')
+        ordering = ['instance']
 
     def __unicode__(self):
         return self.form_fields.label
@@ -178,18 +187,35 @@ class RadioField(InstanceField):
 
 
 class FieldOption(models.Model):
-    """Class: `FieldOption`. 
-       :param label: Field label in the form.
-       :param form_field: The order of the field in the current section.
-       :param section: The current section.
-       :param field_group: A Field could belong to a group.
-       :param field_group_order: The order of the field in the group (if any).
-       :attention The selected option is the first, so we don't have any "selected" field
-                  in any model """
+    """Class: `FieldOption`.
+       :param label: Option label in the field.
+       :param form_field: The form field which is related to this option """
     label = models.CharField(max_length = 256)
     # Link
     form_field = models.ForeignKey(FieldGroup, null = True)
 
+    class Meta:
+        unique_together = ('label', 'form_field')
+        ordering = ['form_field']
+        
+    def __unicode__(self):
+        return self.label
+
+
+class FieldProperty(models.Model):
+    """Class: `FieldProperty`. 
+       :param name: Property name for the field.
+       :param value: Value of the property
+       :param form_field: The form field which is related to this option """
+    name = models.CharField(max_length = 256)
+    value = models.CharField(max_length = 128)
+    # Link
+    form_field = models.ForeignKey(FieldGroup, null = True)
+
+    class Meta:
+        unique_together = ('name', 'form_field')
+        ordering = ['form_field']
+        
     def __unicode__(self):
         return self.label
 
