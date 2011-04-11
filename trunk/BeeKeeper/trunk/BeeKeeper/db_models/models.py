@@ -70,6 +70,10 @@ class FieldList(models.Model):
     label = models.CharField(max_length = 256)
     group = models.OneToOneField(FieldGroup)
 
+    class Meta:
+        unique_together = ('label', 'group')
+        ordering = ['group']
+
     def __unicode__(self):
         return self.label
 
