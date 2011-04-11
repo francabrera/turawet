@@ -104,7 +104,7 @@ class FormField(models.Model):
     required = models.BooleanField() 
 
     class Meta:
-        unique_together = ('label', 'section', 'section_order')
+        unique_together = ('section', 'section_order')
         ordering = ['section']
 
     def __unicode__(self):
@@ -193,8 +193,10 @@ class RadioField(InstanceField):
 class FieldOption(models.Model):
     """Class: `FieldOption`.
        :param label: Option label in the field.
+       :param value: Value of the option
        :param form_field: The form field which is related to this option """
     label = models.CharField(max_length = 256)
+    value = models.CharField(max_length = 128)
     # Link
     form_field = models.ForeignKey(FieldGroup, null = True)
 

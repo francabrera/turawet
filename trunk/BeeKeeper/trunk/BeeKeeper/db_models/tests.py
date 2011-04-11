@@ -14,3 +14,4 @@ class SimpleTest(TestCase):
         """
         self.failUnlessEqual(1 + 1, 2)
 
+# #### SE PODRÍA CARGAR LA BBDD CON EL FIXTURES Y COMPROBAR LA CARGA SE HA HECHO CORRECTAMENTE ###
