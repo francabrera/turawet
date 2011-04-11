@@ -12,16 +12,16 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".activities.FormsActivity" android:label="@string/forms_name">
+		<activity android:name=".activity.FormsActivity" android:label="@string/forms_name">
 		</activity>
 		
-		<activity android:name=".activities.InstanceActivity" android:label="@string/instance_name">
+		<activity android:name=".activity.InstanceActivity" android:label="@string/instance_name">
 		</activity>
 				
-		<activity android:name=".activities.OptionsActivity" android:label="@string/options_name">
+		<activity android:name=".activity.OptionsActivity" android:label="@string/options_name">
 		</activity>
 
-		<activity android:name=".activities.DownloadFormsActivity" android:label="@string/downloads_forms_name">
+		<activity android:name=".activity.DownloadFormsActivity" android:label="@string/downloads_forms_name">
 		</activity>
 		
 	</application>

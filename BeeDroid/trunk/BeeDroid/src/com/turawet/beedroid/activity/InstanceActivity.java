@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.turawet.beedroid.activities;
+package com.turawet.beedroid.activity;
 
 import com.turawet.beedroid.R;
 
