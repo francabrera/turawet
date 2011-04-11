@@ -1,14 +1,13 @@
 /**
  * 
  */
-package com.turawet.beedroid.activities;
+package com.turawet.beedroid.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.turawet.beedroid.BeeDroid;
 import com.turawet.beedroid.R;
 
 import android.app.ListActivity;

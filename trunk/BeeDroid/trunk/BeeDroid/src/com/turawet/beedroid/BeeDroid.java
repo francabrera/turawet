@@ -1,9 +1,9 @@
 package com.turawet.beedroid;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.activities.FormsActivity;
-import com.turawet.beedroid.activities.InstanceActivity;
-import com.turawet.beedroid.activities.OptionsActivity;
+import com.turawet.beedroid.activity.FormsActivity;
+import com.turawet.beedroid.activity.InstanceActivity;
+import com.turawet.beedroid.activity.OptionsActivity;
 
 import android.app.Activity;
 import android.content.Intent;
