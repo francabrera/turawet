@@ -1,76 +1,77 @@
+<?xml encoding="UTF-8"?>
 
-<!ELEMENT form  ( id | version | name | author | sections )*>
+<!ELEMENT form (id,version,name,author,sections)>
+<!ATTLIST form
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT id  ( #PCDATA )>
+<!ELEMENT version (#PCDATA)>
+<!ATTLIST version
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT version  ( #PCDATA )>
+<!ELEMENT author (user)>
+<!ATTLIST author
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT name  ( #PCDATA )>
+<!ELEMENT sections (section)>
+<!ATTLIST sections
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT author  ( user )>
+<!ELEMENT user (#PCDATA)>
+<!ATTLIST user
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT user  ( #PCDATA )>
+<!ELEMENT section (name,fields)>
+<!ATTLIST section
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT sections  ( section )*>
+<!ELEMENT fields (field)+>
+<!ATTLIST fields
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT section  ( id | name | text | date | radio | combo | checkbox | images_gallery | video_gallery | audio_gallery | location )*>
+<!ELEMENT field (id,label,type,required?,options?,properties?)>
+<!ATTLIST field
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT text  ( id | label | maxlength | required | value )*>
+<!ELEMENT type (#PCDATA)>
+<!ATTLIST type
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT label  ( #PCDATA )>
+<!ELEMENT required EMPTY>
+<!ATTLIST required
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT maxlength  ( #PCDATA )>
+<!ELEMENT options (option)+>
+<!ATTLIST options
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT required  ( #PCDATA )>
+<!ELEMENT properties (property)+>
+<!ATTLIST properties
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT value  ( #PCDATA )>
+<!ELEMENT option (label,value,default?)>
+<!ATTLIST option
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT date  ( id | label | required | date_value )*>
+<!ELEMENT property (name,value)>
+<!ATTLIST property
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT date_value  ( day | month | year )*>
+<!ELEMENT default EMPTY>
+<!ATTLIST default
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT day  ( #PCDATA )>
+<!ELEMENT id EMPTY>
+<!ATTLIST id
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT month  ( #PCDATA )>
+<!ELEMENT name (#PCDATA)>
+<!ATTLIST name
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT year  ( #PCDATA )>
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label
+  xmlns CDATA #FIXED ''>
 
-<!ELEMENT radio  ( id | label | required | options )*>
-
-<!ELEMENT options  ( option )*>
-
-<!ELEMENT option  ( label | value | selected )*>
-
-<!ELEMENT selected  ( #PCDATA )>
-
-<!ELEMENT combo  ( id | label | required | options )*>
-
-<!ELEMENT checkbox  ( id | label | required | options )*>
-
-<!ELEMENT images_gallery  ( id | label | images )*>
-
-<!ELEMENT images  ( image )*>
-
-<!ELEMENT image  ( id | title | binary )*>
-
-<!ELEMENT title  ( #PCDATA )>
-
-<!ELEMENT binary  ( #PCDATA )>
-
-<!ELEMENT video_gallery  ( id | label | videos )*>
-
-<!ELEMENT videos  ( video )>
-
-<!ELEMENT video  ( id | title | binary )*>
-
-<!ELEMENT audio_gallery  ( id | label | audios )*>
-
-<!ELEMENT audios  ( audio )>
-
-<!ELEMENT audio  ( id | title | binary )*>
-
-<!ELEMENT location  ( id | label | required | longitude | latitude )*>
-
-<!ELEMENT longitude  ( #PCDATA )>
-
-<!ELEMENT latitude  ( #PCDATA )>
+<!ELEMENT value (#PCDATA)>
+<!ATTLIST value
+  xmlns CDATA #FIXED ''>
