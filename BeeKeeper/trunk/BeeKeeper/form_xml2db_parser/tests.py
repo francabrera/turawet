@@ -20,10 +20,21 @@ class FormXmldbParserTest(TestCase):
         
         # XML Sample
         xml = os.path.dirname(__file__) + 'resources/formulario.xml'
+        print(xml)
         # Creationg a parser
         self.parser = FormXmldbParser()
         self.parser.generateModels(xml)
-        # All the forms in the DB
+        # DB objects
         forms = Form.objects.all()
-        # La base de datos que se levanta para Test es de mentira
+        sections = Section.objects.all()
+        formfields = FormField.objects.all()
+        # La base de datos que se levanta para Test es de mentira. Sólo tiene lo que hemos insertado ahora
 
+        # TEST 1: Nº formularios
+        self.assertEqual(len(forms), 1)
+
+        # TEST 2: Nº secciones
+        self.assertEqual(len(sections), 1)
+
+        # TEST 3: Nº campos
+        self.assertEqual(len(formfields), 10)
