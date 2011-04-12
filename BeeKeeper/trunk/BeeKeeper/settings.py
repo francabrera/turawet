@@ -118,4 +118,5 @@ INSTALLED_APPS = (
     'BeeKeeper.db_models',
     'BeeKeeper.user_models',
     'BeeKeeper.ws_server',
+    'BeeKeeper.form_xml2db_parser',
 )

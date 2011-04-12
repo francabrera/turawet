@@ -11,16 +11,7 @@ from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption
 
 
 class FormXmldbParser():
-    ## Data types ##
-    actionSwitch = {
-        'text': parse_text_field,
-        'date': parse_date_field,
-        'radio': parse_radio_field,
-        'combo': parse_combo_field,
-        'checkbox': parse_check_field
-        }
-    
-    
+    ### METHODS ###    
     def parse_text_field(self, parser, section_model):
         field_model = FormField(section=section_model)
         
@@ -69,6 +60,15 @@ class FormXmldbParser():
     def generateModels(self, xml):
         """
         """
+        ## Data types ##
+        actionSwitch = {
+            'text': self.parse_text_field,
+            'date': self.parse_date_field,
+            'radio': self.parse_radio_field,
+            'combo': self.parse_combo_field,
+            'checkbox': self.parse_check_field
+            }
+    
         if xml is None:
             return None
         else:
@@ -81,16 +81,22 @@ class FormXmldbParser():
             # Form model
             form_model = Form(version=version, name=name)
             form_model.save()
-            id.text = ""+form_model.id
+            id.text = str(form_model.id)
             
             #Section
-            sections = parser.findall("section")
+            sections = parser.findall("sections/section")
+            ################
+            f = open("archivo.txt", "w")
+            f.write(str(sections))
+            f.close()
+            ################
             for i, section in sections:
                 id = section.find('id')
                 name = section.findtext("name")
-                section_model = Section(name=name, order=i)
+                # NAME ES NULL ahora mismo y LA 'i' NO VALE
+                section_model = Section(name=name, order=i, form=form_model)
                 section_model.save()
-                id.text = ""+section_model.id
+                id.text = str(section_model.id)
                 #Section fields
                 for i, field in section:
                     id = field.find('id')
@@ -99,8 +105,13 @@ class FormXmldbParser():
                     field_model.label = field.findtext('label')
                     field_model.required = field.findtext('required')
                     field_model.save()
-                    id.text = ""+field_model.id
+                    id.text = str(field_model.id)
                 
             # Saving the XML in the form table
             form_model.xml = tostring(parser)
+            ################
+            ff = open("archivo2.txt", "w")
+            ff.write(form_model.xml)
+            ff.close()
+            ################
             form_model.save()

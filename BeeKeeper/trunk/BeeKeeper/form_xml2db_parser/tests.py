@@ -14,27 +14,32 @@ import os.path
 
 class FormXmldbParserTest(TestCase):
 
-    def xml_2_db(self):
-        #a = ['larry', 'jose']
-        #self.assertEqual(my_func(a, 0), 'larry')
-        
-        # XML Sample
-        xml = os.path.dirname(__file__) + 'resources/formulario.xml'
-        print(xml)
+    def setUp(self):
         # Creationg a parser
         self.parser = FormXmldbParser()
+        # XML Sample
+        xmlpath = os.path.dirname(__file__) + '/resources/formulario.xml'
+        f = open(xmlpath, "r")
+        xml = f.read()
+        f.close()
+        #print(xml)
         self.parser.generateModels(xml)
+
+
+    def test_xml_2_db(self):
+        #a = ['larry', 'jose']
+        #self.assertEqual(my_func(a, 0), 'larry')
+
         # DB objects
         forms = Form.objects.all()
         sections = Section.objects.all()
-        formfields = FormField.objects.all()
-        # La base de datos que se levanta para Test es de mentira. Sólo tiene lo que hemos insertado ahora
-
-        # TEST 1: Nº formularios
+        formfields = FormField.objects.all()        
+        
+        # TEST 1: Num formularios
         self.assertEqual(len(forms), 1)
 
-        # TEST 2: Nº secciones
+        # TEST 2: Num secciones
         self.assertEqual(len(sections), 1)
 
-        # TEST 3: Nº campos
+        # TEST 3: N campos
         self.assertEqual(len(formfields), 10)
