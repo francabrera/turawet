@@ -1,6 +1,6 @@
 <?xml encoding="UTF-8"?>
 
-<!ELEMENT form (id,version,name,author,sections)>
+<!ELEMENT form (id,fieldid,version,name,author,sections)>
 <!ATTLIST form
   xmlns CDATA #FIXED ''>
 
@@ -20,36 +20,45 @@
 <!ATTLIST user
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT section (name,fields)>
+<!ELEMENT section (name,instances)>
 <!ATTLIST section
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT fields (field+,group+)>
-<!ATTLIST fields
+<!ELEMENT instances (instancefields+,instancegroup+)>
+<!ATTLIST instances
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT group (list?,name,required?,field+)>
-<!ATTLIST group
+<!ELEMENT instancegroup (idgroup,instancefields+)>
+<!ATTLIST instancegroup
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT list EMPTY>
-<!ATTLIST list
+<!ELEMENT idgroup (#PCDATA)>
+<!ATTLIST idgroup
   xmlns CDATA #FIXED ''>
 
 <!ELEMENT id EMPTY>
 <!ATTLIST id
   xmlns CDATA #FIXED ''>
 
+<!ELEMENT fieldid (#PCDATA)>
+<!ATTLIST fieldid
+  xmlns CDATA #FIXED ''>
+
 <!ELEMENT name (#PCDATA)>
 <!ATTLIST name
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT field (id,label,type,required?,options?,properties?)>
-<!ATTLIST field
+<!ELEMENT instancefields (id,fieldid,label,type,required?,value?,
+                          options?,properties?)>
+<!ATTLIST instancefields
   xmlns CDATA #FIXED ''>
 
 <!ELEMENT type (#PCDATA)>
 <!ATTLIST type
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT required EMPTY>
+<!ATTLIST required
   xmlns CDATA #FIXED ''>
 
 <!ELEMENT options (option)+>
@@ -70,10 +79,6 @@
 
 <!ELEMENT default EMPTY>
 <!ATTLIST default
-  xmlns CDATA #FIXED ''>
-
-<!ELEMENT required EMPTY>
-<!ATTLIST required
   xmlns CDATA #FIXED ''>
 
 <!ELEMENT label (#PCDATA)>
