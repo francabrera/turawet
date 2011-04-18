@@ -85,33 +85,26 @@ class FormXmldbParser():
             
             #Section
             sections = parser.findall("sections/section")
-            ################
-            f = open("archivo.txt", "w")
-            f.write(str(sections))
-            f.close()
-            ################
-            for i, section in sections:
-                id = section.find('id')
+            i = 0;
+            for section in sections:
+                #id = section.find('id')
                 name = section.findtext("name")
                 # NAME ES NULL ahora mismo y LA 'i' NO VALE
                 section_model = Section(name=name, order=i, form=form_model)
                 section_model.save()
                 id.text = str(section_model.id)
                 #Section fields
-                for i, field in section:
+                j = 0
+                for field in section:
                     id = field.find('id')
                     field_model = self.actionSwitch[field.tag](field, section_model)
-                    field_model.order = i
+                    field_model.order = j
                     field_model.label = field.findtext('label')
                     field_model.required = field.findtext('required')
                     field_model.save()
                     id.text = str(field_model.id)
-                
+                    j += 1
+                i += 1
             # Saving the XML in the form table
             form_model.xml = tostring(parser)
-            ################
-            ff = open("archivo2.txt", "w")
-            ff.write(form_model.xml)
-            ff.close()
-            ################
             form_model.save()
