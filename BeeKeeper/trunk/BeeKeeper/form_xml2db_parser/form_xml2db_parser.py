@@ -7,7 +7,7 @@
 #Dump data
 
 from xml.etree.ElementTree import ElementTree, tostring, XML
-from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption
+from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption, FieldProperty
 
 
 class FormXmldbParser():
@@ -19,8 +19,14 @@ class FormXmldbParser():
     
     
     def parse_date_field(self, parser, section_model):
-        format = parser.findtext("format")
-        field_model = FormField(format=format, section=section_model)
+        field_model = FormField(section=section_model)
+        # Parsing
+        properties = parser.findall("properties/property")
+        for property in properties:
+            property_name = property.findtext("name")
+            property_value = property.findtext("value")
+            property_model = FieldProperty(name=property_name, value=property_value, form_field=field_model)
+            property_model.save()
         
         return field_model
     
@@ -28,13 +34,12 @@ class FormXmldbParser():
     def parse_radio_field(self, parser, section_model):
         field_model = FormField(section=section_model)
         # Parsing
-        options = parser.findall("option")
+        options = parser.findall("options/option")
         for option in options:
-            id = option.find('id')
             option_label = option.findtext("label")
-            option_model = FieldOption(label=option_label, form_field=field_model)
+            option_value = option.findtext("value")
+            option_model = FieldOption(label=option_label, value=option_value, form_field=field_model)
             option_model.save()
-            id.text = option_model.id
         
         return field_model
     
@@ -42,13 +47,12 @@ class FormXmldbParser():
     def parse_combo_field(self, parser, section_model):
         field_model = FormField(section=section_model)
         # Parsing
-        options = parser.findall("option")
+        options = parser.findall("options/option")
         for option in options:
-            id = option.find('id')
             option_label = option.findtext("label")
-            option_model = FieldOption(label=option_label, form_field=field_model)
+            option_value = option.findtext("value")
+            option_model = FieldOption(label=option_label, value=option_value, form_field=field_model)
             option_model.save()
-            id.text = option_model.id
         
         return field_model
     
@@ -62,11 +66,11 @@ class FormXmldbParser():
         """
         ## Data types ##
         actionSwitch = {
-            'text': self.parse_text_field,
-            'date': self.parse_date_field,
-            'radio': self.parse_radio_field,
-            'combo': self.parse_combo_field,
-            'checkbox': self.parse_check_field
+            'TEXT': self.parse_text_field,
+            'DATE': self.parse_date_field,
+            'RADIO': self.parse_radio_field,
+            'COMBO': self.parse_combo_field,
+            'CHECKBOX': self.parse_check_field
             }
     
         if xml is None:
@@ -94,13 +98,20 @@ class FormXmldbParser():
                 section_model.save()
                 id.text = str(section_model.id)
                 #Section fields
+                fields = section.findall("fields/field")
                 j = 0
-                for field in section:
+                for field in fields:
                     id = field.find('id')
-                    field_model = self.actionSwitch[field.tag](field, section_model)
+                    type = field.findtext("type")
+                    # Need to check that type is valid
+                    field_model = self.actionSwitch[type](field, section_model)
                     field_model.order = j
                     field_model.label = field.findtext('label')
                     field_model.required = field.findtext('required')
+                    if field_model.required:
+                        field_model.required = True
+                    else:
+                        field_model.required = False
                     field_model.save()
                     id.text = str(field_model.id)
                     j += 1
