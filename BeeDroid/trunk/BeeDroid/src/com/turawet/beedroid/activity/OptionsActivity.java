@@ -4,7 +4,7 @@
 package com.turawet.beedroid.activity;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.constantes.Cte;
+import com.turawet.beedroid.constants.Cte;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.turawet.beedroid.constantes;
+package com.turawet.beedroid.constants;
 
 /**
  * @author nicopernas
@@ -33,5 +33,14 @@ public final class Cte
 	{
 		public static final String	REPOSITORY_URL	= "REPOSITORY_URL";
 		
+	}
+	
+	public static final class DataBase
+	{
+		public static final int		DATABASE_VERSION	= 1;
+		public static final String	DATABASE_NAME		= "BeeDroidDataBase";
+		public static final String	FORMS_PREVIEW		= "FORMS_PREVIEW";
+		public static final String	NAME					= "NAME";
+		public static final String	VERSION				= "VERSION";
 	}
 }
