@@ -10,8 +10,8 @@ import java.util.Map;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.FormPreviewBean;
-import com.turawet.beedroid.constantes.Cte;
-import com.turawet.beedroid.wsclient.WSClient;
+import com.turawet.beedroid.constants.Cte;
+import com.turawet.beedroid.database.DataBaseAccesor;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -32,8 +32,8 @@ public class FormsActivity extends ListActivity
 {
 	/**
 	 * @param savedInstanceState
-	 * 	Instancia salvada en caso que la actividad 
-	 * 	inicie luego de un reposo
+	 *           Instancia salvada en caso que la actividad
+	 *           inicie luego de un reposo
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -43,8 +43,8 @@ public class FormsActivity extends ListActivity
 		
 		List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
 		
-		WSClient ws = WSClient.getInstance();
-		List<FormPreviewBean> forms = ws.getAllFormPreview();
+		DataBaseAccesor db = DataBaseAccesor.getInstance(this);
+		List<FormPreviewBean> forms = db.getSavedFormsPreview();
 		int numOfFormPreviews = forms.size();
 		for (int i = 0; i < numOfFormPreviews; i++)
 		{
@@ -80,7 +80,7 @@ public class FormsActivity extends ListActivity
 	
 	/**
 	 * @param menu
-	 * 	
+	 * 
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

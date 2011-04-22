@@ -14,7 +14,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.beans.FormPreviewBean;
-import com.turawet.beedroid.constantes.Cte;
+import com.turawet.beedroid.constants.Cte;
 
 /**
  * @author nicopernas
@@ -22,13 +22,7 @@ import com.turawet.beedroid.constantes.Cte;
  */
 public class WSClient
 {
-	/**
-	 * @return
-	 * 
-	 */
-	
 	private static WSClient	wsClient	= null;
-	
 	private HttpTransportSE	transportSE;
 	
 	/**
