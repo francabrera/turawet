@@ -111,6 +111,41 @@ class FormField(models.Model):
         return self.label
 
 
+class FieldOption(models.Model):
+    """Class: `FieldOption`.
+       :param label: Option label in the field.
+       :param value: Value of the option
+       :param form_field: The form field which is related to this option """
+    label = models.CharField(max_length = 256)
+    value = models.CharField(max_length = 128)
+    # Link
+    form_field = models.ForeignKey(FormField, null = True)
+
+    class Meta:
+        unique_together = ('label', 'form_field')
+        ordering = ['form_field']
+        
+    def __unicode__(self):
+        return self.label
+
+
+class FieldProperty(models.Model):
+    """Class: `FieldProperty`. 
+       :param name: Property name for the field.
+       :param value: Value of the property
+       :param form_field: The form field which is related to this option """
+    name = models.CharField(max_length = 256)
+    value = models.CharField(max_length = 128)
+    # Link
+    form_field = models.ForeignKey(FormField, null = True)
+
+    class Meta:
+        unique_together = ('name', 'form_field')
+        ordering = ['form_field']
+        
+    def __unicode__(self):
+        return self.label
+
 
 class Instance(models.Model):
     """Class: `Instance`. 
@@ -188,42 +223,6 @@ class RadioField(InstanceField):
 
     def getText(self):
         return self.value
-
-
-class FieldOption(models.Model):
-    """Class: `FieldOption`.
-       :param label: Option label in the field.
-       :param value: Value of the option
-       :param form_field: The form field which is related to this option """
-    label = models.CharField(max_length = 256)
-    value = models.CharField(max_length = 128)
-    # Link
-    form_field = models.ForeignKey(FieldGroup, null = True)
-
-    class Meta:
-        unique_together = ('label', 'form_field')
-        ordering = ['form_field']
-        
-    def __unicode__(self):
-        return self.label
-
-
-class FieldProperty(models.Model):
-    """Class: `FieldProperty`. 
-       :param name: Property name for the field.
-       :param value: Value of the property
-       :param form_field: The form field which is related to this option """
-    name = models.CharField(max_length = 256)
-    value = models.CharField(max_length = 128)
-    # Link
-    form_field = models.ForeignKey(FieldGroup, null = True)
-
-    class Meta:
-        unique_together = ('name', 'form_field')
-        ordering = ['form_field']
-        
-    def __unicode__(self):
-        return self.label
 
 
 
