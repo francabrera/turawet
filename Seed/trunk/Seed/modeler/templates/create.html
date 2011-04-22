@@ -12,11 +12,6 @@
 		<ul><li>{{prueba}}</li></ul>
 		<h2>Arrastra los campos al formulario</h2>
 	</div>
-	<form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
-			{% csrf_token %}
-			<input type="hidden" name="fieldList" id="id_fieldList" />
-			<input type="submit" value="Enviar" />
-	</form>
     <ul id="fields">
 		<li><a class="item" href="#" id="campo1" draggable="true">
 			<img src="images/image1.png" />
@@ -41,8 +36,20 @@
 			<div>
 				<p><strong>CAMPO4</strong></p>
 			</div>
-		</a></li>		
+		</a></li>
+		<form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
+            {% csrf_token %}
+            <div class="buttons">
+                <input type="hidden" name="fieldList" id="id_fieldList" />
+                <button type="submit" name="sendButton" class="positive">
+                     <img src="images/send_icon.png" alt=""/>
+                     Enviar
+                </button>
+            </div>
+	    </form>	
 	</ul>
+	
+	<img src="images/turawet_modeler.png" id="minilogo"/>
 </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>
