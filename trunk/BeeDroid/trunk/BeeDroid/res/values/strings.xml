@@ -17,4 +17,12 @@
     <string name="msg_temp_instance">Esta es la pantalla de las instancias</string>
     <string name="msg_temp_options">Esta es la pantalla de las opciones</string>
     
+    
+    <string name="msg_select_all">Seleccionar todos</string>
+    <string name="msg_select_none">Seleccionar ninguno</string>
+    <string name="msg_download_selected">Descargar seleccionados</string>
+    
+    <string name="label_repo_server">URL del repositorio</string>
+    <string name="button_logout">Desconectar</string>
+    
 </resources>
