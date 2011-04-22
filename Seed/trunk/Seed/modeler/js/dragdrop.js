@@ -37,11 +37,13 @@ var addEvent = (function () {
 /*****************************************************************/
 /* Menú de campos                                                */
 /*****************************************************************/
-var myfields = document.querySelectorAll('#fields > li > .item');
+var myfields = document.querySelectorAll('#fieldsBar > ul > li > .item');
 for (var i = 0; i < myfields.length; i++) {
-	// DRAGOVER
+	/*var image = myfields[i].getElementsByTagName("img");*/
+	// DRAGSTART
 	addEvent(myfields[i], 'dragstart', function (e) {
     	e.dataTransfer.setData('text', this.id);
+    	/*e.dataTransfer.setDragImage(image, -10,-10);*/
 		$('h2').fadeIn('fast');
     });
 	// HOVER
