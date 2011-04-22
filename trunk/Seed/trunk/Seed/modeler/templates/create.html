@@ -12,42 +12,44 @@
 		<ul><li>{{prueba}}</li></ul>
 		<h2>Arrastra los campos al formulario</h2>
 	</div>
-    <ul id="fields">
-		<li><a class="item" href="#" id="campo1" draggable="true">
-			<img src="images/image1.png" />
-			<div>
-				<p><strong>CAMPO1</strong></p>
-			</div>
-		</a></li>
-		<li><a class="item" href="#" id="campo2" draggable="true">
-			<img src="images/image2.png" />
-			<div>
-				<p><strong>CAMPO2</strong></p>
-			</div>
-		</a></li>
-		<li><a class="item" href="#" id="campo3" draggable="true">
-			<img src="images/image3.png" />
-			<div>
-				<p><strong>CAMPO3</strong></p>
-			</div>
-		</a></li>
-		<li><a class="item" href="#" id="campo4" draggable="true">
-			<img src="images/image4.png" />
-			<div>
-				<p><strong>CAMPO4</strong></p>
-			</div>
-		</a></li>
+	<div id="fieldsBar">
+	    <ul>
+			<li><a class="item" href="#" id="campo1" draggable="true">
+				<img src="images/image1.png" />
+				<div>
+					<p><strong>CAMPO1</strong></p>
+				</div>
+			</a></li>
+			<li><a class="item" href="#" id="campo2" draggable="true">
+				<img src="images/image2.png" />
+				<div>
+					<p><strong>CAMPO2</strong></p>
+				</div>
+			</a></li>
+			<li><a class="item" href="#" id="campo3" draggable="true">
+				<img src="images/image3.png" />
+				<div>
+					<p><strong>CAMPO3</strong></p>
+				</div>
+			</a></li>
+			<li><a class="item" href="#" id="campo4" draggable="true">
+				<img src="images/image4.png" />
+				<div>
+					<p><strong>CAMPO4</strong></p>
+				</div>
+			</a></li>				
+		</ul>
 		<form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
             {% csrf_token %}
-            <div class="buttons">
+            <div>
                 <input type="hidden" name="fieldList" id="id_fieldList" />
                 <button type="submit" name="sendButton" class="positive">
                      <img src="images/send_icon.png" alt=""/>
                      Enviar
                 </button>
             </div>
-	    </form>	
-	</ul>
+        </form>
+	</div>
 	
 	<img src="images/turawet_modeler.png" id="minilogo"/>
 </div>
