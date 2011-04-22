@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.constantes.Cte;
+import com.turawet.beedroid.wsclient.WSClient;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -28,7 +31,9 @@ import android.widget.Toast;
 public class FormsActivity extends ListActivity
 {
 	/**
-	 *
+	 * @param savedInstanceState
+	 * 	Instancia salvada en caso que la actividad 
+	 * 	inicie luego de un reposo
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -38,16 +43,24 @@ public class FormsActivity extends ListActivity
 		
 		List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
 		
-		for (int i = 1; i < 19; i++)
+		WSClient ws = WSClient.getInstance();
+		List<FormPreviewBean> forms = ws.getAllFormPreview();
+		int numOfFormPreviews = forms.size();
+		for (int i = 0; i < numOfFormPreviews; i++)
 		{
+			FormPreviewBean formPreviewBean = forms.get(i);
+			String name = formPreviewBean.getName();
+			String version = formPreviewBean.getVersion();
+			
 			Map<String, String> group = new HashMap<String, String>();
-			group.put("title", "FORMULARIO " + i);
-			group.put("desc", "Versión " + i + ".0");
+			group.put(Cte.formPreviewBean.name, name);
+			group.put(Cte.formPreviewBean.version, version);
+			
 			groupData.add(group);
 		}
 		
 		SimpleAdapter adapter = new SimpleAdapter(this, groupData, android.R.layout.simple_list_item_2, new String[]
-		{ "title", "desc" }, new int[]
+		{ Cte.formPreviewBean.name, Cte.formPreviewBean.version }, new int[]
 		{ android.R.id.text1, android.R.id.text2 });
 		
 		setListAdapter(adapter);
@@ -62,11 +75,12 @@ public class FormsActivity extends ListActivity
 		// TODO Auto-generated method stub
 		// super.onListItemClick(l, v, position, id);
 		Map<String, String> map = (HashMap<String, String>) l.getItemAtPosition(position);
-		Toast.makeText(this, map.get("title"), Toast.LENGTH_LONG).show();
+		Toast.makeText(this, map.get("name"), Toast.LENGTH_LONG).show();
 	}
 	
 	/**
-	 * 
+	 * @param menu
+	 * 	
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
