@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.turawet.beedroid.beans;
+package com.turawet.beedroid.wsclient.beans;
 
 /**
  * @author nicopernas

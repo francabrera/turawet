@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.constants.Cte;
 import com.turawet.beedroid.database.DataBaseAccesor;
 
@@ -22,7 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 /**
  * @author nicopernas
@@ -72,10 +72,9 @@ public class FormsActivity extends ListActivity
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
-		// TODO Auto-generated method stub
 		// super.onListItemClick(l, v, position, id);
-		Map<String, String> map = (HashMap<String, String>) l.getItemAtPosition(position);
-		Toast.makeText(this, map.get("name"), Toast.LENGTH_LONG).show();
+		//Map<String, String> map = (HashMap<String, String>) l.getItemAtPosition(position);
+		//Toast.makeText(this, map.get("name"), Toast.LENGTH_LONG).show();
 	}
 	
 	/**

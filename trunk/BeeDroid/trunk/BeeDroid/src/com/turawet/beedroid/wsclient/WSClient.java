@@ -13,7 +13,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.constants.Cte;
 
 /**

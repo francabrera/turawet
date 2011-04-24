@@ -10,28 +10,28 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.constants.Cte;
 
 /**
  * @author nicopernas
  * 
  */
-public class DataBaseAccesor
+public class DataBaseManager
 {
 	/**
 	 *
 	 */
 	
-	private static DataBaseAccesor	dataBaseAccesor	= null;
-	private DataBaseOpenHelper			dbAccesor			= null;
+	private static DataBaseManager	dataBaseManager	= null;
+	private DataBaseOpenHelper			dbAccessor			= null;
 	
 	/**
 	 * Cons
 	 */
-	private DataBaseAccesor(Context context)
+	private DataBaseManager(Context context)
 	{
-		dbAccesor = new DataBaseOpenHelper(context);
+		dbAccessor = new DataBaseOpenHelper(context);
 	}
 	
 	/**
@@ -39,19 +39,19 @@ public class DataBaseAccesor
 	 */
 	private synchronized static void createInstance(Context context)
 	{
-		if (dataBaseAccesor == null)
-			dataBaseAccesor = new DataBaseAccesor(context);
+		if (dataBaseManager == null)
+			dataBaseManager = new DataBaseManager(context);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static DataBaseAccesor getInstance(Context context)
+	public static DataBaseManager getInstance(Context context)
 	{
-		if (dataBaseAccesor == null)
+		if (dataBaseManager == null)
 			createInstance(context);
-		return dataBaseAccesor;
+		return dataBaseManager;
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class DataBaseAccesor
 	{
 		List<FormPreviewBean> listFormPreview = new ArrayList<FormPreviewBean>();
 		
-		SQLiteDatabase sqliteDatabase = dbAccesor.getReadableDatabase();
+		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
 		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_PREVIEW, new String[]
 		{ Cte.DataBase.NAME, Cte.DataBase.VERSION }, null, null, null, null, Cte.DataBase.NAME);
 		if (c.moveToFirst())

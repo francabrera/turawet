@@ -7,16 +7,18 @@ import java.util.List;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.adapter.DownloadFormsEfficientAdapter;
-import com.turawet.beedroid.adapter.beans.DownloadsFormItemList;
-import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.wsclient.WSClient;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
@@ -26,6 +28,9 @@ import android.widget.ListView;
  */
 public class DownloadFormsActivity extends ListActivity
 {
+	private ListView	itemFormList;
+	private boolean[]	checkedItemList;
+	
 	/**
 	 *
 	 */
@@ -33,12 +38,15 @@ public class DownloadFormsActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.downloads_forms_view);
-		ListView formList = (ListView) findViewById(android.R.id.list);
+		itemFormList = (ListView) findViewById(android.R.id.list);
 		
 		WSClient ws = WSClient.getInstance();
 		List<FormPreviewBean> listOfNewForms = ws.getAllFormPreview();
-
-		formList.setAdapter(new DownloadFormsEfficientAdapter(this, listOfNewForms));
+		
+		checkedItemList = new boolean[listOfNewForms.size()];
+		
+		ListAdapter customAdapter = new DownloadFormsEfficientAdapter(this, listOfNewForms, checkedItemList);
+		itemFormList.setAdapter(customAdapter);
 	}
 	
 	/**
@@ -47,9 +55,11 @@ public class DownloadFormsActivity extends ListActivity
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
-		CheckBox checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-		boolean checked = checkbox.isChecked();
-		checkbox.setChecked(!checked);
+		super.onListItemClick(l, v, position, id);
+		ViewGroup row = (ViewGroup) v;
+		CheckBox check = (CheckBox) row.findViewById(R.id.checkbox);
+		check.toggle();
+		checkedItemList[position] = !checkedItemList[position];
 	}
 	
 	/**
@@ -76,7 +86,6 @@ public class DownloadFormsActivity extends ListActivity
 				return selectAllFormsToDownload();
 			case R.id.select_none:
 				return selectNoneFormsToDownload();
-				
 			case R.id.download_selected:
 				return downloadAllSelectedForms();
 			default:
@@ -89,7 +98,11 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean downloadAllSelectedForms()
 	{
-		
+		for (int i = 0; i < checkedItemList.length; i++)
+		{
+			if (checkedItemList[i])
+				Log.d("Seleccionado -> ", String.valueOf(i));
+		}
 		return true;
 	}
 	
@@ -98,7 +111,14 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean selectNoneFormsToDownload()
 	{
-		return false;
+		for (int i = 0; i < checkedItemList.length; i++)
+		{
+			checkedItemList[i] = false;
+			ViewGroup row = (ViewGroup) itemFormList.getChildAt(i);
+			if (row != null)
+				((CheckBox) row.findViewById(R.id.checkbox)).setChecked(false);
+		}
+		return true;
 	}
 	
 	/**
@@ -106,13 +126,13 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean selectAllFormsToDownload()
 	{
-		ListView formList = (ListView) findViewById(android.R.id.list);
-		int numOfForms = formList.getCount();
-		for (int position = 0; position < numOfForms; position++)
+		for (int i = 0; i < checkedItemList.length; i++)
 		{
-			DownloadsFormItemList row = (DownloadsFormItemList) formList.getItemAtPosition(position);
-			row.getCheck().setChecked(true);
-		}
+			checkedItemList[i] = true;
+			ViewGroup row = (ViewGroup) itemFormList.getChildAt(i);
+			if (row != null)
+				((CheckBox) row.findViewById(R.id.checkbox)).setChecked(true);
+		}		
 		return true;
 	}
 	
