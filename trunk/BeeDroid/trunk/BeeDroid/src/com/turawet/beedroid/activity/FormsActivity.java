@@ -11,7 +11,7 @@ import java.util.Map;
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.constants.Cte;
-import com.turawet.beedroid.database.DataBaseAccesor;
+import com.turawet.beedroid.database.DataBaseManager;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -43,7 +43,7 @@ public class FormsActivity extends ListActivity
 		
 		List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
 		
-		DataBaseAccesor db = DataBaseAccesor.getInstance(this);
+		DataBaseManager db = DataBaseManager.getInstance(this);
 		List<FormPreviewBean> forms = db.getSavedFormsPreview();
 		int numOfFormPreviews = forms.size();
 		for (int i = 0; i < numOfFormPreviews; i++)
