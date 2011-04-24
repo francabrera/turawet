@@ -4,13 +4,14 @@
 package com.turawet.beedroid.adapter.beans;
 
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.TextView;
 
 /**
  * @author nicopernas
  * 
  */
-public class DownloadsFormItemList
+public class DownloadsFormItemList implements Checkable
 {
 	/**
 	 * 
@@ -19,13 +20,11 @@ public class DownloadsFormItemList
 	 */
 	private TextView	formName;
 	private TextView	formVersion;
-	private CheckBox	check;
 	
 	public DownloadsFormItemList(TextView formName, TextView formVersion, CheckBox check)
 	{
 		this.formName = formName;
 		this.formVersion = formVersion;
-		this.check = check;
 	}
 	
 	/**
@@ -62,21 +61,34 @@ public class DownloadsFormItemList
 		this.formVersion = formVersion;
 	}
 	
-	/**
-	 * @return the check
+	/* (non-Javadoc)
+	 * @see android.widget.Checkable#isChecked()
 	 */
-	public CheckBox getCheck()
+	@Override
+	public boolean isChecked()
 	{
-		return check;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	/**
-	 * @param check
-	 *           the check to set
+
+	/* (non-Javadoc)
+	 * @see android.widget.Checkable#setChecked(boolean)
 	 */
-	public void setCheck(CheckBox check)
+	@Override
+	public void setChecked(boolean arg0)
 	{
-		this.check = check;
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see android.widget.Checkable#toggle()
+	 */
+	@Override
+	public void toggle()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

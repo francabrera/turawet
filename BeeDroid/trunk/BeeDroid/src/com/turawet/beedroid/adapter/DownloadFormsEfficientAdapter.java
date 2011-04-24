@@ -14,8 +14,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.adapter.beans.DownloadsFormItemList;
-import com.turawet.beedroid.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 
 /**
  * @author nicopernas
@@ -25,16 +24,13 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 {
 	private LayoutInflater			mInflater;
 	private List<FormPreviewBean>	listOfForms;
+	private boolean[]					checkedItemList;
 	
-	public DownloadFormsEfficientAdapter(Context context, List<FormPreviewBean> listOfForms)
+	public DownloadFormsEfficientAdapter(Context context, List<FormPreviewBean> listOfForms, boolean[] checkedItemList)
 	{
 		this.mInflater = LayoutInflater.from(context);
 		this.listOfForms = listOfForms;
-	}
-	
-	public void checkAllItems()
-	{
-		
+		this.checkedItemList = checkedItemList;
 	}
 	
 	/**
@@ -58,9 +54,7 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 	 */
 	public Object getItem(int position)
 	{
-		// Devolver el objeto que esta en la fila position
-		View convertView = mInflater.inflate(R.layout.downloads_forms_list, null);
-		return getView(position, convertView, null);
+		return position;
 	}
 	
 	/**
@@ -87,10 +81,10 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 		{
 			convertView = mInflater.inflate(R.layout.downloads_forms_list, null);
 			
-			TextView name = (TextView) convertView.findViewById(R.id.form_name);
-			TextView version = (TextView) convertView.findViewById(R.id.form_version);
-			CheckBox check = (CheckBox) convertView.findViewById(R.id.checkbox);
-			rowItem = new DownloadsFormItemList(name, version, check);
+			rowItem = new DownloadsFormItemList();
+			rowItem.formName = (TextView) convertView.findViewById(R.id.form_name);
+			rowItem.formVersion = (TextView) convertView.findViewById(R.id.form_version);
+			rowItem.checked = (CheckBox) convertView.findViewById(R.id.checkbox);
 			convertView.setTag(rowItem);
 		}
 		else
@@ -99,9 +93,20 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 		}
 		
 		FormPreviewBean formPreview = listOfForms.get(position);
-		rowItem.getFormName().setText(formPreview.getName());
-		rowItem.getFormVersion().setText(formPreview.getVersion());
-		rowItem.getCheck().setChecked(false);
+		rowItem.formName.setText(formPreview.getName());
+		rowItem.formVersion.setText(formPreview.getVersion());
+		rowItem.checked.setChecked(checkedItemList[position]);
 		return convertView;
 	}
+	
+	public static class DownloadsFormItemList
+	{
+		/**
+		 * @author nicopernas
+		 */
+		public TextView	formName;
+		public TextView	formVersion;
+		public CheckBox	checked;
+	}
+	
 }
