@@ -26,11 +26,11 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 	private List<FormPreviewBean>	listOfForms;
 	private boolean[]					checkedItemList;
 	
-	public DownloadFormsEfficientAdapter(Context context, List<FormPreviewBean> listOfForms, boolean[] checkedItemList)
+	public DownloadFormsEfficientAdapter(Context context, List<FormPreviewBean> listOfForms)
 	{
 		this.mInflater = LayoutInflater.from(context);
 		this.listOfForms = listOfForms;
-		this.checkedItemList = checkedItemList;
+		this.checkedItemList = new boolean[listOfForms.size()];
 	}
 	
 	/**
@@ -79,12 +79,12 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 		DownloadsFormItemList rowItem;
 		if (convertView == null)
 		{
-			convertView = mInflater.inflate(R.layout.downloads_forms_list, null);
+			convertView = mInflater.inflate(R.layout.downloads_forms_item_list, null);
 			
 			rowItem = new DownloadsFormItemList();
 			rowItem.formName = (TextView) convertView.findViewById(R.id.form_name);
 			rowItem.formVersion = (TextView) convertView.findViewById(R.id.form_version);
-			rowItem.checked = (CheckBox) convertView.findViewById(R.id.checkbox);
+			rowItem.checked = (CheckBox) convertView.findViewById(R.id.check_form_to_download);
 			convertView.setTag(rowItem);
 		}
 		else
@@ -98,6 +98,28 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 		rowItem.checked.setChecked(checkedItemList[position]);
 		return convertView;
 	}
+	
+	public void toggle(int position)
+	{
+		checkedItemList[position] = !checkedItemList[position];
+	}
+
+	public void checkAllItems()
+	{
+		setAllItemsValueTo(true);
+	}
+	
+	public void uncheckAllItems()
+	{
+		setAllItemsValueTo(false);
+	}
+	
+	private void setAllItemsValueTo(boolean value)
+	{
+		for(int i = 0; i < checkedItemList.length; i++)
+			checkedItemList[i] = value;
+	}
+	
 	
 	public static class DownloadsFormItemList
 	{
