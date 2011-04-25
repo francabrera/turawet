@@ -13,13 +13,11 @@ import com.turawet.beedroid.wsclient.WSClient;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 
 /**
@@ -28,8 +26,7 @@ import android.widget.ListView;
  */
 public class DownloadFormsActivity extends ListActivity
 {
-	private ListView	itemFormList;
-	private boolean[]	checkedItemList;
+	private List<FormPreviewBean>	listOfAvailablesForms;
 	
 	/**
 	 *
@@ -37,16 +34,12 @@ public class DownloadFormsActivity extends ListActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.downloads_forms_view);
-		itemFormList = (ListView) findViewById(android.R.id.list);
+		setContentView(R.layout.downloads_forms_layout);
 		
 		WSClient ws = WSClient.getInstance();
-		List<FormPreviewBean> listOfNewForms = ws.getAllFormPreview();
+		listOfAvailablesForms = ws.getAllFormPreview();
 		
-		checkedItemList = new boolean[listOfNewForms.size()];
-		
-		ListAdapter customAdapter = new DownloadFormsEfficientAdapter(this, listOfNewForms, checkedItemList);
-		itemFormList.setAdapter(customAdapter);
+		setListAdapter(new DownloadFormsEfficientAdapter(this, listOfAvailablesForms));
 	}
 	
 	/**
@@ -55,11 +48,8 @@ public class DownloadFormsActivity extends ListActivity
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
-		super.onListItemClick(l, v, position, id);
-		ViewGroup row = (ViewGroup) v;
-		CheckBox check = (CheckBox) row.findViewById(R.id.checkbox);
-		check.toggle();
-		checkedItemList[position] = !checkedItemList[position];
+		((DownloadFormsEfficientAdapter) getListAdapter()).toggle(position);
+		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 	
 	/**
@@ -98,10 +88,12 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean downloadAllSelectedForms()
 	{
-		for (int i = 0; i < checkedItemList.length; i++)
+		Log.d("", "Entramos en downloadAllSelectedForms()");
+		final ListView listView = getListView();
+		SparseBooleanArray array = listView.getCheckedItemPositions();
+		for (int i = 0; i < array.size(); i++)
 		{
-			if (checkedItemList[i])
-				Log.d("Seleccionado -> ", String.valueOf(i));
+			Log.d("Seleccionado -> ", "Elemento " + i);
 		}
 		return true;
 	}
@@ -111,13 +103,8 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean selectNoneFormsToDownload()
 	{
-		for (int i = 0; i < checkedItemList.length; i++)
-		{
-			checkedItemList[i] = false;
-			ViewGroup row = (ViewGroup) itemFormList.getChildAt(i);
-			if (row != null)
-				((CheckBox) row.findViewById(R.id.checkbox)).setChecked(false);
-		}
+		((DownloadFormsEfficientAdapter) getListAdapter()).uncheckAllItems();
+		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 		return true;
 	}
 	
@@ -126,13 +113,8 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean selectAllFormsToDownload()
 	{
-		for (int i = 0; i < checkedItemList.length; i++)
-		{
-			checkedItemList[i] = true;
-			ViewGroup row = (ViewGroup) itemFormList.getChildAt(i);
-			if (row != null)
-				((CheckBox) row.findViewById(R.id.checkbox)).setChecked(true);
-		}		
+		((DownloadFormsEfficientAdapter) getListAdapter()).checkAllItems();
+		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 		return true;
 	}
 	
