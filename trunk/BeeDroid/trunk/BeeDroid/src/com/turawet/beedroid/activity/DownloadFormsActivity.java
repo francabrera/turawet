@@ -49,7 +49,6 @@ public class DownloadFormsActivity extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		((DownloadFormsEfficientAdapter) getListAdapter()).toggle(position);
-		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 	
 	/**
@@ -104,7 +103,6 @@ public class DownloadFormsActivity extends ListActivity
 	private boolean selectNoneFormsToDownload()
 	{
 		((DownloadFormsEfficientAdapter) getListAdapter()).uncheckAllItems();
-		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 		return true;
 	}
 	
@@ -114,7 +112,6 @@ public class DownloadFormsActivity extends ListActivity
 	private boolean selectAllFormsToDownload()
 	{
 		((DownloadFormsEfficientAdapter) getListAdapter()).checkAllItems();
-		((DownloadFormsEfficientAdapter) getListAdapter()).notifyDataSetChanged();
 		return true;
 	}
 	

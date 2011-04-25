@@ -102,6 +102,7 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 	public void toggle(int position)
 	{
 		checkedItemList[position] = !checkedItemList[position];
+		notifyDataSetChanged();
 	}
 
 	public void checkAllItems()
@@ -118,6 +119,7 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 	{
 		for(int i = 0; i < checkedItemList.length; i++)
 			checkedItemList[i] = value;
+		notifyDataSetChanged();
 	}
 	
 	
