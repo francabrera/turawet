@@ -25,4 +25,8 @@
     <string name="label_repo_server">URL del repositorio</string>
     <string name="button_logout">Desconectar</string>
     
+    <string name="cant_connect">No pude conectarme con el repositorio.\nComprueba que la dirección en el menú \"Opciones\" es correcta.</string>
+    <string name="general_error">Ha ocurrido un error al intentar conectar con el repositorio.</string>
+    <string name="not_available_forms_to_download">No hay ningún formulario disponible para descargar.</string>
+    
 </resources>

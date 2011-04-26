@@ -27,6 +27,7 @@ public final class Cte
 		public static final String	URL_TO_WSDL							= "http://" + REPOSITORY_URL + "/ws_server/service.wsdl";
 		public static final String	GET_ALL_FORMS_PREVIEW			= "get_all_forms_preview";
 		public static final String	GET_XMLFORM_BY_NAME_VERSION	= "get_xmlform_by_name_version";
+		public static final int		TIMEOUT								= 10000;
 	}
 	
 	public static final class Tags
