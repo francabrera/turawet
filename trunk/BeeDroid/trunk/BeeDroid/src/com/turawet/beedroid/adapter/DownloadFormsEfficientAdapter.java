@@ -3,6 +3,7 @@
  */
 package com.turawet.beedroid.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -99,22 +100,47 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 		return convertView;
 	}
 	
+	
+	public List<FormPreviewBean> getSelectedFormsToDownload()
+	{
+		List<FormPreviewBean> selectedFormsToDownload = new ArrayList<FormPreviewBean>();
+		for(int i = 0; i < checkedItemList.length; i++)
+		{
+			if(checkedItemList[i])
+				selectedFormsToDownload.add(listOfForms.get(i));
+		}
+		return selectedFormsToDownload;
+	}
+	/**
+	 * 
+	 * @param position
+	 */
 	public void toggle(int position)
 	{
 		checkedItemList[position] = !checkedItemList[position];
 		notifyDataSetChanged();
 	}
 
+	/**
+	 * 
+	 */
 	public void checkAllItems()
 	{
 		setAllItemsValueTo(true);
 	}
 	
+	/**
+	 * 
+	 */
 	public void uncheckAllItems()
 	{
 		setAllItemsValueTo(false);
 	}
 	
+	/**
+	 * 
+	 * @param value
+	 */
 	private void setAllItemsValueTo(boolean value)
 	{
 		for(int i = 0; i < checkedItemList.length; i++)

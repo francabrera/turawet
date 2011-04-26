@@ -3,7 +3,11 @@
  */
 package com.turawet.beedroid.activity;
 
+import java.io.IOException;
+import java.net.ConnectException;
 import java.util.List;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.adapter.DownloadFormsEfficientAdapter;
@@ -12,13 +16,12 @@ import com.turawet.beedroid.wsclient.WSClient;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * @author nicopernas
@@ -26,7 +29,7 @@ import android.widget.ListView;
  */
 public class DownloadFormsActivity extends ListActivity
 {
-	private List<FormPreviewBean>	listOfAvailablesForms;
+	private boolean	gotAnyFormToDownload	= true;
 	
 	/**
 	 *
@@ -37,9 +40,32 @@ public class DownloadFormsActivity extends ListActivity
 		setContentView(R.layout.downloads_forms_layout);
 		
 		WSClient ws = WSClient.getInstance();
-		listOfAvailablesForms = ws.getAllFormPreview();
 		
-		setListAdapter(new DownloadFormsEfficientAdapter(this, listOfAvailablesForms));
+		try
+		{
+			// Hacemos la llamada al WS y comprobamos los resultados obtenidos
+			List<FormPreviewBean> listOfAvaliableForms = ws.getAllFormPreview();
+			if (listOfAvaliableForms.isEmpty())
+				gotAnyFormToDownload = false;
+			setListAdapter(new DownloadFormsEfficientAdapter(this, listOfAvaliableForms));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			gotAnyFormToDownload = false;
+			TextView msgToDisplay = (TextView) findViewById(android.R.id.empty);
+			String cantConnect = getString(R.string.cant_connect);
+			msgToDisplay.setText(cantConnect);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			gotAnyFormToDownload = false;
+			TextView msgToDisplay = (TextView) findViewById(android.R.id.empty);
+			String gralError = getString(R.string.general_error);
+			msgToDisplay.setText(gralError);
+		}
+		
 	}
 	
 	/**
@@ -59,7 +85,7 @@ public class DownloadFormsActivity extends ListActivity
 	{
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.downloads_forms_menu, menu);
-		return true;
+		return gotAnyFormToDownload;
 	}
 	
 	/**
@@ -87,12 +113,16 @@ public class DownloadFormsActivity extends ListActivity
 	 */
 	private boolean downloadAllSelectedForms()
 	{
-		Log.d("", "Entramos en downloadAllSelectedForms()");
-		final ListView listView = getListView();
-		SparseBooleanArray array = listView.getCheckedItemPositions();
-		for (int i = 0; i < array.size(); i++)
+		List<FormPreviewBean> selectedForms = ((DownloadFormsEfficientAdapter) getListAdapter()).getSelectedFormsToDownload();
+		if (selectedForms.isEmpty())
 		{
-			Log.d("Seleccionado -> ", "Elemento " + i);
+			// TODO Mandar un mensaje diciendo que no se ha seleccionado ningún
+			// formulario
+			return false; // ¿?¿?¿?
+		}
+		else
+		{
+			
 		}
 		return true;
 	}

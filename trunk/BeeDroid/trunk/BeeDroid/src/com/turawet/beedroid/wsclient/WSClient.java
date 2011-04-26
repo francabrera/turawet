@@ -4,6 +4,7 @@
 package com.turawet.beedroid.wsclient;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
+
+import android.util.Log;
 
 import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
 import com.turawet.beedroid.constants.Cte;
@@ -30,7 +33,7 @@ public class WSClient
 	 */
 	private WSClient()
 	{
-		transportSE = new HttpTransportSE(Cte.WSClient.URL_TO_WSDL);
+		transportSE = new HttpTransportSE(Cte.WSClient.URL_TO_WSDL, Cte.WSClient.TIMEOUT);
 	}
 	
 	/**
@@ -53,7 +56,7 @@ public class WSClient
 		return wsClient;
 	}
 	
-	public String getXmlformByNameVersion()
+	public String getXmlsFormByNameVersion(List<FormPreviewBean> selectedForms)
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -88,9 +91,11 @@ public class WSClient
 	 * @return
 	 *         Lista con los nombres y versiones de los formularios
 	 *         disponibles para que el usuario se descargue.
+	 * @throws XmlPullParserException
+	 * @throws IOException
 	 * 
 	 */
-	public List<FormPreviewBean> getAllFormPreview()
+	public List<FormPreviewBean> getAllFormPreview() throws IOException, XmlPullParserException
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_ALL_FORMS_PREVIEW);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -100,33 +105,23 @@ public class WSClient
 		List<FormPreviewBean> allFormPreview = new ArrayList<FormPreviewBean>();
 		
 		// Hacemos la llamada al método remoto
-		try
+		transportSE.call(Cte.WSClient.GET_ALL_FORMS_PREVIEW, envelope);
+		
+		// Obtenemos la respuesta del sobre SOAP
+		SoapObject response = (SoapObject) envelope.getResponse();
+		
+		int countOfFormPreview = response.getPropertyCount();
+		
+		// Pasamos el resultado a objetos FormPreviewBean, los metemos
+		// en la lista para devolver.
+		for (int i = 0; i < countOfFormPreview; i++)
 		{
-			transportSE.call(Cte.WSClient.GET_ALL_FORMS_PREVIEW, envelope);
-			
-			// Obtenemos la respuesta del sobre SOAP
-			SoapObject response = (SoapObject) envelope.getResponse();
-			
-			int countOfFormPreview = response.getPropertyCount();
-			
-			// Pasamos el resultado a objetos FormPreviewBean, los metemos
-			// en la lista para devolver.
-			for (int i = 0; i < countOfFormPreview; i++)
-			{
-				SoapObject formPreview = (SoapObject) response.getProperty(i);
-				String formName = formPreview.getProperty("name").toString();
-				String formVersion = formPreview.getProperty("version").toString();
-				allFormPreview.add(new FormPreviewBean(formName, formVersion));
-			}
+			SoapObject formPreview = (SoapObject) response.getProperty(i);
+			String formName = formPreview.getProperty(Cte.formPreviewBean.name).toString();
+			String formVersion = formPreview.getProperty(Cte.formPreviewBean.version).toString();
+			allFormPreview.add(new FormPreviewBean(formName, formVersion));
 		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (XmlPullParserException e)
-		{
-			e.printStackTrace();
-		}
+		
 		return allFormPreview;
 	}
 }
