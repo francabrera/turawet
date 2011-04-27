@@ -67,16 +67,21 @@ var formSections = new Array();
 formSections[0] = new Section();
 
 /*****************************************************************/
+/* Tipos de campos                                               */
+/*****************************************************************/
+var fieldTypes = {"text" : 0, "textarea" : 1, "file" : 3, "image_gallery" : 4};
+
+/*****************************************************************/
 /* Crea un nuevo campo para el formulario                        */
 /*****************************************************************/
 function createNewField(id, name, idDrag, type) {
 	var newField = $('<li />', {
         text : name,
+        class: type,
         data : { id : idDrag }
-    }).prepend($('<span />', {
-        'class' : 'quantity',
-        text : id
-    }));
+    })/*.append($('<img />', {
+        'src' : 'images/text_field.png',
+    }))*/;
     var jsField = new Field(name,id);
     formSections[0].addField(jsField);
     return newField;

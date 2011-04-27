@@ -9,33 +9,37 @@
 <div id="containt">
 	<div id="form">
 		<h1>Formulario</h1>
-		<ul><li>{{prueba}}</li></ul>
+		<ul><li class="prueba">{{prueba}}</li></ul>
 		<h2>Arrastra los campos al formulario</h2>
 	</div>
 	<div id="fieldsBar">
 	    <ul>
 			<li><a class="item" href="#" id="campo1" draggable="true">
+			    <div class="type">text</div>
 				<img src="images/image1.png" />
-				<div>
-					<p><strong>CAMPO1</strong></p>
+				<div class="label">
+					<p><strong>Campo de texto</strong></p>
 				</div>
 			</a></li>
 			<li><a class="item" href="#" id="campo2" draggable="true">
+			    <div class="type">textarea</div>
 				<img src="images/image2.png" />
-				<div>
-					<p><strong>CAMPO2</strong></p>
+				<div class="label">
+					<p><strong>Área de texto</strong></p>
 				</div>
 			</a></li>
 			<li><a class="item" href="#" id="campo3" draggable="true">
+			    <div class="type">file</div>
 				<img src="images/image3.png" />
-				<div>
-					<p><strong>CAMPO3</strong></p>
+				<div class="label">
+					<p><strong>Fichero</strong></p>
 				</div>
 			</a></li>
 			<li><a class="item" href="#" id="campo4" draggable="true">
+			    <div class="type">image-gallery</div>
 				<img src="images/image4.png" />
-				<div>
-					<p><strong>CAMPO4</strong></p>
+				<div class="label">
+					<p><strong>Galería de imágenes</strong></p>
 				</div>
 			</a></li>				
 		</ul>
@@ -54,6 +58,7 @@
 	<img src="images/turawet_modeler.png" id="minilogo"/>
 </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>
 	<script src="js/fillform.js"></script>
 	<script src="js/dragdrop.js"></script>
