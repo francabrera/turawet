@@ -2,150 +2,173 @@
 <!DOCTYPE form SYSTEM "form_def.dtd">
 
 <form>
-	<id/>
+	<id />
 	<version>1</version>
 	<name>Formulario de prueba</name>
 	<author>
-		<user>nicopernas</user>
+		<user>turawet</user>
 	</author>
 	<sections>
 		<section>
 			<name>Primera sección</name>
 			<fields>
-			     <field>
-			     	 <id/>
-                     <label>Etiqueta1</label>
-			         <type>TEXT</type>
-			         <required/>
-			         <properties>
-			             <property>
-			                 <name>max_length</name>
-			                 <value>10</value>
-			             </property>
-			         </properties>
-			     </field>
-                 <field>
-                 	 <id/>
-                     <label>Etiqueta2</label>
-                     <type>TEXT</type>
-                     <properties>
-                         <property>
-                             <name>font</name>
-                             <value>Arial</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Fecha1</label>
-                     <type>DATE</type>
-                     <required/>
-                     <properties>
-                         <property>
-                            <name>format</name>
-                            <value>YYYY/MM/DD</value>
-                         </property>
-                         <property>
-                            <name>calendar</name>
-                            <value>MONTH_CALENDAR</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Radio1</label>
-                     <type>RADIO</type>
-                     <required/>
-                     <options>
-                        <option>
-                            <label>Masculino</label>
-                            <value>M</value>
-                        </option>
-                        <option>
-                            <label>Femenino</label>
-                            <value>F</value>
-                        </option>
-                     </options>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Combo1</label>
-                     <type>COMBO</type>
-                     <options>
-                        <option>
-                            <label>Opción 1</label>
-                            <value>O1</value>
-                            <default/>
-                        </option>
-                        <option>
-                            <label>Opción 2</label>
-                            <value>O2</value>
-                        </option>
-                     </options>
-                     <properties>
-                        <property>
-                            <name>size</name>
-                            <value>30</value>
-                        </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Check1</label>
-                     <type>CHECKBOX</type>
-                     <required/>
-                     <properties>
-                         <property>
-                            <name>widget</name>
-                            <value>TRISTATE</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Imágenes</label>
-                     <type>IMAGE_GALLERY</type>
-                     <required/>
-                     <properties>
-                         <property>
-                            <name>max_photos</name>
-                            <value>6</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Vídeos</label>
-                     <type>VIDEO_GALLERY</type>
-                     <properties>
-                         <property>
-                            <name>max_file_size</name>
-                            <value>128</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Audio</label>
-                     <type>AUDIO_GALLERY</type>
-                     <properties>
-                         <property>
-                            <name>max_file_size</name>
-                            <value>8</value>
-                         </property>
-                     </properties>
-                 </field>
-                 <field>
-                 	 <id/>
-                     <label>Localización</label>
-                     <type>LOCATION</type>
-                     <properties>
-                         <property>
-                            <name>type</name>
-                            <value>COORDINATES</value>
-                         </property>
-                     </properties>
-                 </field>
+				<field>
+					<id />
+					<label>Etiqueta1</label>
+					<type>TEXT</type>
+					<required />
+					<properties>
+						<property>
+							<name>max_length</name>
+							<value>10</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Etiqueta2</label>
+					<type>TEXT</type>
+					<properties>
+						<property>
+							<name>font</name>
+							<value>Arial</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Fecha1</label>
+					<type>DATE</type>
+					<required />
+					<properties>
+						<property>
+							<name>format</name>
+							<value>YYYY/MM/DD</value>
+						</property>
+						<property>
+							<name>calendar</name>
+							<value>MONTH_CALENDAR</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Radio1</label>
+					<type>RADIO</type>
+					<required />
+					<options>
+						<option>
+							<label>Masculino</label>
+							<value>M</value>
+						</option>
+						<option>
+							<label>Femenino</label>
+							<value>F</value>
+						</option>
+					</options>
+				</field>
+				<field>
+					<id />
+					<label>Combo1</label>
+					<type>COMBO</type>
+					<options>
+						<option>
+							<label>Opción 1</label>
+							<value>O1</value>
+							<default />
+						</option>
+						<option>
+							<label>Opción 2</label>
+							<value>O2</value>
+						</option>
+					</options>
+					<properties>
+						<property>
+							<name>size</name>
+							<value>30</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Check1</label>
+					<type>CHECKBOX</type>
+					<required />
+					<properties>
+						<property>
+							<name>widget</name>
+							<value>TRISTATE</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Imágenes</label>
+					<type>IMAGE_GALLERY</type>
+					<required />
+					<properties>
+						<property>
+							<name>max_photos</name>
+							<value>6</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Vídeos</label>
+					<type>VIDEO_GALLERY</type>
+					<properties>
+						<property>
+							<name>max_file_size</name>
+							<value>128</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Audio</label>
+					<type>AUDIO_GALLERY</type>
+					<properties>
+						<property>
+							<name>max_file_size</name>
+							<value>8</value>
+						</property>
+					</properties>
+				</field>
+				<field>
+					<id />
+					<label>Localización</label>
+					<type>LOCATION</type>
+					<properties>
+						<property>
+							<name>type</name>
+							<value>COORDINATES</value>
+						</property>
+					</properties>
+				</field>
+				<group>
+					<name>GRUPO</name>
+					<required />
+					<field>
+						<id />
+						<label>Nombre</label>
+						<type>TEXT</type>
+					</field>
+					<field>
+						<id />
+						<label>Apellido1</label>
+						<type>TEXT</type>
+					</field>
+				</group>
+				<group>
+					<list />
+					<name>LISTA</name>
+					<field>
+						<id />
+						<label>Imágenes</label>
+						<type>IMAGE_GALLERY</type>
+					</field>
+				</group>
 			</fields>
 		</section>
 	</sections>
