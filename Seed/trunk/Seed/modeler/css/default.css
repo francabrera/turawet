@@ -1,4 +1,13 @@
 /* Generales */
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 html {
 	height:100%;
 }
@@ -50,24 +59,50 @@ p { margin:0; }
     width:90%;
     height: 100%;
 }
+
 #form ul {
-	padding:0;
-    margin:10px 30px;
+    margin: 0px 30px;
+    padding: 15px 0px 20px 0px;
+    vertical-align:middle;
+    border: 1px dashed #000;
 }
+
 #form li {
 	list-style:none;
-	border-bottom:1px solid #494949;
-	padding:5px;
+	/*border-bottom:1px solid #494949;*/
+	background-image:url('../images/icons/empty.png');
+    background-repeat:no-repeat;
+    background-position:right center;
+    margin:5px 0px 0px 0px;
+    padding:20px;
 }
-#form .quantity {
-	font-weight:bold;
-	padding-right:10px;
-	margin-right:10px;
-	border-right:1px solid #494949;
-	display:inline-block;
-	width:15px;
-	text-align:right;
+
+#form li.prueba{
+    background-image:none;
+    margin:0px;
+    padding:0px;
 }
+
+#form li.text {
+    background-color:#F0E4BD;
+    background-image:url('../images/icons/text.png');
+}
+
+#form li.textarea {
+    background-color:#F0BDC0;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.file {
+    background-color:#DAF0BD;
+    background-image:url('../images/icons/file.png');
+}
+
+#form li.image-gallery {
+    background-color:#BDDFF0;
+    background-image:url('../images/icons/image.png');
+}
+
 /* ----------- */
 
 /* CAMPOS */
@@ -101,7 +136,12 @@ p { margin:0; }
 	width:52px;
 	height:52px;
 }
-.item div {
+
+.item div.type {
+    display:none;
+}
+
+.item div.label {
 	text-align:center;
 	background:rgb(0, 0, 0);
 	background: rgba(0, 0, 0, 0.75);

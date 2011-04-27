@@ -43,24 +43,34 @@ for (var i = 0; i < myfields.length; i++) {
 	// DRAGSTART
 	addEvent(myfields[i], 'dragstart', function (e) {
     	e.dataTransfer.setData('text', this.id);
+    	this.style.backgroundColor = '#C9676C';
     	/*e.dataTransfer.setDragImage(image, -10,-10);*/
 		$('h2').fadeIn('fast');
     });
+	// DRAGEND
+	addEvent(myfields[i], 'dragend', function (e) {
+    	this.style.removeProperty("background-color");
+    	$("h2").fadeOut('fast');
+    });
 	// HOVER
     $(myfields[i]).hover(
-		function () { $('div', this).fadeIn(); }, 
-		function () { $('div', this).fadeOut(); }
+		function () { $('div.label', this).fadeIn(); }, 
+		function () { $('div.label', this).fadeOut(); }
 	);
 }
 
 /*****************************************************************/
 /* Formulario                                                    */
 /*****************************************************************/
+
 var myform = document.querySelector('#form');
+// Form's fields will be sortable
+$( "#form ul" ).sortable();
+$( "#form ul" ).disableSelection();
 // DRAGOVER
 addEvent(myform, 'dragover', function (evt) {
     if (evt.preventDefault) evt.preventDefault(); // allows us to drop
-    this.className = 'over';
+    $('ul', this).className = 'over';
     return false;
   });
 
@@ -80,14 +90,13 @@ addEvent(myform, 'drop', function (evt) {
     // Listado de campos del formulario
     var	formList = $("#form ul");
     var lis = $('li', formList);
-
-    $("h2").fadeOut('fast');
     
     // Variables para el nuevo campo
     var fieldName =  $('p:first', item).text();
+    var type =  $('div.type', item).text();
     var id = parseInt(lis.length);
     // Creamos el nuevo campo
-    var newField = createNewField(id, fieldName, idDrag, '');
+    var newField = createNewField(id, fieldName, idDrag, type);
     
     // Agregamos el campo al formulario
     newField.appendTo(formList);
