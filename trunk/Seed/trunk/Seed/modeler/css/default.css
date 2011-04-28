@@ -42,9 +42,9 @@ p { margin:0; }
 #containt {
     position: relative;
     text-align: left;
-	font: 13px/1.5 helvetica, arial, san-serif;
+	  font: 13px/1.5 helvetica, arial, san-serif;
   	width:960px;
-	padding:0;
+	  padding:0;
     margin:0px auto;
     list-style:none;
     height: 100%;
@@ -55,9 +55,10 @@ p { margin:0; }
 #form {
     float:left;
 	/*background-color:#ccc;*/
-	background-color:#B3AFAA;
+	  background-color:#B3AFAA;
     width:90%;
     height: 100%;
+    overflow: auto;
 }
 
 #form ul {
