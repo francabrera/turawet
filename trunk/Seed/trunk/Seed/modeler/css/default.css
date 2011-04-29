@@ -51,6 +51,12 @@ p { margin:0; }
 }
 /* ----------- */
 
+#minilogo {
+    position:fixed;
+    bottom:5px;
+    left:10px;
+}
+
 /* FORMULARIO */
 #form {
     float:left;
@@ -104,6 +110,11 @@ p { margin:0; }
     background-image:url('../images/icons/image.png');
 }
 
+.deleteImg {
+    margin: 0px 20px;
+    vertical-align:bottom;
+}
+
 /* ----------- */
 
 /* CAMPOS */
@@ -154,12 +165,6 @@ p { margin:0; }
 	color:#f3f3f3;
 	padding:5px;
 	display:none;
-}
-
-#minilogo {
-    position:fixed;
-    bottom:5px;
-    left:10px;
 }
 /* ----------- */
 

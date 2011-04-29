@@ -79,7 +79,11 @@ function createNewField(id, name, idDrag, type) {
         text : name,
         class: type,
         data : { id : idDrag }
-    })/*.append($('<img />', {
+    }).append($('<img />', {
+    	src  : 'images/icons/delete.png',
+    	onClick: 'javascript:deleteField(this)',
+    	class: 'deleteImg'
+    }))/*.append($('<img />', {
         'src' : 'images/text_field.png',
     }))*/;
     var jsField = new Field(name,id);
