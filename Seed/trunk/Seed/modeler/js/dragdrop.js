@@ -104,3 +104,17 @@ addEvent(myform, 'drop', function (evt) {
     /*nuevoCampo.fadeIn('fast');*/
     return false;
 });
+
+/*****************************************************************/
+/* Botones del campo                                             */
+/*****************************************************************/
+function deleteField (delNode) {
+   var node = delNode;
+   do {
+      node = node.parentNode;
+   }
+   while
+      (node.nodeType != 1 && node.nodeName != 'li');
+  /* node.fadeOut('fast');*/
+   node.parentNode.removeChild(node);
+}
