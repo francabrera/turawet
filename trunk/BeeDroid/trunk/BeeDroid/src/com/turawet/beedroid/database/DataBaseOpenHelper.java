@@ -32,11 +32,13 @@ public class DataBaseOpenHelper extends SQLiteOpenHelper
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append("CREATE TABLE ").
-		append(Cte.DataBase.FORMS_PREVIEW).
+		append(Cte.DataBase.FORMS_INFO_TABLE).
 		append(" (").
 		append(Cte.DataBase.NAME).
 		append(" TEXT, ").
 		append(Cte.DataBase.VERSION).
+		append(" TEXT, ").
+		append(Cte.DataBase.XML).
 		append(" TEXT);");
 		
 		db.execSQL(sql.toString());

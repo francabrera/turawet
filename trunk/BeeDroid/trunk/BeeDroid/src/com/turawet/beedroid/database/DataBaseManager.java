@@ -6,11 +6,15 @@ package com.turawet.beedroid.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.constants.Cte;
 
 /**
@@ -58,12 +62,35 @@ public class DataBaseManager
 	 * 
 	 * @return
 	 */
-	public List<FormPreviewBean> getSavedFormsPreview()
+	public boolean saveForms(List<FormInfoBean> formsToSave) throws SQLException
 	{
-		List<FormPreviewBean> listFormPreview = new ArrayList<FormPreviewBean>();
+		SQLiteDatabase db = dbAccessor.getWritableDatabase();
+		ContentValues values = new ContentValues(formsToSave.size());
+		for(FormInfoBean formInfo: formsToSave)
+		{
+			
+			Log.d("DATABASE_MANAGER", "Name    -> " + formInfo.getFormPreview().getName());
+			Log.d("DATABASE_MANAGER", "Version -> " + formInfo.getFormPreview().getVersion());
+			Log.d("DATABASE_MANAGER", "Xml     -> " + formInfo.getXml());
+			
+			values.put(Cte.DataBase.NAME, formInfo.getFormPreview().getName());
+			values.put(Cte.DataBase.VERSION,formInfo.getFormPreview().getVersion());
+			values.put(Cte.DataBase.XML, formInfo.getXml());
+			db.insertOrThrow(Cte.DataBase.FORMS_INFO_TABLE, null, values);
+		}
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<FormIdentificationBean> getSavedFormsIdentification()
+	{
+		List<FormIdentificationBean> listOfSavedFormsId = new ArrayList<FormIdentificationBean>();
 		
 		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
-		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_PREVIEW, new String[]
+		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_INFO_TABLE, new String[]
 		{ Cte.DataBase.NAME, Cte.DataBase.VERSION }, null, null, null, null, Cte.DataBase.NAME);
 		if (c.moveToFirst())
 		{
@@ -73,11 +100,25 @@ public class DataBaseManager
 			{
 				String name = c.getString(nameColumn);
 				String version = c.getString(versionColumn);
-				FormPreviewBean formPreviewBean = new FormPreviewBean(name, version);
-				listFormPreview.add(formPreviewBean);
+				FormIdentificationBean formIdentificationBean = new FormIdentificationBean(name, version);
+				listOfSavedFormsId.add(formIdentificationBean);
 			}
 			while (c.moveToNext());
 		}
-		return listFormPreview;
+		return listOfSavedFormsId;
+	}
+
+	/**
+	 * @param form
+	 * @return
+	 */
+	public boolean existForm(FormIdentificationBean form)
+	{
+		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
+		String selection = Cte.DataBase.NAME + " = ? AND " + Cte.DataBase.VERSION + " = ?";
+		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_INFO_TABLE, 
+													new String[] { Cte.DataBase.NAME }, selection, 
+													new String[] { form.getName(), form.getVersion() }, null, null, null);
+		return c.moveToFirst();
 	}
 }

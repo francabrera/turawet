@@ -29,4 +29,12 @@
     <string name="general_error">Ha ocurrido un error al intentar conectar con el repositorio.</string>
     <string name="not_available_forms_to_download">No hay ningún formulario disponible para descargar.</string>
     
+    <string name="no_forms_selected">Selecciona algún formulario para descargar!</string>
+    <string name="accept">Aceptar</string>
+    <string name="warning">Atención!</string>
+    <string name="error">Error!</string>
+    <string name="error_downloading_form">Ha ocurrido un error al intentar descargar el formulario.</string>
+	<string name="error_saving_form">Ha ocurrido un error al intentar los formularios.</string>
+	
+	<string name="version">Versión</string>
 </resources>

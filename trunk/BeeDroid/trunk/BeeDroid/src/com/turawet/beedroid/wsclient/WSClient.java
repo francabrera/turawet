@@ -16,7 +16,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
+import com.turawet.beedroid.wsclient.beans.FormInfoBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import com.turawet.beedroid.constants.Cte;
 
 /**
@@ -56,32 +57,30 @@ public class WSClient
 		return wsClient;
 	}
 	
-	public String getXmlsFormByNameVersion(List<FormPreviewBean> selectedForms)
+	/**
+	 * 
+	 * @param formToDownload
+	 * @return
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	public FormInfoBean getFormByNameVersion(FormIdentificationBean formToDownload) throws IOException, XmlPullParserException
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		
+		// Añadimos los parámetros a la llamada
+		request.addProperty(Cte.FormIdentificationBean.name, formToDownload.getName());
+		request.addProperty(Cte.FormIdentificationBean.version, formToDownload.getVersion());
+		
 		envelope.setOutputSoapObject(request);
 		
-		String xmlForm = null;
+		transportSE.call(Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION, envelope);
 		
-		try
-		{
-			transportSE.call(Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION, envelope);
-			
-			SoapObject response = (SoapObject) envelope.getResponse();
-			
-			int i = 0;
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catch (XmlPullParserException e)
-		{
-			e.printStackTrace();
-		}
+		SoapObject response = (SoapObject) envelope.getResponse();
 		
-		return xmlForm;
+		String xmlForm = response.getProperty(Cte.WSClient.XML).toString();
+		return new FormInfoBean(formToDownload, xmlForm);
 	}
 	
 	/**
@@ -95,14 +94,14 @@ public class WSClient
 	 * @throws IOException
 	 * 
 	 */
-	public List<FormPreviewBean> getAllFormPreview() throws IOException, XmlPullParserException
+	public List<FormIdentificationBean> getAllFormPreview() throws IOException, XmlPullParserException
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_ALL_FORMS_PREVIEW);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(request);
 		
 		// Lista de previas de formularios que vamos a devolver
-		List<FormPreviewBean> allFormPreview = new ArrayList<FormPreviewBean>();
+		List<FormIdentificationBean> allFormPreview = new ArrayList<FormIdentificationBean>();
 		
 		// Hacemos la llamada al método remoto
 		transportSE.call(Cte.WSClient.GET_ALL_FORMS_PREVIEW, envelope);
@@ -116,12 +115,14 @@ public class WSClient
 		// en la lista para devolver.
 		for (int i = 0; i < countOfFormPreview; i++)
 		{
-			SoapObject formPreview = (SoapObject) response.getProperty(i);
-			String formName = formPreview.getProperty(Cte.formPreviewBean.name).toString();
-			String formVersion = formPreview.getProperty(Cte.formPreviewBean.version).toString();
-			allFormPreview.add(new FormPreviewBean(formName, formVersion));
+			SoapObject formId = (SoapObject) response.getProperty(i);
+			String formName = formId.getProperty(Cte.FormIdentificationBean.name).toString();
+			String formVersion = formId.getProperty(Cte.FormIdentificationBean.version).toString();
+			allFormPreview.add(new FormIdentificationBean(formName, formVersion));
 		}
 		
 		return allFormPreview;
 	}
+	
+	
 }
