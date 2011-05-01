@@ -4,25 +4,22 @@
 package com.turawet.beedroid.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
-import com.turawet.beedroid.constants.Cte;
+import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.adapter.SavedFormsEfficientAdapter;
 import com.turawet.beedroid.database.DataBaseManager;
 
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-//import android.widget.Toast;
 
 /**
  * @author nicopernas
@@ -40,30 +37,23 @@ public class FormsActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.forms);
-		
-		List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
-		
+		setListAdapter(new SavedFormsEfficientAdapter(this, android.R.layout.simple_list_item_2, new ArrayList<FormIdentificationBean>()));
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 		DataBaseManager db = DataBaseManager.getInstance(this);
-		List<FormPreviewBean> forms = db.getSavedFormsPreview();
-		int numOfFormPreviews = forms.size();
-		for (int i = 0; i < numOfFormPreviews; i++)
-		{
-			FormPreviewBean formPreviewBean = forms.get(i);
-			String name = formPreviewBean.getName();
-			String version = formPreviewBean.getVersion();
-			
-			Map<String, String> group = new HashMap<String, String>();
-			group.put(Cte.formPreviewBean.name, name);
-			group.put(Cte.formPreviewBean.version, version);
-			
-			groupData.add(group);
-		}
+		List<FormIdentificationBean> savedForms = db.getSavedFormsIdentification();
 		
-		SimpleAdapter adapter = new SimpleAdapter(this, groupData, android.R.layout.simple_list_item_2, new String[]
-		{ Cte.formPreviewBean.name, Cte.formPreviewBean.version }, new int[]
-		{ android.R.id.text1, android.R.id.text2 });
-		
-		setListAdapter(adapter);
+		SavedFormsEfficientAdapter adapter = (SavedFormsEfficientAdapter) getListAdapter();
+		adapter.clear();
+		for (FormIdentificationBean savedForm : savedForms)
+			adapter.add(savedForm);
 	}
 	
 	/**
@@ -73,8 +63,9 @@ public class FormsActivity extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		// super.onListItemClick(l, v, position, id);
-		//Map<String, String> map = (HashMap<String, String>) l.getItemAtPosition(position);
-		//Toast.makeText(this, map.get("name"), Toast.LENGTH_LONG).show();
+		// Map<String, String> map = (HashMap<String, String>)
+		// l.getItemAtPosition(position);
+		// Toast.makeText(this, map.get("name"), Toast.LENGTH_LONG).show();
 	}
 	
 	/**

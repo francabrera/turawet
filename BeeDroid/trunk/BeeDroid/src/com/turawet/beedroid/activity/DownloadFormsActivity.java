@@ -4,17 +4,20 @@
 package com.turawet.beedroid.activity;
 
 import java.io.IOException;
-import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.List;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.adapter.DownloadFormsEfficientAdapter;
-import com.turawet.beedroid.wsclient.beans.FormPreviewBean;
+import com.turawet.beedroid.database.DataBaseManager;
+import com.turawet.beedroid.util.AlertMaker;
+import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.wsclient.WSClient;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,10 +47,13 @@ public class DownloadFormsActivity extends ListActivity
 		try
 		{
 			// Hacemos la llamada al WS y comprobamos los resultados obtenidos
-			List<FormPreviewBean> listOfAvaliableForms = ws.getAllFormPreview();
-			if (listOfAvaliableForms.isEmpty())
+			List<FormIdentificationBean> avaliablesFormsToDownload = ws.getAllFormPreview();
+			DataBaseManager db = DataBaseManager.getInstance(this);
+			List<FormIdentificationBean> savedForms = db.getSavedFormsIdentification();
+			avaliablesFormsToDownload.removeAll(savedForms);
+			if (avaliablesFormsToDownload.isEmpty())
 				gotAnyFormToDownload = false;
-			setListAdapter(new DownloadFormsEfficientAdapter(this, listOfAvaliableForms));
+			setListAdapter(new DownloadFormsEfficientAdapter(this, avaliablesFormsToDownload));
 		}
 		catch (IOException e)
 		{
@@ -83,8 +89,11 @@ public class DownloadFormsActivity extends ListActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.downloads_forms_menu, menu);
+		if (gotAnyFormToDownload)
+		{
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.downloads_forms_menu, menu);
+		}
 		return gotAnyFormToDownload;
 	}
 	
@@ -109,20 +118,51 @@ public class DownloadFormsActivity extends ListActivity
 	}
 	
 	/**
+	 * 
 	 * @return
 	 */
 	private boolean downloadAllSelectedForms()
 	{
-		List<FormPreviewBean> selectedForms = ((DownloadFormsEfficientAdapter) getListAdapter()).getSelectedFormsToDownload();
+		// Obtenemos los formularios seleccionados para descargarse
+		List<FormIdentificationBean> selectedForms = ((DownloadFormsEfficientAdapter) getListAdapter()).getSelectedFormsToDownload();
+		
+		// Comprobamos que la lista no sea vacía
 		if (selectedForms.isEmpty())
 		{
-			// TODO Mandar un mensaje diciendo que no se ha seleccionado ningún
-			// formulario
-			return false; // ¿?¿?¿?
+			AlertMaker.showAlertMessage(new AlertDialog.Builder(this), R.string.no_forms_selected).show();
 		}
 		else
 		{
+			List<FormInfoBean> formsToSave = new ArrayList<FormInfoBean>();
+			WSClient ws = WSClient.getInstance();
 			
+			// Descargamos todos los formularios y los almacenamos
+			for (FormIdentificationBean formId : selectedForms)
+			{
+				try
+				{
+					FormInfoBean formInfoBean = ws.getFormByNameVersion(formId);
+					formsToSave.add(formInfoBean);
+				}
+				catch (Exception e)
+				{
+					AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.error_downloading_form).show();
+					e.printStackTrace();
+				}
+			}
+			
+			// Guardamos los formularios en el dispositivo
+			DataBaseManager dbManager = DataBaseManager.getInstance(this);
+			try
+			{
+				dbManager.saveForms(formsToSave);
+			}
+			catch (SQLException s)
+			{
+				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.error_saving_form).show();
+			}
+			// Cerramos la activity
+			finish();
 		}
 		return true;
 	}
