@@ -45,12 +45,14 @@ for (var i = 0; i < myfields.length; i++) {
     	e.dataTransfer.setData('text', this.id);
     	this.style.backgroundColor = '#C9676C';
     	/*e.dataTransfer.setDragImage(image, -10,-10);*/
-		$('h2').fadeIn('fast');
+		//$('h2').fadeIn('fast');
+		$('#toEndText').fadeIn('fast');
     });
 	// DRAGEND
 	addEvent(myfields[i], 'dragend', function (e) {
     	this.style.removeProperty("background-color");
-    	$("h2").fadeOut('fast');
+    	//$("h2").fadeOut('fast');
+    	$('#toEndText').fadeOut('fast');
     });
 	// HOVER
     $(myfields[i]).hover(
@@ -70,7 +72,7 @@ $( "#form ul" ).disableSelection();
 // DRAGOVER
 addEvent(myform, 'dragover', function (evt) {
     if (evt.preventDefault) evt.preventDefault(); // allows us to drop
-    $('ul', this).className = 'over';
+    //$('ul', this).className = 'over';
     return false;
   });
 
@@ -78,9 +80,10 @@ addEvent(myform, 'dragover', function (evt) {
 addEvent(myform, 'dragenter', function (evt) {
     if (evt.preventDefault) evt.preventDefault();
     // to get IE to work
-    this.className = 'over';
+    //this.className = 'over';
     return false;
 });
+
 // DROP
 addEvent(myform, 'drop', function (evt) {
     if (evt.stopPropagation) evt.stopPropagation();
@@ -104,6 +107,31 @@ addEvent(myform, 'drop', function (evt) {
     /*nuevoCampo.fadeIn('fast');*/
     return false;
 });
+
+// DROP over a form field
+function addListenersToField(field) {
+	// DROP
+	addEvent(field, 'drop', function (evt) {
+	    if (evt.stopPropagation) evt.stopPropagation();
+	    // Obtenemos el ID transferido en el DRAG
+	    var idDrag = evt.dataTransfer.getData('text');
+	    var item = $('#' + idDrag);
+	    // Listado de campos del formulario
+	    var	formList = $("#form ul");
+	    var lis = $('li', formList);	    
+	    // Variables para el nuevo campo
+	    var fieldName =  $('p:first', item).text();
+	    var type =  $('div.type', item).text();
+	    var id = parseInt(lis.length);
+	    // Creamos el nuevo campo
+	    var newField = createNewField(id, fieldName, idDrag, type);	    
+	    // Agregamos el campo al formulario
+	    newField.insertBefore(this);
+
+	    /*nuevoCampo.fadeIn('fast');*/
+	    return false;
+	});
+}
 
 /*****************************************************************/
 /* Botones del campo                                             */
