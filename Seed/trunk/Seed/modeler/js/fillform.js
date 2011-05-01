@@ -86,6 +86,7 @@ function createNewField(id, name, idDrag, type) {
     }))/*.append($('<img />', {
         'src' : 'images/text_field.png',
     }))*/;
+	addListenersToField(newField);
     var jsField = new Field(name,id);
     formSections[0].addField(jsField);
     return newField;

@@ -67,6 +67,10 @@ p { margin:0; }
     overflow: auto;
 }
 
+#form.over {
+    background-color:#FFAFAA;
+}
+
 #form ul {
     margin: 0px 30px;
     padding: 15px 0px 20px 0px;
@@ -83,6 +87,22 @@ p { margin:0; }
     margin:5px 0px 0px 0px;
     padding:20px;
 }
+/* Mensaje para añadir campo al final */
+#form li.toEnd {
+    color: #FFFFFF;
+    background-image: none;
+    text-align:center;
+    height:30px;
+    margin:0px;
+    padding:0px;
+}
+
+#toEndText {
+    background-color: #4F4C49;
+    display: none;
+    height:100%;
+}
+/* ---------------------------------- */
 
 #form li.prueba{
     background-image:none;
