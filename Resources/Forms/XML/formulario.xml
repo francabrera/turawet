@@ -6,7 +6,7 @@
 	<version>1</version>
 	<name>Formulario de prueba</name>
 	<author>
-		<user>nicopernas</user>
+		<user>turawet</user>
 	</author>
 	<sections>
 		<section>
@@ -147,7 +147,7 @@
 					</properties>
 				</field>
 				<group>
-					<name>GRUPO</name>
+					<label>GRUPO</label>
 					<required />
 					<field>
 						<id />
@@ -162,7 +162,7 @@
 				</group>
 				<group>
 					<list />
-					<name>LISTA</name>
+					<label>LISTA</label>
 					<field>
 						<id />
 						<label>Imágenes</label>
