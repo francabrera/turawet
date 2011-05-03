@@ -13,8 +13,6 @@ html {
 }
 body {
     text-align: center;
-	/*background: #ececec;*/
-	/*background: #FFE9D6;*/
 	background: #2F2C29;
 	margin:0px auto;
 	padding:0px;
@@ -42,9 +40,9 @@ p { margin:0; }
 #containt {
     position: relative;
     text-align: left;
-	  font: 13px/1.5 helvetica, arial, san-serif;
+	font: 13px/1.5 helvetica, arial, san-serif;
   	width:960px;
-	  padding:0;
+	padding:0;
     margin:0px auto;
     list-style:none;
     height: 100%;
@@ -60,8 +58,7 @@ p { margin:0; }
 /* FORMULARIO */
 #form {
     float:left;
-	/*background-color:#ccc;*/
-	  background-color:#B3AFAA;
+	background-color:#B3AFAA;
     width:90%;
     height: 100%;
     overflow: auto;
@@ -83,10 +80,19 @@ p { margin:0; }
 	/*border-bottom:1px solid #494949;*/
 	background-image:url('../images/icons/empty.png');
     background-repeat:no-repeat;
-    background-position:right center;
+    background-position:left center;
     margin:5px 0px 0px 0px;
     padding:20px;
 }
+
+#form li p.label {
+	margin:0px 0px 0px 40px;
+}
+
+#form li div {
+    float:right;
+}
+
 /* Mensaje para añadir campo al final */
 #form li.toEnd {
     color: #FFFFFF;
@@ -103,6 +109,10 @@ p { margin:0; }
     height:100%;
 }
 /* ---------------------------------- */
+
+
+/** Estilos para cada campo en el formulario **/
+/** ---------------------------------------- **/
 
 #form li.prueba{
     background-image:none;
@@ -129,6 +139,8 @@ p { margin:0; }
     background-color:#BDDFF0;
     background-image:url('../images/icons/image.png');
 }
+/** ---------------------------------------- **/
+
 
 .deleteImg {
     margin: 0px 20px;
@@ -150,13 +162,13 @@ p { margin:0; }
 #fieldsBar ul li {
 	display:inline;
 }
+
 .item {
 	display:block;
 	float:right;
 	width:80px;
 	height:58px;
 	margin:20px auto;
-	border:0px solid #494949;
 	text-align:center;
 	text-decoration:none;
 	color: #000;

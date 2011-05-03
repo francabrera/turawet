@@ -46,6 +46,19 @@ function Section() {
 	    this.fields.push(f);
 	}
 	
+	this.removeField = function(id)    
+	{
+	    delete this.fields[id];
+	}
+	
+	/**
+	 * Devuelve el número de campos de la sección
+	 */
+	this.size = function()    
+	{
+	    return this.fields.length;
+	}
+	
 	/**
 	 * Devuelve el XML de la sección con sus campos
 	 */
@@ -75,19 +88,42 @@ var fieldTypes = {"text" : 0, "textarea" : 1, "file" : 3, "image_gallery" : 4};
 /* Crea un nuevo campo para el formulario                        */
 /*****************************************************************/
 function createNewField(id, name, idDrag, type) {
+	// Componemos el id del nuevo campo
+	var idField = 's' + actualSection + '-f' + formSections[actualSection].size();
 	var newField = $('<li />', {
-        text : name,
         class: type,
+        id: idField,
         data : { id : idDrag }
-    }).append($('<img />', {
-    	src  : 'images/icons/delete.png',
-    	onClick: 'javascript:deleteField(this)',
-    	class: 'deleteImg'
-    }))/*.append($('<img />', {
-        'src' : 'images/text_field.png',
-    }))*/;
+    }).append(
+        // Cuadro de botones
+		$('<div />', {
+	    	class: 'actions'
+		}).prepend(
+				// Botón de borrado
+				$('<img />', {
+					src  : 'images/icons/delete.png',
+					onClick: 'javascript:deleteField(\''+idField+'\')',
+					class: 'deleteImg'
+		    })),
+		// Nombre del campo
+	    $('<p />', {
+	    	text : name,
+	    	class: 'label'
+	    })
+	);
 	addListenersToField(newField);
     var jsField = new Field(name,id);
     formSections[0].addField(jsField);
     return newField;
+}
+
+// Borrado
+function deleteField (tagID) {
+   var node = document.querySelector('#'+tagID);
+   var auxIDs = tagID.match(/\d+/g);
+   var sectionID = parseInt(auxIDs[0]);
+   var fieldID = parseInt(auxIDs[1]);
+   //alert("ID de la sección:" + sectionID + "\n ID del campo:" + fieldID);
+   formSections[sectionID].removeField(fieldID);
+   deleteParentElement(node, 'li');
 }
