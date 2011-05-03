@@ -39,23 +39,23 @@ var addEvent = (function () {
 /*****************************************************************/
 var myfields = document.querySelectorAll('#fieldsBar > ul > li > .item');
 for (var i = 0; i < myfields.length; i++) {
-	/*var image = myfields[i].getElementsByTagName("img");*/
+	var actualField = myfields[i];
 	// DRAGSTART
-	addEvent(myfields[i], 'dragstart', function (e) {
+	addEvent(actualField, 'dragstart', function (e) {
     	e.dataTransfer.setData('text', this.id);
     	this.style.backgroundColor = '#C9676C';
-    	/*e.dataTransfer.setDragImage(image, -10,-10);*/
+    	e.dataTransfer.setDragImage(this.getElementsByTagName("img")[0], 10, 10);
 		//$('h2').fadeIn('fast');
 		$('#toEndText').fadeIn('fast');
     });
 	// DRAGEND
-	addEvent(myfields[i], 'dragend', function (e) {
+	addEvent(actualField, 'dragend', function (e) {
     	this.style.removeProperty("background-color");
     	//$("h2").fadeOut('fast');
     	$('#toEndText').fadeOut('fast');
     });
 	// HOVER
-    $(myfields[i]).hover(
+    $(actualField).hover(
 		function () { $('div.label', this).fadeIn(); }, 
 		function () { $('div.label', this).fadeOut(); }
 	);
@@ -64,6 +64,28 @@ for (var i = 0; i < myfields.length; i++) {
 /*****************************************************************/
 /* Formulario                                                    */
 /*****************************************************************/
+var actualSection = 0;
+
+//Drop Function
+function dropField (evt, isElem) {
+	// Obtenemos el ID transferido en el DRAG
+	var idDrag = evt.dataTransfer.getData('text');
+	var item = $('#' + idDrag);
+	// Listado de campos del formulario
+	var	formList = $("#form ul")[actualSection];
+	var lis = $('li', formList);	    
+	// Variables para el nuevo campo
+	var fieldName =  $('p:first', item).text();
+	var type =  $('div.type', item).text();
+	var id = parseInt(lis.length);
+	// Creamos el nuevo campo
+	var newField = createNewField(id, fieldName, idDrag, type);	    
+	// Agregamos el campo al formulario
+	if (isElem)
+		newField.insertBefore(evt.target);
+	else
+		newField.appendTo(formList);
+}
 
 var myform = document.querySelector('#form');
 // Form's fields will be sortable
@@ -71,7 +93,7 @@ $( "#form ul" ).sortable();
 $( "#form ul" ).disableSelection();
 // DRAGOVER
 addEvent(myform, 'dragover', function (evt) {
-    if (evt.preventDefault) evt.preventDefault(); // allows us to drop
+	if (evt.preventDefault) evt.preventDefault();
     //$('ul', this).className = 'over';
     return false;
   });
@@ -86,63 +108,38 @@ addEvent(myform, 'dragenter', function (evt) {
 
 // DROP
 addEvent(myform, 'drop', function (evt) {
-    if (evt.stopPropagation) evt.stopPropagation();
-    // Obtenemos el ID transferido en el DRAG
-    var idDrag = evt.dataTransfer.getData('text');
-    var item = $('#' + idDrag);
-    // Listado de campos del formulario
-    var	formList = $("#form ul");
-    var lis = $('li', formList);
-    
-    // Variables para el nuevo campo
-    var fieldName =  $('p:first', item).text();
-    var type =  $('div.type', item).text();
-    var id = parseInt(lis.length);
-    // Creamos el nuevo campo
-    var newField = createNewField(id, fieldName, idDrag, type);
-    
-    // Agregamos el campo al formulario
-    newField.appendTo(formList);
-
+	if (evt.preventDefault) evt.preventDefault();
+    dropField(evt, false)
     /*nuevoCampo.fadeIn('fast');*/
     return false;
 });
 
 // DROP over a form field
 function addListenersToField(field) {
+	
+//	addEvent(field, 'dragover', function (evt) {
+//	    if (evt.preventDefault) evt.preventDefault(); // allows us to drop
+//	    //$('ul', this).className = 'over';
+//	    return false;
+//	  });
 	// DROP
 	addEvent(field, 'drop', function (evt) {
-	    if (evt.stopPropagation) evt.stopPropagation();
-	    // Obtenemos el ID transferido en el DRAG
-	    var idDrag = evt.dataTransfer.getData('text');
-	    var item = $('#' + idDrag);
-	    // Listado de campos del formulario
-	    var	formList = $("#form ul");
-	    var lis = $('li', formList);	    
-	    // Variables para el nuevo campo
-	    var fieldName =  $('p:first', item).text();
-	    var type =  $('div.type', item).text();
-	    var id = parseInt(lis.length);
-	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, idDrag, type);	    
-	    // Agregamos el campo al formulario
-	    newField.insertBefore(this);
-
+		if (evt.preventDefault) evt.preventDefault();
+		dropField(evt, true);
 	    /*nuevoCampo.fadeIn('fast');*/
 	    return false;
 	});
 }
 
-/*****************************************************************/
-/* Botones del campo                                             */
-/*****************************************************************/
-function deleteField (delNode) {
-   var node = delNode;
-   do {
+// Borra el elemento padre especificado del objeto item
+function deleteParentElement (item, parentName) {
+   var node = item;
+   // Desde el nodo item, recorremos de forma ascendente hasta
+   // encontrar al padre especificado
+   while (node.nodeType != 1 && node.nodeName != parentName) {
       node = node.parentNode;
-   }
-   while
-      (node.nodeType != 1 && node.nodeName != 'li');
-  /* node.fadeOut('fast');*/
-   node.parentNode.removeChild(node);
+   };
+   // Eliminamos el nodo hijo desde el nodo padre
+   $(node).fadeOut('fast', function () {this.parentNode.removeChild(this)});
+   
 }
