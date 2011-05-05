@@ -80,7 +80,7 @@ p { margin:0; }
 	/*border-bottom:1px solid #494949;*/
 	background-image:url('../images/icons/empty.png');
     background-repeat:no-repeat;
-    background-position:left center;
+    background-position:left top;
     margin:5px 0px 0px 0px;
     padding:20px;
 }
@@ -89,9 +89,27 @@ p { margin:0; }
 	margin:0px 0px 0px 40px;
 }
 
-#form li div {
+#form li .actions {
     float:right;
 }
+
+#form li .actions .fieldButton {
+    margin: 0px 20px;
+    position:relative;
+    top:-5px;
+}
+
+#form li div.properties {
+    display:none;
+    padding:20px;
+    background-color: #999691;
+/*    width: 100%;*/
+    position: relative;
+    top: 20px;
+/*    left: -20px;*/
+    
+}
+
 
 /* Mensaje para añadir campo al final */
 #form li.toEnd {
@@ -120,9 +138,13 @@ p { margin:0; }
     padding:0px;
 }
 
+/* ----->>>> */
 #form li.text {
     background-color:#F0E4BD;
     background-image:url('../images/icons/text.png');
+}
+#form li.text div.properties {
+    background-color:#D6CCA9;
 }
 
 #form li.textarea {
@@ -140,12 +162,6 @@ p { margin:0; }
     background-image:url('../images/icons/image.png');
 }
 /** ---------------------------------------- **/
-
-
-.deleteImg {
-    margin: 0px 20px;
-    vertical-align:bottom;
-}
 
 /* ----------- */
 
