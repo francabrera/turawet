@@ -78,6 +78,7 @@ function Section() {
 
 var formSections = new Array();
 formSections[0] = new Section();
+var actualSection = 0;
 
 /*****************************************************************/
 /* Tipos de campos                                               */
@@ -99,17 +100,29 @@ function createNewField(id, name, idDrag, type) {
 		$('<div />', {
 	    	class: 'actions'
 		}).prepend(
+				// Botón de propiedades
+				$('<img />', {
+					src  : 'images/buttons/more.png',
+					onClick: 'javascript:expandField(\''+idField+'\')',
+					class: 'fieldButton'
+				}),
 				// Botón de borrado
 				$('<img />', {
-					src  : 'images/icons/delete.png',
+					src  : 'images/buttons/delete.png',
 					onClick: 'javascript:deleteField(\''+idField+'\')',
-					class: 'deleteImg'
-		    })),
+					class: 'fieldButton'
+				})
+		),
 		// Nombre del campo
 	    $('<p />', {
 	    	text : name,
 	    	class: 'label'
-	    })
+	    }),
+	    // Propiedades
+		$('<div />', {
+	    	class: 'properties',
+	    	text: 'propiedades'
+		})
 	);
 	addListenersToField(newField);
     var jsField = new Field(name,id);
@@ -126,4 +139,11 @@ function deleteField (tagID) {
    //alert("ID de la sección:" + sectionID + "\n ID del campo:" + fieldID);
    formSections[sectionID].removeField(fieldID);
    deleteParentElement(node, 'li');
+}
+
+//Borrado
+function expandField (tagID) {
+   var node = document.querySelector('#'+tagID);
+   node = $(node).children('.properties');
+   $(node).toggle();
 }
