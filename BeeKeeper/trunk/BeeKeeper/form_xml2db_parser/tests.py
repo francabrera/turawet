@@ -41,5 +41,5 @@ class FormXmldbParserTest(TestCase):
         # TEST 2: Num secciones
         self.assertEqual(len(sections), 1)
 
-        # TEST 3: N campos
+        # TEST 3: N campos -> Now it must fail
         self.assertEqual(len(formfields), 10)
