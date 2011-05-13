@@ -1,0 +1,11 @@
+#summary One-sentence summary of this page.
+#labels Phase-Design
+
+= Introduction =
+
+Los datos de geolocalización podemos rellenarlos como metadatos o como un campo opcional (tal como está en el ejemplo de "formulario.xml").
+
+
+= Details =
+
+Creo que lo mejor será que sean metadatos (junto con el id del usuario que rellena la instancia). Aunque quizá pueda haber formularios donde no deseemos guardar los datos de geolocalización. Esto es un tema de debate.
