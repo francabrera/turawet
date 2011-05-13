@@ -1,11 +1,11 @@
-#summary One-sentence summary of this page.
+#summary ¿Cómo incluir los datos georeferenciados en una instancia?
 #labels Phase-Design
 
 = Introduction =
 
-Los datos de geolocalización podemos rellenarlos como metadatos o como un campo opcional (tal como está en el ejemplo de "formulario.xml").
+Los datos de geolocalización podemos rellenarlos como metadatos o como un campo opcional (tal como está propuesto en el ejemplo de "formulario.xml") en cada instancia de formulario.
 
 
 = Details =
 
-Creo que lo mejor será que sean metadatos (junto con el id del usuario que rellena la instancia). Aunque quizá pueda haber formularios donde no deseemos guardar los datos de geolocalización. Esto es un tema de debate.
+Creo que lo mejor será que sean metadatos (junto con el id del usuario que rellena la instancia). Aunque quizá pueda haber formularios donde no deseemos guardar los datos de geolocalización para sus instancias, lo que justificaría que sean un campo a parte que el modelador pueda poner o no. También se podría tratar con un checkbox en el modelador y que se traduzca en los metadatos en caso de estar activo, y no en un campo. Esto es un tema de debate.
