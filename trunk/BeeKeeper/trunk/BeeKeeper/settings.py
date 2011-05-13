@@ -1,12 +1,28 @@
 # Django settings for BeeKeeper project.
 import os.path
+import logging
 
 PROJECT_DIR = os.path.dirname(__file__) # this is not Django setting.
+
+PARENT_DIR = os.path.dirname(PROJECT_DIR)
 
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
+#logging.basicConfig(level=logging.DEBUG,
+#     format='%(asctime)s %(levelname)s %(message)s',
+#     filename=os.path.join(PARENT_DIR, 'django.log'),
+#     filemode='a+')
+
+
+LOGS = {
+    'FormXmldbParser': {
+        'file': PROJECT_DIR+'/logs/FormXmldbParser.log',
+        'level': 'ERROR',
+    },
+}
 
 
 ADMINS = (

@@ -52,27 +52,11 @@ class Section(models.Model):
 
 class FieldGroup(models.Model):
     """Class: `FieldGroup`. 
-       :param label: Field-group label in the form."""
+       :param label: Field-group label in the form.
+       :param multiple: If it is a list of elements"""
     label = models.CharField(max_length = 256)
-
-    def __unicode__(self):
-        return self.label
-
-
-
-class FieldList(models.Model):
-    """Class: `FieldList`. 
-       :param label: Field-list label in the form.
-       :param group: group associated with the list.
-       :attention Group relation is in this class due to
-                  the group could exist without being in
-                  a list. But a list is always related to groups"""
-    label = models.CharField(max_length = 256)
-    group = models.OneToOneField(FieldGroup)
-
-    class Meta:
-        unique_together = ('label', 'group')
-        ordering = ['group']
+    multiple = models.BooleanField()
+    required = models.BooleanField()
 
     def __unicode__(self):
         return self.label
@@ -101,7 +85,7 @@ class FormField(models.Model):
     field_group = models.ForeignKey(FieldGroup, null = True)
     field_group_order = models.SmallIntegerField(null = True)
     type = models.CharField(max_length = 128)
-    required = models.BooleanField() 
+    required = models.BooleanField()
 
     class Meta:
         unique_together = ('section', 'section_order')
@@ -138,13 +122,11 @@ class FieldProperty(models.Model):
     value = models.CharField(max_length = 128)
     # Link
     form_field = models.ForeignKey(FormField, null = True)
+    group_field = models.ForeignKey(FieldGroup, null = True)
 
-    class Meta:
-        unique_together = ('name', 'form_field')
-        ordering = ['form_field']
-        
+       
     def __unicode__(self):
-        return self.label
+        return self.form_field + " - " + self.group_field + " - " + self.name
 
 
 class Instance(models.Model):
@@ -159,6 +141,8 @@ class Instance(models.Model):
     modification_date = models.DateField()
     signature = models.CharField(max_length = 128)
     form = models.ForeignKey(Form)
+    georef = models.CharField(max_length = 256)
+    editable = models.BooleanField()
 
     def __unicode__(self):
         return self.form.name + " - " + self.id
