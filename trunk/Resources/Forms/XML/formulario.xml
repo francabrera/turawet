@@ -147,6 +147,7 @@
 					</properties>
 				</field>
 				<group>
+					<id />
 					<label>GRUPO</label>
 					<required />
 					<field>
@@ -161,6 +162,7 @@
 					</field>
 				</group>
 				<group>
+					<id />
 					<list />
 					<label>LISTA</label>
 					<field>
