@@ -2,13 +2,16 @@
 <!DOCTYPE form SYSTEM "instance_def.dtd">
 
 <form>
-	<id />
-	<fieldid>1</fieldid>
-	<version>1</version>
+	<id>1</id>>
 	<name>Formulario de prueba</name>
-	<author>
-		<user>turawet</user>
-	</author>
+	<version>1</version>
+	<meta>
+		<author>
+			<user>turawet</user>
+		</author>
+		<creationdate>12/01/11</creationdate>
+		<modificationdate>12/01/11</modificationdate>
+	</meta>
 	<sections>
 		<section>
 			<name>Primera sección</name>
@@ -145,6 +148,10 @@
 					<fieldid>1</fieldid>
 					<label>Localización</label>
 					<type>LOCATION</type>
+					<position>
+						<latitude>23.516</latitude>
+						<longitude>-49.21</longitude>
+					</position>
 					<properties>
 						<property>
 							<name>type</name>
@@ -160,6 +167,10 @@
 						<fieldid>1</fieldid>
 						<label>Localización</label>
 						<type>LOCATION</type>
+						<position>
+							<latitude>23.516</latitude>
+							<longitude>-49.21</longitude>
+						</position>
 						<properties>
 							<property>
 								<name>type</name>
