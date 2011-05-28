@@ -12,30 +12,30 @@ public class FormInfoBean
 	/**
 	 *
 	 */
-	private FormIdentificationBean	formPreview;
+	private FormIdentificationBean	formId;
 	private String				xml;
 	
-	public FormInfoBean(FormIdentificationBean formPreview, String xml)
+	public FormInfoBean(FormIdentificationBean formId, String xml)
 	{
-		this.formPreview = formPreview;
+		this.formId = formId;
 		this.xml = xml;
 	}
 	
 	/**
-	 * @return the formPreview
+	 * @return the formId
 	 */
-	public FormIdentificationBean getFormPreview()
+	public FormIdentificationBean getFormId()
 	{
-		return formPreview;
+		return formId;
 	}
 	
 	/**
-	 * @param formPreview
-	 *           the formPreview to set
+	 * @param formId
+	 *           the formId to set
 	 */
-	public void setFormPreview(FormIdentificationBean formPreview)
+	public void setFormId(FormIdentificationBean formId)
 	{
-		this.formPreview = formPreview;
+		this.formId = formId;
 	}
 	
 	/**

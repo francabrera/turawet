@@ -66,15 +66,15 @@ public class DataBaseManager
 	{
 		SQLiteDatabase db = dbAccessor.getWritableDatabase();
 		ContentValues values = new ContentValues(formsToSave.size());
-		for(FormInfoBean formInfo: formsToSave)
+		for (FormInfoBean formInfo : formsToSave)
 		{
 			
-			Log.d("DATABASE_MANAGER", "Name    -> " + formInfo.getFormPreview().getName());
-			Log.d("DATABASE_MANAGER", "Version -> " + formInfo.getFormPreview().getVersion());
+			Log.d("DATABASE_MANAGER", "Name    -> " + formInfo.getFormId().getName());
+			Log.d("DATABASE_MANAGER", "Version -> " + formInfo.getFormId().getVersion());
 			Log.d("DATABASE_MANAGER", "Xml     -> " + formInfo.getXml());
 			
-			values.put(Cte.DataBase.NAME, formInfo.getFormPreview().getName());
-			values.put(Cte.DataBase.VERSION,formInfo.getFormPreview().getVersion());
+			values.put(Cte.DataBase.NAME, formInfo.getFormId().getName());
+			values.put(Cte.DataBase.VERSION, formInfo.getFormId().getVersion());
 			values.put(Cte.DataBase.XML, formInfo.getXml());
 			db.insertOrThrow(Cte.DataBase.FORMS_INFO_TABLE, null, values);
 		}
@@ -107,18 +107,27 @@ public class DataBaseManager
 		}
 		return listOfSavedFormsId;
 	}
-
+	
 	/**
 	 * @param form
 	 * @return
 	 */
-	public boolean existForm(FormIdentificationBean form)
+	public FormInfoBean getFormInfo(FormIdentificationBean form)
 	{
 		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
 		String selection = Cte.DataBase.NAME + " = ? AND " + Cte.DataBase.VERSION + " = ?";
-		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_INFO_TABLE, 
-													new String[] { Cte.DataBase.NAME }, selection, 
-													new String[] { form.getName(), form.getVersion() }, null, null, null);
-		return c.moveToFirst();
+		
+		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_INFO_TABLE, new String[]
+		{ Cte.DataBase.XML }, selection, new String[]
+		{ form.getName(), form.getVersion() }, null, null, null);
+		
+		String xml = null;
+		if (c.moveToFirst())
+		{
+			int xmlColumn = c.getColumnIndex(Cte.DataBase.XML);
+			xml = c.getString(xmlColumn);
+		}
+		
+		return new FormInfoBean(form, xml);
 	}
 }

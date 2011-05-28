@@ -46,7 +46,8 @@ public class DownloadFormsActivity extends ListActivity
 		
 		try
 		{
-			// Hacemos la llamada al WS y comprobamos los resultados obtenidos
+			// Hacemos la llamada al WS y eliminamos aquellos formularios que ya estén
+			// guardadaos en el teléfono, para que no se puedan volver a descargar.
 			List<FormIdentificationBean> avaliablesFormsToDownload = ws.getAllFormPreview();
 			DataBaseManager db = DataBaseManager.getInstance(this);
 			List<FormIdentificationBean> savedForms = db.getSavedFormsIdentification();

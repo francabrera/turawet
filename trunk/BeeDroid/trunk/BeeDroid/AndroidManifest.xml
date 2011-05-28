@@ -28,6 +28,11 @@
 		<activity android:name=".activity.DownloadFormsActivity"
 			android:label="@string/downloads_forms_name">
 		</activity>
+		<activity android:name=".activity.FillNewInstanceActivity"
+			android:label="Nueva Instancia">
+		</activity>
+				
+		
 
 	</application>
 </manifest>

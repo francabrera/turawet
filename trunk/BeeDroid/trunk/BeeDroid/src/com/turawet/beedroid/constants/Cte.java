@@ -46,4 +46,13 @@ public final class Cte
 		public static final String	VERSION				= "VERSION";
 		public static final String	XML					= "XML";
 	}
+	
+	public static final class Parser
+	{
+		public static final String	FORM		= "form";
+		public static final String	SECTION	= "section";
+		public static final String	TEXT		= "text";
+		public static final String	DATE		= "date";
+		public static final String	NAME		= "name";
+	}
 }
