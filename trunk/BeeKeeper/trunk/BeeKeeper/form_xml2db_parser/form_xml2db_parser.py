@@ -22,7 +22,28 @@ class FormXmldbParser():
 
     ### ATRIBUTES ###
     
-    ### METHODS ###    
+    ### METHODS ###
+    
+    def parse_field_properties(self, properties, field_model):
+        for property in properties:
+            property_name = property.findtext("name")
+            property_value = property.findtext("value")
+            property_model = FieldProperty(name=property_name, value=property_value, form_field=field_model)
+            property_model.save()
+        
+        return 0
+    
+        
+    def parse_field_options(self, options, field_model):
+        for option in options:
+            option_label = option.findtext("label")
+            option_value = option.findtext("value")
+            option_model = FieldOption(label=option_label, value=option_value, form_field=field_model)
+            option_model.save()
+        
+        return 0
+    
+    
     def parse_text_field(self, parser, section_model):
         field_model = FormField(section=section_model)
         
@@ -33,11 +54,7 @@ class FormXmldbParser():
         field_model = FormField(section=section_model)
         # Parsing
         properties = parser.findall("properties/property")
-        for property in properties:
-            property_name = property.findtext("name")
-            property_value = property.findtext("value")
-            property_model = FieldProperty(name=property_name, value=property_value, form_field=field_model)
-            property_model.save()
+        self.parse_field_properties(properties, field_model)
         
         return field_model
     
@@ -46,11 +63,7 @@ class FormXmldbParser():
         field_model = FormField(section=section_model)
         # Parsing
         options = parser.findall("options/option")
-        for option in options:
-            option_label = option.findtext("label")
-            option_value = option.findtext("value")
-            option_model = FieldOption(label=option_label, value=option_value, form_field=field_model)
-            option_model.save()
+        self.parse_field_options(options, field_model)
         
         return field_model
     
@@ -59,12 +72,8 @@ class FormXmldbParser():
         field_model = FormField(section=section_model)
         # Parsing
         options = parser.findall("options/option")
-        for option in options:
-            option_label = option.findtext("label")
-            option_value = option.findtext("value")
-            option_model = FieldOption(label=option_label, value=option_value, form_field=field_model)
-            option_model.save()
-        
+        self.parse_field_options(options, field_model)
+                
         return field_model
     
     
