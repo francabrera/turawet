@@ -39,23 +39,23 @@ var addEvent = (function () {
 /*****************************************************************/
 var myfields = document.querySelectorAll('#fieldsBar > ul > li > .item');
 for (var i = 0; i < myfields.length; i++) {
-	/*var image = myfields[i].getElementsByTagName("img");*/
+	var actualField = myfields[i];
 	// DRAGSTART
-	addEvent(myfields[i], 'dragstart', function (e) {
+	addEvent(actualField, 'dragstart', function (e) {
     	e.dataTransfer.setData('text', this.id);
     	this.style.backgroundColor = '#C9676C';
-    	/*e.dataTransfer.setDragImage(image, -10,-10);*/
+    	e.dataTransfer.setDragImage(this.getElementsByTagName("img")[0], 10, 10);
 		//$('h2').fadeIn('fast');
 		$('#toEndText').fadeIn('fast');
     });
 	// DRAGEND
-	addEvent(myfields[i], 'dragend', function (e) {
+	addEvent(actualField, 'dragend', function (e) {
     	this.style.removeProperty("background-color");
     	//$("h2").fadeOut('fast');
     	$('#toEndText').fadeOut('fast');
     });
 	// HOVER
-    $(myfields[i]).hover(
+    $(actualField).hover(
 		function () { $('div.label', this).fadeIn(); }, 
 		function () { $('div.label', this).fadeOut(); }
 	);
@@ -67,7 +67,7 @@ for (var i = 0; i < myfields.length; i++) {
 
 var myform = document.querySelector('#form');
 // Form's fields will be sortable
-$( "#form ul" ).sortable();
+$( "#form ul" ).sortable({items: "li:not(.toEnd)"});
 $( "#form ul" ).disableSelection();
 // DRAGOVER
 addEvent(myform, 'dragover', function (evt) {
