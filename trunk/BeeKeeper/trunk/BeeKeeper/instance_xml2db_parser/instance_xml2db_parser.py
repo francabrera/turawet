@@ -34,37 +34,36 @@ class InstanceXmldbParser():
             version = parser.findtext('version')
             name = parser.findtext('name')
             user = parser.findtext('author/user')
+            ####
+            # Dates
+            ####
+            user = parser.findtext('creationdate')
+            user = parser.findtext('modificationdate')
             
-            #####
-            # Creation date / Modification date
-            #####
-            
-            # Form model
-            form_model = Form(version=version, name=name)
-            form_model.save()
-            id.text = str(form_model.id)
             
             #Section
             sections = parser.findall("sections/section")
             i = 0;
             for section in sections:
-                #id = section.find('id')
+                ##### EL ID YA FUE INTRODUCIDO POR EL OTRO PARSER
+                id = section.find('id')
                 name = section.findtext("name")
-                # NAME ES NULL ahora mismo y LA 'i' NO VALE
-                section_model = Section(name=name, order=i, form=form_model)
-                section_model.save()
-                id.text = str(section_model.id)
+                #### Obtenemos la sección que ya ha de estar guardada ####
+                section_model = Section.objects.get(pk=id)
                 #Section fields
-                fields = section.findall("fields/field")
+                instance_fields = section.findall("instancefields/instancefield")
                 # Parsing the fields
                 j = 0 # Integer in python are inmutable. So they are passed by value to the function
-                j = self.parse_generic_field(fields, section_model, i, j)
+                j = self.parse_generic_instancefield(instance_fields, section_model, i, j)
                 # Parsing the groups
-                groups = section.findall("fields/group")
+                groups = section.findall("instancefields/instancegroup")
                 j = self.parse_generic_group(groups, section_model, i, j)
                 i += 1
+                #id.text = str(section_model.id)
             # Saving the XML in the form table
-            form_model.xml = tostring(parser)
-            form_model.save()
+            #form_model.xml = tostring(parser)
+            instance_model.save()
+            
+            return 0
             
             return 0
