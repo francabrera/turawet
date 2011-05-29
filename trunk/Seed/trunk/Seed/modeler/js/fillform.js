@@ -118,6 +118,7 @@ function createNewField(id, name, idDrag, type) {
 	    	text : name,
 	    	class: 'label'
 	    }),
+	    $('<br />'),
 	    // Propiedades
 		$('<div />', {
 	    	class: 'properties',
@@ -145,5 +146,5 @@ function deleteField (tagID) {
 function expandField (tagID) {
    var node = document.querySelector('#'+tagID);
    node = $(node).children('.properties');
-   $(node).toggle();
+   $(node).slideToggle('slow');
 }
