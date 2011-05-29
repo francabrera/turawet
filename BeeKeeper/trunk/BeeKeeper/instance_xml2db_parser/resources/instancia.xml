@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE form SYSTEM "instance_def.dtd">
 
-<form>
-	<id>1</id>>
-	<name>Formulario de prueba</name>
-	<version>1</version>
+<instance>
 	<meta>
+		<formmeta>
+			<formid>1</formid>
+			<name>Formulario de prueba</name>
+			<version>1</version>
+		</formmeta>
+		<!-- Instance meta fields -->
+		<id/>
 		<author>
 			<user>turawet</user>
 		</author>
@@ -14,19 +18,21 @@
 	</meta>
 	<sections>
 		<section>
+			<id>1</id>
 			<name>Primera sección</name>
-			<instances>
-				<instancefields>
+			<instancefields>
+				<instancefield>
 					<id />
+					<value>Texto escrito</value>
 					<fieldid>1</fieldid>
 					<label>Etiqueta1</label>
 					<type>TEXT</type>
 					<required />
-					<value>Texto escrito</value>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>Texto escrito</value>
+					<fieldid>2</fieldid>
 					<label>Etiqueta2</label>
 					<type>TEXT</type>
 					<properties>
@@ -35,10 +41,15 @@
 							<value>Arial</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<date_value>
+                       <day>14</day>
+                       <month>10</month>
+                       <year>1986</year>
+                   	</date_value>
+					<fieldid>3</fieldid>
 					<label>Fecha1</label>
 					<type>DATE</type>
 					<required />
@@ -52,10 +63,11 @@
 							<value>MONTH_CALENDAR</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>M</value>
+					<fieldid>4</fieldid>
 					<label>Radio1</label>
 					<type>RADIO</type>
 					<required />
@@ -69,10 +81,11 @@
 							<value>F</value>
 						</option>
 					</options>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>O1</value>
+					<fieldid>5</fieldid>
 					<label>Combo1</label>
 					<type>COMBO</type>
 					<options>
@@ -92,10 +105,11 @@
 							<value>30</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>True</value>
+					<fieldid>6</fieldid>
 					<label>Check1</label>
 					<type>CHECKBOX</type>
 					<required />
@@ -105,10 +119,15 @@
 							<value>TRISTATE</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>
+						<filename>IMG_001.jpg</filename>
+						<hash>9324F00CD</hash>
+						<binary>12312311323123</binary>
+					</value>
+					<fieldid>7</fieldid>
 					<label>Imágenes</label>
 					<type>IMAGE_GALLERY</type>
 					<required />
@@ -118,10 +137,15 @@
 							<value>6</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>
+						<filename>AVI_001.avi</filename>
+						<hash>9324F123CD</hash>
+						<binary>123543543511323123</binary>
+					</value>
+					<fieldid>8</fieldid>
 					<label>Vídeos</label>
 					<type>VIDEO_GALLERY</type>
 					<properties>
@@ -130,10 +154,15 @@
 							<value>128</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
+					<value>
+						<filename>MP3_001.mp3</filename>
+						<hash>9324F0032CD</hash>
+						<binary>12312345435323123</binary>
+					</value>
+					<fieldid>9</fieldid>
 					<label>Audio</label>
 					<type>AUDIO_GALLERY</type>
 					<properties>
@@ -142,42 +171,42 @@
 							<value>8</value>
 						</property>
 					</properties>
-				</instancefields>
-				<instancefields>
+				</instancefield>
+				<instancefield>
 					<id />
-					<fieldid>1</fieldid>
-					<label>Localización</label>
-					<type>LOCATION</type>
-					<position>
+					<value>
 						<latitude>23.516</latitude>
 						<longitude>-49.21</longitude>
-					</position>
+					</value>
+					<fieldid>10</fieldid>
+					<label>Localización</label>
+					<type>LOCATION</type>
 					<properties>
 						<property>
 							<name>type</name>
 							<value>COORDINATES</value>
 						</property>
 					</properties>
-				</instancefields>
+				</instancefield>
 				<!--  Grupo sin lista, con un idgroup que no se repite -->
 				<instancegroup>
 					<idgroup>0</idgroup>
-					<instancefields>
+					<instancefield>
 						<id />
-						<fieldid>1</fieldid>
-						<label>Localización</label>
-						<type>LOCATION</type>
-						<position>
+						<value>
 							<latitude>23.516</latitude>
 							<longitude>-49.21</longitude>
-						</position>
+						</value>
+						<fieldid>11</fieldid>
+						<label>Localización</label>
+						<type>LOCATION</type>
 						<properties>
 							<property>
 								<name>type</name>
 								<value>COORDINATES</value>
 							</property>
 						</properties>
-					</instancefields>
+					</instancefield>
 				</instancegroup>
 				<!--
 					A continuación dos elementos de una lista con un mismo idgroup y
@@ -185,166 +214,45 @@
 				-->
 				<instancegroup>
 					<idgroup>1</idgroup> <!-- Primer elemento de la lista -->
-					<instancefields>
+					<instancefield>
 						<id />
-						<fieldid>1</fieldid>
+						<value>Prueba</value>
+						<fieldid>12</fieldid>
 						<label>Nombre</label>
 						<type>TEXT</type>
 						<required />
-						<value>Texto escrito</value>
-					</instancefields>
-					<instancefields>
+					</instancefield>
+					<instancefield>
 						<id />
-						<fieldid>2</fieldid>
+						<value>Prueba</value>
+						<fieldid>13</fieldid>
 						<label>Apellido</label>
 						<type>TEXT</type>
 						<required />
-						<value>Texto escrito</value>
-					</instancefields>
+					</instancefield>
 				</instancegroup>
 				<instancegroup>
-					<idgroup>1</idgroup> <!-- Segundo elemento de la lista -->
-					<instancefields>
+					<idgroup>2</idgroup> <!-- Segundo elemento de la lista -->
+					<instancefield>
 						<id />
-						<fieldid>1</fieldid>
+						<value>Prueba</value>
+						<fieldid>13</fieldid>
 						<label>Nombre</label>
 						<type>TEXT</type>
 						<required />
-						<value>Texto escrito2</value>
-					</instancefields>
-					<instancefields>
+					</instancefield>
+					<instancefield>
 						<id />
-						<fieldid>2</fieldid>
+						<value>Prueba</value>
+						<fieldid>14</fieldid>
 						<label>Apellido</label>
 						<type>TEXT</type>
 						<required />
-						<value>Texto escrito2</value>
-					</instancefields>
+					</instancefield>
 				</instancegroup>
-			</instances>
+			</instancefields>
 		</section>
 	</sections>
-</form>
 
-<!---->
-	<!--		<section>-->
-	<!--			<id>id</id>-->
-	<!--			<name>Primera sección</name>-->
-	<!--			<text> Elementos tipo texto -->
-	<!--				<id>id</id>-->
-	<!--				<label>Nombre</label>-->
-	<!--				<maxlength>100</maxlength>-->
-	<!--				<required>true</required>-->
-	<!--				<value>Nicolás Pernas Maradei</value>-->
-	<!--			</text>-->
-	<!--			<date> Elementos tipo fecha -->
-	<!--				<id>id</id>-->
-	<!--				<label>Fecha de nacimiento</label>-->
-	<!--				<required>true</required>-->
-	<!--				<date_value>-->
-	<!--					<day>14</day>-->
-	<!--					<month>10</month>-->
-	<!--					<year>1986</year>-->
-	<!--				</date_value>-->
-	<!--			</date>-->
-	<!--			<radio> Elementos tipo radio-button -->
-	<!--				<id>id</id>-->
-	<!--				<label>Sexo</label>-->
-	<!--				<required>false</required>-->
-	<!--				<options>-->
-	<!--					<option>-->
-	<!--						<label>Masculino</label>-->
-	<!--						<value>M</value>-->
-	<!--                        <selected/>-->
-	<!--					</option>-->
-	<!--					<option>-->
-	<!--						<label>Femenino</label>-->
-	<!--						<value>F</value>-->
-	<!--					</option>-->
-	<!--				</options>-->
-	<!--			</radio>-->
-	<!--			<combo> Elementos tipo combo -->
-	<!--				<id>id</id>-->
-	<!--				<label>Estudios</label>-->
-	<!--				<required>true</required>-->
-	<!--				<options>-->
-	<!--					<option>-->
-	<!--						<label>Ingeniería Informática</label>-->
-	<!--						<value>IM</value>-->
-	<!--						<selected/>-->
-	<!--					</option>-->
-	<!--					<option>-->
-	<!--						<label>Medicina</label>-->
-	<!--						<value>M</value>-->
-	<!--					</option>-->
-	<!--					<option>-->
-	<!--						<label>Farmacia</label>-->
-	<!--						<value>F</value>-->
-	<!--					</option>-->
-	<!--				</options>-->
-	<!--			</combo>-->
-	<!--			<checkbox> Elementos tipo checkbox -->
-	<!--				<id>id</id>-->
-	<!--				<label>Idiomas</label>-->
-	<!--				<required>false</required>-->
-<!---->
-	<!--			</checkbox>-->
-	<!--			<images_gallery>-->
-	<!--				<id>id</id>-->
-	<!--				<label>Imágenes</label>-->
-	<!--				<images>-->
-	<!--					<image>-->
-	<!--						<id>id</id>-->
-	<!--						<title>IMG_001.jpg</title>-->
-	<!--						<binary>12312311323123</binary>-->
-	<!--					</image>-->
-	<!--					<image>-->
-	<!--						<id>id</id>-->
-	<!--						<title>IMG_002.jpg</title>-->
-	<!--						<binary>12312311323123</binary>-->
-	<!--					</image>-->
-	<!--				</images>-->
-	<!--			</images_gallery>-->
-	<!--			<video_gallery>-->
-	<!--				<id>id</id>-->
-	<!--				<label>Vídeos</label>-->
-	<!--				<videos>-->
-	<!--					<video>-->
-	<!--						<id>id</id>-->
-	<!--						<title>2011_01_10.mpg</title>-->
-	<!--						<binary>12312311323123</binary>-->
-	<!--					</video>-->
-	<!--				</videos>-->
-	<!--			</video_gallery>-->
-	<!--			<audio_gallery>-->
-	<!--				<id>id</id>-->
-	<!--				<label>Sonidos</label>-->
-	<!--				<audios>-->
-	<!--					<audio>-->
-	<!--						<id>id</id>-->
-	<!--						<title>2011_01_10.mp3</title>-->
-	<!--						<binary>12312311323123</binary>-->
-	<!--					</audio>-->
-	<!--				</audios>-->
-	<!--			</audio_gallery>-->
-	<!--			<location>-->
-	<!--				<id>id</id>-->
-	<!--				<label>Localización</label>-->
-	<!--				<required>false</required>-->
-	<!--				<longitude>23.1231</longitude>-->
-	<!--				<latitude>34.33234</latitude>-->
-	<!--			</location>-->
-	<!--		</section>-->
-	<!--		<section>-->
-	<!--			<id>id</id>-->
-	<!--			<name>Segunda sección</name>-->
-	<!--			<text> Elementos tipo texto -->
-	<!--				<id>id</id>-->
-	<!--				<label>Comentarios</label>-->
-	<!--				<maxlength>200</maxlength>-->
-	<!--				<required>false</required>-->
-	<!--				<value>Esto es un comentario...</value>-->
-	<!--			</text>-->
-	<!--		</section>-->
-	<!--	</sections>-->
-	<!--</form>-->
+</instance>
+
