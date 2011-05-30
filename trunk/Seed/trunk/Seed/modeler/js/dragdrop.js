@@ -69,44 +69,55 @@ var myform = document.querySelector('#form');
 // Form's fields will be sortable
 $( "#form ul" ).sortable({items: "li:not(.toEnd)"});
 $( "#form ul" ).disableSelection();
-// DRAGOVER
-addEvent(myform, 'dragover', function (evt) {
-    if (evt.preventDefault) evt.preventDefault(); // allows us to drop
-    //$('ul', this).className = 'over';
-    return false;
-  });
+var mysections = document.querySelectorAll('#form ul');
+for (var i = 0; i < mysections.length; i++) {
+	var section = mysections[i];
+	addListenersToSection(section);
+}
 
-// DRAGENTER
-addEvent(myform, 'dragenter', function (evt) {
-    if (evt.preventDefault) evt.preventDefault();
-    // to get IE to work
-    //this.className = 'over';
-    return false;
-});
-
-// DROP
-addEvent(myform, 'drop', function (evt) {
-    if (evt.stopPropagation) evt.stopPropagation();
-    // Obtenemos el ID transferido en el DRAG
-    var idDrag = evt.dataTransfer.getData('text');
-    var item = $('#' + idDrag);
-    // Listado de campos del formulario
-    var	formList = $("#form ul");
-    var lis = $('li', formList);
-    
-    // Variables para el nuevo campo
-    var fieldName =  $('p:first', item).text();
-    var type =  $('div.type', item).text();
-    var id = parseInt(lis.length);
-    // Creamos el nuevo campo
-    var newField = createNewField(id, fieldName, idDrag, type);
-    
-    // Agregamos el campo al formulario
-    newField.appendTo(formList);
-
-    /*nuevoCampo.fadeIn('fast');*/
-    return false;
-});
+// DROP over a form section
+function addListenersToSection(section) {
+	// DRAGOVER
+	addEvent(section, 'dragover', function (evt) {
+	    if (evt.preventDefault) evt.preventDefault(); // allows us to drop
+	    //$('ul', this).className = 'over';
+	    return false;
+	  });
+	
+	// DRAGENTER
+	addEvent(section, 'dragenter', function (evt) {
+	    if (evt.preventDefault) evt.preventDefault();
+	    // to get IE to work
+	    //this.className = 'over';
+	    return false;
+	});
+	
+	// DROP
+	addEvent(section, 'drop', function (evt) {
+	    if (evt.stopPropagation) evt.stopPropagation();
+	    // Obtenemos el ID transferido en el DRAG
+	    var idDrag = evt.dataTransfer.getData('text');
+	    var item = $('#' + idDrag);
+	    // Listado de campos del formulario
+	    var lis = $('li', this);
+	    
+	    // Variables para el nuevo campo
+	    var fieldName =  $('p:first', item).text();
+	    var type =  $('div.type', item).text();
+	    // id of Section
+	    var sectionId = parseInt((this.id).match(/\d+/));
+	    // id of Field
+	    var id = parseInt(formSections[sectionId].size());
+	    // Creamos el nuevo campo
+	    var newField = createNewField(id, fieldName, sectionId, idDrag, type);
+	    
+	    // Agregamos el campo al formulario
+	    newField.appendTo(this);
+	
+	    /*nuevoCampo.fadeIn('fast');*/
+	    return false;
+	});
+}
 
 // DROP over a form field
 function addListenersToField(field) {
@@ -116,15 +127,16 @@ function addListenersToField(field) {
 	    // Obtenemos el ID transferido en el DRAG
 	    var idDrag = evt.dataTransfer.getData('text');
 	    var item = $('#' + idDrag);
-	    // Listado de campos del formulario
-	    var	formList = $("#form ul");
-	    var lis = $('li', formList);	    
+	    var lis = $('li', this.parentNode);	    
 	    // Variables para el nuevo campo
 	    var fieldName =  $('p:first', item).text();
 	    var type =  $('div.type', item).text();
-	    var id = parseInt(lis.length);
+	    // id of Section
+	    var sectionId = parseInt((this.parentNode.id).match(/\d+/));
+	    // id of Field
+	    var id = parseInt(formSections[sectionId].size());
 	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, idDrag, type);	    
+	    var newField = createNewField(id, fieldName, sectionId, idDrag, type);	    
 	    // Agregamos el campo al formulario
 	    newField.insertBefore(this);
 

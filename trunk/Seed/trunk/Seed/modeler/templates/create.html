@@ -6,62 +6,66 @@
 	<link rel="stylesheet" href="css/default.css" />
 </head>
 <body>
-<div id="containt">
-	<div id="form">
-		<h1>Formulario</h1>
-		<ul>
-		  <li class="toEnd">
-		      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
-		  </li>
-		  <li class="prueba">{{prueba}}</li>
-		</ul>
-		<h2>Arrastra los campos al formulario</h2>
-	</div>
-	<div id="fieldsBar">
-	    <ul>
-			<li><a class="item" href="#" id="campo1" draggable="true">
-			    <div class="type">text</div>
-				<img src="images/text-button.png" />
-				<div class="label">
-					<p><strong>Campo de texto</strong></p>
-				</div>
-			</a></li>
-			<li><a class="item" href="#" id="campo2" draggable="true">
-			    <div class="type">textarea</div>
-				<img src="images/textarea-button.png" />
-				<div class="label">
-					<p><strong>Área de texto</strong></p>
-				</div>
-			</a></li>
-			<li><a class="item" href="#" id="campo3" draggable="true">
-			    <div class="type">file</div>
-				<img src="images/file-button.png" />
-				<div class="label">
-					<p><strong>Fichero</strong></p>
-				</div>
-			</a></li>
-			<li><a class="item" href="#" id="campo4" draggable="true">
-			    <div class="type">image-gallery</div>
-				<img src="images/image-button.png" />
-				<div class="label">
-					<p><strong>Galería de imágenes</strong></p>
-				</div>
-			</a></li>				
-		</ul>
-		<form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
-            {% csrf_token %}
-            <div>
-                <input type="hidden" name="fieldList" id="id_fieldList" />
-                <button type="submit" name="sendButton" class="positive">
-                     <img src="images/send_icon.png" alt=""/>
-                     Enviar
-                </button>
-            </div>
-        </form>
-	</div>
+	<div id="containt">
+		<div id="form">
+			<h1>Formulario</h1>
+			<h2>Arrastra los campos al formulario</h2>
+			<ul id="s0" class="section">
+			  <li class="toEnd">
+			      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
+			  </li>
+			  <li class="prueba">{{prueba}}</li>
+			</ul>
+		</div>
+		<div id="fieldsBar">
+		    <ul>
+				<li><a class="item" href="#" id="campo1" draggable="true">
+				    <div class="type">text</div>
+					<img src="images/text-button.png" />
+					<div class="label">
+						<p><strong>Campo de texto</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo2" draggable="true">
+				    <div class="type">textarea</div>
+					<img src="images/textarea-button.png" />
+					<div class="label">
+						<p><strong>Área de texto</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo3" draggable="true">
+				    <div class="type">file</div>
+					<img src="images/file-button.png" />
+					<div class="label">
+						<p><strong>Fichero</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo4" draggable="true">
+				    <div class="type">image-gallery</div>
+					<img src="images/image-button.png" />
+					<div class="label">
+						<p><strong>Galería de imágenes</strong></p>
+					</div>
+				</a></li>			
+			</ul>
+			<div class="buttons">
+				<button type="button" name="addSection" onclick="addSection(); return false">
+				  Añadir sección
+				</button>
+		        <form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
+		            {% csrf_token %}
+	                <input type="hidden" name="fieldList" id="id_fieldList" />
+	                <button type="submit" name="sendButton" class="positive">
+	                     <img src="images/send_icon.png" alt=""/>
+	                     Enviar
+	                </button>
+		        </form>
+			</div>
 	
-	<img src="images/turawet_modeler.png" id="minilogo"/>
-</div>
+		</div>
+		
+		<img src="images/turawet_modeler.png" id="minilogo"/>
+	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>

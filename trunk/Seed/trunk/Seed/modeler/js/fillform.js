@@ -88,9 +88,9 @@ var fieldTypes = {"text" : 0, "textarea" : 1, "file" : 3, "image_gallery" : 4};
 /*****************************************************************/
 /* Crea un nuevo campo para el formulario                        */
 /*****************************************************************/
-function createNewField(id, name, idDrag, type) {
+function createNewField(id, name, section, idDrag, type) {
 	// Componemos el id del nuevo campo
-	var idField = 's' + actualSection + '-f' + formSections[actualSection].size();
+	var idField = 's' + section + '-f' + formSections[section].size();
 	var newField = $('<li />', {
         class: type,
         id: idField,
@@ -127,7 +127,7 @@ function createNewField(id, name, idDrag, type) {
 	);
 	addListenersToField(newField);
     var jsField = new Field(name,id);
-    formSections[0].addField(jsField);
+    formSections[section].addField(jsField);
     return newField;
 }
 
@@ -142,9 +142,21 @@ function deleteField (tagID) {
    deleteParentElement(node, 'li');
 }
 
-//Borrado
+//Mostrar propiedades
 function expandField (tagID) {
    var node = document.querySelector('#'+tagID);
    node = $(node).children('.properties');
    $(node).slideToggle('slow');
+}
+
+// Añadir una nueva sección
+function addSection () {
+	formSections[++actualSection] = new Section();
+	var newSection =  $('<ul />', {
+    	text : 'prueba',
+    	id: 's' + actualSection,
+    	class: 'section'
+    });
+	newSection.appendTo(myform);
+	addListenersToSection(newSection);
 }
