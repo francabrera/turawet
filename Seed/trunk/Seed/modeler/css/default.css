@@ -219,9 +219,6 @@ p { margin:0; }
 
 .buttons {
     text-align:center;
-    position:relative;
-    /*bottom:20px;*/
-    top:40px;
 }
 .buttons a, .buttons button{
     /*display:block;*/
@@ -235,7 +232,7 @@ p { margin:0; }
     text-decoration:none;
     font-weight:bold;
     font: 16px/1.5 helvetica, arial, san-serif;
-    color:#565656;
+    color:#FFFFFF;
     cursor:pointer;
     padding:5px 10px 6px 7px; /* Links */
 }
@@ -273,7 +270,8 @@ button:hover, .buttons a:hover{
 /* POSITIVE */
 
 button.positive, .buttons a.positive{
-    color:#F6FFED;
+    color:#9CBA7F;
+    background-color:#4E5943;
 }
 .buttons a.positive:hover, button.positive:hover{
     background-color:#E6EFC2;
