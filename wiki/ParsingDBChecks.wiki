@@ -1,0 +1,15 @@
+#summary Comprobaciones en los XML de las instancias
+#labels Phase-Design
+
+= Introducción =
+
+Estoy trabajando en el parser de instancia a BBDD.
+
+Me planteo si es necesario hacer todas las comprobaciones de correctitud.
+
+
+= Detalles =
+
+ Por ejemplo, cuando vamos a crear la instancia, ¿debemos comprobar si realmente existe el formulario con el "ID" que hemos leído en la instancia antes de buscarlo en la BBDD para enlazar la instancia a él o directamente podríamos sacarlo de la BBDD debido a que ya sabemos que tiene que existir? Un caso de fallo sería un borrado accidental de los formularios en la BBDD.
+
+La duda viene a ser si deberíamos llenar el código de "try-except" o dejar de lado todas esas comprobaciones.
