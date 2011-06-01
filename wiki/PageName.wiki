@@ -1,0 +1,25 @@
+#labels Phase-Design
+#Definición del XML: Usuario
+
+= Introduction =
+
+"usuario" en el XML del formulario y "usuario" en el XML de la instancia.
+
+
+= Details =
+
+Como hemos planteado, un usuario crea un formulario (con lo que dicho formulario tendrá un metadato que será el username). A su vez tendrá otro metadato "grupo".
+
+Luego, en la instancia tendremos otro metadato de la instancia "usuario". En este caso es el usuario que ha rellenado la instancia.
+
+*Restricciones*
+
+_Formulario_
+
+1) Un usuario crea un formulario y le asigna uno de los grupos a los que él pertenece.
+
+_Instancia_
+
+2) Un usuario rellena una instancia de un grupo al que pertenece
+
+3) Sólo el usuario que comenzó una instancia puede completarla
