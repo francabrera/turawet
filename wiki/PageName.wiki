@@ -1,12 +1,12 @@
+#summary Definición del XML: Usuario y grupo en formularios e instancias
 #labels Phase-Design
-#Definición del XML: Usuario
 
-= Introduction =
+= Introducción =
 
 "usuario" en el XML del formulario y "usuario" en el XML de la instancia.
 
 
-= Details =
+= Detalles =
 
 Como hemos planteado, un usuario crea un formulario (con lo que dicho formulario tendrá un metadato que será el username). A su vez tendrá otro metadato "grupo".
 
