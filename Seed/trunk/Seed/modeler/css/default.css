@@ -46,6 +46,7 @@ p { margin:0; }
     margin:0px auto;
     list-style:none;
     height: 100%;
+    background-color:#B3AFAA;
 }
 /* ----------- */
 
@@ -58,9 +59,9 @@ p { margin:0; }
 /* FORMULARIO */
 #form {
     float:left;
-	background-color:#B3AFAA;
+
     width:90%;
-    height: 100%;
+    height: 95%;
     overflow: auto;
 }
 
@@ -106,9 +107,20 @@ p { margin:0; }
 /*    width: 100%;*/
     position: relative;
     top: 20px;
-/*    left: -20px;*/
-    
+/*    left: -20px;*/   
 }
+
+#sections {
+	position:absolute;
+	bottom:1px;
+	width:90%;
+	height:5%;
+	background-color: #999691;
+	}
+	
+#sections ul li{
+	display:inline;
+	}
 
 
 /* Mensaje para añadir campo al final */
@@ -216,102 +228,33 @@ p { margin:0; }
 
 
 /* BUTTONS */
-
 .buttons {
-    text-align:center;
-}
-.buttons a, .buttons button{
-    /*display:block;*/
-    background-color:#787169;
-    border:1px solid #dedede;
-    border-top:1px solid #eee;
-    border-left:1px solid #eee;
-
-    text-align:center;
-    line-height:130%;
-    text-decoration:none;
-    font-weight:bold;
-    font: 16px/1.5 helvetica, arial, san-serif;
-    color:#FFFFFF;
-    cursor:pointer;
-    padding:5px 10px 6px 7px; /* Links */
-}
-.buttons button{
-    overflow:visible;
-    padding:4px 10px 3px 7px; /* IE6 */
-}
-.buttons button[type]{
-    padding:5px 10px 5px 7px; /* Firefox */
-    line-height:17px; /* Safari */
-}
-*:first-child+html button[type]{
-    padding:4px 10px 3px 7px; /* IE7 */
-}
-.buttons button img, .buttons a img{
-    margin:0 3px -3px 0 !important;
-    padding:0;
-    border:none;
-    width:16px;
-    height:16px;
-}
-/* STANDARD */
-
-button:hover, .buttons a:hover{
-    background-color:#dff4ff;
-    border:1px solid #c2e1ef;
-    color:#336699;
-}
-.buttons a:active{
-    background-color:#6299c5;
-    border:1px solid #6299c5;
-    color:#fff;
-}
-
-/* POSITIVE */
-
-button.positive, .buttons a.positive{
-    color:#9CBA7F;
-    background-color:#4E5943;
-}
-.buttons a.positive:hover, button.positive:hover{
-    background-color:#E6EFC2;
-    border:1px solid #C6D880;
-    color:#529214;
-}
-.buttons a.positive:active{
-    background-color:#529214;
-    border:1px solid #529214;
-    color:#fff;
-}
-
-/* NEGATIVE */
-
-.buttons a.negative, button.negative{
-    color:#d12f19;
-}
-.buttons a.negative:hover, button.negative:hover{
-    background:#fbe3e4;
-    border:1px solid #fbc2c4;
-    color:#d12f19;
-}
-.buttons a.negative:active{
-    background-color:#d12f19;
-    border:1px solid #d12f19;
-    color:#fff;
-}
-
-/* REGULAR */
-
-button.regular, .buttons a.regular{
-    color:#336699;
-}
-.buttons a.regular:hover, button.regular:hover{
-    background-color:#dff4ff;
-    border:1px solid #c2e1ef;
-    color:#336699;
-}
-.buttons a.regular:active{
-    background-color:#6299c5;
-    border:1px solid #6299c5;
-    color:#fff;
-}
+	text-align:center;
+	line-height:40px;
+	}
+.buttons a.button {
+    padding: 7px 10px;
+    background-color: #777;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: 1px 1px #666;
+    }
+.buttons a.button[class]:hover {
+    background-color: #333;
+    padding: 10px 10px;
+    }
+.buttons a.button.red { background-color: #e50000; }
+.buttons a.button.purple { background-color: #9400bf; }
+.buttons a.button.green { background-color: #58aa00; }
+.buttons a.button.orange { background-color: #ff9c00; }
+.buttons a.button.blue { background-color: #2c6da0; }
+.buttons a.button.black { background-color: #333; }
+.buttons a.button.white { background-color: #fff; color: #000; text-shadow: 1px 1px #fff; }
+.buttons a.button.white:hover { color:#fff; text-shadow: 1px 1px #000;} 
+.buttons a.button.small { font-size: 75%; }
+.buttons a.button.large { font-size: 125%; }
