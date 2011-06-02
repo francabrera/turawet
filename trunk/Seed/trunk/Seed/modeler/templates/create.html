@@ -17,6 +17,14 @@
 			  <li class="prueba">{{prueba}}</li>
 			</ul>
 		</div>
+		
+		<div id="sections">
+            <ul>
+                <li> <a href="#s0">Sección 0</a> </li>
+                <li> <a href="#s0">Sección 1</a> </li>
+            </ul>
+        </div>
+
 		<div id="fieldsBar">
 		    <ul>
 				<li><a class="item" href="#" id="campo1" draggable="true">
@@ -49,18 +57,19 @@
 				</a></li>			
 			</ul>
 			<div class="buttons">
-				<button type="button" name="addSection" onclick="addSection(); return false">
-				  Añadir sección
-				</button>
+				<a onclick="addSection(); return false" class="button white">
+				    New Section
+				</a>
+                <br/>
 		        <form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
 		            {% csrf_token %}
 	                <input type="hidden" name="fieldList" id="id_fieldList" />
-	                <button type="submit" name="sendButton" class="positive">
-	                     <img src="images/send_icon.png" alt=""/>
-	                     Enviar
-	                </button>
+	                <!-- <button type="submit" name="sendButton" class="positive">-->
+	                <a class="button large green">
+	                     Send
+	                </a>
 		        </form>
-			</div>
+            </div>
 	
 		</div>
 		
