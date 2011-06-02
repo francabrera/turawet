@@ -20,8 +20,7 @@
 		
 		<div id="sections">
             <ul>
-                <li> <a href="#s0">Sección 0</a> </li>
-                <li> <a href="#s0">Sección 1</a> </li>
+                <li id="s0link"> <a href="#s0">Sección 0</a> </li>
             </ul>
         </div>
 
@@ -61,23 +60,22 @@
 				    New Section
 				</a>
                 <br/>
-		        <form class="sendform" action="/modeler/" method="post" onsubmit="fillForm()">
+		        <form class="sendform" action="/modeler/" method="post">
 		            {% csrf_token %}
 	                <input type="hidden" name="fieldList" id="id_fieldList" />
 	                <!-- <button type="submit" name="sendButton" class="positive">-->
-	                <a class="button large green">
+	                <a class="button large green" onclick="fillForm(); this.parentNode.submit(); return false">
 	                     Send
 	                </a>
 		        </form>
-            </div>
-	
-		</div>
-		
-		<img src="images/turawet_modeler.png" id="minilogo"/>
+            </div>	
+		</div>		
+		<!--<img src="images/turawet_modeler.png" id="minilogo"/>-->
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<script src="https://github.com/guillaumebort/jquery-ndd/raw/master/jquery.ndd.js"></script>
+	<script src="js/lib/jquery.inlineedit.js"></script>
 	<script src="js/fillform.js"></script>
 	<script src="js/dragdrop.js"></script>
 	<script src="js/parseform.js"></script>
