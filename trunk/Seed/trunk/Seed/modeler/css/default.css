@@ -13,7 +13,11 @@ html {
 }
 body {
     text-align: center;
-	background: #2F2C29;
+	background-color: #2F2C29;
+	/*background-image:url('../images/modeler-background.png');*/
+	background-image:url('../images/modeler-background2.png');
+    background-repeat:no-repeat;
+    background-position:right top;
 	margin:0px auto;
 	padding:0px;
 	font: 13px/1.5 helvetica, arial, san-serif;
@@ -50,11 +54,13 @@ p { margin:0; }
 }
 /* ----------- */
 
+
 #minilogo {
     position:fixed;
     bottom:5px;
     left:10px;
 }
+
 
 /* FORMULARIO */
 #form {
@@ -86,7 +92,7 @@ p { margin:0; }
     padding:20px;
 }
 
-#form li p.label {
+#form li p.fieldlabel {
 	margin:0px 0px 0px 40px;
 }
 
@@ -112,7 +118,7 @@ p { margin:0; }
 
 #sections {
 	position:absolute;
-	bottom:1px;
+	bottom:4px;
 	width:90%;
 	height:5%;
 	background-color: #999691;

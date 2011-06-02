@@ -51,6 +51,12 @@ function Section() {
 	    delete this.fields[id];
 	}
 	
+	this.changeFieldName = function(id, newlabel)
+	{
+		if (typeof this.fields[id]  != "undefined")
+			this.fields[id].name = newlabel;
+	}
+	
 	/**
 	 * Devuelve el número de campos de la sección
 	 */
@@ -76,6 +82,9 @@ function Section() {
 }
 /* -------------- */
 
+/*****************************************************************/
+/* Inicializacion                                                */
+/*****************************************************************/
 var formSections = new Array();
 formSections[0] = new Section();
 var actualSection = 0;
@@ -84,6 +93,18 @@ var actualSection = 0;
 /* Tipos de campos                                               */
 /*****************************************************************/
 var fieldTypes = {"text" : 0, "textarea" : 1, "file" : 3, "image_gallery" : 4};
+
+//Etiquetas editables
+$(".fieldlabel").inlineEdit({
+		save: function(event, hash) {
+				var fieldElem = this.parentNode;
+				var aux = new Array();
+				aux = (fieldElem.id).match(/\d+/);
+				var sectionId = parseInt(aux[0]);
+				var fieldId = parseInt(aux[1]);
+				formSections[sectionId].changeFieldName(fieldId, hash.value);
+		}
+});
 
 /*****************************************************************/
 /* Crea un nuevo campo para el formulario                        */
@@ -116,7 +137,7 @@ function createNewField(id, name, section, idDrag, type) {
 		// Nombre del campo
 	    $('<p />', {
 	    	text : name,
-	    	class: 'label'
+	    	class: 'fieldlabel'
 	    }),
 	    $('<br />'),
 	    // Propiedades
