@@ -76,7 +76,7 @@ p { margin:0; }
 }
 
 #form ul {
-    margin: 0px 30px;
+    margin: 0px 30px 20px 30px;
     padding: 15px 0px 20px 0px;
     vertical-align:middle;
     border: 1px dashed #000;
@@ -124,8 +124,9 @@ p { margin:0; }
 	background-color: #999691;
 	}
 	
-#sections ul li{
+#sections ul li {
 	display:inline;
+	margin:0px 10px 2px 0px;
 	}
 
 
@@ -150,10 +151,10 @@ p { margin:0; }
 /** Estilos para cada campo en el formulario **/
 /** ---------------------------------------- **/
 
-#form li.prueba{
+.prueba{
     background-image:none;
-    margin:0px;
-    padding:0px;
+    margin:20px;
+    padding:10px;
 }
 
 /* ----->>>> */

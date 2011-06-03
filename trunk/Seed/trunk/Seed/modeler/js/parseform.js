@@ -9,8 +9,11 @@
 /* Devuelve el String con el XML del formulario form             */
 /*****************************************************************/
 
-function formToXML (form) {
-	var text = form.toXML();
+function formToXML (name, sections) {
+	var text = "<form><name>" + name + "</name><sections>";
+	for (i=0;i<sections.length;i++)	
+		text += sections[i].toXML();
+	text += "</sections></form>";
 	var salida;
 	if (window.DOMParser) {
 		parser=new DOMParser();
@@ -28,5 +31,5 @@ function formToXML (form) {
 
 function fillForm () {
 	var xmlField = document.querySelector('#id_fieldList');
-	xmlField.value = formToXML(formSections[0]);
+	xmlField.value = formToXML(formName, formSections);
 }
