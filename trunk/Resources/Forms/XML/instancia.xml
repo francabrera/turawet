@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE form SYSTEM "instance_def.dtd">
 
-<form>
+<instance>
 	<meta>
 		<formmeta>
 			<formid>1</formid>
@@ -15,12 +15,13 @@
 		</author>
 		<creationdate>12/01/11</creationdate>
 		<modificationdate>12/01/11</modificationdate>
+		<editable>True</editable>
 	</meta>
 	<sections>
 		<section>
 			<id>1</id>
 			<name>Primera sección</name>
-			<instanceflieds>
+			<instancefields>
 				<instancefield>
 					<id />
 					<value>Texto escrito</value>
@@ -236,7 +237,7 @@
 					<instancefield>
 						<id />
 						<value>Prueba</value>
-						<fieldid>13</fieldid>
+						<fieldid>14</fieldid>
 						<label>Nombre</label>
 						<type>TEXT</type>
 						<required />
@@ -244,13 +245,14 @@
 					<instancefield>
 						<id />
 						<value>Prueba</value>
-						<fieldid>14</fieldid>
+						<fieldid>15</fieldid>
 						<label>Apellido</label>
 						<type>TEXT</type>
 						<required />
 					</instancefield>
 				</instancegroup>
-			</instanceflieds>
+			</instancefields>
 		</section>
 	</sections>
-</form>
+
+</instance>

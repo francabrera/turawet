@@ -10,6 +10,7 @@
 	</author>
 	<sections>
 		<section>
+			<id />
 			<name>Primera sección</name>
 			<fields>
 				<field>
@@ -103,37 +104,19 @@
 				</field>
 				<field>
 					<id />
-					<label>Imágenes</label>
-					<type>IMAGE_GALLERY</type>
+					<label>Imagen</label>
+					<type>IMAGE</type>
 					<required />
-					<properties>
-						<property>
-							<name>max_photos</name>
-							<value>6</value>
-						</property>
-					</properties>
 				</field>
 				<field>
 					<id />
-					<label>Vídeos</label>
-					<type>VIDEO_GALLERY</type>
-					<properties>
-						<property>
-							<name>max_file_size</name>
-							<value>128</value>
-						</property>
-					</properties>
+					<label>Vídeo</label>
+					<type>VIDEO</type>
 				</field>
 				<field>
 					<id />
 					<label>Audio</label>
-					<type>AUDIO_GALLERY</type>
-					<properties>
-						<property>
-							<name>max_file_size</name>
-							<value>8</value>
-						</property>
-					</properties>
+					<type>AUDIO</type>
 				</field>
 				<field>
 					<id />
@@ -164,12 +147,22 @@
 				<group>
 					<id />
 					<list />
-					<label>LISTA</label>
+					<label>Galería de imágenes</label>
 					<field>
 						<id />
 						<label>Imágenes</label>
 						<type>IMAGE_GALLERY</type>
 					</field>
+					<properties>
+						<property>
+							<name>max_photos</name>
+							<value>6</value>
+						</property>
+						<property>
+							<name>max_file_size</name>
+							<value>128</value>
+						</property>
+					</properties>
 				</group>
 			</fields>
 		</section>
