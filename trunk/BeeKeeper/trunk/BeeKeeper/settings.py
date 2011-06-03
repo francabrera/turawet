@@ -22,6 +22,10 @@ LOGS = {
         'file': PROJECT_DIR+'/logs/FormXmldbParser.log',
         'level': 'ERROR',
     },
+    'InstanceXmldbParser': {
+        'file': PROJECT_DIR+'/logs/InstanceXmldbParser.log',
+        'level': 'ERROR',
+    },
 }
 
 
@@ -39,7 +43,7 @@ DATABASES = {
         'NAME':     'xe',
         'USER':     'turawet',
         'PASSWORD': '4b3j45n3gr45',
-        'HOST':     '10.209.2.96',
+        'HOST':     '10.209.5.109',
         'PORT':     '5432',
     },
 }
@@ -135,4 +139,5 @@ INSTALLED_APPS = (
     'BeeKeeper.user_models',
     'BeeKeeper.ws_server',
     'BeeKeeper.form_xml2db_parser',
+    'BeeKeeper.instance_xml2db_parser',
 )
