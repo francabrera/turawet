@@ -33,9 +33,9 @@ function Field(name, order) {
 /**
  * Clase sección
  */
-function Section() {
-	this.name;
-	this.order;
+function Section(name, order) {
+	this.name = name;
+	this.order = order;
 	this.fields = new Array();
 	
 	/**
@@ -72,10 +72,11 @@ function Section() {
 	{
 		var i;
 		var xml = "<section><order>" + this.order + "</order>";
-		xml += "<name>" + this.order + "</name>";
+		xml += "<name>" + this.name + "</name>";
 		xml += "<fields>";
-		for (i=0;i<this.fields.length;i++)			
-			xml += this.fields[i].toXML();
+		for (i=0;i<this.fields.length;i++)	
+			if (typeof this.fields[i] != "undefined")
+				xml += this.fields[i].toXML();
 		xml += "</fields></section>";
 		return xml;
 	}
@@ -85,8 +86,9 @@ function Section() {
 /*****************************************************************/
 /* Inicializacion                                                */
 /*****************************************************************/
+var formName = "Formulario";
 var formSections = new Array();
-formSections[0] = new Section();
+formSections[0] = new Section("Nombre sección 0", 0);
 var actualSection = 0;
 
 /*****************************************************************/
@@ -99,10 +101,26 @@ $(".fieldlabel").inlineEdit({
 		save: function(event, hash) {
 				var fieldElem = this.parentNode;
 				var aux = new Array();
-				aux = (fieldElem.id).match(/\d+/);
+				aux = (fieldElem.id).match(/\d+/g);
 				var sectionId = parseInt(aux[0]);
 				var fieldId = parseInt(aux[1]);
 				formSections[sectionId].changeFieldName(fieldId, hash.value);
+		}
+});
+
+//Nombres secciones editables
+$(".sectionlabel").inlineEdit({
+		save: function(event, hash) {
+				var sectionElem = this.parentNode;
+				var sectionId = parseInt((sectionElem.id).match(/\d+/));
+				formSections[sectionId].name = hash.value;
+		}
+});
+
+//Nombre formulario editable
+$(".formname").inlineEdit({
+		save: function(event, hash) {
+			formname = hash.value;
 		}
 });
 
@@ -172,12 +190,28 @@ function expandField (tagID) {
 
 // Añadir una nueva sección
 function addSection () {
-	formSections[++actualSection] = new Section();
+	var name = 'Nombre sección ' + (++actualSection);
+	formSections[actualSection] = new Section(name, actualSection);
 	var newSection =  $('<ul />', {
-    	text : 'prueba',
     	id: 's' + actualSection,
-    	class: 'section'
-    });
+    	class: 'section',
+    	href: '#s' + actualSection
+    }).prepend( $('<p />', {
+    	text : name,
+    	class: 'sectionlabel',
+    }));
+	if (actualSection <= 10) {
+		$('#sections > ul').append(
+			$('<li />', {
+				id: 's' + actualSection + 'link',
+			}).prepend(
+				$('<a />', {
+					text: 'Sección ' + actualSection,
+					href: '#s' + actualSection
+				})
+			)
+		);
+	}
 	newSection.appendTo(myform);
 	addListenersToSection(newSection);
 }

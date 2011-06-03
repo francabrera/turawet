@@ -8,14 +8,15 @@
 <body>
 	<div id="containt">
 		<div id="form">
-			<h1>Formulario</h1>
+			<h1 class="formname">Formulario</h1>
 			<h2>Arrastra los campos al formulario</h2>
-			<ul id="s0" class="section">
-			  <li class="toEnd">
+			<ul id="s0" class="section" href="#s0">
+			  <p class="sectionlabel">Nombre sección 0</p>
+			  <!--<li class="toEnd">
 			      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
-			  </li>
-			  <li class="prueba">{{prueba}}</li>
+			  </li>-->
 			</ul>
+			<p class="prueba">{{prueba}}</p>
 		</div>
 		
 		<div id="sections">
@@ -65,7 +66,7 @@
 	                <input type="hidden" name="fieldList" id="id_fieldList" />
 	                <!-- <button type="submit" name="sendButton" class="positive">-->
 	                <a class="button large green" onclick="fillForm(); this.parentNode.submit(); return false">
-	                     Send
+	                   Send
 	                </a>
 		        </form>
             </div>	
