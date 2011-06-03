@@ -5,7 +5,6 @@ from BeeKeeper.db_models.models import *
 admin.site.register(Form)
 admin.site.register(Section)
 admin.site.register(FieldGroup)
-admin.site.register(FieldList)
 admin.site.register(FormField)
 admin.site.register(Instance)
 admin.site.register(InstanceField)
