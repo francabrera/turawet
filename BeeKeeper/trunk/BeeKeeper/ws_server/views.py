@@ -11,7 +11,7 @@ from soaplib.serializers.primitive import Array, Integer, String
 #from soaplib.serializers.binary import Attachment
 from soaplib_handler import DjangoSoapService
 #from os.path import exists
-#from dummy import Dummy, DummyWs
+from dummy import Dummy, DummyWs
 
 from BeeKeeper.db_models.models import Form
 from models_ws import WsFormPreview, WsXmlForm, WsUploadStatus
@@ -19,7 +19,9 @@ from models_ws import WsFormPreview, WsXmlForm, WsUploadStatus
 
 class SoapService(DjangoSoapService):
 
-    __tns__ = 'http://localhost:8000/ws_server/'
+    ##TODO La IP deberia ser calculada y que no este a mano.
+    __tns__ = 'http://193.145.110.236/ws_server/'
+
 
     """
     @soapmethod(_returns = DummyWs)
@@ -48,6 +50,7 @@ class SoapService(DjangoSoapService):
         return document
 
     """
+
     @soapmethod(_returns = Array(WsFormPreview))
     def get_all_forms_preview(self):
         ''' 
@@ -58,7 +61,6 @@ class SoapService(DjangoSoapService):
         for form in forms:
             wsforms.append(WsFormPreview(form))
         return wsforms
-
 
     @soapmethod(String, Integer, _returns = WsXmlForm)
     def get_xmlform_by_name_version(self, name, version):
@@ -76,11 +78,11 @@ class SoapService(DjangoSoapService):
             form = Form.objects.get(id = form_id)
             list.append(WsXmlForm(form))
         return forms
-    
+
 
     @soapmethod(String, _returns = WsUploadStatus)
     def upload_new_form(self, form):
-        
+
         '''
         b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.');
         b.save();
