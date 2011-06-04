@@ -12,22 +12,39 @@
 /**
  * Clase campo
  */
-function Field(name, order) {
+function Field(name, order, type) {
 	this.name = name;
 	this.order = order;
+	this.type = type;
 	
 	/**
 	 * Devuelve el XML del campo
 	 */
 	this.toXML = function()
 	{
-		var fieldxml = "<field><order>" + this.order + "</order>";
-		fieldxml += "<name>" + this.name + "</name></field>";
+		var fieldxml = "<field><id />";
+		fieldxml += "<label>" + this.name + "</label>";
+		fieldxml += "<type>"+ this.type +"</type>";
+		fieldxml += "<properties/></field>";
 		return fieldxml;
 	}
 	
 }
 /* -------------- */
+
+<field>
+<id />
+<label>Etiqueta1</label>
+<type>TEXT</type>
+<required />
+<properties>
+	<property>
+		<name>max_length</name>
+		<value>10</value>
+	</property>
+</properties>
+</field>
+
 
 
 /**
@@ -71,7 +88,7 @@ function Section(name, order) {
 	this.toXML = function()
 	{
 		var i;
-		var xml = "<section><order>" + this.order + "</order>";
+		var xml = "<section><id/>";
 		xml += "<name>" + this.name + "</name>";
 		xml += "<fields>";
 		for (i=0;i<this.fields.length;i++)	
@@ -127,7 +144,7 @@ $(".formname").inlineEdit({
 /*****************************************************************/
 /* Crea un nuevo campo para el formulario                        */
 /*****************************************************************/
-function createNewField(id, name, section, idDrag, type) {
+function createNewField(id, name, section, idDrag, type, fieldType) {
 	// Componemos el id del nuevo campo
 	var idField = 's' + section + '-f' + formSections[section].size();
 	var newField = $('<li />', {
@@ -165,7 +182,7 @@ function createNewField(id, name, section, idDrag, type) {
 		})
 	);
 	addListenersToField(newField);
-    var jsField = new Field(name,id);
+    var jsField = new Field(name,id,fieldType);
     formSections[section].addField(jsField);
     return newField;
 }
@@ -185,7 +202,7 @@ function deleteField (tagID) {
 function expandField (tagID) {
    var node = document.querySelector('#'+tagID);
    node = $(node).children('.properties');
-   $(node).slideToggle('slow');
+   $(node).slideToggle('fast');
 }
 
 // Añadir una nueva sección

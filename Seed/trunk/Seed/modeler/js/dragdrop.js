@@ -104,12 +104,13 @@ function addListenersToSection(section) {
 	    // Variables para el nuevo campo
 	    var fieldName =  $('p:first', item).text();
 	    var type =  $('div.type', item).text();
+	    var fieldType =  $('div.fieldtype', item).text();
 	    // id of Section
 	    var sectionId = parseInt((this.id).match(/\d+/));
 	    // id of Field
 	    var id = parseInt(formSections[sectionId].size());
 	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, sectionId, idDrag, type);
+	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);
 	    
 	    // Agregamos el campo al formulario
 	    newField.appendTo(this);
@@ -131,12 +132,13 @@ function addListenersToField(field) {
 	    // Variables para el nuevo campo
 	    var fieldName =  $('p:first', item).text();
 	    var type =  $('div.type', item).text();
+	    var fieldType =  $('div.fieldtype', item).text();
 	    // id of Section
 	    var sectionId = parseInt((this.parentNode.id).match(/\d+/));
 	    // id of Field
 	    var id = parseInt(formSections[sectionId].size());
 	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, sectionId, idDrag, type);	    
+	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);	    
 	    // Agregamos el campo al formulario
 	    newField.insertBefore(this);
 

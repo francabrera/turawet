@@ -10,7 +10,10 @@
 /*****************************************************************/
 
 function formToXML (name, sections) {
-	var text = "<form><name>" + name + "</name><sections>";
+	var text = "<form><id/><version>1</version>";
+	text += "<name>" + name + "</name>";
+	text += "<author><user>turawet</user></author>";
+	text += "<sections>";
 	for (i=0;i<sections.length;i++)	
 		text += sections[i].toXML();
 	text += "</sections></form>";
