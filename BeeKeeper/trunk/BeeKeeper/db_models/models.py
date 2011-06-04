@@ -6,6 +6,8 @@
 
 # Imports
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+
 #from django.core.management.validation import max_length
 
 #--------------------------------------
@@ -113,8 +115,8 @@ class FieldOption(models.Model):
         return self.label
 
 
-class FieldProperty(models.Model):
-    """Class: `FieldProperty`. 
+class Property(models.Model):
+    """Class: `Property`. 
        :param name: Property name for the field.
        :param value: Value of the property
        :param form_field: The form field which is related to this option """
@@ -126,7 +128,10 @@ class FieldProperty(models.Model):
 
        
     def __unicode__(self):
-        return self.form_field + " - " + self.group_field + " - " + self.name
+        if self.form_field:
+            return self.form_field.label + " - " + self.name
+        else:
+            return self.group_field.label + " - " + self.name
 
 
 class Instance(models.Model):
@@ -160,23 +165,32 @@ class InstanceField(models.Model):
     instance_order = models.SmallIntegerField()
     form_fields = models.ForeignKey(FormField)
 
+    # For inheritance
+    content_type = models.ForeignKey(ContentType,editable=False,null=True)
+
+
     class Meta:
         unique_together = ('instance', 'instance_order')
         ordering = ['instance']
+        #abstract = True
 
     def __unicode__(self):
         return self.form_fields.label
 
+"""
+    def save(self):
+        if(not self.content_type):
+            self.content_type = ContentType.objects.get_for_model(self.__class__)
+        self.save_base()
 
+    def as_leaf_class(self):
+        content_type = self.content_type
+        model = content_type.model_class()
+        if(model == InstanceField):
+            return self
+        return model.objects.get(id=self.id)
+"""
 
-class ImageField(InstanceField):
-    """Class: `ImageField`. 
-       :param value: The image itself.
-       :todo ImageField parameters"""
-    value = models.ImageField(upload_to = '/')
-
-    def getImage(self):
-        return self.value
 
 
 
@@ -187,9 +201,8 @@ class TextField(InstanceField):
 
     def getText(self):
         return self.value
-
-
-
+    
+    
 class TextAreaField(InstanceField):
     """Class: `TextAreaField`. 
        :param value: The text itself."""
@@ -199,13 +212,57 @@ class TextAreaField(InstanceField):
         return self.value
 
 
-
-class RadioField(InstanceField):
-    """Class: `TextField`. 
-       :param value: The id of the selected option."""
-    value = models.IntegerField() # TIPO DE DATOS ID DE DJANGO
+class DateField(InstanceField):
+    """Class: `DateField`. 
+       :param day_value: The Day.
+       :param month_value: The Month.
+       :param year_value: The Year."""
+    value = models.DateField()
 
     def getText(self):
+        return self.value
+
+
+class RadioField(InstanceField):
+    """Class: `RadioField`. 
+       :param value: The id of the selected option."""
+    value = models.CharField(max_length = 16) # TIPO DE DATOS ID DE DJANGO
+
+    def getText(self):
+        return self.value
+    
+    
+class CheckField(InstanceField):
+    """Class: `CheckField`. 
+       :param value: True or False (if TRIESTATE property also None)."""
+    value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
+
+    def getText(self):
+        return self.value
+    
+    
+class ComboField(InstanceField):
+    """Class: `ComboField`. 
+       :param value: The id of the selected option."""
+    value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
+
+    def getText(self):
+        return self.value
+
+
+
+
+
+
+
+
+class ImageField(InstanceField):
+    """Class: `ImageField`. 
+       :param value: The image itself.
+       :todo ImageField parameters"""
+    value = models.ImageField(upload_to = '/')
+
+    def getImage(self):
         return self.value
 
 

@@ -7,7 +7,7 @@
 #Dump data
 
 from xml.etree.ElementTree import ElementTree, tostring, XML
-from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption, FieldProperty, FieldGroup
+from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption, Property, FieldGroup
 from BeeKeeper.logger import *
 
 import sys
@@ -23,12 +23,21 @@ class FormXmldbParser():
     ### ATRIBUTES ###
     
     ### METHODS ###
+
+    def parse_group_properties(self, properties, group_model):
+        for property in properties:
+            property_name = property.findtext("name")
+            property_value = property.findtext("value")
+            property_model = Property(name=property_name, value=property_value, group_field=group_model)
+            property_model.save()
+        
+        return 0
     
     def parse_field_properties(self, properties, field_model):
         for property in properties:
             property_name = property.findtext("name")
             property_value = property.findtext("value")
-            property_model = FieldProperty(name=property_name, value=property_value, form_field=field_model)
+            property_model = Property(name=property_name, value=property_value, form_field=field_model)
             property_model.save()
         
         return 0
@@ -50,17 +59,21 @@ class FormXmldbParser():
         return field_model
     
     
+    def parse_textarea_field(self, parser, section_model):
+        field_model = FormField(section=section_model)
+        
+        return field_model
+    
+    
     def parse_date_field(self, parser, section_model):
         field_model = FormField(section=section_model)
-        # Parsing
-        properties = parser.findall("properties/property")
-        self.parse_field_properties(properties, field_model)
         
         return field_model
     
     
     def parse_radio_field(self, parser, section_model):
         field_model = FormField(section=section_model)
+        field_model.save()
         # Parsing
         options = parser.findall("options/option")
         self.parse_field_options(options, field_model)
@@ -70,6 +83,7 @@ class FormXmldbParser():
     
     def parse_combo_field(self, parser, section_model):
         field_model = FormField(section=section_model)
+        field_model.save()
         # Parsing
         options = parser.findall("options/option")
         self.parse_field_options(options, field_model)
@@ -89,6 +103,7 @@ class FormXmldbParser():
         ## Data types ##
         actionSwitch = {
             'TEXT': self.parse_text_field,
+            'TEXTAREA': self.parse_textarea_field,
             'DATE': self.parse_date_field,
             'RADIO': self.parse_radio_field,
             'COMBO': self.parse_combo_field,
@@ -99,21 +114,20 @@ class FormXmldbParser():
         for field in fields:
             id = field.find('id')
             type = field.findtext('type')
-            ok = False
+            ok_type = False
             # TO-DO: Need to check that type is valid
             # If there is a an error we report it to the logger
             try:
                 field_model = actionSwitch[type](field, section_model)
-                ok = True
+                ok_type = True
             except:
                 logger.error('Indexing actionSwitch error:'+ str(sys.exc_info()[0]))
                 # We sould rollack the transaction
-            if ok:
+            if ok_type:
                 field_model.type = type
                 field_model.section_order = j
                 field_model.label = field.findtext('label')
                 field_model.required = field.findtext('required')
-                # TO-DO: Order inside the group (if any)
                 if field_model.required:
                     field_model.required = True
                 else:
@@ -128,6 +142,9 @@ class FormXmldbParser():
                     k += 1
                 field_model.save()
                 id.text = str(field_model.id)
+                # Adding the field properties
+                properties = field.findall("properties/property")
+                self.parse_field_properties(properties, field_model)
             j += 1
             
         return j
@@ -140,16 +157,19 @@ class FormXmldbParser():
             label = group.findtext("label")
             # If required --> Special case
             required = group.findtext("required")
-            if required: required = True
+            if required == '': required = True
             else: required = False
             # If list --> Special case
             list = group.findtext("list")
-            if list: list = True
+            if list == '': list = True
             else: list = False
             ## Creating Group and List ##
             field_group_model = FieldGroup(label=label, required=required, multiple=list)
             field_group_model.save()
             id.text = str(field_group_model.id)
+            # Group properties
+            properties = group.findall("properties/property")
+            self.parse_group_properties(properties, field_group_model)
             # Field
             fields = group.findall("field")
             j = self.parse_generic_field(fields, section_model, i, j, field_group_model)
