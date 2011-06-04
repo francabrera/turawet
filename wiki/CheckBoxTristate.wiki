@@ -1,0 +1,13 @@
+#summary Implementación de CheckBoxTriState
+#labels Phase-Design
+
+= Introducción =
+
+Se nos ha pedido que permitamos el uso de "checkboxes" que tengan tres estados en lugar de dos.
+
+Podemos poner dos tipos de datos diferentes o tratar "tristate" como una propiedad.
+
+
+= Detalles =
+
+si lo tratamos como una propiedad: ¿El value del campo pasa a ser string? Anteriormente era Booleano.
