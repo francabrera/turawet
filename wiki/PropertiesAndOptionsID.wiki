@@ -1,0 +1,13 @@
+#summary ¿Las propiedades y opciones de un campo deben tener un ID?
+#labels Phase-Design
+
+= Introducción =
+
+Las opciones para los "value" de los formularios y las propiedades porque no tienen clave sencilla propia.
+
+= Details =
+
+
+En el caso de las opciones esto es necesario para poner el value a la ID de la opción seleccionada, o bien poner el label de la opción seleccionada (que es clave alternativa).
+
+En el caso de las propiedades, como son compartidas por grupo y campo su clave por defecto es compleja. En el modelo hemos propuesto utilizar un ID.
