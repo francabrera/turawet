@@ -1,23 +1,69 @@
 """
-This file demonstrates two different styles of tests (one doctest and one
-unittest). These will both pass when you run "manage.py test".
-
-Replace these with more appropriate tests for your application.
+    Tests unitarios para el parser y los Modelos de la BBDD
 """
-
+#from django.test import TestCase
 from django.test import TestCase
+#import logging
+    #from suds.xsd.doctor import Import, ImportDoctor
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
+#from suds.client import Client
+from BeeKeeper.db_models.models import *
+from BeeKeeper.instance_xml2db_parser.instance_xml2db_parser import InstanceXmldbParser 
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
+import os.path
 
->>> 1 + 1 == 2
-True
-"""}
+class InstanceXmldbParserTest(TestCase):
 
+    fixtures = ['test_form_v1.json']
+
+    def setUp(self):
+        # Creationg a parser
+        self.parser = InstanceXmldbParser()
+        # XML Sample
+        xmlpath = os.path.dirname(__file__) + '/resources/instancia.xml'
+        f = open(xmlpath, "r")
+        xml = f.read()
+        f.close()
+        #print(xml)
+        self.parser.generateModels(xml)
+
+
+    def test_number_of_instances(self):
+        #a = ['larry', 'jose']
+        #self.assertEqual(my_func(a, 0), 'larry')
+
+        # DB objects
+        instances = Instance.objects.all()
+        
+        # TEST 1: Num formularios
+        self.assertEqual(len(instances), 1)
+
+
+    def test_number_of_fields(self):
+        # DB objects
+        instance_fields = InstanceField.objects.all()
+        
+        # TEST 1: Num formularios
+        self.assertEqual((instance_fields), 1)
+
+
+    def test_text_field_value(self):
+        # DB objects
+        instance_field = TextField.objects.get(pk=1)
+        
+        # TEST 1: Num formularios
+        self.assertEqual(instance_field.value, 'Texto escrito')     
+        
+
+    def test_text_field_instantiation(self):
+        instance_model = Instance.objects.get(pk=1)
+        field_model = FormField.objects.get(pk=1)
+        instance_field_model = TextField(value='hola')
+        instance_field_model.form_fields = field_model
+        instance_field_model.instance = instance_model
+        instance_field_model.instance_order = 9
+        instance_field_model.save()
+        
+        prueba = TextField.objects.get(value='hola')
+        
+        self.assertEqual(prueba.instance_order, 9)

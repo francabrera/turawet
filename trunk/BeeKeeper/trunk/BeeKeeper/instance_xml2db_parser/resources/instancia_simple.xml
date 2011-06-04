@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form SYSTEM "instance_def.dtd">
+
+<instance>
+	<meta>
+		<formmeta>
+			<formid>1</formid>
+			<name>Formulario de prueba</name>
+			<version>1</version>
+		</formmeta>
+		<!-- Instance meta fields -->
+		<id/>
+		<author>
+			<user>turawet</user>
+		</author>
+		<creationdate>2011-01-11</creationdate>
+		<modificationdate>2011-01-11</modificationdate>
+		<editable>True</editable>
+	</meta>
+	<sections>
+		<section>
+			<id>1</id>
+			<name>Primera sección</name>
+			<instancefields>
+				<instancefield>
+					<id />
+					<value>Texto escrito</value>
+					<fieldid>1</fieldid>
+					<label>Etiqueta1</label>
+					<type>TEXT</type>
+					<required />
+				</instancefield>
+			</instancefields>
+		</section>
+	</sections>
+
+</instance>
+

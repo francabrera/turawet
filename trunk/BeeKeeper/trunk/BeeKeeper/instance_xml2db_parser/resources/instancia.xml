@@ -13,8 +13,9 @@
 		<author>
 			<user>turawet</user>
 		</author>
-		<creationdate>12/01/11</creationdate>
-		<modificationdate>12/01/11</modificationdate>
+		<creationdate>2011-01-12</creationdate>
+		<modificationdate>2011-01-12</modificationdate>
+		<editable>True</editable>
 	</meta>
 	<sections>
 		<section>
@@ -56,7 +57,7 @@
 					<properties>
 						<property>
 							<name>format</name>
-							<value>YYYY/MM/DD</value>
+							<value>YYYY-MM-DD</value>
 						</property>
 						<property>
 							<name>calendar</name>
@@ -236,7 +237,7 @@
 					<instancefield>
 						<id />
 						<value>Prueba</value>
-						<fieldid>13</fieldid>
+						<fieldid>14</fieldid>
 						<label>Nombre</label>
 						<type>TEXT</type>
 						<required />
@@ -244,7 +245,7 @@
 					<instancefield>
 						<id />
 						<value>Prueba</value>
-						<fieldid>14</fieldid>
+						<fieldid>15</fieldid>
 						<label>Apellido</label>
 						<type>TEXT</type>
 						<required />
