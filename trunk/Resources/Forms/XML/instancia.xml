@@ -13,8 +13,8 @@
 		<author>
 			<user>turawet</user>
 		</author>
-		<creationdate>12/01/11</creationdate>
-		<modificationdate>12/01/11</modificationdate>
+		<creationdate>2011-01-12</creationdate>
+		<modificationdate>2011-01-12</modificationdate>
 		<editable>True</editable>
 	</meta>
 	<sections>
@@ -57,7 +57,7 @@
 					<properties>
 						<property>
 							<name>format</name>
-							<value>YYYY/MM/DD</value>
+							<value>YYYY-MM-DD</value>
 						</property>
 						<property>
 							<name>calendar</name>
@@ -256,3 +256,4 @@
 	</sections>
 
 </instance>
+
