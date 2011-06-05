@@ -16,6 +16,9 @@ from dummy import Dummy, DummyWs
 from BeeKeeper.db_models.models import Form
 from models_ws import WsFormPreview, WsXmlForm, WsUploadStatus
 
+from BeeKeeper.form_xml2db_parser.form_xml2db_parser import FormXmldbParser
+from BeeKeeper.instance_xml2db_parser.instance_xml2db_parser import InstanceXmldbParser 
+
 
 class SoapService(DjangoSoapService):
 
@@ -86,15 +89,27 @@ class SoapService(DjangoSoapService):
 
 
     @soapmethod(String, _returns = WsUploadStatus)
-    def upload_new_form(self, form):
+    def upload_new_form(self, xml):
+        '''
+            Receiving an XML (form) and calling the parser
+        '''
 
+        parser = FormXmldbParser()
+        is_inserted = parser.generateModels(xml)
+        
+        return is_inserted
+    
+
+    @soapmethod(String, _returns = WsUploadStatus)
+    def upload_new_instance(self, xml):
         '''
-        b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.');
-        b.save();
+            Receiving an XML (instance) and calling the parser
         '''
-        return
-    '''
-    def upload_new_instance(self):
-        return
-    '''
+
+        parser = InstanceXmldbParser()
+        is_inserted = parser.generateModels(xml)
+        
+        return is_inserted
+    
+
 service = csrf_exempt(SoapService())
