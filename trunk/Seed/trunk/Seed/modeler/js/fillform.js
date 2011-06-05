@@ -32,20 +32,6 @@ function Field(name, order, type) {
 }
 /* -------------- */
 
-<field>
-<id />
-<label>Etiqueta1</label>
-<type>TEXT</type>
-<required />
-<properties>
-	<property>
-		<name>max_length</name>
-		<value>10</value>
-	</property>
-</properties>
-</field>
-
-
 
 /**
  * Clase sección
