@@ -1,0 +1,15 @@
+#summary Borrado de la Base de Datos y carga de datos iniciales
+#labels Phase-Implementation
+
+= Introducción =
+
+¿Cómo limpiar o hacer un backup en JSON de la base de datos de un proyecto Django?
+
+
+= Detalles =
+
+El limpiado de la base de datos se realiza colocándonos en la raíz del proyecto y ejecutando:
+_./manage.py flush_
+
+Por otra parte, generar un JSON de la base de datos actual se realiza ejecutando, desde la raíz del proyecto Django en cuestión:
+_python manage.py dumpdata --indent=4 > shipping_fixture.json_
