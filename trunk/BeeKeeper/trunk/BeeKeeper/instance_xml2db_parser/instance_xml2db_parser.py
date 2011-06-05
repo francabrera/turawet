@@ -48,17 +48,18 @@ class InstanceXmldbParser():
         ###return field_model
 
 
-    def parse_date_field(self, parser, section_model):
-        day_value = parser.findtext('date_value/day')
-        month_value = parser.findtext('date_value/month')
-        year_value = parser.findtext('date_value/year')
-        instance_field_model = DateField(value=datetime.date(year_value,month_value,day_value))
+    def parse_date_field(self, parser):
+        day_value = int(parser.findtext('date_value/day'))
+        month_value = int(parser.findtext('date_value/month'))
+        year_value = int(parser.findtext('date_value/year'))
+        date = datetime.date(year_value,month_value,day_value)
+        instance_field_model = DateField(value=date)
         
         return instance_field_model
     
     
 
-    def parse_radio_field(self, parser, section_model):
+    def parse_radio_field(self, parser):
         value = parser.findtext('value')
         instance_field_model = RadioField(value=value)
         # Need to add the id value after saving the instance_field_model
@@ -66,7 +67,7 @@ class InstanceXmldbParser():
         return instance_field_model
     
 
-    def parse_check_field(self, parser, section_model):
+    def parse_check_field(self, parser):
         value = parser.findtext('value')
         instance_field_model = CheckField(value=value)
         # Need to add the id value after saving the instance_field_model
@@ -74,7 +75,7 @@ class InstanceXmldbParser():
         return instance_field_model
 
 
-    def parse_combo_field(self, parser, section_model):
+    def parse_combo_field(self, parser):
         value = parser.findtext('value')
         instance_field_model = ComboField(value=value)
         # Need to add the id value after saving the instance_field_model
@@ -126,7 +127,7 @@ class InstanceXmldbParser():
                 if ok_type:
                     # We fill the fields of the instance field
                     instance_field_model.instance_order = k
-                    instance_field_model.form_fields = field_model
+                    instance_field_model.form_field = field_model
                     instance_field_model.instance = instance_model
                     ### We save the value in the DDBB ###
                     instance_field_model.save()

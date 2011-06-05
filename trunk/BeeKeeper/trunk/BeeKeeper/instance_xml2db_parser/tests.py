@@ -44,7 +44,7 @@ class InstanceXmldbParserTest(TestCase):
         instance_fields = InstanceField.objects.all()
         
         # TEST 1: Num formularios
-        self.assertEqual((instance_fields), 1)
+        self.assertEqual(len(instance_fields), 15)
 
 
     def test_text_field_value(self):
@@ -59,7 +59,7 @@ class InstanceXmldbParserTest(TestCase):
         instance_model = Instance.objects.get(pk=1)
         field_model = FormField.objects.get(pk=1)
         instance_field_model = TextField(value='hola')
-        instance_field_model.form_fields = field_model
+        instance_field_model.form_field = field_model
         instance_field_model.instance = instance_model
         instance_field_model.instance_order = 9
         instance_field_model.save()
@@ -67,3 +67,25 @@ class InstanceXmldbParserTest(TestCase):
         prueba = TextField.objects.get(value='hola')
         
         self.assertEqual(prueba.instance_order, 9)
+        
+        
+    def test_fields_inheritance(self):
+        #### NOT INSTANCE, Just FORMFIELD
+        form_fields = FormField.objects.filter(label=u'Radio1')
+        
+        if len(form_fields) == 1:
+            #There is only one instance field of this Form_field
+            radio_fields = InstanceField.objects.filter(form_field=form_fields[0])
+            # WARNING: The parent has to know his child (Radio is a child of FieldForm)
+            self.assertEqual(len(radio_fields), 1)
+
+
+    def test_radio_options(self):
+        form_fields = FormField.objects.filter(label=u'Radio1')
+        
+        if len(form_fields) == 1:
+            #There is only one instance field of this Form_field
+            radio_fields = RadioField.objects.get(form_field=form_fields[0])
+            field_options = FieldOption.objects.filter(form_field=radio_fields)
+            # The Radio1 field has 2 options
+            self.assertEqual(len(field_options), 2)
