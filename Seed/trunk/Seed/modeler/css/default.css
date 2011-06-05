@@ -85,6 +85,10 @@ p { margin:0; }
     border-radius: 5px;*/
 }
 
+#form ul.selected {
+    border-color: #96393B;
+}
+
 #form .sectionlabel {
     font: bold 14px/1.5 helvetica, arial, san-serif;
     margin: 0px 0px 0px 10px;
@@ -143,6 +147,20 @@ p { margin:0; }
 	margin:0px 10px 2px 0px;
 	}
 
+#sections ul li a:link { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #F7F0C3;
+    }
+#sections ul li a:visited { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #F7F0C3;
+    }
+#sections ul li a:hover, #sections ul li a:active { 
+    text-decoration: underline; 
+    color: #454545;
+    }
 
 /* Mensaje para añadir campo al final */
 #form li.toEnd {

@@ -210,11 +210,18 @@ function addSection () {
 			}).prepend(
 				$('<a />', {
 					text: 'Sección ' + actualSection,
-					href: '#s' + actualSection
+					href: '#s' + actualSection,
+					onclick: 'selectSection(' + actualSection
+								+ '); return false',						
 				})
 			)
 		);
 	}
 	newSection.appendTo(myform);
 	addListenersToSection(newSection);
+}
+
+function selectSection (id) {
+	$('#s' + id).addClass("selected");
+	setTimeout("$('#s" + id + "').removeClass(\"selected\");",1000);
 }
