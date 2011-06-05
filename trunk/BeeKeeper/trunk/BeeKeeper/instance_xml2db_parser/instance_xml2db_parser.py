@@ -140,7 +140,7 @@ class InstanceXmldbParser():
     
     def generateModels(self, xml):
         if xml is None:
-            return None
+            return False
         else:
             parser = XML(xml)
             #Starting the parsing
@@ -205,5 +205,5 @@ class InstanceXmldbParser():
                     groups = section.findall("instancefields/instancegroup")
                 #####j = self.parse_generic_group(groups, instance_model, j)
             
-            return 0
+            return True
             

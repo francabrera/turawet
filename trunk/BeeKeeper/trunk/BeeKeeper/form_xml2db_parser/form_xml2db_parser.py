@@ -175,7 +175,7 @@ class FormXmldbParser():
     
     def generateModels(self, xml):
         if xml is None:
-            return None
+            return False
         else:
             parser = XML(xml)
             #Starting the parsing
@@ -211,4 +211,4 @@ class FormXmldbParser():
             form_model.xml = tostring(parser)
             form_model.save()
             
-            return 0
+            return True
