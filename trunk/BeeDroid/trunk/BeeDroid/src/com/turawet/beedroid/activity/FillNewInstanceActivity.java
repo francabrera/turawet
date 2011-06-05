@@ -1,4 +1,8 @@
 /**
+ * @title FillNewInstanceActivity
+ * @authors Francisco Jose Cabrera Hernandez,
+ *          Nicolas Pernas Maradei,
+ *          Romen Rodriguez Gil
  * 
  */
 package com.turawet.beedroid.activity;
@@ -22,15 +26,14 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-/**
- * @author nicopernas
- * 
- */
+
 public class FillNewInstanceActivity extends Activity // implements
 // OnGestureListener
 {
@@ -125,48 +128,94 @@ public class FillNewInstanceActivity extends Activity // implements
 	}
 	
 	@Override
-	public boolean onTouchEvent(MotionEvent touchEvent)
-	{
-		int action = touchEvent.getAction();
-		switch (action)
-		{
-			case MotionEvent.ACTION_DOWN:
-			{
-				oldTouchValue = touchEvent.getX();
-				break;
-			}
-			case MotionEvent.ACTION_UP:
-			{
-				float currentX = touchEvent.getX();
-				if (oldTouchValue > currentX)
-				{
-					flipper.setInAnimation(inAnimationLeft);
-					flipper.setOutAnimation(outAnimationLeft);
-					
-					flipper.showNext();
-				}
-				if (oldTouchValue < currentX)
-				{
-					flipper.setInAnimation(inAnimationRight);
-					flipper.setOutAnimation(outAnimationRight);
-					
-					flipper.showPrevious();
-				}
-				break;
-			}
-			case MotionEvent.ACTION_MOVE:
-			{
-				final View currentView = flipper.getCurrentView();
-				currentView.layout((int) (touchEvent.getX() - oldTouchValue), currentView.getTop(), currentView.getRight(), currentView.getBottom());
-				//flipper.getChildAt(flipper.getDisplayedChild() - 1); // previous
-				//flipper.getChildAt(flipper.getDisplayedChild() + 1); // next
-				break;
-			}
+	public boolean onTouchEvent(MotionEvent touchEvent) {
+		  switch (touchEvent.getAction()) {
+		    case MotionEvent.ACTION_DOWN: {
+		      oldTouchValue = touchEvent.getX();
+		      break;
+		    }
+		    case MotionEvent.ACTION_UP: {
+		      float currentX = touchEvent.getX();
+		      if (oldTouchValue < currentX) {
+		        flipper.setInAnimation(AnimationHelper.inFromLeftAnimation());
+		        flipper.setOutAnimation(AnimationHelper.outToRightAnimation());
+		        flipper.showNext();
+		      }
+		      if (oldTouchValue > currentX) {
+		        flipper.setInAnimation(AnimationHelper.inFromRightAnimation());
+		        flipper.setOutAnimation(AnimationHelper.outToLeftAnimation());
+		        flipper.showPrevious();
+		      }
+		      break;
+		    }
+		    case MotionEvent.ACTION_MOVE: {
+		      // TODO: Some code to make the ViewFlipper
+		      // act like the home screen.
+		      break;
+		    }
+		  }
+		  return false;
 		}
-		
-		// detector.onTouchEvent(me);
-		return true;
-	}
+
+		public static class AnimationHelper {
+		  public static Animation inFromRightAnimation() {
+		    Animation inFromRight = new TranslateAnimation(
+		    Animation.RELATIVE_TO_PARENT, +1.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f);
+		    inFromRight.setDuration(350);
+		    inFromRight.setInterpolator(new AccelerateInterpolator());
+		    return inFromRight;
+		  }
+
+		  public static Animation outToLeftAnimation() {
+		    Animation outtoLeft = new TranslateAnimation(
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, -1.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f);
+		    outtoLeft.setDuration(350);
+		    outtoLeft.setInterpolator(new AccelerateInterpolator());
+		    return outtoLeft;
+		  }
+
+		  // for the next movement
+		  public static Animation inFromLeftAnimation() {
+		    Animation inFromLeft = new TranslateAnimation(
+		    Animation.RELATIVE_TO_PARENT, -1.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f);
+		    inFromLeft.setDuration(350);
+		    inFromLeft.setInterpolator(new AccelerateInterpolator());
+		    return inFromLeft;
+		  }
+
+		  public static Animation outToRightAnimation() {
+		    Animation outtoRight = new TranslateAnimation(
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, +1.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f,
+		    Animation.RELATIVE_TO_PARENT, 0.0f);
+		    outtoRight.setDuration(350);
+		    outtoRight.setInterpolator(new AccelerateInterpolator());
+		    return outtoRight;
+		  }
+		}
+
+
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
 	/*
 	 * @Override
 	 * public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
