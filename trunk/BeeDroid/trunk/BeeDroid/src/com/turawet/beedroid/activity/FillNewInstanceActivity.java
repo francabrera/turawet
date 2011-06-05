@@ -26,10 +26,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -128,93 +126,131 @@ public class FillNewInstanceActivity extends Activity // implements
 	}
 	
 	@Override
-	public boolean onTouchEvent(MotionEvent touchEvent) {
-		  switch (touchEvent.getAction()) {
-		    case MotionEvent.ACTION_DOWN: {
-		      oldTouchValue = touchEvent.getX();
-		      break;
-		    }
-		    case MotionEvent.ACTION_UP: {
-		      float currentX = touchEvent.getX();
-		      if (oldTouchValue < currentX) {
-		        flipper.setInAnimation(AnimationHelper.inFromLeftAnimation());
-		        flipper.setOutAnimation(AnimationHelper.outToRightAnimation());
-		        flipper.showNext();
-		      }
-		      if (oldTouchValue > currentX) {
-		        flipper.setInAnimation(AnimationHelper.inFromRightAnimation());
-		        flipper.setOutAnimation(AnimationHelper.outToLeftAnimation());
-		        flipper.showPrevious();
-		      }
-		      break;
-		    }
-		    case MotionEvent.ACTION_MOVE: {
-		      // TODO: Some code to make the ViewFlipper
-		      // act like the home screen.
-		      break;
-		    }
-		  }
-		  return false;
+	public boolean onTouchEvent(MotionEvent touchEvent)
+	{
+		int action = touchEvent.getAction();
+		switch (action)
+		{
+			case MotionEvent.ACTION_DOWN:
+			{
+				oldTouchValue = touchEvent.getX();
+				break;
+			}
+			case MotionEvent.ACTION_UP:
+			{
+				float currentX = touchEvent.getX();
+				if (oldTouchValue > currentX)
+				{
+					flipper.setInAnimation(inAnimationLeft);
+					flipper.setOutAnimation(outAnimationLeft);
+					
+					flipper.showNext();
+				}
+				if (oldTouchValue < currentX)
+				{
+					flipper.setInAnimation(inAnimationRight);
+					flipper.setOutAnimation(outAnimationRight);
+					
+					flipper.showPrevious();
+				}
+				break;
+			}
+			case MotionEvent.ACTION_MOVE:
+			{
+				final View currentView = flipper.getCurrentView();
+				currentView.layout((int) (touchEvent.getX() - oldTouchValue), currentView.getTop(), currentView.getRight(), currentView.getBottom());
+				//flipper.getChildAt(flipper.getDisplayedChild() - 1); // previous
+				//flipper.getChildAt(flipper.getDisplayedChild() + 1); // next
+				break;
+			}
 		}
-
-		public static class AnimationHelper {
-		  public static Animation inFromRightAnimation() {
-		    Animation inFromRight = new TranslateAnimation(
-		    Animation.RELATIVE_TO_PARENT, +1.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f);
-		    inFromRight.setDuration(350);
-		    inFromRight.setInterpolator(new AccelerateInterpolator());
-		    return inFromRight;
-		  }
-
-		  public static Animation outToLeftAnimation() {
-		    Animation outtoLeft = new TranslateAnimation(
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, -1.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f);
-		    outtoLeft.setDuration(350);
-		    outtoLeft.setInterpolator(new AccelerateInterpolator());
-		    return outtoLeft;
-		  }
-
-		  // for the next movement
-		  public static Animation inFromLeftAnimation() {
-		    Animation inFromLeft = new TranslateAnimation(
-		    Animation.RELATIVE_TO_PARENT, -1.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f);
-		    inFromLeft.setDuration(350);
-		    inFromLeft.setInterpolator(new AccelerateInterpolator());
-		    return inFromLeft;
-		  }
-
-		  public static Animation outToRightAnimation() {
-		    Animation outtoRight = new TranslateAnimation(
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, +1.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f,
-		    Animation.RELATIVE_TO_PARENT, 0.0f);
-		    outtoRight.setDuration(350);
-		    outtoRight.setInterpolator(new AccelerateInterpolator());
-		    return outtoRight;
-		  }
+		
+		// detector.onTouchEvent(me);
+		return true;
+	}
+	
+/*	
+ * http://planetandroid.org/
+ * 
+	public void onTouch (MotionEvent event, AndroidInput input) {
+		final int action = event.getAction() & MotionEvent.ACTION_MASK;
+		int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_ID_MASK) >> MotionEvent.ACTION_POINTER_ID_SHIFT;
+		int pointerId = event.getPointerId(pointerIndex);		
+ 
+		int x = 0, y = 0;
+		int realPointerIndex = 0;
+ 
+		synchronized(input) { // FUCK 
+			switch (action) {
+			case MotionEvent.ACTION_DOWN:
+			case MotionEvent.ACTION_POINTER_DOWN:
+				realPointerIndex = input.getFreePointerIndex(); // get a free pointer index as reported by Input.getX() etc.
+				input.realId[realPointerIndex] = pointerId;
+				x = (int)event.getX(pointerIndex);
+				y = (int)event.getY(pointerIndex);
+				postTouchEvent(input, TouchEvent.TOUCH_DOWN, x, y, realPointerIndex);
+				input.touchX[realPointerIndex] = x;
+				input.touchY[realPointerIndex] = y;
+				input.touched[realPointerIndex] = true;
+				break;
+ 
+			case MotionEvent.ACTION_UP:
+			case MotionEvent.ACTION_POINTER_UP:
+			case MotionEvent.ACTION_OUTSIDE:
+			case MotionEvent.ACTION_CANCEL:				
+				realPointerIndex = input.lookUpPointerIndex(pointerId);				
+				input.realId[realPointerIndex] = -1;
+				x = (int)event.getX(pointerIndex);
+				y = (int)event.getY(pointerIndex);
+				postTouchEvent(input, TouchEvent.TOUCH_UP, x, y, realPointerIndex);
+				input.touchX[realPointerIndex] = x;
+				input.touchY[realPointerIndex] = y;
+				input.touched[realPointerIndex] = false;
+				break;
+ 
+			case MotionEvent.ACTION_MOVE:
+				int pointerCount = event.getPointerCount();
+				for (int i = 0; i < pointerCount; i++) {
+					pointerIndex = i;
+					pointerId = event.getPointerId(pointerIndex);
+					x = (int)event.getX(pointerIndex);
+					y = (int)event.getY(pointerIndex);
+					realPointerIndex = input.lookUpPointerIndex(pointerId);
+					postTouchEvent(input, TouchEvent.TOUCH_DRAGGED, x, y, realPointerIndex);
+					input.touchX[realPointerIndex] = x;
+					input.touchY[realPointerIndex] = y;
+				}
+				break;
+			}
 		}
+	}
+ 
+	public int getFreePointerIndex() {
+		int len = realId.length;
+		for(int i = 0; i < len; i++) {
+			if(realId[i] == -1) return i;
+		}
+ 
+		int[] tmp = new int[realId.length + 1];
+		System.arraycopy(realId, 0, tmp, 0, realId.length);
+		realId = tmp;
+		return tmp.length - 1;
+	}
+ 
+	public int lookUpPointerIndex(int pointerId) {
+		int len = realId.length;
+		for(int i = 0; i < len; i++) {
+			if(realId[i] == pointerId) return i;
+		}
+ 
+		StringBuffer buf = new StringBuffer();
+		for(int i = 0; i < len; i++) {
+			buf.append(i + ":" + realId[i] + " ");
+		}
+		throw new GdxRuntimeException("Pointer ID lookup failed: " + pointerId + ", " + buf.toString());
+	}
 
-
-	
-
-	
-	
-	
-
-	
-	
-	
-	
+	*/
 	
 	/*
 	 * @Override
