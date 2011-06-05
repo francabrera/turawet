@@ -86,7 +86,7 @@ p { margin:0; }
 }
 
 #form ul.selected {
-    border-color: #96393B;
+    border-color: #E01B1B;
 }
 
 #form .sectionlabel {
@@ -136,15 +136,19 @@ p { margin:0; }
 
 #sections {
 	position:absolute;
-	bottom:4px;
+	bottom:2px;
 	width:90%;
 	height:5%;
 	background-color: #999691;
+	/*padding:0px 0px 4px 0px;*/
 	}
 	
 #sections ul li {
 	display:inline;
-	margin:0px 10px 2px 0px;
+	}
+
+#sections ul li a {
+	margin:0px 10px 0px 0px;
 	}
 
 #sections ul li a:link { 

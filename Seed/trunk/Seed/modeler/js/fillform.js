@@ -212,7 +212,7 @@ function addSection () {
 					text: 'Sección ' + actualSection,
 					href: '#s' + actualSection,
 					onclick: 'selectSection(' + actualSection
-								+ '); return false',						
+								+ ')',						
 				})
 			)
 		);
@@ -223,5 +223,5 @@ function addSection () {
 
 function selectSection (id) {
 	$('#s' + id).addClass("selected");
-	setTimeout("$('#s" + id + "').removeClass(\"selected\");",1000);
+	setTimeout("$('#s" + id + "').removeClass(\"selected\");",1500);
 }
