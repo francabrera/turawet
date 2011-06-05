@@ -74,7 +74,7 @@ class FormXmldbParserTest(TestCase):
         #TO-DO:
         # Must fail because LOCATION type is still not implemented in the parser
         properties = Property.objects.all()
-        self.assertEqual((properties), 9)        
+        self.assertEqual(len(properties), 9)        
 
         
     def test_group_property(self):
@@ -91,22 +91,23 @@ class FormXmldbParserTest(TestCase):
             self.assertEqual(font[0].value, u'Arial')
 
 
-    def test_fields_inheritance(self):
-        #### NOT INSTANCE, Just FORMFIELD
-        form_fields = FormField.objects.filter(label=u'Radio1')
-        
-        if len(form_fields) == 1:
-            #There is only one instance field of this Form_field
-            radio_fields = InstanceField.objects.get(form_field=form_fields)
-            # WARNING: The parent has to know his child (Radio is a child of FieldForm)
-            self.assertEqual(len(radio_fields), 1)
+    def test_radio_options_null_field(self):
+        #One sample option
+        field_options = FieldOption.objects.all()
+        # The Radio1 field has 2 options
+        self.assertNotEqual(field_options[0].form_field, None)
+            
 
-    def test_radio_options(self):
+    def test_num_radio_options(self):
         form_fields = FormField.objects.filter(label=u'Radio1')
         
         if len(form_fields) == 1:
             #There is only one instance field of this Form_field
-            radio_fields = RadioField.objects.get(form_field=form_fields)
-            field_options = FieldOption.objects.filter(form_field=radio_fields)
+            field_options = FieldOption.objects.filter(form_field=form_fields[0])
             # The Radio1 field has 2 options
             self.assertEqual(len(field_options), 2)
+            
+    def test_num_options(self):
+        field_options = FieldOption.objects.all()
+        # The Radio1 field has 2 options
+        self.assertEqual(len(field_options), 4)
