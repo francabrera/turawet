@@ -73,20 +73,12 @@ class FormXmldbParser():
     
     def parse_radio_field(self, parser, section_model):
         field_model = FormField(section=section_model)
-        field_model.save()
-        # Parsing
-        options = parser.findall("options/option")
-        self.parse_field_options(options, field_model)
         
         return field_model
     
     
     def parse_combo_field(self, parser, section_model):
         field_model = FormField(section=section_model)
-        field_model.save()
-        # Parsing
-        options = parser.findall("options/option")
-        self.parse_field_options(options, field_model)
                 
         return field_model
     
@@ -128,7 +120,7 @@ class FormXmldbParser():
                 field_model.section_order = j
                 field_model.label = field.findtext('label')
                 field_model.required = field.findtext('required')
-                if field_model.required:
+                if field_model.required == '':
                     field_model.required = True
                 else:
                     field_model.required = False
@@ -142,6 +134,10 @@ class FormXmldbParser():
                     k += 1
                 field_model.save()
                 id.text = str(field_model.id)
+                # Adding options (if any)
+                options = field.findall("options/option")
+                if (len(options) > 0):
+                    self.parse_field_options(options, field_model)
                 # Adding the field properties
                 properties = field.findall("properties/property")
                 self.parse_field_properties(properties, field_model)

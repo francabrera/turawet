@@ -163,7 +163,7 @@ class InstanceField(models.Model):
                   of the dynamic fields"""
     instance = models.ForeignKey(Instance)
     instance_order = models.SmallIntegerField()
-    form_fields = models.ForeignKey(FormField)
+    form_field = models.ForeignKey(FormField)
 
     # For inheritance
     content_type = models.ForeignKey(ContentType,editable=False,null=True)
