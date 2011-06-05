@@ -54,6 +54,7 @@ class SoapService(DjangoSoapService):
     @soapmethod(_returns = Array(WsFormPreview))
     def get_all_forms_preview(self):
         ''' 
+            Sending the preview of the forms in the DB
         '''
         forms = Form.objects.values('name', 'version')
 
@@ -65,6 +66,7 @@ class SoapService(DjangoSoapService):
     @soapmethod(String, Integer, _returns = WsXmlForm)
     def get_xmlform_by_name_version(self, name, version):
         '''
+            Sending the XML of a selected form by name-version
         '''
         form = Form.objects.get(name = name, version = version)
         ws_xml_form = WsXmlForm(form)
@@ -73,6 +75,9 @@ class SoapService(DjangoSoapService):
 
     @soapmethod(Array(Integer), _returns = Array(WsXmlForm))
     def get_forms_by_ids(self, forms_id):
+        '''
+            Sending the XML of a selected form by ID
+        '''
         forms = []
         for form_id in forms_id:
             form = Form.objects.get(id = form_id)

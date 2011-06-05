@@ -1,8 +1,9 @@
-'''
-Created on 04/02/2011
-
-@author: nicopernas
-'''
+"""Soaplib Handler. 
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.2"""
+   
 from soaplib.wsgi_soap import SimpleWSGISoapApp 
 from django.http import HttpResponse
 import StringIO

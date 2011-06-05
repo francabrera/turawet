@@ -1,4 +1,4 @@
-"""*Database Models* definition module. 
+"""*WebServices models 
    :author: Francisco Jose Cabrera Hernandez,
             Nicolas Pernas Maradei,
             Romen Rodriguez Gil
