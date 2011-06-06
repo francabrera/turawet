@@ -3,13 +3,8 @@
 
 <instance>
 	<meta>
-		<formmeta>
-			<formid>1</formid>
-			<name>Formulario de prueba</name>
-			<version>1</version>
-		</formmeta>
-		<!-- Instance meta fields -->
-		<id/>
+        <id/>
+	    <formid>1</formid>
 		<author>
 			<user>turawet</user>
 		</author>
@@ -17,243 +12,142 @@
 		<modificationdate>2011-01-12</modificationdate>
 		<editable>True</editable>
 	</meta>
-	<sections>
-		<section>
-			<id>1</id>
-			<name>Primera sección</name>
-			<instancefields>
-				<instancefield>
+	
+	<fields>
+		<field>
+			<id />
+			<value>Texto escrito</value>
+			<fieldid>1</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>Texto escrito</value>
+			<fieldid>2</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>
+                     <day>14</day>
+                     <month>10</month>
+                     <year>1986</year>
+            </value>
+			<fieldid>3</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>M</value>
+			<fieldid>4</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>O1</value>
+			<fieldid>5</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>True</value>
+			<fieldid>6</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>
+				<filename>IMG_001.jpg</filename>
+				<hash>9324F00CD</hash>
+				<binary>12312311323123</binary>
+			</value>
+			<fieldid>7</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>
+				<filename>AVI_001.avi</filename>
+				<hash>9324F123CD</hash>
+				<binary>123543543511323123</binary>
+			</value>
+			<fieldid>8</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>
+				<filename>MP3_001.mp3</filename>
+				<hash>9324F0032CD</hash>
+				<binary>12312345435323123</binary>
+			</value>
+			<fieldid>9</fieldid>
+		</field>
+		<field>
+			<id />
+			<value>
+				<latitude>23.516</latitude>
+				<longitude>-49.21</longitude>
+			</value>
+			<fieldid>10</fieldid>
+		</field>
+		<!--  Grupo sin lista, con un idgroup que no se repite -->
+		<group>
+			<idgroup>0</idgroup>
+			<field>
+				<id />
+				<value>
+					<latitude>23.516</latitude>
+					<longitude>-49.21</longitude>
+				</value>
+				<fieldid>11</fieldid>
+				<label>Localización</label>
+				<type>LOCATION</type>
+				<properties>
+					<property>
+						<name>type</name>
+						<value>COORDINATES</value>
+					</property>
+				</properties>
+			</field>
+		</group>
+		<!--
+			A continuación dos elementos de una lista con un mismo idgroup y
+			mismo fielid
+		-->
+		<group>
+			<idgroup>1</idgroup>
+			 <!-- Primer elemento de la lista -->
+			<element>
+				<field>
 					<id />
-					<value>Texto escrito</value>
-					<fieldid>1</fieldid>
-					<label>Etiqueta1</label>
+					<value>Prueba</value>
+					<fieldid>12</fieldid>
+					<label>Nombre</label>
 					<type>TEXT</type>
 					<required />
-				</instancefield>
-				<instancefield>
+				</field>
+				<field>
 					<id />
-					<value>Texto escrito</value>
-					<fieldid>2</fieldid>
-					<label>Etiqueta2</label>
+					<value>Prueba</value>
+					<fieldid>13</fieldid>
+					<label>Apellido</label>
 					<type>TEXT</type>
-					<properties>
-						<property>
-							<name>font</name>
-							<value>Arial</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<date_value>
-                       <day>14</day>
-                       <month>10</month>
-                       <year>1986</year>
-                   	</date_value>
-					<fieldid>3</fieldid>
-					<label>Fecha1</label>
-					<type>DATE</type>
 					<required />
-					<properties>
-						<property>
-							<name>format</name>
-							<value>YYYY-MM-DD</value>
-						</property>
-						<property>
-							<name>calendar</name>
-							<value>MONTH_CALENDAR</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
+				</field>
+            </element>
+            <!-- Segundo elemento de la lista -->
+            <element>
+				<field>
 					<id />
-					<value>M</value>
-					<fieldid>4</fieldid>
-					<label>Radio1</label>
-					<type>RADIO</type>
+					<value>Prueba</value>
+					<fieldid>14</fieldid>
+					<label>Nombre</label>
+					<type>TEXT</type>
 					<required />
-					<options>
-						<option>
-							<label>Masculino</label>
-							<value>M</value>
-						</option>
-						<option>
-							<label>Femenino</label>
-							<value>F</value>
-						</option>
-					</options>
-				</instancefield>
-				<instancefield>
+				</field>
+				<field>
 					<id />
-					<value>O1</value>
-					<fieldid>5</fieldid>
-					<label>Combo1</label>
-					<type>COMBO</type>
-					<options>
-						<option>
-							<label>Opción 1</label>
-							<value>O1</value>
-							<default />
-						</option>
-						<option>
-							<label>Opción 2</label>
-							<value>O2</value>
-						</option>
-					</options>
-					<properties>
-						<property>
-							<name>size</name>
-							<value>30</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<value>True</value>
-					<fieldid>6</fieldid>
-					<label>Check1</label>
-					<type>CHECKBOX</type>
+					<value>Prueba</value>
+					<fieldid>15</fieldid>
+					<label>Apellido</label>
+					<type>TEXT</type>
 					<required />
-					<properties>
-						<property>
-							<name>widget</name>
-							<value>TRISTATE</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<value>
-						<filename>IMG_001.jpg</filename>
-						<hash>9324F00CD</hash>
-						<binary>12312311323123</binary>
-					</value>
-					<fieldid>7</fieldid>
-					<label>Imágenes</label>
-					<type>IMAGE_GALLERY</type>
-					<required />
-					<properties>
-						<property>
-							<name>max_photos</name>
-							<value>6</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<value>
-						<filename>AVI_001.avi</filename>
-						<hash>9324F123CD</hash>
-						<binary>123543543511323123</binary>
-					</value>
-					<fieldid>8</fieldid>
-					<label>Vídeos</label>
-					<type>VIDEO_GALLERY</type>
-					<properties>
-						<property>
-							<name>max_file_size</name>
-							<value>128</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<value>
-						<filename>MP3_001.mp3</filename>
-						<hash>9324F0032CD</hash>
-						<binary>12312345435323123</binary>
-					</value>
-					<fieldid>9</fieldid>
-					<label>Audio</label>
-					<type>AUDIO_GALLERY</type>
-					<properties>
-						<property>
-							<name>max_file_size</name>
-							<value>8</value>
-						</property>
-					</properties>
-				</instancefield>
-				<instancefield>
-					<id />
-					<value>
-						<latitude>23.516</latitude>
-						<longitude>-49.21</longitude>
-					</value>
-					<fieldid>10</fieldid>
-					<label>Localización</label>
-					<type>LOCATION</type>
-					<properties>
-						<property>
-							<name>type</name>
-							<value>COORDINATES</value>
-						</property>
-					</properties>
-				</instancefield>
-				<!--  Grupo sin lista, con un idgroup que no se repite -->
-				<instancegroup>
-					<idgroup>0</idgroup>
-					<instancefield>
-						<id />
-						<value>
-							<latitude>23.516</latitude>
-							<longitude>-49.21</longitude>
-						</value>
-						<fieldid>11</fieldid>
-						<label>Localización</label>
-						<type>LOCATION</type>
-						<properties>
-							<property>
-								<name>type</name>
-								<value>COORDINATES</value>
-							</property>
-						</properties>
-					</instancefield>
-				</instancegroup>
-				<!--
-					A continuación dos elementos de una lista con un mismo idgroup y
-					mismo fielid
-				-->
-				<instancegroup>
-					<idgroup>1</idgroup> <!-- Primer elemento de la lista -->
-					<instancefield>
-						<id />
-						<value>Prueba</value>
-						<fieldid>12</fieldid>
-						<label>Nombre</label>
-						<type>TEXT</type>
-						<required />
-					</instancefield>
-					<instancefield>
-						<id />
-						<value>Prueba</value>
-						<fieldid>13</fieldid>
-						<label>Apellido</label>
-						<type>TEXT</type>
-						<required />
-					</instancefield>
-				</instancegroup>
-				<instancegroup>
-					<idgroup>2</idgroup> <!-- Segundo elemento de la lista -->
-					<instancefield>
-						<id />
-						<value>Prueba</value>
-						<fieldid>14</fieldid>
-						<label>Nombre</label>
-						<type>TEXT</type>
-						<required />
-					</instancefield>
-					<instancefield>
-						<id />
-						<value>Prueba</value>
-						<fieldid>15</fieldid>
-						<label>Apellido</label>
-						<type>TEXT</type>
-						<required />
-					</instancefield>
-				</instancegroup>
-			</instancefields>
-		</section>
-	</sections>
-
+				</field>
+			</element>
+		</group>
+	</fields>
 </instance>
 
