@@ -3,8 +3,8 @@
 
 <instance>
 	<meta>
-        <id/>
-	    <formid>1</formid>
+		<id />
+		<formid>1</formid>
 		<author>
 			<user>turawet</user>
 		</author>
@@ -12,7 +12,6 @@
 		<modificationdate>2011-01-12</modificationdate>
 		<editable>True</editable>
 	</meta>
-	
 	<fields>
 		<field>
 			<id />
@@ -27,10 +26,10 @@
 		<field>
 			<id />
 			<value>
-                     <day>14</day>
-                     <month>10</month>
-                     <year>1986</year>
-            </value>
+				<day>14</day>
+				<month>10</month>
+				<year>1986</year>
+			</value>
 			<fieldid>3</fieldid>
 		</field>
 		<field>
@@ -109,7 +108,7 @@
 		-->
 		<group>
 			<idgroup>1</idgroup>
-			 <!-- Primer elemento de la lista -->
+			<!-- Primer elemento de la lista -->
 			<element>
 				<field>
 					<id />
@@ -127,9 +126,9 @@
 					<type>TEXT</type>
 					<required />
 				</field>
-            </element>
-            <!-- Segundo elemento de la lista -->
-            <element>
+			</element>
+			<!-- Segundo elemento de la lista -->
+			<element>
 				<field>
 					<id />
 					<value>Prueba</value>
