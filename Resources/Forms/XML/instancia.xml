@@ -16,12 +16,14 @@
 		<field>
 			<id />
 			<value>Texto escrito</value>
-			<fieldid>1</fieldid>
+			<order>1</order>
+			<formfieldid>1</formfieldid>
 		</field>
 		<field>
 			<id />
 			<value>Texto escrito</value>
-			<fieldid>2</fieldid>
+			<order>2</order>
+			<formfieldid>2</formfieldid>
 		</field>
 		<field>
 			<id />
@@ -30,22 +32,26 @@
 				<month>10</month>
 				<year>1986</year>
 			</value>
-			<fieldid>3</fieldid>
+			<order>3</order>
+			<formfieldid>3</formfieldid>
 		</field>
 		<field>
 			<id />
 			<value>M</value>
-			<fieldid>4</fieldid>
+			<order>4</order>
+			<formfieldid>4</formfieldid>
 		</field>
 		<field>
 			<id />
 			<value>O1</value>
-			<fieldid>5</fieldid>
+			<order>5</order>
+			<formfieldid>5</formfieldid>
 		</field>
 		<field>
 			<id />
 			<value>True</value>
-			<fieldid>6</fieldid>
+			<order>6</order>
+			<formfieldid>6</formfieldid>
 		</field>
 		<field>
 			<id />
@@ -54,7 +60,8 @@
 				<hash>9324F00CD</hash>
 				<binary>12312311323123</binary>
 			</value>
-			<fieldid>7</fieldid>
+			<order>7</order>
+			<formfieldid>7</formfieldid>
 		</field>
 		<field>
 			<id />
@@ -63,7 +70,8 @@
 				<hash>9324F123CD</hash>
 				<binary>123543543511323123</binary>
 			</value>
-			<fieldid>8</fieldid>
+			<order>8</order>
+			<formfieldid>8</formfieldid>
 		</field>
 		<field>
 			<id />
@@ -72,7 +80,8 @@
 				<hash>9324F0032CD</hash>
 				<binary>12312345435323123</binary>
 			</value>
-			<fieldid>9</fieldid>
+			<order>9</order>
+			<formfieldid>9</formfieldid>
 		</field>
 		<field>
 			<id />
@@ -80,70 +89,63 @@
 				<latitude>23.516</latitude>
 				<longitude>-49.21</longitude>
 			</value>
-			<fieldid>10</fieldid>
+			<order>10</order>
+			<formfieldid>10</formfieldid>
 		</field>
-		<!--  Grupo sin lista, con un idgroup que no se repite -->
+		<!--  Grupo sin lista, con un groupid que no se repite -->
 		<group>
-			<idgroup>0</idgroup>
-			<field>
-				<id />
-				<value>
-					<latitude>23.516</latitude>
-					<longitude>-49.21</longitude>
-				</value>
-				<fieldid>11</fieldid>
-				<label>Localización</label>
-				<type>LOCATION</type>
-				<properties>
-					<property>
-						<name>type</name>
-						<value>COORDINATES</value>
-					</property>
-				</properties>
-			</field>
+			<groupid>1</groupid>
+			<element>
+				<field>
+					<id />
+					<ordengrupo>1</ordengrupo>
+					<value>
+						<latitude>23.516</latitude>
+						<longitude>-49.21</longitude>
+					</value>
+					<order>11</order>
+					<formfieldid>11</formfieldid>
+				</field>
+			</element>
 		</group>
 		<!--
-			A continuación dos elementos de una lista con un mismo idgroup y
+			A continuación dos elementos de una lista con un mismo groupid y
 			mismo fielid
 		-->
 		<group>
-			<idgroup>1</idgroup>
+			<groupid>2</groupid>
 			<!-- Primer elemento de la lista -->
 			<element>
 				<field>
 					<id />
+					<ordengrupo>1</ordengrupo>
 					<value>Prueba</value>
-					<fieldid>12</fieldid>
-					<label>Nombre</label>
-					<type>TEXT</type>
-					<required />
+					<order>12</order>
+					<formfieldid>12</formfieldid>
 				</field>
 				<field>
 					<id />
+					<ordengrupo>1</ordengrupo>
 					<value>Prueba</value>
-					<fieldid>13</fieldid>
-					<label>Apellido</label>
-					<type>TEXT</type>
-					<required />
+					<order>13</order>
+					<formfieldid>13</formfieldid>
 				</field>
 			</element>
 			<!-- Segundo elemento de la lista -->
 			<element>
 				<field>
 					<id />
+					<ordengrupo>2</ordengrupo>
 					<value>Prueba</value>
-					<fieldid>14</fieldid>
-					<label>Nombre</label>
-					<type>TEXT</type>
-					<required />
+					<order>14</order>
+					<formfieldid>12</formfieldid>
 				</field>
 				<field>
 					<id />
+					<ordengrupo>2</ordengrupo>
 					<value>Prueba</value>
-					<fieldid>15</fieldid>
-					<label>Apellido</label>
-					<type>TEXT</type>
-					<required />
+					<order>15</order>
+					<formfieldid>12</formfieldid>
 				</field>
 			</element>
 		</group>
