@@ -35,7 +35,7 @@ public class FieldGroupInstanceBean extends SectionChildBean {
 	@Override
 	public String toXml()
 	{
-		String temp = "<group><groupid>"+id+"</groupid>";
+		String temp = "<group><groupid>"+groupId+"</groupid>";
 		Iterator<GroupElementBean> it=groupElements.iterator();
         while(it.hasNext()) {
         	temp+=(it.next()).toXml();
