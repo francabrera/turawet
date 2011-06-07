@@ -15,11 +15,20 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import com.turawet.beedroid.beans.InstanceBean;
+
 
 import android.util.Log;
 
+
 /**
- * @author nicopernas
+ * @class XmlToViewsParser
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @autor Romén Rodríguez Gil
  * 
  */
 public class XmlToViewsParser
@@ -65,10 +74,11 @@ public class XmlToViewsParser
 	 * 
 	 * @return
 	 */
-	public List<FieldContainer> getFields()
+	public InstanceBean getInstance()
 	{
-		return handler.getFields();
+		return handler.getInstance();
 	}
+	
 	
 	/**
 	 * Método que mostrará todo el proceso de parsing por el LOG
@@ -76,11 +86,7 @@ public class XmlToViewsParser
 	 */
 	public void showParse()
 	{
-		List<FieldContainer> list = handler.getFields();
-		for (FieldContainer field : list)
-		{
-			Log.d("Campo ", field.toString());
-		}
+		//TO-DO
 		
 	}
 	
