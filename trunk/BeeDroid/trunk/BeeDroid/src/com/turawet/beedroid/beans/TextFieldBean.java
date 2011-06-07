@@ -19,6 +19,11 @@ import java.util.List;
 public class TextFieldBean extends GenericInstanceFieldBean {
 	public Integer id;
 	public String value;
+
+	public TextFieldBean(int order, FormFieldBean formField) {
+		super(order, formField);
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public String toXml() {

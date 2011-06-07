@@ -94,14 +94,14 @@ public class FormSaxParserHandler extends DefaultHandler
 		/* Closing Field */
 		else if (localName.equalsIgnoreCase("field")) {
 			inField= false;
-			switch (typeMap.get(tempFormField.getType())) {
-				case 1: 
+//			switch (typeMap.get(tempFormField.getType())) {
+//				case 1: 
 					// TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
-					tempInstanceField = new TextFieldBean(1, tempFormField);
-				case 2: 
-					tempInstanceField = new DateFieldBean(tempFormField); // TO-DO: Arguments
-				break;
-			}
+//					tempInstanceField = new TextFieldBean(1, tempFormField);
+//				case 2: 
+//					tempInstanceField = new DateFieldBean(tempFormField); // TO-DO: Arguments
+//				break;
+//			}
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
 			
 		}
@@ -161,7 +161,7 @@ public class FormSaxParserHandler extends DefaultHandler
 	/**
 	 * @return
 	 */
-	public InstanceBean InstanceBean()
+	public InstanceBean getInstance()
 	{
 		return instance;
 	}

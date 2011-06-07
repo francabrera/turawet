@@ -18,6 +18,11 @@ public class DateFieldBean extends GenericInstanceFieldBean {
 	public Integer dayValue;
 	public Integer monthValue;
 	public Integer yearValue;
+
+	public DateFieldBean(int order, FormFieldBean formField) {
+		super(order, formField);
+		// TODO Auto-generated constructor stub
+	}
 	
 	@Override
 	public String toXml() {
