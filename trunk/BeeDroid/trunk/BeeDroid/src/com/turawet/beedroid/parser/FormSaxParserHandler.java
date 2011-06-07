@@ -89,6 +89,7 @@ public class FormSaxParserHandler extends DefaultHandler
 		/* Closing Section */
 		if (localName.equalsIgnoreCase("section")) {
 			inSection = false;
+			//NOW WE HAVE TO ADD THE SECTION TO THE INSTANCE
 		}
 		/* Closing Field */
 		else if (localName.equalsIgnoreCase("field")) {
@@ -101,6 +102,7 @@ public class FormSaxParserHandler extends DefaultHandler
 					tempInstanceField = new DateFieldBean(tempFormField); // TO-DO: Arguments
 				break;
 			}
+			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
 			
 		}
 		/* Section */
