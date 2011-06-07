@@ -5,15 +5,29 @@ package com.turawet.beedroid.parser;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.turawet.beedroid.beans.DateFieldBean;
+import com.turawet.beedroid.beans.FormFieldBean;
+import com.turawet.beedroid.beans.GenericInstanceFieldBean;
+import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.SectionBean;
+import com.turawet.beedroid.beans.TextFieldBean;
+
 
 /**
- * @author nicopernas
+ * @class FormSaxParserHandler: Our Sax Parser Handler
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @autor Romén Rodríguez Gil
  * 
  */
 public class FormSaxParserHandler extends DefaultHandler
@@ -21,66 +35,50 @@ public class FormSaxParserHandler extends DefaultHandler
 	/**
 	 *
 	 */	
-	private ArrayList<FieldContainer>	fieldElements;
-	private StringBuilder					buffer;
-	private FieldContainer					temporaryField;
-	private boolean							buffering;
-	private boolean							fieldOpen;
-	private String								propertyName;
-	private String								propertyValue;
-	private boolean							sectionOpen;
+	/* Result */
+	private InstanceBean instance;
+	/* Aux */
+    private StringBuilder buffer;
+    private boolean buffering;
+    private HashMap<String, Integer> typeMap;
+    private boolean inField;
+    private boolean inSection;
+    /* Temp atributes */
+    private SectionBean tempSection;
+    private FormFieldBean tempFormField;
+    private GenericInstanceFieldBean tempInstanceField;
+
+
+
 	
 	@Override
-	public void startDocument() throws SAXException
-	{
-		fieldElements = new ArrayList<FieldContainer>();
-		buffer = new StringBuilder();
-		
-		buffering = false;
-		fieldOpen = false;
-		sectionOpen = false;
-		
-		propertyName = null;
-		propertyValue = null;
+	public void startDocument() throws SAXException	{
+		typeMap = new HashMap<String, Integer>();
+		typeMap.put("TEXT", 1);
+		typeMap.put("DATE", 2);
 	}
 	
 	@Override
-	public void endDocument() throws SAXException
-	{
+	public void endDocument() throws SAXException {
 	}
 	
 	@Override
-	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException
-	{
-		/*
-		 * A section its beign opened
-		 */
-		if (localName.equalsIgnoreCase("section"))
-		{
-			sectionOpen = true;
+	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException	{
+		/* A section is being opened */
+		if (localName.equalsIgnoreCase("section")) {
+			inSection = true;
+			tempSection = new SectionBean();
 		}
-		/*
-		 * Tag 'name' of a section it's beign opened
-		 */
-		else if (sectionOpen && !fieldOpen && localName.equalsIgnoreCase("name"))
-		{
-			temporaryField = new FieldContainer();
-			temporaryField.setType("SECTION");
-			buffering = true;
-		}
-		/*
-		 * A new field it's beign opened
-		 */
-		else if (sectionOpen && localName.equalsIgnoreCase("field"))
-		{
-			temporaryField = new FieldContainer();
-			fieldOpen = true;
+
+		/* A field is being opened */
+		else if (inSection && localName.equalsIgnoreCase("field")) {
+			inField = true;
+			tempFormField = new FormFieldBean();
 		}
 		/*
 		 * Tags of a field
 		 */
-		else if (sectionOpen && fieldOpen && (localName.equalsIgnoreCase("id") || localName.equalsIgnoreCase("label") || localName.equalsIgnoreCase("type") || localName.equalsIgnoreCase("name") || localName.equalsIgnoreCase("value")))
-		{
+		else {
 			buffering = true;
 		}
 	}
@@ -88,82 +86,56 @@ public class FormSaxParserHandler extends DefaultHandler
 	@Override
 	public void endElement(String uri, String qName, String localName) throws SAXException
 	{
-		/*
-		 * Closing section tag
-		 */
-		if (localName.equalsIgnoreCase("section"))
-		{
-			sectionOpen = false;
+		/* Closing Section */
+		if (localName.equalsIgnoreCase("section")) {
+			inSection = false;
 		}
-		/*
-		 * Tag 'name' of a section. No more data for 'section', we insert him into
-		 * the list
-		 */
-		else if (sectionOpen && !fieldOpen && localName.equalsIgnoreCase("name"))
-		{
-			temporaryField.setLabel(buffer.toString().trim());
-			fieldElements.add(temporaryField);
+		/* Closing Field */
+		else if (localName.equalsIgnoreCase("field")) {
+			inField= false;
+			switch (typeMap.get(tempFormField.getType())) {
+				case 1: 
+					// TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
+					tempInstanceField = new TextFieldBean(1, tempFormField);
+				case 2: 
+					tempInstanceField = new DateFieldBean(tempFormField); // TO-DO: Arguments
+				break;
+			}
+			
+		}
+		/* Section */
+		else if (inSection && !inField && localName.equalsIgnoreCase("id")) {
+			tempSection.setId(Integer.parseInt(buffer.toString().trim()));
 			clearBuffer();
 		}
-		/*
-		 * Closing 'field' tag . We put him into the list
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("field"))
-		{
-			fieldElements.add(temporaryField);
-			fieldOpen = false;
-		}
-		/*
-		 * Closing 'id' tag of a field
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("id"))
-		{
-			temporaryField.setId(buffer.toString().trim());
+		else if (inSection && !inField && localName.equalsIgnoreCase("name")) {
+			tempSection.setName(buffer.toString().trim());
 			clearBuffer();
 		}
-		/*
-		 * Closing 'label' tag of a field
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("label"))
-		{
-			temporaryField.setLabel(buffer.toString().trim());
+		/* Field */
+		else if (inSection && inField && localName.equalsIgnoreCase("id")) {
+			tempFormField.setId(Integer.parseInt(buffer.toString().trim()));
 			clearBuffer();
 		}
-		/*
-		 * Closing 'type' tag of a field
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("type"))
-		{
-			temporaryField.setType(buffer.toString().trim());
+		else if (inSection && inField && localName.equalsIgnoreCase("label")) {
+			tempFormField.setLabel(buffer.toString().trim());
 			clearBuffer();
 		}
-		/*
-		 * If 'required' tag exists, this field it's mandatory
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("required"))
-		{
-			temporaryField.setRequired(true);
+		else if (inSection && inField && localName.equalsIgnoreCase("type")) {
+			tempFormField.setLabel(buffer.toString().trim());
 			clearBuffer();
 		}
-		/*
-		 * Name of a property of a field
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("name"))
-		{
-			propertyName = buffer.toString().trim();
-			clearBuffer();
-		}
-		/*
-		 * Value of a property of a field. Add the property to the field
-		 */
-		else if (sectionOpen && fieldOpen && localName.equalsIgnoreCase("value"))
-		{
-			propertyValue = buffer.toString().trim();
-			temporaryField.addProperty(propertyName, propertyValue);
+		else if (inSection && inField && localName.equalsIgnoreCase("required")) {
+			tempFormField.setRequired(true);
 			clearBuffer();
 		}
 		
+		
+		/* Once finished, we always have to clean the buffer*/
+		clearBuffer();	
 	}
+
+	
 	
 	/**
 	 * SAX call this method when found text between some tags
@@ -187,8 +159,8 @@ public class FormSaxParserHandler extends DefaultHandler
 	/**
 	 * @return
 	 */
-	public List<FieldContainer> getFields()
+	public InstanceBean InstanceBean()
 	{
-		return fieldElements;
+		return instance;
 	}
 }
