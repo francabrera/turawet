@@ -58,6 +58,10 @@ public class SectionBean extends BaseBean {
 		this.sectionChildren = sectionChildren;
 	}
 	
+	/* Other mutators */
+	public void addChild(SectionChildBean child) {
+		this.sectionChildren.add(child);
+	}
 	
 	/* Other methods */
 	@Override
