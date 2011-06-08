@@ -48,7 +48,58 @@ public class InstanceBean extends BaseBean {
 
 	
 	/* Getters y setters */
+	public FormBean getForm() {
+		return form;
+	}
+
+	public void setForm(FormBean form) {
+		this.form = form;
+	}
+
+	public String getAuthoruser() {
+		return authoruser;
+	}
+
+	public void setAuthoruser(String authoruser) {
+		this.authoruser = authoruser;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public String getModificationDate() {
+		return modificationDate;
+	}
+
+	public void setModificationDate(String modificationDate) {
+		this.modificationDate = modificationDate;
+	}
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+
+	public List<SectionBean> getSections() {
+		return sections;
+	}
+
+	public void setSections(List<SectionBean> sections) {
+		this.sections = sections;
+	}
 	
+	/* Other mutators */
+	public void addSection(SectionBean section) {
+		this.sections.add(section);
+	}
 	
 	/* Other methods */
 
@@ -58,6 +109,7 @@ public class InstanceBean extends BaseBean {
 		return "Instance: "+id+" Form: "+form.name;
 	}
 	
+
 	@Override
 	public String toXml()
 	{

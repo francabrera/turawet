@@ -10,6 +10,7 @@
 	</author>
 	<sections>
 		<section>
+			<id />
 			<name>Primera sección</name>
 			<fields>
 				<field>
@@ -41,7 +42,7 @@
 					</properties>
 				</field>
 				<field>
-					<id>1</id>
+					<id>3</id>
 					<label>Campito</label>
 					<type>TEXT</type>
 					<required />
@@ -54,7 +55,7 @@
 				</field>
 
 				<field>
-					<id>2</id>
+					<id>4</id>
 					<label>Otra fecha</label>
 					<type>DATE</type>
 					<required />
