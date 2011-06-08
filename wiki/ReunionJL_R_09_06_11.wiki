@@ -1,5 +1,5 @@
 #summary Birds pluggin eclipse (para data minning). GeoReferenciación y UML de los BEANS
-#labels Phase-Implementation
+#labels Phase-Implementation,Phase-Requirements,Phase-Design
 
 = Introducción =
 
