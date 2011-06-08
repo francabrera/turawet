@@ -18,22 +18,22 @@ import java.util.List;
  */
 public class SectionBean extends BaseBean {
 
-	public Integer id;
+	/**
+	 * @uml.property  name="name"
+	 */
 	public String name;
-	public Integer order;
+	/**
+	 * @uml.property  name="order"
+	 */
+	public int order;
+	/**
+	 * @uml.property  name="sectionChildren"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.SectionChildBean"
+	 */
 	private List<SectionChildBean> sectionChildren;
 	
 	
 	/* Getters y setters */
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -42,11 +42,11 @@ public class SectionBean extends BaseBean {
 		this.name = name;
 	}
 
-	public Integer getOrder() {
+	public int getOrder() {
 		return order;
 	}
 
-	public void setOrder(Integer order) {
+	public void setOrder(int order) {
 		this.order = order;
 	}
 
@@ -57,7 +57,9 @@ public class SectionBean extends BaseBean {
 	public void setSectionChildren(List<SectionChildBean> sectionChildren) {
 		this.sectionChildren = sectionChildren;
 	}
-
+	
+	
+	/* Other methods */
 	@Override
 	public String toString()
 	{

@@ -11,6 +11,18 @@ package com.turawet.beedroid.beans;
  * 
  */
 public abstract class BaseBean {
+	/* Field group instance bena has no attribute id (has the groupId of the form group*/
+	public int id;
+	
+	
+	/*Getters y setters */
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}	
+	
 	abstract public String toXml();
 }

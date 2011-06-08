@@ -22,10 +22,21 @@ import java.util.List;
 public class FieldGroupBean extends BaseBean {
 	
 	// Should we create a groupInstance and a Group (one for description and other for instantiation) 
-	public Integer id;
+	/**
+	 * @uml.property  name="label"
+	 */
 	public String label;
-	public Boolean required;
-	public Boolean list;
+	/**
+	 * @uml.property  name="required"
+	 */
+	public boolean required;
+	/**
+	 * @uml.property  name="list"
+	 */
+	public boolean list;
+	/**
+	 * @uml.property  name="properties"
+	 */
 	private List<PropertyBean> properties;
 	// we don't need here the fieldForms because the groupInstance will have the
 	// fieldInstances which have their formFiels

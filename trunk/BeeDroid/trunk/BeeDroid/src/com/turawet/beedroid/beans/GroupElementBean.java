@@ -17,6 +17,10 @@ import java.util.List;
  */
 public class GroupElementBean extends BaseBean {
 
+	/**
+	 * @uml.property  name="fields"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.GenericInstanceFieldBean"
+	 */
 	private List<GenericInstanceFieldBean> fields;
 
 	@Override

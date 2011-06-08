@@ -17,7 +17,14 @@ import java.util.List;
  */
 public class GenericInstanceFieldBean extends SectionChildBean {
 
+	/**
+	 * @uml.property  name="order"
+	 */
 	public int order;
+	/**
+	 * @uml.property  name="formField"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	public FormFieldBean formField;
 	
     /* Constructor */		
