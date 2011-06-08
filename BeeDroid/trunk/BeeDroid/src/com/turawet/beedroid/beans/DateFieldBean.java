@@ -14,10 +14,18 @@ package com.turawet.beedroid.beans;
  * 
  */
 public class DateFieldBean extends GenericInstanceFieldBean {
-	public Integer id;
-	public Integer dayValue;
-	public Integer monthValue;
-	public Integer yearValue;
+	/**
+	 * @uml.property  name="dayValue"
+	 */
+	public int dayValue;
+	/**
+	 * @uml.property  name="monthValue"
+	 */
+	public int monthValue;
+	/**
+	 * @uml.property  name="yearValue"
+	 */
+	public int yearValue;
 
 	public DateFieldBean(int order, FormFieldBean formField) {
 		super(order, formField);

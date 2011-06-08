@@ -21,36 +21,15 @@ import android.test.suitebuilder.annotation.SmallTest;
  */
 public class FormBean extends BaseBean {
 
-	public Integer id;
+	/**
+	 * @uml.property  name="name"
+	 */
 	public String name;
-	public Integer version;
+	/**
+	 * @uml.property  name="version"
+	 */
+	public int version;
 	
-	/*Getters & setters*/
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
-
 	
 	/* Methods */
 	

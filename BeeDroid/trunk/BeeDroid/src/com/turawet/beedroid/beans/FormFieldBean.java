@@ -23,26 +23,37 @@ import java.util.List;
  */
 public class FormFieldBean extends SectionChildBean {
 
-	public Integer id;
+	/**
+	 * @uml.property  name="label"
+	 */
 	public String label;
-	public Integer section_order;
-	public Integer field_group_order;
+	/**
+	 * @uml.property  name="section_order"
+	 */
+	public int section_order;
+	/**
+	 * @uml.property  name="field_group_order"
+	 */
+	public int field_group_order;
+	/**
+	 * @uml.property  name="type"
+	 */
 	public String type;
-	public Boolean required;
+	/**
+	 * @uml.property  name="required"
+	 */
+	public boolean required;
+	/**
+	 * @uml.property  name="fieldOptions"
+	 */
 	private List<FieldOptionBean> fieldOptions;
+	/**
+	 * @uml.property  name="properties"
+	 */
 	private List<PropertyBean> properties;
 
 
 	/* Getter & Setters */
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getLabel() {
 		return label;
 	}
@@ -51,19 +62,19 @@ public class FormFieldBean extends SectionChildBean {
 		this.label = label;
 	}
 
-	public Integer getSection_order() {
+	public int getSection_order() {
 		return section_order;
 	}
 
-	public void setSection_order(Integer sectionOrder) {
+	public void setSection_order(int sectionOrder) {
 		section_order = sectionOrder;
 	}
 
-	public Integer getField_group_order() {
+	public int getField_group_order() {
 		return field_group_order;
 	}
 
-	public void setField_group_order(Integer fieldGroupOrder) {
+	public void setField_group_order(int fieldGroupOrder) {
 		field_group_order = fieldGroupOrder;
 	}
 
@@ -75,11 +86,11 @@ public class FormFieldBean extends SectionChildBean {
 		this.type = type;
 	}
 
-	public Boolean getRequired() {
+	public boolean isRequired() {
 		return required;
 	}
 
-	public void setRequired(Boolean required) {
+	public void setRequired(boolean required) {
 		this.required = required;
 	}
 
@@ -98,12 +109,15 @@ public class FormFieldBean extends SectionChildBean {
 	public void setProperties(List<PropertyBean> properties) {
 		this.properties = properties;
 	}
+	
+	
+	/* Other methods */
 
 	@Override
 	public String toString() {
 		return label;
 	}
-	
+
 	@Override
 	public String toXml() {
 

@@ -17,7 +17,9 @@ import java.util.List;
  * 
  */
 public class TextFieldBean extends GenericInstanceFieldBean {
-	public Integer id;
+	/**
+	 * @uml.property  name="value"
+	 */
 	public String value;
 
 	public TextFieldBean(int order, FormFieldBean formField) {

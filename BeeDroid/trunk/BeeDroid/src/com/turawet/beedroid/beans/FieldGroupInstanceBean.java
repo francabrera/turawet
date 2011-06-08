@@ -20,7 +20,14 @@ import java.util.List;
 public class FieldGroupInstanceBean extends SectionChildBean {
 	
 	// Should we create a groupInstance and a Group (one for description and other for instantiation) 
-	public Integer groupId;
+	/**
+	 * @uml.property  name="groupId"
+	 */
+	public int groupId;
+	/**
+	 * @uml.property  name="groupElements"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.GroupElementBean"
+	 */
 	private List<GroupElementBean> groupElements;
 	
 

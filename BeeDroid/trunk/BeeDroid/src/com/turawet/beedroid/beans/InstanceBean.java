@@ -17,74 +17,38 @@ import java.util.List;
 public class InstanceBean extends BaseBean {
 
 	/* Form meta */
+	/**
+	 * @uml.property  name="form"
+	 * @uml.associationEnd  
+	 */
 	public FormBean form;
 	/* Insance meta */
-	public Integer id;
+	/**
+	 * @uml.property  name="authoruser"
+	 */
 	public String authoruser;
+	/**
+	 * @uml.property  name="creationDate"
+	 */
 	public String creationDate;
+	/**
+	 * @uml.property  name="modificationDate"
+	 */
 	public String modificationDate;
-	public Boolean editable;
+	/**
+	 * @uml.property  name="editable"
+	 */
+	public boolean editable;
 	/* Children */
+	/**
+	 * @uml.property  name="sections"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.SectionBean"
+	 */
 	private List<SectionBean> sections;
 
 	
 	/* Getters y setters */
 	
-	public FormBean getForm() {
-		return form;
-	}
-
-	public void setForm(FormBean form) {
-		this.form = form;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getAuthoruser() {
-		return authoruser;
-	}
-
-	public void setAuthoruser(String authoruser) {
-		this.authoruser = authoruser;
-	}
-
-	public String getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public String getModificationDate() {
-		return modificationDate;
-	}
-
-	public void setModificationDate(String modificationDate) {
-		this.modificationDate = modificationDate;
-	}
-
-	public Boolean getEditable() {
-		return editable;
-	}
-
-	public void setEditable(Boolean editable) {
-		this.editable = editable;
-	}
-
-	public List<SectionBean> getSections() {
-		return sections;
-	}
-
-	public void setSections(List<SectionBean> sections) {
-		this.sections = sections;
-	}
 	
 	/* Other methods */
 

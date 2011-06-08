@@ -15,35 +15,20 @@ package com.turawet.beedroid.beans;
  */
 public class PropertyBean extends BaseBean {
 
-	public Integer id;
+	/**
+	 * @uml.property  name="id"
+	 */
+	public int id;
+	/**
+	 * @uml.property  name="name"
+	 */
 	public String name;
-	public Integer value;
+	/**
+	 * @uml.property  name="value"
+	 */
+	public int value;
 
 		
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getValue() {
-		return value;
-	}
-
-	public void setValue(Integer value) {
-		this.value = value;
-	}
-
 	@Override
 	public String toString() {
 		return name;

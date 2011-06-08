@@ -15,35 +15,16 @@ package com.turawet.beedroid.beans;
  */
 public class FieldOptionBean extends BaseBean {
 	
-	public Integer id;
+	/**
+	 * @uml.property  name="label"
+	 */
 	public String label;
-	public Integer value;
+	/**
+	 * @uml.property  name="value"
+	 */
+	public int value;
 	
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public Integer getValue() {
-		return value;
-	}
-
-	public void setValue(Integer value) {
-		this.value = value;
-	}
-
 	@Override
 	public String toString() {
 		return label;
