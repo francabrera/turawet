@@ -1,0 +1,15 @@
+#summary Birds pluggin eclipse (para data minning). GeoReferenciación y UML de los BEANS
+#labels Phase-Implementation
+
+= Introducción =
+
+Se traataron los temas del Birds pluggin eclipse (para data minning de la base de datos). GeoReferenciación y UML de los Beans (Herencia y diagrama de clases)
+
+
+= Detalles =
+
+Hay que mirar el Birds pluggin por si nos facilita hacer un pequeño data minning con las instancias (estadísticas, etc...).
+
+También se habló sobre geolocalizar las instancias (dónde se puso la multa). Imagino que tendrá que traducirse como un botón geolocalizar pero que será un metadato. Luego hay que hacer una representación desde el administrador de la base de datos sobre GoogleMaps de las instancias geolocalizadas. El modelador tendrá un checkbox que dirá "geolocalizada".
+
+Por último se consideró interesante de cara a la memoria final elaborar UML (herencia y diagramas de clases) por ejemplo de los Beans. Utilizar un pluggin de Eclipse como el eUML2 se consideró oportuno.
