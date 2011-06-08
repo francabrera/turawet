@@ -1,0 +1,10 @@
+#summary ¿La clase abstracta BaseBean debería tener getters y setters para Id?
+#labels Phase-Implementation
+
+= Introducción =
+
+Dado que todas las clases "Beans" tienen el atributo ID, lo hemos colocado en la clase madre de la jerarquía (BaseBean). Ahora surge la dudad de los getters/setters.
+
+= Detalles =
+
+Al crear automáticamente los getter/setters en el Eclipse para una clase hija de BaseBean nos crea los getters/setters propios de la clase hija, pero no incluye los de la madre (atributo Id).
