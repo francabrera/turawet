@@ -81,7 +81,8 @@ public class XmlToBeansParser
 	 */
 	public InstanceBean getInstance()
 	{
-		return handler.getInstance();
+		//return handler.getInstance();
+		return null;
 	}
 	
 	
