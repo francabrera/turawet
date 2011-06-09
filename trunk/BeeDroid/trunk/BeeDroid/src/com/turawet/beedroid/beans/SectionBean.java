@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,6 +32,13 @@ public class SectionBean extends BaseBean {
 	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.SectionChildBean"
 	 */
 	private List<SectionChildBean> sectionChildren;
+	
+	
+	/*Constructor*/
+	public SectionBean() {
+		super();
+		sectionChildren = new ArrayList<SectionChildBean>();
+	}	
 	
 	
 	/* Getters y setters */
