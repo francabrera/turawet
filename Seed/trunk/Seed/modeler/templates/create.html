@@ -22,8 +22,12 @@
 		
 		<div id="resultado">
 		    <img class="delete" src="images/buttons/delete.png" onClick="hideResults()"/>
-		    <p class="prueba">{{prueba}}</p>
-            <p class="prueba">{{wsresponse}}</p>
+		    {% if wsresponse %}
+		      <p class="prueba">Formulario Guardado!</p>
+		    {% else %}
+		      <p class="prueba">Enviado:<br/>{{prueba}}</p>
+		      <p class="pruebaerror">{{errormessage}}</p>
+		    {% endif %}
         </div>
 		
 		<div id="sections">
