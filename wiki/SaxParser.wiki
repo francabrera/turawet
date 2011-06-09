@@ -1,0 +1,13 @@
+#summary Sax vs DOM vs PullParser
+#labels Phase-Design,Phase-Implementation
+
+= Introducción =
+
+Decisiones tomadas a la hora de elegir una tecnología para trabajar con xml
+
+
+= Detalles =
+
+Para trabajar con los distintos xml, hemos optado por utilizar Sax Parser. El motivo es simple: la eficiencia. Si bien la metodología de leer xml que ofrece Sax no es la más amigable, si es la más eficiente, reduciendo el tiempo de cómputo frente a las otras dos opciones, DOM y PullParser y considerablemente la carga de memoria frente a DOM, que parecía ser la forma más sencilla de trabajar. 
+
+En principio, por conocimiento previo y comodidad, habíamos optado por DOM, pero luego de hacer una pequeña investigación, nos dimos cuenta de que esta metodología no era óptima si estábamos tratando con grandes ficheros xml, disparando el consumo de memoria y recursos en general. Recordemos que en el dispositivo móvil los recursos son muy limitados.
