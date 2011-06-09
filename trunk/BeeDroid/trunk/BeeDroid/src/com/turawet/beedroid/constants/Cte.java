@@ -19,12 +19,20 @@ public final class Cte
 	 *
 	 */
 	
-	public static final class ParsingBeans {
-	    public static enum fieldTypeMap {
-	    	TEXT,
-	    	DATE
-	    };
-	}
+	public static enum FieldTypeMap
+	{
+		TEXT, DATE
+	};
+	
+	public static enum XmlEnumTags
+	{
+		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields
+	};
+	
+	public static final class XmlTags
+	{
+		public static final String	namespace	= "";
+	};
 	
 	public static final class FormIdentificationBean
 	{
