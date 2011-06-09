@@ -1,7 +1,11 @@
 <?xml encoding="UTF-8"?>
 
-<!ELEMENT form (id,version,name,author,sections)>
+<!ELEMENT form (meta,sections)>
 <!ATTLIST form
+  xmlns CDATA #FIXED ''>
+
+<!ELEMENT meta (id,version,name,author)>
+<!ATTLIST meta
   xmlns CDATA #FIXED ''>
 
 <!ELEMENT version (#PCDATA)>
@@ -20,7 +24,7 @@
 <!ATTLIST user
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT section (name,fields)>
+<!ELEMENT section (id,name,fields)>
 <!ATTLIST section
   xmlns CDATA #FIXED ''>
 
@@ -28,7 +32,7 @@
 <!ATTLIST fields
   xmlns CDATA #FIXED ''>
 
-<!ELEMENT group (list?,name,required?,field+)>
+<!ELEMENT group (id,list?,label,required?,field+,properties?)>
 <!ATTLIST group
   xmlns CDATA #FIXED ''>
 
