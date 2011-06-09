@@ -18,6 +18,7 @@ import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.beans.SectionBean;
 import com.turawet.beedroid.beans.TextFieldBean;
+import com.turawet.beedroid.constants.Cte.ParsingBeans.fieldTypeMap;
 
 
 /**
@@ -30,7 +31,7 @@ import com.turawet.beedroid.beans.TextFieldBean;
  * @autor Romén Rodríguez Gil
  * 
  */
-public class FormSaxParserHandler extends DefaultHandler
+public class XmlToBeansParserHandler extends DefaultHandler
 {
 	/**
 	 *
@@ -40,7 +41,6 @@ public class FormSaxParserHandler extends DefaultHandler
 	/* Aux */
     private StringBuilder buffer;
     private boolean buffering;
-    private HashMap<String, Integer> typeMap;
     private boolean inField;
     private boolean inSection;
     /* Temp atributes */
@@ -49,13 +49,16 @@ public class FormSaxParserHandler extends DefaultHandler
     private GenericInstanceFieldBean tempInstanceField;
 
 
-
 	
 	@Override
 	public void startDocument() throws SAXException	{
-		typeMap = new HashMap<String, Integer>();
-		typeMap.put("TEXT", 1);
-		typeMap.put("DATE", 2);
+		/* Initializing */
+		instance = new InstanceBean();
+        buffer = new StringBuilder();
+        buffering = false;
+        inField = false;
+        inSection = false;
+
 	}
 	
 	@Override
@@ -90,24 +93,36 @@ public class FormSaxParserHandler extends DefaultHandler
 		if (localName.equalsIgnoreCase("section")) {
 			inSection = false;
 			//NOW WE HAVE TO ADD THE SECTION TO THE INSTANCE
+			instance.addSection(tempSection);
 		}
 		/* Closing Field */
 		else if (localName.equalsIgnoreCase("field")) {
 			inField= false;
-//			switch (typeMap.get(tempFormField.getType())) {
-//				case 1: 
-					// TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
-//					tempInstanceField = new TextFieldBean(1, tempFormField);
-//				case 2: 
-//					tempInstanceField = new DateFieldBean(tempFormField); // TO-DO: Arguments
-//				break;
-//			}
+			fieldTypeMap type;
+			try {
+				type = fieldTypeMap.valueOf((tempFormField.getType()));
+			}
+			catch(Exception e) {
+				type = fieldTypeMap.TEXT;
+			}
+			switch (type) {
+				case TEXT: 
+					//TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
+					tempInstanceField = new TextFieldBean(1, tempFormField);
+				break;
+				case DATE: 
+					tempInstanceField = new DateFieldBean(1, tempFormField); // TO-DO: Arguments
+				break;
+			}
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
+			tempSection.addChild(tempInstanceField);
 			
 		}
 		/* Section */
 		else if (inSection && !inField && localName.equalsIgnoreCase("id")) {
-			tempSection.setId(Integer.parseInt(buffer.toString().trim()));
+			String value = buffer.toString().trim();
+			if (!value.isEmpty())
+				tempSection.setId(Integer.parseInt(value));
 			clearBuffer();
 		}
 		else if (inSection && !inField && localName.equalsIgnoreCase("name")) {
@@ -116,7 +131,9 @@ public class FormSaxParserHandler extends DefaultHandler
 		}
 		/* Field */
 		else if (inSection && inField && localName.equalsIgnoreCase("id")) {
-			tempFormField.setId(Integer.parseInt(buffer.toString().trim()));
+			String value = buffer.toString().trim();
+			if (!value.isEmpty())
+				tempFormField.setId(Integer.parseInt(value));
 			clearBuffer();
 		}
 		else if (inSection && inField && localName.equalsIgnoreCase("label")) {
@@ -124,7 +141,7 @@ public class FormSaxParserHandler extends DefaultHandler
 			clearBuffer();
 		}
 		else if (inSection && inField && localName.equalsIgnoreCase("type")) {
-			tempFormField.setLabel(buffer.toString().trim());
+			tempFormField.setType(buffer.toString().trim());
 			clearBuffer();
 		}
 		else if (inSection && inField && localName.equalsIgnoreCase("required")) {
@@ -158,11 +175,12 @@ public class FormSaxParserHandler extends DefaultHandler
 		buffer.setLength(0);
 	}
 	
+
+	
 	/**
 	 * @return
 	 */
-	public InstanceBean getInstance()
-	{
+	public InstanceBean getInstance() {
 		return instance;
 	}
 }

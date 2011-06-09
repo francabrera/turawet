@@ -4,7 +4,13 @@
 package com.turawet.beedroid.constants;
 
 /**
- * @author nicopernas
+ * Cte: Clase que contiene las constantes del proyecto
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @autor Romén Rodríguez Gil
  * 
  */
 public final class Cte
@@ -12,6 +18,13 @@ public final class Cte
 	/**
 	 *
 	 */
+	
+	public static final class ParsingBeans {
+	    public static enum fieldTypeMap {
+	    	TEXT,
+	    	DATE
+	    };
+	}
 	
 	public static final class FormIdentificationBean
 	{
@@ -22,7 +35,7 @@ public final class Cte
 	
 	public static final class WSClient
 	{
-		public static final String	REPOSITORY_URL						= "192.168.0.10";
+		public static final String	REPOSITORY_URL						= "193.145.110.236";
 		public static final String	NAMESPACE							= "http://" + REPOSITORY_URL + "/ws_server/";
 		public static final String	URL_TO_WSDL							= "http://" + REPOSITORY_URL + "/ws_server/service.wsdl";
 		public static final String	GET_ALL_FORMS_PREVIEW			= "get_all_forms_preview";
