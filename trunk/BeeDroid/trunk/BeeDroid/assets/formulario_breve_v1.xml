@@ -2,12 +2,14 @@
 <!-- <!DOCTYPE form SYSTEM "form_def.dtd"> -->
 
 <form>
-	<id />
-	<version>1</version>
-	<name>Formulario de prueba</name>
-	<author>
-		<user>turawet</user>
-	</author>
+	<meta>
+		<id />
+		<version>1</version>
+		<name>Formulario de prueba</name>
+		<author>
+			<user>turawet</user>
+		</author>
+	</meta>
 	<sections>
 		<section>
 			<id />
