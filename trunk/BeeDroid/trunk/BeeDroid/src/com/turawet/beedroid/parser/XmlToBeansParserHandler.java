@@ -19,7 +19,7 @@ import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.beans.SectionBean;
 import com.turawet.beedroid.beans.TextFieldBean;
-import com.turawet.beedroid.constants.Cte.ParsingBeans.fieldTypeMap;
+import com.turawet.beedroid.constants.Cte.FieldTypeMap;
 
 
 /**
@@ -29,7 +29,7 @@ import com.turawet.beedroid.constants.Cte.ParsingBeans.fieldTypeMap;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class XmlToBeansParserHandler extends DefaultHandler
@@ -105,12 +105,12 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		/* Closing Field */
 		else if (localName.equalsIgnoreCase("field")) {
 			inField= false;
-			fieldTypeMap type;
+			FieldTypeMap type;
 			try {
-				type = fieldTypeMap.valueOf((tempFormField.getType()));
+				type = FieldTypeMap.valueOf((tempFormField.getType()));
 			}
 			catch(Exception e) {
-				type = fieldTypeMap.TEXT;
+				type = FieldTypeMap.TEXT;
 			}
 			switch (type) {
 				case TEXT: 
