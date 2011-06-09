@@ -38,6 +38,7 @@ var addEvent = (function () {
 /* Menú de campos                                                */
 /*****************************************************************/
 var myfields = document.querySelectorAll('#fieldsBar > ul > li > .item');
+$('#fieldsBar > div.buttons').disableSelection();
 for (var i = 0; i < myfields.length; i++) {
 	var actualField = myfields[i];
 	// DRAGSTART
@@ -100,28 +101,30 @@ function addListenersToSection(section) {
 	    // Obtenemos el ID transferido en el DRAG
 	    var idDrag = evt.dataTransfer.getData('text');
 	    var item = $('#' + idDrag);
-	    // Listado de campos del formulario
-	    var lis = $('li', this);
-	    
-	    // Variables para el nuevo campo
-	    var fieldName =  $('p:first', item).text();
-	    var type =  $('div.type', item).text();
-	    var fieldType =  $('div.fieldtype', item).text();
-	    // id of Section
-	    var sectionId = parseInt((this.id).match(/\d+/));
-	    // id of Field
-	    var id = parseInt(formSections[sectionId].size());
-	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);
-	    // Agregamos el campo al formulario
-	    newField.appendTo(this);
-	    
-	    // Div contenedor del formulario
-	    var divForm = $(this.parentNode);
-	    var newTop = (divForm.scrollTop() + $(this).position().top
-	    				+ $(this).outerHeight() - $(newField).outerHeight()*3);
-	    // Hacemos scroll hasta el final de la sección
-	    divForm.animate({scrollTop: newTop}, 700);
+	    if ((typeof item != "undefined") && (item.length > 0)) {
+		    // Listado de campos del formulario
+		    var lis = $('li', this);
+		    
+		    // Variables para el nuevo campo
+		    var fieldName =  $('p:first', item).text();
+		    var type =  $('div.type', item).text();
+		    var fieldType =  $('div.fieldtype', item).text();
+		    // id of Section
+		    var sectionId = parseInt((this.id).match(/\d+/));
+		    // id of Field
+		    var id = parseInt(formSections[sectionId].size());
+		    // Creamos el nuevo campo
+		    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);
+		    // Agregamos el campo al formulario
+		    newField.appendTo(this);
+		    
+		    // Div contenedor del formulario
+		    var divForm = $(this.parentNode);
+		    var newTop = (divForm.scrollTop() + $(this).position().top
+		    				+ $(this).outerHeight() - $(newField).outerHeight()*3);
+		    // Hacemos scroll hasta el final de la sección
+		    divForm.animate({scrollTop: newTop}, 700);
+	    }
 	    /*nuevoCampo.fadeIn('fast');*/
 	    return false;
 	});
@@ -135,20 +138,21 @@ function addListenersToField(field) {
 	    // Obtenemos el ID transferido en el DRAG
 	    var idDrag = evt.dataTransfer.getData('text');
 	    var item = $('#' + idDrag);
-	    var lis = $('li', this.parentNode);	    
-	    // Variables para el nuevo campo
-	    var fieldName =  $('p:first', item).text();
-	    var type =  $('div.type', item).text();
-	    var fieldType =  $('div.fieldtype', item).text();
-	    // id of Section
-	    var sectionId = parseInt((this.parentNode.id).match(/\d+/));
-	    // id of Field
-	    var id = parseInt(formSections[sectionId].size());
-	    // Creamos el nuevo campo
-	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);	    
-	    // Agregamos el campo al formulario
-	    newField.insertBefore(this);
-
+	    if ((typeof item != "undefined") && (item.length > 0)) {
+		    var lis = $('li', this.parentNode);	    
+		    // Variables para el nuevo campo
+		    var fieldName =  $('p:first', item).text();
+		    var type =  $('div.type', item).text();
+		    var fieldType =  $('div.fieldtype', item).text();
+		    // id of Section
+		    var sectionId = parseInt((this.parentNode.id).match(/\d+/));
+		    // id of Field
+		    var id = parseInt(formSections[sectionId].size());
+		    // Creamos el nuevo campo
+		    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);	    
+		    // Agregamos el campo al formulario
+		    newField.insertBefore(this);
+	    }
 	    /*nuevoCampo.fadeIn('fast');*/
 	    return false;
 	});
