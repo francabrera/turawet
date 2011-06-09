@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class FormFieldBean extends SectionChildBean {
@@ -132,9 +133,8 @@ public class FormFieldBean extends SectionChildBean {
 	}
 
 	@Override
-	public String toXml() {
+	public void toXml(Writer writer) {
 
-        return null;
 	}
 	
 

@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,15 +41,15 @@ public class FieldGroupInstanceBean extends SectionChildBean {
 	
 	
 	@Override
-	public String toXml()
+	public void toXml(Writer writer)
 	{
 		String temp = "<group><groupid>"+groupId+"</groupid>";
 		Iterator<GroupElementBean> it=groupElements.iterator();
         while(it.hasNext()) {
-        	temp+=(it.next()).toXml();
+        	(it.next()).toXml(writer);
         }
         
-        return temp+"</group>";
+        temp+="</group>";
 	}
 
 }

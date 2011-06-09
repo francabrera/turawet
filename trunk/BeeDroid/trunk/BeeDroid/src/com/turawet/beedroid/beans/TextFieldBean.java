@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class TextFieldBean extends GenericInstanceFieldBean {
@@ -28,11 +29,10 @@ public class TextFieldBean extends GenericInstanceFieldBean {
 	}
 	
 	@Override
-	public String toXml() {
+	public void toXml(Writer writer) {
 		// TO-DO- If the id is seted we are updating, not creating a new insance
-		String temp = "<instancefield><id/><value>"+value+"</value><order>"+order+"</order>"+formField.toXml()+"</instancefield>";
+		String temp = "<instancefield><id/><value>"+value+"</value><order>"+order+"</order>"+/*formField.toXml(writer)+*/"</instancefield>";
 
-		return temp;
 	}
 	
 }

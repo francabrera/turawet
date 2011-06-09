@@ -1,9 +1,18 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.xmlpull.v1.XmlSerializer;
+
+import com.turawet.beedroid.constants.Cte;
+
+import android.util.Xml;
+import com.turawet.beedroid.constants.Cte.XmlEnumTags;
+import com.turawet.beedroid.constants.Cte.XmlTags;
 /**
  * @class InstanceBean: Represents a instance
  * 
@@ -22,24 +31,24 @@ public class InstanceBean extends BaseBean {
 	 * @uml.property  name="form"
 	 * @uml.associationEnd  
 	 */
-	public FormBean form;
+	private FormBean form;
 	/* Insance meta */
 	/**
 	 * @uml.property  name="authoruser"
 	 */
-	public String authoruser;
+	private String authoruser;
 	/**
 	 * @uml.property  name="creationDate"
 	 */
-	public String creationDate;
+	private String creationDate;
 	/**
 	 * @uml.property  name="modificationDate"
 	 */
-	public String modificationDate;
+	private String modificationDate;
 	/**
 	 * @uml.property  name="editable"
 	 */
-	public boolean editable;
+	private boolean editable;
 	/* Children */
 	/**
 	 * @uml.property  name="sections"
@@ -53,8 +62,6 @@ public class InstanceBean extends BaseBean {
 		super();
 		sections = new ArrayList<SectionBean>();
 	}	
-	
-	
 	
 	/* Getters y setters */
 	public FormBean getForm() {
@@ -120,22 +127,38 @@ public class InstanceBean extends BaseBean {
 	
 
 	@Override
-	public String toXml()
+	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
-		String tempSections = "<instance>" +
-				"<meta><id/><formid>"+form.getId()+"</formid>" +
-				"<author><user>"+authoruser+"</user></author>" +
-				"<creationdate>"+creationDate+"</creationdate>" +
-				"<modificationdate>"+modificationDate+"</modificationdate>" +
-				"<editable>"+editable+"</editable>" +
-				"</meta>";
+		serializer = Xml.newSerializer();
+		serializer.setOutput(writer);
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.meta.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.id.toString())
+		.endTag(XmlTags.namespace, XmlEnumTags.id.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.formid.toString())
+		.text(String.valueOf(form.getId()))
+		.endTag(XmlTags.namespace, XmlEnumTags.formid.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.author.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.user.toString())
+		.text(authoruser)
+		.endTag(XmlTags.namespace, XmlEnumTags.user.toString())
+		.endTag(XmlTags.namespace, XmlEnumTags.author.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.creationdate.toString())
+		.text(creationDate)
+		.endTag(XmlTags.namespace, XmlEnumTags.creationdate.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString())
+		.text(modificationDate)
+		.endTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString())
+		.startTag(XmlTags.namespace, XmlEnumTags.editable.toString())
+		.text(String.valueOf(editable))
+		.endTag(XmlTags.namespace, XmlEnumTags.editable.toString())
+		.endTag(XmlTags.namespace, XmlEnumTags.meta.toString());
+
 		/* Sections */
-		Iterator<SectionBean> it=sections.iterator();
-        while(it.hasNext()) {
-          tempSections+=(it.next()).toXml();
-        }
-		
-		return tempSections+"</instance>";
+		for(SectionBean section: sections)
+			section.toXml(writer);
+
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.instance.toString());
 	}
 
 }

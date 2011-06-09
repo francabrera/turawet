@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,15 +37,15 @@ public class GroupElementBean extends BaseBean {
 	}
 	
 	@Override
-	public String toXml()
+	public void toXml(Writer writer)
 	{
 		String temp = "<element>";
 		Iterator<GenericInstanceFieldBean> it=fields.iterator();
         while(it.hasNext()) {
-        	temp +=(it.next()).toXml();
+        	(it.next()).toXml(writer);
         }
 
-        return temp+"</element>";
+        temp+="</element>";
 	}
 
 }
