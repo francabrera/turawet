@@ -251,6 +251,7 @@ function addSection () {
 }
 
 function selectSection (id) {
-	$('#s' + id).addClass("selected");
+	var selectedSection = $('#s' + id);
+	selectedSection.addClass("selected");
 	setTimeout("$('#s" + id + "').removeClass(\"selected\");",1500);
 }

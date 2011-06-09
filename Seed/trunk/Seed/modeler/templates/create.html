@@ -99,10 +99,10 @@
 	<script src="js/dragdrop.js"></script>
 	<script src="js/parseform.js"></script>
 	<!-- Debugging -->
+	{% if prueba %}
 	<script language="JavaScript">
-        {% if prueba %}
             $("#resultado").toggle('slow');
-        {% endif %}
     </script>
+    {% endif %}
 </body>
 </html>
