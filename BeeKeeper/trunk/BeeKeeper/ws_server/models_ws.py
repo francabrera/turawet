@@ -3,9 +3,9 @@
             Nicolas Pernas Maradei,
             Romen Rodriguez Gil
    :version: 0.2"""
-   
-   
-from soaplib.serializers.primitive import *
+
+
+from soaplib.serializers.primitive import Integer, String, Boolean
 from soaplib.serializers.clazz import ClassSerializer
 
 class ModelsSerializer(ClassSerializer):
@@ -90,10 +90,3 @@ class WsFormPreview(ModelsSerializer):
         name = String
         version = Integer
 
-class WsXmlForm(ModelsSerializer):
-    class types:
-        xml = String
-
-class WsUploadStatus(ModelsSerializer):
-    class types:
-        status = Boolean
