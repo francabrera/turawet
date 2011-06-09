@@ -32,8 +32,25 @@ public class FormBean extends BaseBean {
 	public int version;
 	
 	
-	/* Methods */
+	/* Getters & Setters*/
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}	
 	
+	
+	/* Methods */	
 	@Override
 	public String toString()
 	{
