@@ -152,7 +152,7 @@ $(".sectionlabel").inlineEdit({
 //Nombre formulario editable
 $(".formname").inlineEdit({
 		save: function(event, hash) {
-			formname = hash.value;
+			formName = hash.value;
 		}
 });
 

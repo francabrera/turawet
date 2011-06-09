@@ -202,10 +202,15 @@ p { margin:0; }
 	}
 
 .prueba{
-    background-image:none;
     margin:20px;
     padding:10px;
 }
+
+.pruebaerror {
+	font-weight: bold;
+	color: #910000;
+	margin-bottom:20px;
+	}
 
 /* ----->>>> */
 #form li.text {
