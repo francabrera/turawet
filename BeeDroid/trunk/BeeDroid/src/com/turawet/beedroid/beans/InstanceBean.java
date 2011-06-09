@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +47,14 @@ public class InstanceBean extends BaseBean {
 	 */
 	private List<SectionBean> sections;
 
+	
+	/*Constructor*/
+	public InstanceBean() {
+		super();
+		sections = new ArrayList<SectionBean>();
+	}	
+	
+	
 	
 	/* Getters y setters */
 	public FormBean getForm() {
