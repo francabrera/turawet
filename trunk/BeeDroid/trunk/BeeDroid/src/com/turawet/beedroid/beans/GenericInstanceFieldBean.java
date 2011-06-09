@@ -15,7 +15,7 @@ import java.util.List;
  * @author Romén Rodríguez Gil
  * 
  */
-public class GenericInstanceFieldBean extends SectionChildBean {
+public abstract class GenericInstanceFieldBean extends SectionChildBean {
 
 	/**
 	 * @uml.property  name="order"
@@ -33,11 +33,27 @@ public class GenericInstanceFieldBean extends SectionChildBean {
 		this.order = order;
 		this.formField = formField;
 	}
+	
+	/* Getters && Setters */
+	public int getOrder() {
+		return order;
+	}
 
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
+	public FormFieldBean getFormField() {
+		return formField;
+	}
+
+	public void setFormField(FormFieldBean formField) {
+		this.formField = formField;
+	}
+
+	/* Other methods */
 	@Override
 	public String toXml() {
 		return null;
-	}
-	
+	}	
 }

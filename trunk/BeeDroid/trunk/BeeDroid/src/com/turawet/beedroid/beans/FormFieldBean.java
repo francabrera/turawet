@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,6 +53,12 @@ public class FormFieldBean extends SectionChildBean {
 	 */
 	private List<PropertyBean> properties;
 
+
+	/*Constructor*/
+	public FormFieldBean() {
+		super();
+		properties = new ArrayList<PropertyBean>();
+	}	
 
 	/* Getter & Setters */
 	public String getLabel() {
@@ -108,6 +115,12 @@ public class FormFieldBean extends SectionChildBean {
 
 	public void setProperties(List<PropertyBean> properties) {
 		this.properties = properties;
+	}
+	
+	
+	/* Other mutators */
+	public void addProperty(PropertyBean property) {
+		this.properties.add(property);
 	}
 	
 	
