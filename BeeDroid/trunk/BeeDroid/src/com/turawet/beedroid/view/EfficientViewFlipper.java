@@ -1,92 +1,174 @@
-/**
- * 
- */
 package com.turawet.beedroid.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.turawet.beedroid.parser.FieldContainer;
+import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.view.support.BeanToViewGenerator;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 /**
- * @author nicopernas
+ * Efficient management of a dynamic flipper list of view
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @author Romén Rodríguez Gil
  * 
  */
-public class EfficientViewFlipper extends ViewFlipper
+
+public class EfficientViewFlipper extends FrameLayout
 {
-	static String[]					items			=
-															{ "11111", "222222", "333333", "444444", "555555", "6666666" };
-	
-	private List<FieldContainer>	fields;
-	private int							index;
-	
-	private static final int		START			= 0;
-	private static final int		MIDDLE		= 1;
-	private static final int		END			= 2;
-	private static final int		BUFF_SIZE	= 3;
+	private int							width;
+	private LinearLayout				previousView;
+	private LinearLayout				nextView;
+	private LinearLayout				currentView;
+	private BeanToViewGenerator	viewsGenerator;
 	
 	/**
-	 * 
 	 * @param context
-	 * @param attributes
+	 *           Context where the class its beign created
+	 * @param instance
+	 *           Instance of the form where the views are gonna be taken
 	 */
-	public EfficientViewFlipper(Context context, AttributeSet attributes)
+	public EfficientViewFlipper(Context context, InstanceBean instance)
 	{
-		super(context, attributes);
-		fields = new ArrayList<FieldContainer>();
-		index = -1;
-		addView(getView(START), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		addView(getView(MIDDLE), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		addView(getView(END), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-	}
-	
-	private View getView(int position)
-	{
-		TextView text = new TextView(this.getContext());
-		text.setText(items[position]);
-		text.setTextColor(Color.BLACK);
-		text.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-		text.setBackgroundColor(position % 2 == 0 ? Color.WHITE : Color.GRAY);
-		return text;
-	}
-	
-	@Override
-	public void showNext()
-	{
-		super.showNext();
+		super(context);
 		
+		/*
+		 * Create a bean to view translator
+		 */
+		viewsGenerator = new BeanToViewGenerator(context, instance);
 		
-		index++;
+		/*
+		 * We get first two views dynamically through the view manager
+		 * current and next ones
+		 */
+		currentView = (LinearLayout) viewsGenerator.getCurrentView();
+		nextView = (LinearLayout) viewsGenerator.getNextView();
 		
-		if (index > MIDDLE)
+		/*
+		 * If the forms have just one or two views, we can get a null view
+		 * from the manager
+		 */
+		if (nextView != null)
+			addView(nextView);
+		if (currentView != null)
 		{
-			
+			addView(currentView);
+			bringChildToFront(currentView);
 		}
 	}
 	
-	@Override
-	public void showPrevious()
+	public void setWidth(int width)
 	{
-		super.showPrevious();
-		Log.d("", "Esto tendría que tardaar en salir");
+		this.width = width;
 	}
 	
 	/**
-	 * @param fields
+	 * Shows the current view when tries to move beyon the last or first
 	 */
-	public void setFields(List<FieldContainer> fields)
+	public void backToCurrent()
 	{
-		this.fields = fields;
-		this.index = 0;
+		/*
+		 * Moves the previous one to the left
+		 */
+		if (previousView != null)
+			previousView.layout(-width, previousView.getTop(), 0, previousView.getBottom());
+		/*
+		 * Current one to the front
+		 */
+		currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
+		/*
+		 * ...and next one to the right
+		 */
+		if (nextView != null)
+			nextView.layout(width, nextView.getTop(), 2 * width, nextView.getBottom());
+		
 	}
+	
+	/**
+	 * Shows the previous view
+	 */
+	public void showPrevious()
+	{
+		Log.d("", "ShowPrevious()");
+		
+		if (viewsGenerator.canDecreaseIndex())
+		{
+			
+			removeAllViews();
+			
+			boolean updated = viewsGenerator.updateBeforeDecrease();
+			nextView = currentView;
+			currentView = previousView;
+			previousView = (LinearLayout) viewsGenerator.getPrevView();
+			if (previousView != null)
+				addView(previousView);
+			addView(currentView);
+			if (nextView != null)
+				addView(nextView);
+			
+			bringChildToFront(currentView);
+			if (!updated)
+				viewsGenerator.decIndex();
+		}
+		else
+		{
+			currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
+			nextView.layout(width, nextView.getTop(), 2 * width, nextView.getBottom());
+		}
+	}
+	
+	/**
+	 * Shows the next view
+	 */
+	public void showNext()
+	{
+		if (viewsGenerator.canIncreaseIndex())
+		{
+			removeAllViews();
+			
+			boolean updated = viewsGenerator.updateBeforeIncrease();
+			
+			previousView = currentView;
+			currentView = nextView;
+			nextView = (LinearLayout) viewsGenerator.getNextView();
+			if (previousView != null)
+				addView(previousView);
+			addView(currentView);
+			if (nextView != null)
+				addView(nextView);
+			
+			bringChildToFront(currentView);
+			
+			if (!updated)
+				viewsGenerator.incIndex();
+		}
+		else
+		{
+			previousView.layout(-width, previousView.getTop(), 0, previousView.getBottom());
+			currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
+		}
+	}
+	
+	/**
+	 * Moves the three views together along with the finger
+	 * 
+	 * @param oldX
+	 *           Original position
+	 * @param currentX
+	 *           New position
+	 */
+	public void move(int oldX, int currentX)
+	{
+		if (previousView != null)
+			previousView.layout(currentX - oldX - width, previousView.getTop(), currentX - oldX, previousView.getBottom());
+		currentView.layout(currentX - oldX, currentView.getTop(), currentX - oldX + width, currentView.getBottom());
+		if (nextView != null)
+			nextView.layout(currentX - oldX + width, nextView.getTop(), currentX - oldX + 2 * width, nextView.getBottom());
+	}
+	
 }
