@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     
     (r'^form_xml2db_parser/', include('form_xml2db_parser.urls')),
     
+    (r'^beekeeper/', include('beekeeper.urls')),
+    
     (r'^ws_server/', include('ws_server.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
