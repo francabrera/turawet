@@ -3,6 +3,7 @@
  */
 package com.turawet.beedroid.parser;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -15,7 +16,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.SectionBean;
+import com.turawet.beedroid.beans.SectionChildBean;
 
 
 import android.util.Log;
@@ -31,14 +35,14 @@ import android.util.Log;
  * @autor Romén Rodríguez Gil
  * 
  */
-public class XmlToViewsParser
+public class XmlToBeansParser
 {
 	/**
 	 *
 	 */
-	private FormSaxParserHandler	handler;
+	private XmlToBeansParserHandler	handler;
 	
-	public XmlToViewsParser(String xml) throws SAXException, ParserConfigurationException, IOException
+	public XmlToBeansParser(String xml) throws SAXException, ParserConfigurationException, IOException
 	{
 		/*
 		 * handler = new XmlFormHandler();
@@ -59,9 +63,9 @@ public class XmlToViewsParser
 	 * @throws ParserConfigurationException
 	 * @throws IOException
 	 */
-	public XmlToViewsParser(InputStream in) throws SAXException, ParserConfigurationException, IOException
+	public XmlToBeansParser(InputStream in) throws SAXException, ParserConfigurationException, IOException
 	{
-		handler = new FormSaxParserHandler();
+		handler = new XmlToBeansParserHandler();
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		SAXParser parser = factory.newSAXParser();
 		XMLReader xmlReader = parser.getXMLReader();
@@ -86,7 +90,16 @@ public class XmlToViewsParser
 	 */
 	public void showParse()
 	{
-		//TO-DO
+		InstanceBean instance = handler.getInstance();
+		List<SectionBean> sections = instance.getSections();
+        for (SectionBean section : sections) {
+        	List<SectionChildBean> fields = section.getSectionChildren();
+        	/* Must differ if it is a group or a field */
+        	for (SectionChildBean field : fields) {
+                Log.d("Campo de la instancia: ", field.toString());
+        	}
+        }
+
 		
 	}
 	
