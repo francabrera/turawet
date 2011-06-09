@@ -7,6 +7,16 @@ PROJECT_DIR = os.path.dirname(__file__) # this is not Django setting.
 PARENT_DIR = os.path.dirname(PROJECT_DIR)
 
 
+
+# CSS paths
+CSS_MODELER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper', 'css')
+
+# Images paths
+IMAGES_MODELER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper',
+                                    'templates', 'images')
+
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -121,6 +131,7 @@ ROOT_URLCONF = 'BeeKeeper.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'form_xml2db_parser/templates'),
+    os.path.join(PROJECT_DIR, 'beekeeper/templates'),
     # here you can add another templates directory if you wish.
 )
 
@@ -141,4 +152,5 @@ INSTALLED_APPS = (
     'BeeKeeper.ws_server',
     'BeeKeeper.form_xml2db_parser',
     'BeeKeeper.instance_xml2db_parser',
+    'BeeKeeper.beekeeper',
 )
