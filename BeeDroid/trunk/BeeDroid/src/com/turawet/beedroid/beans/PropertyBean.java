@@ -1,5 +1,7 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
+
 /**
  * @class PropertyBean: Represents a PropertyBean
  * 
@@ -61,8 +63,7 @@ public class PropertyBean extends BaseBean {
 	}
 	
 	@Override
-	public String toXml() {
-		return null;
+	public void toXml(Writer writer) {
 	}
 
 }

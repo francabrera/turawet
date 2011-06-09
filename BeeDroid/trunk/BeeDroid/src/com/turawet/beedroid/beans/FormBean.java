@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,8 +41,7 @@ public class FormBean extends BaseBean {
 	}
 	
 	@Override
-	public String toXml()
+	public void toXml(Writer writer)
 	{
-		return null;
 	}
 }

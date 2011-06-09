@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,7 +54,6 @@ public abstract class GenericInstanceFieldBean extends SectionChildBean {
 
 	/* Other methods */
 	@Override
-	public String toXml() {
-		return null;
+	public void toXml(Writer writer) {
 	}	
 }

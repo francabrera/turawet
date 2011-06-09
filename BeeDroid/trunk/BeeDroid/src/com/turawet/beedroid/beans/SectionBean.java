@@ -1,15 +1,25 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.turawet.beedroid.constants.Cte.XmlEnumTags;
+import com.turawet.beedroid.constants.Cte.XmlTags;
+
+import android.util.Xml;
+
 /**
  * @class SectionBean: Represents a section
  * 
- * @param id: The id of the form
- * @param name: The name of the form
- * @param order: The order of the section within the form
+ * @param id
+ *           : The id of the form
+ * @param name
+ *           : The name of the form
+ * @param order
+ *           : The order of the section within the form
  * @version 1.0
  * 
  * @author Francisco José Cabrera Hernández
@@ -17,57 +27,65 @@ import java.util.List;
  * @autor Romén Rodríguez Gil
  * 
  */
-public class SectionBean extends BaseBean {
-
-	/**
-	 * @uml.property  name="name"
-	 */
-	public String name;
-	/**
-	 * @uml.property  name="order"
-	 */
-	public int order;
-	/**
-	 * @uml.property  name="sectionChildren"
-	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.SectionChildBean"
-	 */
-	private List<SectionChildBean> sectionChildren;
+public class SectionBean extends BaseBean
+{
 	
+	/**
+	 * @uml.property name="name"
+	 */
+	public String							name;
+	/**
+	 * @uml.property name="order"
+	 */
+	public int								order;
+	/**
+	 * @uml.property name="sectionChildren"
+	 * @uml.associationEnd multiplicity="(0 -1)"
+	 *                     elementType="com.turawet.beedroid.beans.SectionChildBean"
+	 */
+	private List<SectionChildBean>	sectionChildren;
 	
-	/*Constructor*/
-	public SectionBean() {
+	/* Constructor */
+	public SectionBean()
+	{
 		super();
 		sectionChildren = new ArrayList<SectionChildBean>();
-	}	
-	
+	}
 	
 	/* Getters y setters */
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
-
-	public void setName(String name) {
+	
+	public void setName(String name)
+	{
 		this.name = name;
 	}
-
-	public int getOrder() {
+	
+	public int getOrder()
+	{
 		return order;
 	}
-
-	public void setOrder(int order) {
+	
+	public void setOrder(int order)
+	{
 		this.order = order;
 	}
-
-	public List<SectionChildBean> getSectionChildren() {
+	
+	public List<SectionChildBean> getSectionChildren()
+	{
 		return sectionChildren;
 	}
-
-	public void setSectionChildren(List<SectionChildBean> sectionChildren) {
+	
+	public void setSectionChildren(List<SectionChildBean> sectionChildren)
+	{
 		this.sectionChildren = sectionChildren;
 	}
 	
 	/* Other mutators */
-	public void addChild(SectionChildBean child) {
+	public void addChild(SectionChildBean child)
+	{
 		this.sectionChildren.add(child);
 	}
 	
@@ -79,15 +97,18 @@ public class SectionBean extends BaseBean {
 	}
 	
 	@Override
-	public String toXml()
+	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
-		String tempSections = "<fields>";
-		Iterator<SectionChildBean> it=sectionChildren.iterator();
-        while(it.hasNext()) {
-        	tempSections+=(it.next()).toXml();
-        }
-
-        return tempSections+"</fields>";
+		serializer = Xml.newSerializer();
+		serializer.setOutput(writer);
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.fields.toString());
+/*		
+		for (SectionChildBean section: sectionChildren)
+		{
+			section.toXml(writer);
+		}
+*/		
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.fields.toString());
 	}
 	
 }

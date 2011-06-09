@@ -1,5 +1,12 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
+import java.io.Writer;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import android.util.Xml;
+
 /**
  * @class BaseBean: Base class form the XML elements
  * 
@@ -7,22 +14,34 @@ package com.turawet.beedroid.beans;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
-public abstract class BaseBean {
-	/* Field group instance bena has no attribute id (has the groupId of the form group*/
-	public int id;
+public abstract class BaseBean
+{
+	/*
+	 * Field group instance bena has no attribute id (has the groupId of the form
+	 * group
+	 */
+	protected int				id;
 	
+	protected XmlSerializer	serializer;
 	
-	/*Getters y setters */
-	public int getId() {
+	public BaseBean()
+	{
+		id = -1;
+	}
+	
+	/* Getters y setters */
+	public int getId()
+	{
 		return id;
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}	
 	
-	abstract public String toXml();
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	abstract public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException;
 }

@@ -1,5 +1,7 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
+
 /**
  * @class TextFieldBean: Represents a TextField
  * 
@@ -17,15 +19,15 @@ public class DateFieldBean extends GenericInstanceFieldBean {
 	/**
 	 * @uml.property  name="dayValue"
 	 */
-	public int dayValue;
+	private int dayValue;
 	/**
 	 * @uml.property  name="monthValue"
 	 */
-	public int monthValue;
+	private int monthValue;
 	/**
 	 * @uml.property  name="yearValue"
 	 */
-	public int yearValue;
+	private int yearValue;
 
 	public DateFieldBean(int order, FormFieldBean formField) {
 		super(order, formField);
@@ -33,13 +35,12 @@ public class DateFieldBean extends GenericInstanceFieldBean {
 	}
 	
 	@Override
-	public String toXml() {
+	public void toXml(Writer writer) {
 		// TO-DO- If the id is seted we are updating, not creating a new insance
 		String temp = "<instancefield><id/><value>" +
 				"<day>"+dayValue+"</day><month>"+monthValue+"</month><year>"+yearValue+"</year>" +
-				"</value><order>"+order+"</order>"+formField.toXml()+"</instancefield>";
+				"</value><order>"+order+"</order>"/*+formField.toXml()*/+"</instancefield>";
 
-		return temp;
 	}
 	
 }

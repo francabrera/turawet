@@ -1,5 +1,7 @@
 package com.turawet.beedroid.beans;
 
+import java.io.Writer;
+
 /**
  * @class FieldOptionBean: Represents a FieldOptionBean
  * 
@@ -10,7 +12,7 @@ package com.turawet.beedroid.beans;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class FieldOptionBean extends BaseBean {
@@ -31,8 +33,7 @@ public class FieldOptionBean extends BaseBean {
 	}
 	
 	@Override
-	public String toXml() {
-		return null;
+	public void toXml(Writer writer) {
 	}
 
 }
