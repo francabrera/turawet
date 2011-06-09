@@ -187,6 +187,20 @@ p { margin:0; }
 /** Estilos para cada campo en el formulario **/
 /** ---------------------------------------- **/
 
+#resultado {
+	width:700px;
+	position:absolute;
+	top:60px;
+	left:50%;
+	margin:0px auto auto -399px;
+	text-align:center;
+	background-color: #BD8F8F;
+	display: none;
+	}
+#resultado img.delete {
+	float:right;
+	}
+
 .prueba{
     background-image:none;
     margin:20px;
@@ -290,6 +304,9 @@ p { margin:0; }
 .buttons a.button[class]:hover {
     background-color: #333;
     padding: 10px 10px;
+    }
+.buttons a.button[class] img {
+    vertical-align:middle;
     }
 .buttons a.button.red { background-color: #e50000; }
 .buttons a.button.purple { background-color: #9400bf; }

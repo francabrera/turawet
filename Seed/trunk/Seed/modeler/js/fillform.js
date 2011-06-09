@@ -83,6 +83,25 @@ function Section(name, order) {
 		xml += "</fields></section>";
 		return xml;
 	}
+	
+	this.toXMLOrdered = function()
+	{
+		var i;
+		var xml = "<section><id/>";
+		xml += "<name>" + this.name + "</name>";
+		xml += "<fields>";
+		var sectionElems = $("#s" + this.order + " li");
+		for (i=0;i<sectionElems.length;i++) {
+			var fieldElem = sectionElems[i];
+			// Los IDs de los elementos Field serán sX-fX
+			// Nos quedamos con el segundo matching
+			var j = parseInt((fieldElem.id).match(/\d+/g)[1]);
+			xml += this.fields[j].toXML();
+		}
+		xml += "</fields></section>";
+		return xml;
+	}
+		
 }
 /* -------------- */
 
@@ -93,6 +112,16 @@ var formName = "Formulario";
 var formSections = new Array();
 formSections[0] = new Section("Nombre sección 0", 0);
 var actualSection = 0;
+
+/****** PRUEBAS ******/
+function hideResults() {
+	$('#resultado').toggle();
+}
+function showResults() {
+	$('#resultado').toggle('slow');
+}
+
+/*********************/
 
 /*****************************************************************/
 /* Tipos de campos                                               */

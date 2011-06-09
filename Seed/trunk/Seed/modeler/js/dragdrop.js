@@ -113,13 +113,15 @@ function addListenersToSection(section) {
 	    var id = parseInt(formSections[sectionId].size());
 	    // Creamos el nuevo campo
 	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);
-	    // Div contenedor del formulario
-	    var divForm = $(this.parentNode);
-	    var newTop = divForm.scrollTop() + $(this).position().top + $(this).outerHeight() - $(newField).outerHeight();
-	    // Hacemos scroll hasta el final de la sección
-	    divForm.animate({scrollTop: newTop}, 1000);
 	    // Agregamos el campo al formulario
 	    newField.appendTo(this);
+	    
+	    // Div contenedor del formulario
+	    var divForm = $(this.parentNode);
+	    var newTop = (divForm.scrollTop() + $(this).position().top
+	    				+ $(this).outerHeight() - $(newField).outerHeight()*3);
+	    // Hacemos scroll hasta el final de la sección
+	    divForm.animate({scrollTop: newTop}, 700);
 	    /*nuevoCampo.fadeIn('fast');*/
 	    return false;
 	});
