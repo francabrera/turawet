@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.turawet.beedroid.beans.DateFieldBean;
+import com.turawet.beedroid.beans.FormBean;
 import com.turawet.beedroid.beans.FormFieldBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
@@ -46,6 +47,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
     private boolean inField;
     private boolean inSection;
     /* Temp atributes */
+    private FormBean tempForm;
     private SectionBean tempSection;
     private FormFieldBean tempFormField;
     private PropertyBean tempProperty;
@@ -57,11 +59,11 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	public void startDocument() throws SAXException	{
 		/* Initializing */
 		instance = new InstanceBean();
+		tempForm = new FormBean();
         buffer = new StringBuilder();
         buffering = false;
         inField = false;
         inSection = false;
-
 	}
 	
 	@Override
@@ -96,6 +98,10 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	@Override
 	public void endElement(String uri, String qName, String localName) throws SAXException
 	{
+		/* Closing Meta */
+		if (localName.equalsIgnoreCase("meta")) {
+			instance.setForm(tempForm);
+		}
 		/* Closing Section */
 		if (localName.equalsIgnoreCase("section")) {
 			inSection = false;
@@ -131,6 +137,32 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			inProperty = false;
 			//NOW WE HAVE TO ADD THE PROPERTY TO THE FORMFIELD
 			tempFormField.addProperty(tempProperty);
+		}
+		/************************************/
+		/* Meta */
+		else if (!inSection && localName.equalsIgnoreCase("id")) {
+			String value = buffer.toString().trim();
+			if (!value.isEmpty())
+				tempForm.setId(Integer.parseInt(value));
+			/* ByDefaultID*/
+			else {
+				tempForm.setId(-1);
+			}
+			clearBuffer();
+		}
+		else if (!inSection && localName.equalsIgnoreCase("name")) {
+			tempForm.setName(buffer.toString().trim());
+			clearBuffer();
+		}
+		else if (!inSection && localName.equalsIgnoreCase("version")) {
+			String value = buffer.toString().trim();
+			if (!value.isEmpty())
+				tempForm.setVersion(Integer.parseInt(value));
+			clearBuffer();
+		}
+		else if (!inSection && localName.equalsIgnoreCase("user")) {
+			instance.setAuthoruser(buffer.toString().trim());
+			clearBuffer();
 		}
 		/* Section */
 		else if (inSection && !inField && localName.equalsIgnoreCase("id")) {
