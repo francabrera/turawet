@@ -77,6 +77,8 @@ for (var i = 0; i < mysections.length; i++) {
 
 // DROP over a form section
 function addListenersToSection(section) {
+	$(section).sortable({items: "li:not(.toEnd)"});
+	$(section).disableSelection();
 	// DRAGOVER
 	addEvent(section, 'dragover', function (evt) {
 	    if (evt.preventDefault) evt.preventDefault(); // allows us to drop
@@ -111,10 +113,13 @@ function addListenersToSection(section) {
 	    var id = parseInt(formSections[sectionId].size());
 	    // Creamos el nuevo campo
 	    var newField = createNewField(id, fieldName, sectionId, idDrag, type, fieldType);
-	    
+	    // Div contenedor del formulario
+	    var divForm = $(this.parentNode);
+	    var newTop = divForm.scrollTop() + $(this).position().top + $(this).outerHeight() - $(newField).outerHeight();
+	    // Hacemos scroll hasta el final de la sección
+	    divForm.animate({scrollTop: newTop}, 1000);
 	    // Agregamos el campo al formulario
 	    newField.appendTo(this);
-	
 	    /*nuevoCampo.fadeIn('fast');*/
 	    return false;
 	});

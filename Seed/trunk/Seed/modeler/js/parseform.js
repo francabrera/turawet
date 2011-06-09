@@ -18,7 +18,6 @@ function formToXML (name, sections) {
 	for (i=0;i<sections.length;i++)	
 		text += sections[i].toXML();
 	text += "</sections></form>";
-	var salida = text;
 	/*if (window.DOMParser) {
 		parser=new DOMParser();
 		xmlForm=parser.parseFromString(text,"text/xml");
@@ -30,7 +29,7 @@ function formToXML (name, sections) {
 		xmlForm.loadXML(text); 
 		salida = xmlForm.xml;
 	}*/	
-	return salida;
+	return text;
 }
 
 function fillForm () {

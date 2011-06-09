@@ -7,9 +7,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from Seed.modeler.forms import NewForm
-from Seed.ws_client.beekeeperws import WsClient
+from Seed.ws_client.beekeeperws import upload_new_form
+from suds.sax.parser import Parser
 
-from xml.etree.ElementTree import tostring, XML
+#from xml.etree.ElementTree import tostring, XML
 
 def showModeler(request):
     context = RequestContext(request)
@@ -17,12 +18,11 @@ def showModeler(request):
         form = NewForm(request.POST)
         if form.is_valid() :
             xmlForm = form.cleaned_data['fieldList']
-            xmlFormCleaned = parseSentFormXML(xmlForm)
-            client = WsClient()
-            response = client.service.get_forms_by_ids(xmlFormCleaned)
+            #xmlFormCleaned = parseSentFormXML(xmlForm)
+            #response = upload_new_form(xmlFormCleaned)
             context['prueba'] = xmlForm
-            context['prueba2'] = xmlFormCleaned
-            context['wsresponse'] = response
+            #context['prueba2'] = xmlFormCleaned
+            #context['wsresponse'] = response
 #        if form.is_valid() :
 #            return HttpResponseRedirect('/formList')
     else:
@@ -35,8 +35,10 @@ def parseSentFormXML (xml):
     if xml is None:
         return None
     else:
-        formXML = XML(xml)
+        myparser = Parser()
+        formXML = myparser.parse(string=xml)
+        formXML.prefixOptimize(False)
         #sections = formXML.findall("section")
-        return tostring(formXML);
+        return formXML;
 
 
