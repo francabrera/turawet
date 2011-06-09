@@ -18,6 +18,7 @@ import org.xml.sax.XMLReader;
 
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.beans.SectionBean;
 import com.turawet.beedroid.beans.SectionChildBean;
 
@@ -93,10 +94,16 @@ public class XmlToBeansParser
 		InstanceBean instance = handler.getInstance();
 		List<SectionBean> sections = instance.getSections();
         for (SectionBean section : sections) {
-        	List<SectionChildBean> fields = section.getSectionChildren();
+        	List<SectionChildBean> sectionChildren = section.getSectionChildren();
         	/* Must differ if it is a group or a field */
-        	for (SectionChildBean field : fields) {
-                Log.d("Campo de la instancia: ", field.toString());
+        	for (SectionChildBean sectionChild : sectionChildren) {
+                Log.d("Campo de la instancia: ", sectionChild.toString());
+                GenericInstanceFieldBean field = (GenericInstanceFieldBean)sectionChild;
+            	List<PropertyBean> properties = field.getFormField().getProperties();
+            	/* Must differ if it is a group or a field */
+            	for (PropertyBean property : properties) {
+                    Log.d("Propiedad del campo: ", property.toString());
+            	}
         	}
         }
 

@@ -16,6 +16,7 @@ import com.turawet.beedroid.beans.DateFieldBean;
 import com.turawet.beedroid.beans.FormFieldBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.beans.SectionBean;
 import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.ParsingBeans.fieldTypeMap;
@@ -41,11 +42,13 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	/* Aux */
     private StringBuilder buffer;
     private boolean buffering;
+    private boolean inProperty;
     private boolean inField;
     private boolean inSection;
     /* Temp atributes */
     private SectionBean tempSection;
     private FormFieldBean tempFormField;
+    private PropertyBean tempProperty;
     private GenericInstanceFieldBean tempInstanceField;
 
 
@@ -72,14 +75,18 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			inSection = true;
 			tempSection = new SectionBean();
 		}
-
 		/* A field is being opened */
 		else if (inSection && localName.equalsIgnoreCase("field")) {
 			inField = true;
 			tempFormField = new FormFieldBean();
 		}
+		/* A field is being opened */
+		else if (inSection && inField && localName.equalsIgnoreCase("property")) {
+			inProperty = true;
+			tempProperty = new PropertyBean();
+		}
 		/*
-		 * Tags of a field
+		 * Internal tags
 		 */
 		else {
 			buffering = true;
@@ -108,6 +115,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			switch (type) {
 				case TEXT: 
 					//TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
+					// the first attribute is the order
 					tempInstanceField = new TextFieldBean(1, tempFormField);
 				break;
 				case DATE: 
@@ -117,6 +125,12 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
 			tempSection.addChild(tempInstanceField);
 			
+		}
+		/* Closing Property */
+		if (localName.equalsIgnoreCase("property")) {
+			inProperty = false;
+			//NOW WE HAVE TO ADD THE PROPERTY TO THE FORMFIELD
+			tempFormField.addProperty(tempProperty);
 		}
 		/* Section */
 		else if (inSection && !inField && localName.equalsIgnoreCase("id")) {
@@ -148,7 +162,15 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			tempFormField.setRequired(true);
 			clearBuffer();
 		}
-		
+		/* Property */
+		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("name")) {
+			tempProperty.setName(buffer.toString().trim());
+			clearBuffer();
+		}
+		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("value")) {
+			tempProperty.setValue(buffer.toString().trim());
+			clearBuffer();
+		}
 		
 		/* Once finished, we always have to clean the buffer*/
 		clearBuffer();	
