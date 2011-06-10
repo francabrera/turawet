@@ -23,28 +23,28 @@ import java.util.List;
  * @author Romén Rodríguez Gil
  * 
  */
-public class FormFieldBean extends SectionChildBean {
+public class FormFieldBean extends BaseBean {
 
 	/**
 	 * @uml.property  name="label"
 	 */
-	public String label;
+	private String label;
 	/**
 	 * @uml.property  name="section_order"
 	 */
-	public int section_order;
+	private int section_order;
 	/**
 	 * @uml.property  name="field_group_order"
 	 */
-	public int field_group_order;
+	private int field_group_order;
 	/**
 	 * @uml.property  name="type"
 	 */
-	public String type;
+	private String type;
 	/**
 	 * @uml.property  name="required"
 	 */
-	public boolean required;
+	private boolean required;
 	/**
 	 * @uml.property  name="fieldOptions"
 	 */

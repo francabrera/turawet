@@ -33,15 +33,16 @@ public class SectionBean extends BaseBean
 	/**
 	 * @uml.property name="name"
 	 */
-	public String							name;
+	private String							name;
 	/**
 	 * @uml.property name="order"
 	 */
-	public int								order;
+	private int								order;
 	/**
 	 * @uml.property name="sectionChildren"
 	 * @uml.associationEnd multiplicity="(0 -1)"
-	 *                     elementType="com.turawet.beedroid.beans.SectionChildBean"
+	 *                     elementType=
+	 *                     "com.turawet.beedroid.beans.SectionChildBean"
 	 */
 	private List<SectionChildBean>	sectionChildren;
 	
@@ -102,12 +103,12 @@ public class SectionBean extends BaseBean
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.fields.toString());
-/*		
-		for (SectionChildBean section: sectionChildren)
+		
+		for (SectionChildBean section : sectionChildren)
 		{
 			section.toXml(writer);
 		}
-*/		
+		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.fields.toString());
 	}
 	

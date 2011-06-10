@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 public class EfficientViewFlipper extends FrameLayout
 {
 	private int							width;
+	private int							height;
 	private LinearLayout				previousView;
 	private LinearLayout				nextView;
 	private LinearLayout				currentView;
@@ -94,8 +95,6 @@ public class EfficientViewFlipper extends FrameLayout
 	 */
 	public void showPrevious()
 	{
-		Log.d("", "ShowPrevious()");
-		
 		if (viewsGenerator.canDecreaseIndex())
 		{
 			
@@ -169,6 +168,14 @@ public class EfficientViewFlipper extends FrameLayout
 		currentView.layout(currentX - oldX, currentView.getTop(), currentX - oldX + width, currentView.getBottom());
 		if (nextView != null)
 			nextView.layout(currentX - oldX + width, nextView.getTop(), currentX - oldX + 2 * width, nextView.getBottom());
+	}
+	
+	/**
+	 * @param height
+	 */
+	public void setHeight(int height)
+	{
+		this.height = height;
 	}
 	
 }
