@@ -1,0 +1,12 @@
+#summary ¿Deben las URL de las diferentes partes ir en el html o ser variables?
+#labels Phase-Implementation
+
+= Introducción =
+
+Estoy poniendo las URL de los links del administrador del repositorio directamente en el Html. Me pregunto si es correcto.
+
+
+= Detalles =
+
+A lo mejor cada template debería recibir las URL desde la vista.
+En Django a veces no tengo claro en qué directorio está una vista (para hacer referencia a otros utilizando "../" etc...).
