@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 /**
  * @author nicopernas
- *
+ * 
  */
 public class BeanToViewGenerator
 {
@@ -31,14 +31,19 @@ public class BeanToViewGenerator
 	private boolean				increased;
 	private boolean				decreased;
 	
-	InstanceBean instance;
+	InstanceBean					instance;
 	private Context				context;
+	
+	private int						sectionIndex;
+	private int						fieldIndex;
 	
 	public BeanToViewGenerator(Context context, InstanceBean instance)
 	{
 		this.instance = instance;
 		this.context = context;
 		index = 0;
+		sectionIndex = 0;
+		fieldIndex = 0;
 		increased = false;
 		decreased = false;
 		list = new LinearLayout[CHILDS];

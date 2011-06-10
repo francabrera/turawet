@@ -12,7 +12,7 @@ import java.io.Writer;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class DateFieldBean extends GenericInstanceFieldBean {

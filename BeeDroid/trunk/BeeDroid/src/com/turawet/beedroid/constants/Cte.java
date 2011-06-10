@@ -26,7 +26,7 @@ public final class Cte
 	
 	public static enum XmlEnumTags
 	{
-		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields
+		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, instancefield, group, groupid, element
 	};
 	
 	public static final class XmlTags

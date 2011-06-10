@@ -13,10 +13,12 @@ import com.turawet.beedroid.constants.Cte;
 import android.util.Xml;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;
+
 /**
  * @class InstanceBean: Represents a instance
  * 
- * @param id: The id of the instance
+ * @param id
+ *           : The id of the instance
  * @version 1.0
  * 
  * @author Francisco José Cabrera Hernández
@@ -24,96 +26,115 @@ import com.turawet.beedroid.constants.Cte.XmlTags;
  * @autor Romén Rodríguez Gil
  * 
  */
-public class InstanceBean extends BaseBean {
-
+public class InstanceBean extends BaseBean
+{
+	
 	/* Form meta */
 	/**
-	 * @uml.property  name="form"
-	 * @uml.associationEnd  
+	 * @uml.property name="form"
+	 * @uml.associationEnd
 	 */
-	private FormBean form;
+	private FormBean				form;
 	/* Insance meta */
 	/**
-	 * @uml.property  name="authoruser"
+	 * @uml.property name="authoruser"
 	 */
-	private String authoruser;
+	private String					authoruser;
 	/**
-	 * @uml.property  name="creationDate"
+	 * @uml.property name="creationDate"
 	 */
-	private String creationDate;
+	private String					creationDate;
 	/**
-	 * @uml.property  name="modificationDate"
+	 * @uml.property name="modificationDate"
 	 */
-	private String modificationDate;
+	private String					modificationDate;
 	/**
-	 * @uml.property  name="editable"
+	 * @uml.property name="editable"
 	 */
-	private boolean editable;
+	private boolean				editable;
 	/* Children */
 	/**
-	 * @uml.property  name="sections"
-	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="com.turawet.beedroid.beans.SectionBean"
+	 * @uml.property name="sections"
+	 * @uml.associationEnd multiplicity="(0 -1)"
+	 *                     elementType="com.turawet.beedroid.beans.SectionBean"
 	 */
-	private List<SectionBean> sections;
-
+	private List<SectionBean>	sections;
 	
-	/*Constructor*/
-	public InstanceBean() {
+	/* Constructor */
+	public InstanceBean()
+	{
 		super();
 		sections = new ArrayList<SectionBean>();
-	}	
+		authoruser = "";
+		creationDate = "";
+		modificationDate = "";
+		editable = true;
+	}
 	
 	/* Getters y setters */
-	public FormBean getForm() {
+	public FormBean getForm()
+	{
 		return form;
 	}
-
-	public void setForm(FormBean form) {
+	
+	public void setForm(FormBean form)
+	{
 		this.form = form;
 	}
-
-	public String getAuthoruser() {
+	
+	public String getAuthoruser()
+	{
 		return authoruser;
 	}
-
-	public void setAuthoruser(String authoruser) {
+	
+	public void setAuthoruser(String authoruser)
+	{
 		this.authoruser = authoruser;
 	}
-
-	public String getCreationDate() {
+	
+	public String getCreationDate()
+	{
 		return creationDate;
 	}
-
-	public void setCreationDate(String creationDate) {
+	
+	public void setCreationDate(String creationDate)
+	{
 		this.creationDate = creationDate;
 	}
-
-	public String getModificationDate() {
+	
+	public String getModificationDate()
+	{
 		return modificationDate;
 	}
-
-	public void setModificationDate(String modificationDate) {
+	
+	public void setModificationDate(String modificationDate)
+	{
 		this.modificationDate = modificationDate;
 	}
-
-	public boolean isEditable() {
+	
+	public boolean isEditable()
+	{
 		return editable;
 	}
-
-	public void setEditable(boolean editable) {
+	
+	public void setEditable(boolean editable)
+	{
 		this.editable = editable;
 	}
-
-	public List<SectionBean> getSections() {
+	
+	public List<SectionBean> getSections()
+	{
 		return sections;
 	}
-
-	public void setSections(List<SectionBean> sections) {
+	
+	public void setSections(List<SectionBean> sections)
+	{
 		this.sections = sections;
 	}
 	
 	/* Other mutators */
-	public void addSection(SectionBean section) {
+	public void addSection(SectionBean section)
+	{
 		this.sections.add(section);
 	}
 	
@@ -122,15 +143,15 @@ public class InstanceBean extends BaseBean {
 	@Override
 	public String toString()
 	{
-		return "Instance: "+id+" Form: "+form.name;
+		return "Instance: " + id + " Form: " + form.name;
 	}
-	
 
 	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
+      serializer.startDocument("UTF-8", null);
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString())
 		.startTag(XmlTags.namespace, XmlEnumTags.meta.toString())
 		.startTag(XmlTags.namespace, XmlEnumTags.id.toString())
@@ -159,6 +180,7 @@ public class InstanceBean extends BaseBean {
 			section.toXml(writer);
 
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.instance.toString());
+		serializer.endDocument();
 	}
 
 }

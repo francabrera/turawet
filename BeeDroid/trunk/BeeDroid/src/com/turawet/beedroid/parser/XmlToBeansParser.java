@@ -45,16 +45,7 @@ public class XmlToBeansParser
 	
 	public XmlToBeansParser(String xml) throws SAXException, ParserConfigurationException, IOException
 	{
-		/*
-		 * handler = new XmlFormHandler();
-		 * SAXParserFactory factory = SAXParserFactory.newInstance();
-		 * SAXParser parser = factory.newSAXParser();
-		 * XMLReader xmlReader = parser.getXMLReader();
-		 * xmlReader.setContentHandler(handler);
-		 * Reader reader = new StringReader(xml);
-		 * InputSource inputSource = new InputSource(reader);
-		 * xmlReader.parse(inputSource);
-		 */
+		this(new ByteArrayInputStream(xml.getBytes("UTF-8")));
 	}
 	
 	/**

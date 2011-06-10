@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<ViewFlipper
-		android:id="@+id/flipper" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
-	</ViewFlipper>
-</LinearLayout> 
+<com.turawet.beedroid.view.EfficientViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:id="@+id/flipView">
+<!-- 
+	<LinearLayout android:id="@+id/previous"
+		android:layout_width="fill_parent" android:layout_height="fill_parent" />
+
+	<LinearLayout android:id="@+id/current"
+		android:layout_width="fill_parent" android:layout_height="fill_parent" />
+
+	<LinearLayout android:id="@+id/next" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" />
+ -->
+</com.turawet.beedroid.view.EfficientViewFlipper>

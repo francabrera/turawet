@@ -7,30 +7,30 @@
  */
 package com.turawet.beedroid.activity;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.Writer;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.constants.Cte;
 import com.turawet.beedroid.database.DataBaseManager;
-import com.turawet.beedroid.parser.XmlToViewsParser;
+import com.turawet.beedroid.parser.XmlToBeansParser;
 import com.turawet.beedroid.view.EfficientViewFlipper;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
-
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class FillNewInstanceActivity extends Activity // implements
 // OnGestureListener
@@ -38,78 +38,53 @@ public class FillNewInstanceActivity extends Activity // implements
 	/**
 	 *
 	 */
-	private ViewFlipper		flipper;
-	private final String		TAG	= getClass().getName();
+	private final String				TAG	= getClass().getName();
+	private float						oldTouchValue;
+	private static int				WIDTH;
+	private static int				HEIGHT;
 	
-	private Animation			inAnimationLeft;
-	private Animation			outAnimationLeft;
-	private Animation			inAnimationRight;
-	private Animation			outAnimationRight;
-	
-	private GestureDetector	detector;
-	private float				oldTouchValue;
-	
-	static int					WIDTH;
-	
-	/*
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
-	static String[]			items	=
-											{ "11111", "222222", "333333", "444444", "555555", "6666666" };
-	
-	private View getView(int position)
-	{
-		TextView text = new TextView(this);
-		text.setText(items[position]);
-		text.setTextColor(Color.BLACK);
-		text.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-		text.setBackgroundColor(position % 2 == 0 ? Color.WHITE : Color.GRAY);
-		return text;
-	}
+	private EfficientViewFlipper	flipper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-		inAnimationLeft = AnimationUtils.loadAnimation(this, R.anim.slide_in_left);
-		outAnimationLeft = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
-		inAnimationRight = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
-		outAnimationRight = AnimationUtils.loadAnimation(this, R.anim.slide_out_right);
-		
-		// detector = new GestureDetector(this, this);
 		
 		super.onCreate(savedInstanceState);
-		Bundle parameters = getIntent().getExtras();
-		String name = parameters.getString(Cte.FormIdentificationBean.name);
-		String version = parameters.getString(Cte.FormIdentificationBean.version);
-		FormIdentificationBean form = new FormIdentificationBean(name, version);
-		DataBaseManager db = DataBaseManager.getInstance(this);
-		String xml = db.getFormInfo(form).getXml();
 		
-		Log.d(TAG, "Name = " + name);
-		Log.d(TAG, "Version = " + version);
-		Log.d(TAG, "XML = " + xml);
-		setContentView(R.layout.instance_fields_flipper);
-		
-		flipper = (ViewFlipper) findViewById(R.id.flipper);
-		flipper.addView(getView(0), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		flipper.addView(getView(1), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		flipper.addView(getView(2), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-		flipper.addView(getView(3), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 		try
 		{
-			// TODO obtener el xml de la BBDD y no de los assets
-			//InputStream in = getAssets().open("formulario.xml");
-			//XmlToViewsParser xmlParser = new XmlToViewsParser(in);
-			// flipper.setFields(xmlParser.getFields());
+			WIDTH = this.getWindowManager().getDefaultDisplay().getWidth();
+			HEIGHT = this.getWindowManager().getDefaultDisplay().getHeight();
+			Bundle parameters = getIntent().getExtras();
+			String name = parameters.getString(Cte.FormIdentificationBean.name);
+			String version = parameters.getString(Cte.FormIdentificationBean.version);
+			FormIdentificationBean form = new FormIdentificationBean(name, version);
+			DataBaseManager db = DataBaseManager.getInstance(this);
+			String xml = db.getFormInfo(form).getXml();
+			XmlToBeansParser parser;
+			parser = new XmlToBeansParser(xml);
+			InstanceBean instance = parser.getInstance();
+			
+			flipper = new EfficientViewFlipper(this, instance);
+			flipper.setWidth(WIDTH);
+			flipper.setHeight(HEIGHT);
+			setContentView(flipper);
 		}
-		catch (Exception e)
+		catch (SAXException e1)
 		{
-			// TODO Mostrar mensajito de error a la vista
-			e.printStackTrace();
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
-		
-		WIDTH = this.getWindowManager().getDefaultDisplay().getWidth() / 2;
+		catch (ParserConfigurationException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	/**
@@ -129,6 +104,7 @@ public class FillNewInstanceActivity extends Activity // implements
 	public boolean onTouchEvent(MotionEvent touchEvent)
 	{
 		int action = touchEvent.getAction();
+		
 		switch (action)
 		{
 			case MotionEvent.ACTION_DOWN:
@@ -139,189 +115,33 @@ public class FillNewInstanceActivity extends Activity // implements
 			case MotionEvent.ACTION_UP:
 			{
 				float currentX = touchEvent.getX();
-				if (oldTouchValue > currentX)
+				// Queremos ver la vista previa
+				if (oldTouchValue < WIDTH / 2 && currentX > WIDTH / 2 && Math.abs(currentX - oldTouchValue) > WIDTH / 2)
 				{
-					flipper.setInAnimation(inAnimationLeft);
-					flipper.setOutAnimation(outAnimationLeft);
-					
+					// flipper.setInAnimation(inAnimationLeft);
+					// flipper.setOutAnimation(outAnimationLeft);
+					flipper.showPrevious();
+				}
+				// Queremos ver la vista siguiente
+				else if (oldTouchValue > WIDTH / 2 && currentX < WIDTH / 2 && Math.abs(currentX - oldTouchValue) > WIDTH / 2)
+				{
+					// flipper.setInAnimation(inAnimationRight);
+					// flipper.setOutAnimation(outAnimationRight);
 					flipper.showNext();
 				}
-				if (oldTouchValue < currentX)
+				else
 				{
-					flipper.setInAnimation(inAnimationRight);
-					flipper.setOutAnimation(outAnimationRight);
-					
-					flipper.showPrevious();
+					flipper.backToCurrent();
 				}
 				break;
 			}
 			case MotionEvent.ACTION_MOVE:
 			{
-				final View currentView = flipper.getCurrentView();
-				currentView.layout((int) (touchEvent.getX() - oldTouchValue), currentView.getTop(), currentView.getRight(), currentView.getBottom());
-				//flipper.getChildAt(flipper.getDisplayedChild() - 1); // previous
-				//flipper.getChildAt(flipper.getDisplayedChild() + 1); // next
+				flipper.move((int) oldTouchValue, (int) touchEvent.getX());
 				break;
 			}
 		}
 		
-		// detector.onTouchEvent(me);
 		return true;
 	}
-	
-/*	
- * http://planetandroid.org/
- * 
-	public void onTouch (MotionEvent event, AndroidInput input) {
-		final int action = event.getAction() & MotionEvent.ACTION_MASK;
-		int pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_ID_MASK) >> MotionEvent.ACTION_POINTER_ID_SHIFT;
-		int pointerId = event.getPointerId(pointerIndex);		
- 
-		int x = 0, y = 0;
-		int realPointerIndex = 0;
- 
-		synchronized(input) { // FUCK 
-			switch (action) {
-			case MotionEvent.ACTION_DOWN:
-			case MotionEvent.ACTION_POINTER_DOWN:
-				realPointerIndex = input.getFreePointerIndex(); // get a free pointer index as reported by Input.getX() etc.
-				input.realId[realPointerIndex] = pointerId;
-				x = (int)event.getX(pointerIndex);
-				y = (int)event.getY(pointerIndex);
-				postTouchEvent(input, TouchEvent.TOUCH_DOWN, x, y, realPointerIndex);
-				input.touchX[realPointerIndex] = x;
-				input.touchY[realPointerIndex] = y;
-				input.touched[realPointerIndex] = true;
-				break;
- 
-			case MotionEvent.ACTION_UP:
-			case MotionEvent.ACTION_POINTER_UP:
-			case MotionEvent.ACTION_OUTSIDE:
-			case MotionEvent.ACTION_CANCEL:				
-				realPointerIndex = input.lookUpPointerIndex(pointerId);				
-				input.realId[realPointerIndex] = -1;
-				x = (int)event.getX(pointerIndex);
-				y = (int)event.getY(pointerIndex);
-				postTouchEvent(input, TouchEvent.TOUCH_UP, x, y, realPointerIndex);
-				input.touchX[realPointerIndex] = x;
-				input.touchY[realPointerIndex] = y;
-				input.touched[realPointerIndex] = false;
-				break;
- 
-			case MotionEvent.ACTION_MOVE:
-				int pointerCount = event.getPointerCount();
-				for (int i = 0; i < pointerCount; i++) {
-					pointerIndex = i;
-					pointerId = event.getPointerId(pointerIndex);
-					x = (int)event.getX(pointerIndex);
-					y = (int)event.getY(pointerIndex);
-					realPointerIndex = input.lookUpPointerIndex(pointerId);
-					postTouchEvent(input, TouchEvent.TOUCH_DRAGGED, x, y, realPointerIndex);
-					input.touchX[realPointerIndex] = x;
-					input.touchY[realPointerIndex] = y;
-				}
-				break;
-			}
-		}
-	}
- 
-	public int getFreePointerIndex() {
-		int len = realId.length;
-		for(int i = 0; i < len; i++) {
-			if(realId[i] == -1) return i;
-		}
- 
-		int[] tmp = new int[realId.length + 1];
-		System.arraycopy(realId, 0, tmp, 0, realId.length);
-		realId = tmp;
-		return tmp.length - 1;
-	}
- 
-	public int lookUpPointerIndex(int pointerId) {
-		int len = realId.length;
-		for(int i = 0; i < len; i++) {
-			if(realId[i] == pointerId) return i;
-		}
- 
-		StringBuffer buf = new StringBuffer();
-		for(int i = 0; i < len; i++) {
-			buf.append(i + ":" + realId[i] + " ");
-		}
-		throw new GdxRuntimeException("Pointer ID lookup failed: " + pointerId + ", " + buf.toString());
-	}
-
-	*/
-	
-	/*
-	 * @Override
-	 * public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-	 * float velocityY)
-	 * {
-	 * Log.d("Motion Event", e1.toString() + " - " + e2.toString());
-	 * if (e1.getRawX() > e2.getRawX())
-	 * {
-	 * flipper.setInAnimation(inAnimationLeft);
-	 * flipper.setOutAnimation(outAnimationLeft);
-	 * flipper.showNext();
-	 * }
-	 * else if (e1.getRawX() < e2.getRawX())
-	 * {
-	 * flipper.setInAnimation(inAnimationRight);
-	 * flipper.setOutAnimation(outAnimationRight);
-	 * flipper.showPrevious();
-	 * }
-	 * return true;
-	 * }
-	 * @Override
-	 * public boolean onDown(MotionEvent e)
-	 * {
-	 * return false;
-	 * }
-	 * @Override
-	 * public void onLongPress(MotionEvent e)
-	 * {
-	 * }
-	 * @Override
-	 * public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-	 * float distanceY)
-	 * {
-	 * /*
-	 * Log.d("Scroll", "X1 = " + e1.getX() + " X2 = " + e2.getX());
-	 * int x1 = (int) e1.getX();
-	 * int x2 = (int) e2.getX();
-	 * if (x1 < x2) // Previous
-	 * {
-	 * int fade = x2 - x1;
-	 * flipper.setPadding(fade, 0, -fade, 0);
-	 * if (x2 > WIDTH)
-	 * {
-	 * flipper.showPrevious();
-	 * flipper.setPadding(0, 0, 0, 0);
-	 * }
-	 * }
-	 * else if (x1 > x2) // Next
-	 * {
-	 * int fade = x1 - x2;
-	 * flipper.setPadding(-fade, 0, fade, 0);
-	 * if (x1 < WIDTH)
-	 * {
-	 * flipper.showNext();
-	 * flipper.setPadding(0, 0, 0, 0);
-	 * }
-	 * }
-	 * //flipper.setPadding((int) e2.getX(), 0, 0, 0);
-	 */
-	/*
-	 * return false;
-	 * }
-	 * @Override
-	 * public void onShowPress(MotionEvent e)
-	 * {
-	 * }
-	 * @Override
-	 * public boolean onSingleTapUp(MotionEvent e)
-	 * {
-	 * return false;
-	 * }
-	 */
 }
