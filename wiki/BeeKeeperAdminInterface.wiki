@@ -1,0 +1,22 @@
+#summary Interfaz del administrador del repositorio.
+#labels Phase-Design
+
+= Introduction =
+
+Dónde colocar el menú.
+
+
+= Details =
+
+Tengo varias posibles ideas:
+
+   -  Colocar iconos en la barra derecha (como en el modelador). Dependiendo del template en el que estés te saldrán unas opciones y otras.
+
+      - En "ver formulario" te pueden aparecer un icono para instancias (abre la lista de instancias de un formulario) y otro para los metadatos (usuario, etc...)
+
+      - En "ver instancia" te puede aparecer un icono para metadatos y otro para geolocalizar...
+
+
+
+
+Por decir algo. Se admiten más ideas sobre la interfaz
