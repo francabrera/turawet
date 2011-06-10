@@ -1,0 +1,17 @@
+#summary ¿Puede el administrador borrar formularios o instancias?
+#labels Phase-Design
+
+= Introducción =
+
+Falta definir lo que se puede hacer en el administrador y lo que no.
+¿Podrá borrar formularios o instancias?
+
+
+= Details =
+
+Parece claro que puede ver la lista de formularios, los campos de cada formulario, la lista de instancias de un formulario y cada instancia concreta.
+
+Además hemos hablado que sería interesante ver en el mapa las instancias (gracias a la geolocalización).
+
+
+Falta definir lo que puede hacer el administrador del repositorio. ¿Puede borrar formularios o instancias?
