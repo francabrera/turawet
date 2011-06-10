@@ -1,0 +1,36 @@
+{% comment %}
+	Esquema basico de la web.
+	TurawetProject: BeeKeeper
+{% endcomment %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Turawet Administrador: | {% block title %}{% endblock %}</title>
+	<link rel="icon" href="/beekeeper/templates/images/modeler-favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/beekeeper/templates/images/modeler-favicon.ico" type="image/x-icon"> 
+	<link rel="stylesheet" href="/beekeeper/css/default.css" />
+	<!-- No consigo poner rutas absoultas y que funcion en ver_formulario el CSS -->
+</head>
+<body>
+	<div id="containt">
+		<div id="form">
+			{% block dislpayedInfo %}{% endblock %}
+
+		</div>
+		
+		<div id="resultado">
+
+        </div>
+		
+		<div id="sections">
+
+        </div>
+
+		<div id="fieldsBar">
+
+		</div>		
+		<img src="/beekeeper/templates/images/turawet_minilogo.png" id="minilogo"/>
+	</div>
+</body>
+</html>

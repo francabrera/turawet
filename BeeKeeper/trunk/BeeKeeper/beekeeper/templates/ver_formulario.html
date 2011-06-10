@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Formularios{% endblock %}
+{% block dislpayedInfo %}
+
+			{% if form %}
+				<h1>Formularios</h1>
+				<h2>{{ form.name }}</h2>
+
+
+				{% for section in sections %}
+					 <ul id="s0" class="section" href="#s0">
+					   <p class="sectionlabel">{{ section.name }}</p>
+					   {% for field in form_fields %}
+	                       <li class="text"><p class="fieldlabel">{{ field.label }}</p><br></li>
+					   {% endfor %}
+					</ul>
+				{% endfor %}
+
+
+				<br/>
+			{% else %}
+				<h3>No se ha encontrado ningún formulario en la base de datos.</h3>
+			{% endif %}
+
+{% endblock %}

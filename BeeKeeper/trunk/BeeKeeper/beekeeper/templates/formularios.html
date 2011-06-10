@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>Demo Administrador</title>
-	<link rel="icon" href="images/modeler-favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/modeler-favicon.ico" type="image/x-icon"> 
-	<link rel="stylesheet" href="css/default.css" />
-</head>
-<body>
-	<div id="containt">
-		<div id="form">
+{% extends "base.html" %}
+{% block title %}Formularios{% endblock %}
+{% block dislpayedInfo %}
+
 			{% if forms %}
+				<h1>Formularios</h1>
+				<h2>Lista de formularios</h2>
 				<table id="form{{ forloop.counter0 }}" border="1px" style="width: 60%; ">
 				<thead>
 					<td><span class="form">ID</span></td>
@@ -24,20 +18,12 @@
 							<span class="form">{{ form.id }}</span>
 						</td>
 						<td>
-							<span class="form">{{ form.name }}</span>
+							<a href="show_form/{{ form.id }}"><span class="form">{{ form.name }}</span></a>
 						</td>
 						<td>
 							<span class="form">{{ form.version }}</span>
 						</td>
 					</tr>
-					{% for section in form.section_set %}
-						 <ul id="s0" class="section" href="#s0">
-						   <p class="sectionlabel">{{ section.name }}</p>
-						   {% for field in section.field_set %}
-		                       <li class="text"><p class="fieldlabel">{{ field.name }}</p><br>/li>
-						   {% endfor %}
-					</ul>
-					{% endfor %}
 				{% endfor %}
 				</tbody>
 					<tfoot></tfoot>
@@ -46,21 +32,5 @@
 			{% else %}
 				<h3>No se ha encontrado ningún formulario en la base de datos.</h3>
 			{% endif %}
-		</div>
-		
-		<div id="resultado">
 
-        </div>
-		
-		<div id="sections">
-
-        </div>
-
-		<div id="fieldsBar">
-
-		</div>		
-		<img src="images/turawet_minilogo.png" id="minilogo"/>
-	</div>
-
-</body>
-</html>
+{% endblock %}
