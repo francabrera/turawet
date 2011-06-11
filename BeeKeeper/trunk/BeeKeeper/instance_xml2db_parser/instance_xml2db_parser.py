@@ -8,7 +8,7 @@
 
 from xml.etree.ElementTree import ElementTree, tostring, XML
 from BeeKeeper.db_models.models import Instance, Section, FormField, Form, TextField, InstanceField, DateField,\
-    RadioField, CheckField, ComboField, TextAreaField
+    RadioField, CheckField, ComboField, TextAreaField, NumericField
 from BeeKeeper.logger import *
 
 import datetime
@@ -48,10 +48,18 @@ class InstanceXmldbParser():
         ###return field_model
 
 
+    def parse_numeric_field(self, parser):
+        value = parser.findtext('value')
+        instance_field_model = NumericField(value=value)
+        # Need to add the id value after saving the instance_field_model
+        
+        return instance_field_model
+
+
     def parse_date_field(self, parser):
-        day_value = int(parser.findtext('date_value/day'))
-        month_value = int(parser.findtext('date_value/month'))
-        year_value = int(parser.findtext('date_value/year'))
+        day_value = int(parser.findtext('value/day'))
+        month_value = int(parser.findtext('value/month'))
+        year_value = int(parser.findtext('value/year'))
         date = datetime.date(year_value,month_value,day_value)
         instance_field_model = DateField(value=date)
         
@@ -93,6 +101,7 @@ class InstanceXmldbParser():
         actionSwitch = {
             'TEXT': self.parse_text_field,
             'TEXTAREA': self.parse_textarea_field,
+            'NUMERIC': self.parse_numeric_field,
             'DATE': self.parse_date_field,
             'RADIO': self.parse_radio_field,
             'COMBO': self.parse_combo_field,
@@ -102,13 +111,12 @@ class InstanceXmldbParser():
         k = 0
         for field in instance_fields:
             id = field.find('id')
-            field_id = field.findtext('fieldid')
-            type = field.findtext('type')
+            formfield_id = field.findtext('formfieldid')
 
             # If there is a an error we report it to the logger
             ok_field = False
             try:
-                field_model = FormField.objects.get(pk=field_id)
+                field_model = FormField.objects.get(pk=formfield_id)
                 ok_field = True
             except FormField.DoesNotExist:
                 logger.error('FormField: does not exist:'+ str(sys.exc_info()[0]))
@@ -145,9 +153,7 @@ class InstanceXmldbParser():
             parser = XML(xml)
             #Starting the parsing
             # Getting the form meta info
-            form_id = parser.findtext('meta/formmeta/formid')
-            form_name = parser.findtext('meta/formmeta/name')
-            form_version = parser.findtext('meta/formmeta/version')
+            form_id = parser.findtext('meta/formid')
             #Getting the instance meta info
             user = parser.findtext('meta/author/user')
             creation_date = parser.findtext('meta/creationdate')
@@ -197,12 +203,12 @@ class InstanceXmldbParser():
                 # Valid section
                 if ok:
                     #Section fields
-                    instance_fields = section.findall("instancefields/instancefield")
+                    instance_fields = section.findall("fields/field")
                     # Parsing the fields
                     j = 0 # Integer in python are inmutable. So they are passed by value to the function
                     j = self.parse_generic_field(instance_fields, instance_model, j)
                     # Parsing the groups
-                    groups = section.findall("instancefields/instancegroup")
+                    groups = section.findall("fields/group")
                 #####j = self.parse_generic_group(groups, instance_model, j)
             
             return True
