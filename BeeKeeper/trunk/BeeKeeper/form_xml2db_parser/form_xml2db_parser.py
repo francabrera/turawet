@@ -65,6 +65,12 @@ class FormXmldbParser():
         return field_model
     
     
+    def parse_numeric_field(self, parser, section_model):
+        field_model = FormField(section=section_model)
+        
+        return field_model
+    
+    
     def parse_date_field(self, parser, section_model):
         field_model = FormField(section=section_model)
         
@@ -96,6 +102,7 @@ class FormXmldbParser():
         actionSwitch = {
             'TEXT': self.parse_text_field,
             'TEXTAREA': self.parse_textarea_field,
+            'NUMERIC': self.parse_numeric_field,
             'DATE': self.parse_date_field,
             'RADIO': self.parse_radio_field,
             'COMBO': self.parse_combo_field,
@@ -180,9 +187,9 @@ class FormXmldbParser():
             parser = XML(xml)
             #Starting the parsing
             id = parser.find('id')
-            version = parser.findtext('version')
-            name = parser.findtext('name')
-            user = parser.findtext('author/user')
+            version = parser.findtext('meta/version')
+            name = parser.findtext('meta/name')
+            user = parser.findtext('meta/author/user')
             # Form model
             form_model = Form(version=version, name=name)
             form_model.save()

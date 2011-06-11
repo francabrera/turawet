@@ -3,11 +3,13 @@
 
 <form>
 	<id />
-	<version>1</version>
-	<name>Formulario de prueba</name>
-	<author>
-		<user>turawet</user>
-	</author>
+	<meta>
+		<version>1</version>
+		<name>Formulario de prueba</name>
+		<author>
+			<user>turawet</user>
+		</author>
+	</meta>
 	<sections>
 		<section>
 			<id />
