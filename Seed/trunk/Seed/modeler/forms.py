@@ -1,7 +1,9 @@
 '''
-Created on 02/03/2011
-
-@author: franxu
+*Modeler Form* Request Modeler Form
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.1
 '''
 from django import forms
 

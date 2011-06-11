@@ -1,0 +1,55 @@
+{% comment %}
+Esquema basico de la web.
+Project: Seed::Modeler
+Author: Francisco Jose Cabrera Hernandez,
+        Nicolas Pernas Maradei,
+        Romen Rodriguez Gil
+{% endcomment %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="images/modeler-favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/modeler-favicon.ico" type="image/x-icon"> 
+    <link rel="stylesheet" href="css/default.css" />
+</head>
+<body>
+    <div id="containt">
+        <div id="form">
+            {% block mainframe %}
+            {% endblock %}
+        </div>
+        
+        <div id="resultado">
+            <img class="delete" src="images/buttons/delete.png" onClick="hideResults()"/>
+            {% block serviceresult %}
+            {% endblock %}
+        </div>
+        
+        <div id="sections">
+            {% block sectionslinks %}
+            {% endblock %}
+        </div>
+
+        <div id="fieldsBar">
+            {% block sidebar %}
+            {% endblock %}
+            <div class="buttons">
+                {% block buttonssidebar %}
+                {% endblock %}
+            </div>  
+        </div>      
+        <img src="images/turawet-modeler-minilogo.png" id="minilogo"/>
+    </div>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery-ui.min.js"></script>
+    <script src="js/lib/jquery.ndd.js"></script>
+    <script src="js/lib/jquery.inlineedit.js"></script>
+    <script src="js/fillform.js"></script>
+    <script src="js/dragdrop.js"></script>
+    <script src="js/parseform.js"></script>
+    {% block extrajs %}
+    {% endblock %}
+</body>
+</html>

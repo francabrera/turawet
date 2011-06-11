@@ -1,7 +1,7 @@
 /**
-* @fileoverview Funcionalidad Drag and Drop del modelador web
+* @fileoverview Funcionalidades Drag and Drop del modelador web
 *
-* @author Turawet Project
+* @author Francisco Jose Cabrera Hernandez, Nicolas Pernas Maradei, Romen Rodriguez Gil
 * @version 0.1
 */
 

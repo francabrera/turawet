@@ -1,7 +1,9 @@
 '''
-Created on 05/06/2011
-
-@author: bee
+*BeeKeeper Services Client*
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.1
 '''
 import logging
 from suds.client import Client
