@@ -1,8 +1,10 @@
 /**
 * @fileoverview Definición de clases y variables donde se 
-* 				almacenará el formulario y sus elementos.
+* 				almacenará el formulario y sus elementos
+* 				así como funciones para la creación, eliminación,
+* 				y manejo de los mismos.
 *
-* @author Turawet Project
+* @author Francisco Jose Cabrera Hernandez, Nicolas Pernas Maradei, Romen Rodriguez Gil
 * @version 0.1
 */
 

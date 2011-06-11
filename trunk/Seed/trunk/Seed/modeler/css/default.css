@@ -1,4 +1,4 @@
-/* Generales */
+/*********************** Generales ***********************/
 
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
@@ -38,9 +38,9 @@ p { margin:0; }
 [draggable=true] {
 	cursor: move;
 }
-/* ----------- */
+/*********************** ----------- ***********************/
 
-/* Contenedor global */
+/*********************** Contenedor global ***********************/
 #containt {
     position: relative;
     text-align: left;
@@ -52,7 +52,7 @@ p { margin:0; }
     height: 100%;
     background-color:#B3AFAA;
 }
-/* ----------- */
+/*********************** ----------- ***********************/
 
 
 #minilogo {
@@ -62,7 +62,7 @@ p { margin:0; }
 }
 
 
-/* FORMULARIO */
+/*********************** FORMULARIO ***********************/
 #form {
     float:left;
 
@@ -75,7 +75,7 @@ p { margin:0; }
     background-color:#FFAFAA;
 }
 
-/* SECTION */
+    /************************ SECTION ************************/
 #form ul {
     margin: 0px 30px 20px 30px;
     padding: 15px 0px 20px 0px;
@@ -93,8 +93,9 @@ p { margin:0; }
     font: bold 14px/1.5 helvetica, arial, san-serif;
     margin: 0px 0px 0px 10px;
 }
+    /*********************** ----------- ***********************/
 
-/* FIELD */
+    /************************ FIELDS ************************/
 #form li {
 	list-style:none;
 	/*border-bottom:1px solid #494949;*/
@@ -133,7 +134,11 @@ p { margin:0; }
     top: 20px;
 /*    left: -20px;*/   
 }
+    /*********************** ----------- ***********************/
+    
+/*********************** ----------- ***********************/
 
+/************************ SECTIONLINKS ************************/
 #sections {
 	position:absolute;
 	bottom:2px;
@@ -165,27 +170,11 @@ p { margin:0; }
     text-decoration: underline; 
     color: #454545;
     }
-
-/* Mensaje para añadir campo al final */
-#form li.toEnd {
-    color: #FFFFFF;
-    background-image: none;
-    text-align:center;
-    height:30px;
-    margin:0px;
-    padding:0px;
-}
-
-#toEndText {
-    background-color: #4F4C49;
-    display: none;
-    height:100%;
-}
-/* ---------------------------------- */
+/*********************** ----------- ***********************/
 
 
-/** Estilos para cada campo en el formulario **/
-/** ---------------------------------------- **/
+/** Estilos div resultado **/
+/** --------------------- **/
 
 #resultado {
 	width:700px;
@@ -212,7 +201,7 @@ p { margin:0; }
 	margin-bottom:20px;
 	}
 
-/* ----->>>> */
+/************************ FIELDTYPES ************************/
 #form li.text {
     background-color:#F0E4BD;
     background-image:url('../images/icons/text.png');
@@ -235,11 +224,10 @@ p { margin:0; }
     background-color:#BDDFF0;
     background-image:url('../images/icons/image.png');
 }
-/** ---------------------------------------- **/
+/*********************** ----------- ***********************/
 
-/* ----------- */
 
-/* CAMPOS */
+/*********************** SideBar FIELDS ***********************/
 #fieldsBar {
     float:right;
 	width:10%;
@@ -286,10 +274,10 @@ p { margin:0; }
 	padding:5px;
 	display:none;
 }
-/* ----------- */
+/*********************** ----------- ***********************/
 
 
-/* BUTTONS */
+/*********************** BUTTONS ***********************/
 .buttons {
 	text-align:center;
 	line-height:40px;
@@ -323,3 +311,4 @@ p { margin:0; }
 .buttons a.button.white:hover { color:#fff; text-shadow: 1px 1px #000;} 
 .buttons a.button.small { font-size: 75%; }
 .buttons a.button.large { font-size: 125%; }
+/*********************** ----------- ***********************/

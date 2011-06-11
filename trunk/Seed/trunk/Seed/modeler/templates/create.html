@@ -1,108 +1,93 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>Demo Modelador</title>
-	<link rel="icon" href="images/modeler-favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/modeler-favicon.ico" type="image/x-icon"> 
-	<link rel="stylesheet" href="css/default.css" />
-</head>
-<body>
-	<div id="containt">
-		<div id="form">
-			<h1 class="formname">Formulario</h1>
-			<h2>Arrastra los campos al formulario</h2>
-			<ul id="s0" class="section" href="#s0">
-			  <p class="sectionlabel">Nombre sección 0</p>
-			  <!--<li class="toEnd">
-			      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
-			  </li>-->
-			</ul>
-		</div>
-		
-		<div id="resultado">
-		    <img class="delete" src="images/buttons/delete.png" onClick="hideResults()"/>
-		    {% if wsresponse %}
-		      <p class="prueba">Formulario Guardado!</p>
-		    {% else %}
-		      <p class="prueba">Enviado:<br/>{{prueba}}</p>
-		      <p class="pruebaerror">{{errormessage}}</p>
-		    {% endif %}
-        </div>
-		
-		<div id="sections">
-            <ul>
-                <li id="s0link"> <a href="#s0" onclick="selectSection(0)">Sección 0</a> </li>
-            </ul>
-        </div>
+{% extends "base.html" %}
 
-		<div id="fieldsBar">
-		    <ul>
-				<li><a class="item" href="#" id="campo1" draggable="true">
-				    <div class="type">text</div>
-				    <div class="fieldtype">TEXT</div>
-					<img src="images/text-button.png" />
-					<div class="label">
-						<p><strong>Campo de texto</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo2" draggable="true">
-				    <div class="type">textarea</div>
-				    <div class="fieldtype">TEXT</div>
-					<img src="images/textarea-button.png" />
-					<div class="label">
-						<p><strong>Área de texto</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo3" draggable="true">
-				    <div class="type">file</div>
-				    <div class="fieldtype">FILE</div>
-					<img src="images/file-button.png" />
-					<div class="label">
-						<p><strong>Fichero</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo4" draggable="true">
-				    <div class="type">image-gallery</div>
-				    <div class="fieldtype">IMAGE</div>
-					<img src="images/image-button.png" />
-					<div class="label">
-						<p><strong>Galería de imágenes</strong></p>
-					</div>
-				</a></li>			
-			</ul>
-			<div class="buttons">
-				<a onclick="addSection(); return false" class="button white">
-				    New Section
-				</a>
-                <br/>
-		        <form class="sendform" action="/modeler/" method="post">
-		            {% csrf_token %}
-	                <input type="hidden" name="fieldList" id="id_fieldList" />
-	                <!-- <button type="submit" name="sendButton" class="positive">-->
-	                <a class="button large green" onclick="fillForm(); this.parentNode.submit(); return false">
-	                   Send
-	                </a>
-	                <a class="button large red" onclick="showResults(); return false">
-                       <img src="images/bug.png"/>
-                    </a>
-		        </form>
-            </div>	
-		</div>		
-		<img src="images/turawet-modeler-minilogo.png" id="minilogo"/>
-	</div>
-	<script src="js/lib/jquery.min.js"></script>
-	<script src="js/lib/jquery-ui.min.js"></script>
-	<script src="js/lib/jquery.ndd.js"></script>
-	<script src="js/lib/jquery.inlineedit.js"></script>
-	<script src="js/fillform.js"></script>
-	<script src="js/dragdrop.js"></script>
-	<script src="js/parseform.js"></script>
+{% block title %}Turawet::Seed - Web Modeler{% endblock %}
+
+{% block mainframe %}
+	<h1 class="formname">Formulario</h1>
+	<h2>Arrastra los campos al formulario</h2>
+	<ul id="s0" class="section" href="#s0">
+	  <p class="sectionlabel">Nombre sección 0</p>
+	  <!--<li class="toEnd">
+	      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
+	  </li>-->
+	</ul>
+{% endblock %}
+		
+{% block serviceresult %}
+    {% if wsresponse %}
+      <p class="prueba">Formulario Guardado!</p>
+    {% else %}
+      <p class="prueba">Enviado:<br/>{{prueba}}</p>
+      <p class="pruebaerror">{{errormessage}}</p>
+    {% endif %}
+{% endblock %}
+		
+{% block sectionslinks %}
+    <ul>
+        <li id="s0link"> <a href="#s0" onclick="selectSection(0)">Sección 0</a> </li>
+    </ul>
+{% endblock %}
+
+{% block sidebar %}
+    <ul>
+		<li><a class="item" href="#" id="campo1" draggable="true">
+		    <div class="type">text</div>
+		    <div class="fieldtype">TEXT</div>
+			<img src="images/text-button.png" />
+			<div class="label">
+				<p><strong>Campo de texto</strong></p>
+			</div>
+		</a></li>
+		<li><a class="item" href="#" id="campo2" draggable="true">
+		    <div class="type">textarea</div>
+		    <div class="fieldtype">TEXT</div>
+			<img src="images/textarea-button.png" />
+			<div class="label">
+				<p><strong>Área de texto</strong></p>
+			</div>
+		</a></li>
+		<li><a class="item" href="#" id="campo3" draggable="true">
+		    <div class="type">file</div>
+		    <div class="fieldtype">FILE</div>
+			<img src="images/file-button.png" />
+			<div class="label">
+				<p><strong>Fichero</strong></p>
+			</div>
+		</a></li>
+		<li><a class="item" href="#" id="campo4" draggable="true">
+		    <div class="type">image-gallery</div>
+		    <div class="fieldtype">IMAGE</div>
+			<img src="images/image-button.png" />
+			<div class="label">
+				<p><strong>Galería de imágenes</strong></p>
+			</div>
+		</a></li>			
+	</ul>
+{% endblock %}
+
+{% block buttonssidebar %}
+	<a onclick="addSection(); return false" class="button white">
+	    New Section
+	</a>
+    <br/>
+    <form class="sendform" action="/modeler/" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="fieldList" id="id_fieldList" />
+        <!-- <button type="submit" name="sendButton" class="positive">-->
+        <a class="button large green" onclick="fillForm(); this.parentNode.submit(); return false">
+           Send
+        </a>
+        <a class="button large red" onclick="showResults(); return false">
+           <img src="images/bug.png"/>
+        </a>
+    </form>
+{% endblock %}
+
+{% block extrajs %}
 	<!-- Debugging -->
 	{% if prueba %}
 	<script language="JavaScript">
             $("#resultado").toggle('slow');
     </script>
     {% endif %}
-</body>
-</html>
+{% endblock %}

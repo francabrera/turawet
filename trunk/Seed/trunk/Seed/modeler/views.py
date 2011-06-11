@@ -1,8 +1,10 @@
-"""
-Views for Seed web modeler
-Project: Turawet
-Date: 01-03-2011
-"""
+'''
+*Modeler Views* Views for Seed web modeler
+   :author: Francisco Jose Cabrera Hernandez,
+            Nicolas Pernas Maradei,
+            Romen Rodriguez Gil
+   :version: 0.1
+'''
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from Seed.modeler.forms import NewForm

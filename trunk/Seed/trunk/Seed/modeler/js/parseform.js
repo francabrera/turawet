@@ -1,7 +1,7 @@
 /**
 * @fileoverview Parser del formulario a XML.
-*
-* @author Turawet Project
+* 
+* @author Francisco Jose Cabrera Hernandez, Nicolas Pernas Maradei, Romen Rodriguez Gil
 * @version 0.1
 */
 
