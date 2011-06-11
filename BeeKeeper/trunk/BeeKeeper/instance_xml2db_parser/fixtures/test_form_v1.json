@@ -1,0 +1,259 @@
+[
+    {
+        "pk": 1, 
+        "model": "db_models.form", 
+        "fields": {
+            "xml": "<form>\n\t<id>1</id>\n\t<version>1</version>\n\t<name>Formulario de prueba</name>\n\t<author>\n\t\t<user>turawet</user>\n\t</author>\n\t<sections>\n\t\t<section>\n\t\t\t<id />\n\t\t\t<name>Primera secci&#243;n</name>\n\t\t\t<fields>\n\t\t\t\t<field>\n\t\t\t\t\t<id>1</id>\n\t\t\t\t\t<label>Etiqueta1</label>\n\t\t\t\t\t<type>TEXT</type>\n\t\t\t\t\t<required />\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>max_length</name>\n\t\t\t\t\t\t\t<value>10</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id>2</id>\n\t\t\t\t\t<label>Etiqueta2</label>\n\t\t\t\t\t<type>TEXT</type>\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>font</name>\n\t\t\t\t\t\t\t<value>Arial</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id>3</id>\n\t\t\t\t\t<label>Fecha1</label>\n\t\t\t\t\t<type>DATE</type>\n\t\t\t\t\t<required />\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>format</name>\n\t\t\t\t\t\t\t<value>YYYY/MM/DD</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>calendar</name>\n\t\t\t\t\t\t\t<value>MONTH_CALENDAR</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id>4</id>\n\t\t\t\t\t<label>Radio1</label>\n\t\t\t\t\t<type>RADIO</type>\n\t\t\t\t\t<required />\n\t\t\t\t\t<options>\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t<label>Masculino</label>\n\t\t\t\t\t\t\t<value>M</value>\n\t\t\t\t\t\t</option>\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t<label>Femenino</label>\n\t\t\t\t\t\t\t<value>F</value>\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</options>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id>5</id>\n\t\t\t\t\t<label>Combo1</label>\n\t\t\t\t\t<type>COMBO</type>\n\t\t\t\t\t<options>\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t<label>Opci&#243;n 1</label>\n\t\t\t\t\t\t\t<value>O1</value>\n\t\t\t\t\t\t\t<default />\n\t\t\t\t\t\t</option>\n\t\t\t\t\t\t<option>\n\t\t\t\t\t\t\t<label>Opci&#243;n 2</label>\n\t\t\t\t\t\t\t<value>O2</value>\n\t\t\t\t\t\t</option>\n\t\t\t\t\t</options>\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>size</name>\n\t\t\t\t\t\t\t<value>30</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id>6</id>\n\t\t\t\t\t<label>Check1</label>\n\t\t\t\t\t<type>CHECKBOX</type>\n\t\t\t\t\t<required />\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>widget</name>\n\t\t\t\t\t\t\t<value>TRISTATE</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id />\n\t\t\t\t\t<label>Imagen</label>\n\t\t\t\t\t<type>IMAGE</type>\n\t\t\t\t\t<required />\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id />\n\t\t\t\t\t<label>V&#237;deo</label>\n\t\t\t\t\t<type>VIDEO</type>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id />\n\t\t\t\t\t<label>Audio</label>\n\t\t\t\t\t<type>AUDIO</type>\n\t\t\t\t</field>\n\t\t\t\t<field>\n\t\t\t\t\t<id />\n\t\t\t\t\t<label>Localizaci&#243;n</label>\n\t\t\t\t\t<type>LOCATION</type>\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>type</name>\n\t\t\t\t\t\t\t<value>COORDINATES</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</field>\n\t\t\t\t<group>\n\t\t\t\t\t<id>1</id>\n\t\t\t\t\t<label>GRUPO</label>\n\t\t\t\t\t<required />\n\t\t\t\t\t<field>\n\t\t\t\t\t\t<id>7</id>\n\t\t\t\t\t\t<label>Nombre</label>\n\t\t\t\t\t\t<type>TEXT</type>\n\t\t\t\t\t</field>\n\t\t\t\t\t<field>\n\t\t\t\t\t\t<id>8</id>\n\t\t\t\t\t\t<label>Apellido1</label>\n\t\t\t\t\t\t<type>TEXT</type>\n\t\t\t\t\t</field>\n\t\t\t\t</group>\n\t\t\t\t<group>\n\t\t\t\t\t<id>2</id>\n\t\t\t\t\t<list />\n\t\t\t\t\t<label>Galer&#237;a de im&#225;genes</label>\n\t\t\t\t\t<field>\n\t\t\t\t\t\t<id />\n\t\t\t\t\t\t<label>Im&#225;genes</label>\n\t\t\t\t\t\t<type>IMAGE_GALLERY</type>\n\t\t\t\t\t</field>\n\t\t\t\t\t<properties>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>max_photos</name>\n\t\t\t\t\t\t\t<value>6</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t\t<property>\n\t\t\t\t\t\t\t<name>max_file_size</name>\n\t\t\t\t\t\t\t<value>128</value>\n\t\t\t\t\t\t</property>\n\t\t\t\t\t</properties>\n\t\t\t\t</group>\n\t\t\t</fields>\n\t\t</section>\n\t</sections>\n</form>", 
+            "active": false, 
+            "version": 1, 
+            "name": "Formulario de prueba"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "db_models.section", 
+        "fields": {
+            "name": "Primera secci\u00f3n", 
+            "form": 1, 
+            "order": 0
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "db_models.fieldgroup", 
+        "fields": {
+            "required": true, 
+            "multiple": false, 
+            "label": "GRUPO"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "db_models.fieldgroup", 
+        "fields": {
+            "required": false, 
+            "multiple": true, 
+            "label": "Galer\u00eda de im\u00e1genes"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": true, 
+            "label": "Etiqueta1", 
+            "field_group": null, 
+            "type": "TEXT", 
+            "section_order": 0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": false, 
+            "label": "Etiqueta2", 
+            "field_group": null, 
+            "type": "TEXT", 
+            "section_order": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": true, 
+            "label": "Fecha1", 
+            "field_group": null, 
+            "type": "DATE", 
+            "section_order": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": true, 
+            "label": "Radio1", 
+            "field_group": null, 
+            "type": "RADIO", 
+            "section_order": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": false, 
+            "label": "Combo1", 
+            "field_group": null, 
+            "type": "COMBO", 
+            "section_order": 4
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": null, 
+            "section": 1, 
+            "required": true, 
+            "label": "Check1", 
+            "field_group": null, 
+            "type": "CHECKBOX", 
+            "section_order": 5
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": 0, 
+            "section": 1, 
+            "required": true, 
+            "label": "Nombre", 
+            "field_group": 1, 
+            "type": "TEXT", 
+            "section_order": 10
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "db_models.formfield", 
+        "fields": {
+            "field_group_order": 1, 
+            "section": 1, 
+            "required": true, 
+            "label": "Apellido1", 
+            "field_group": 1, 
+            "type": "TEXT", 
+            "section_order": 11
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "db_models.fieldoption", 
+        "fields": {
+            "form_field": 4, 
+            "value": "M", 
+            "label": "Masculino"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "db_models.fieldoption", 
+        "fields": {
+            "form_field": 4, 
+            "value": "F", 
+            "label": "Femenino"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "db_models.fieldoption", 
+        "fields": {
+            "form_field": 5, 
+            "value": "O1", 
+            "label": "Opci\u00f3n 1"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "db_models.fieldoption", 
+        "fields": {
+            "form_field": 5, 
+            "value": "O2", 
+            "label": "Opci\u00f3n 2"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "max_length", 
+            "value": "10", 
+            "form_field": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "font", 
+            "value": "Arial", 
+            "form_field": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "format", 
+            "value": "YYYY/MM/DD", 
+            "form_field": 3
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "calendar", 
+            "value": "MONTH_CALENDAR", 
+            "form_field": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "size", 
+            "value": "30", 
+            "form_field": 5
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": null, 
+            "name": "widget", 
+            "value": "TRISTATE", 
+            "form_field": 6
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": 2, 
+            "name": "max_photos", 
+            "value": "6", 
+            "form_field": null
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "db_models.property", 
+        "fields": {
+            "group_field": 2, 
+            "name": "max_file_size", 
+            "value": "128", 
+            "form_field": null
+        }
+    }
+]
