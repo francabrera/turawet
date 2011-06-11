@@ -212,6 +212,15 @@ class TextAreaField(InstanceField):
         return self.value
 
 
+class NumericField(InstanceField):
+    """Class: `TextField`. 
+       :param value: The text itself."""
+    value = models.IntegerField()
+
+    def getText(self):
+        return self.value
+
+
 class DateField(InstanceField):
     """Class: `DateField`. 
        :param day_value: The Day.
@@ -248,10 +257,6 @@ class ComboField(InstanceField):
 
     def getText(self):
         return self.value
-
-
-
-
 
 
 
