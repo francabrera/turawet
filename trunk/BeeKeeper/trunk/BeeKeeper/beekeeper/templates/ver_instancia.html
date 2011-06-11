@@ -2,15 +2,15 @@
 {% block title %}Formularios{% endblock %}
 {% block dislpayedInfo %}
 
-			{% if form %}
-				<h1>Formulario: {{ form.name }}</h1>
-				<h2>{{ form.name }}</h2>
+			{% if instance %}
+				<h1>Instancia: {{ instance.id }}</h1>
+				<h2>Del formulario: {{ instance.form.name }}</h2>
 
 
 				{% for section in sections %}
 					 <ul id="s0" class="section" href="#s0">
 					   <p class="sectionlabel">{{ section.name }}</p>
-					   {% for field in form_fields %}
+					   {% for field in instance_fields %}
 	                       <li class="text"><p class="fieldlabel">{{ field.label }}</p><br></li>
 					   {% endfor %}
 					</ul>
@@ -19,7 +19,7 @@
 
 				<br/>
 			{% else %}
-				<h3>No se ha encontrado el formulario en la base de datos.</h3>
+				<h3>No se ha encontrado la instancia en la base de datos.</h3>
 			{% endif %}
 
 {% endblock %}
@@ -30,18 +30,6 @@
 					<img src="../../templates/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar formulario</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo2">
-					<img src="../../templates/images/instances.png" />
-					<div class="label">
-						<p><strong>Instancias</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo3">
-					<img src="../../templates/images/statistics.png" />
-					<div class="label">
-						<p><strong>Estad&iacute;sticas</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo4">
