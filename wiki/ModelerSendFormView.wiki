@@ -1,0 +1,18 @@
+#summary ¿Qué mostrar tras enviar un formulario desde el modelador y cómo?
+#labels Phase-Implementation
+
+= Introduction =
+
+Una vez enviado un formulario generado desde el modelador, nos recarga la página (con un formulario vacío) y nos muestra un cuadro de texto donde se visualiza si se ha insertado o no correctamente el formulario en la BBDD.
+
+
+= Details =
+
+Además de tratar los distintos errores enviados desde el servicio web, habría que preparar la vista del modelador así como el template para recargar un formulario a partir de su XML en caso de error, para no perderlo. Dado que no hacemos aún uso de AJAX, en caso de que la petición al servicio web falle por alguna causa, habría que volver a generar los elementos del formulario para que se le vuelva a mostrar en modo edición, pueda subsanar el fallo (lo más común el nombre del formulario repetido) y volver a enviar. Para ello habría que preparar la vista y las plantillas para que generen de forma dinámica el código javascript así como los elementos DOM del documento.
+
+Pero hay un problema para ello, una vez enviado el formulario, la vista sólo cuenta con el XML del formulario para regenerarlo por lo que habría que realizar un parsing del mismo (y ya tenemos suficientes parsers...).
+
+Planteo dos posibles soluciones:
+
+  # Devolver en la respuesta del servicio de Beekeeper el Formulario generado por el parser del mismo.
+  # Utilizar Ajax para realizar la petición, de forma que sin recargar se obtenga el resultado y redirija sólo en caso de que la respuesta sea correcta.
