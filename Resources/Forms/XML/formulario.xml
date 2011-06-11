@@ -166,6 +166,12 @@
 						</property>
 					</properties>
 				</group>
+				<field>
+					<id />
+					<label>Número de ventanas</label>
+					<type>NUMERIC</type>
+					<required />
+				</field>
 			</fields>
 		</section>
 	</sections>
