@@ -63,7 +63,7 @@ public abstract class GenericInstanceFieldBean extends SectionChildBean
 	
 	/* Other methods */
 	@Override
-	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
+	protected void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
 	}
 }

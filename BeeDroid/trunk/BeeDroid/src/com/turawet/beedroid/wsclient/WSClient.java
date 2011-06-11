@@ -77,9 +77,8 @@ public class WSClient
 		
 		transportSE.call(Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION, envelope);
 		
-		SoapObject response = (SoapObject) envelope.getResponse();
+		String xmlForm = envelope.getResponse().toString();
 		
-		String xmlForm = response.getProperty(Cte.WSClient.XML).toString();
 		return new FormInfoBean(formToDownload, xmlForm);
 	}
 	

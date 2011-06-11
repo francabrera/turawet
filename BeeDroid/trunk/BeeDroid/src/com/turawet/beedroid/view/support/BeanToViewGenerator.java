@@ -3,13 +3,19 @@
  */
 package com.turawet.beedroid.view.support;
 
+import com.turawet.beedroid.beans.DateFieldBean;
+import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.TextFieldBean;
+import com.turawet.beedroid.constants.Cte.FieldType;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,39 +28,27 @@ public class BeanToViewGenerator
 	/**
 	 *
 	 */
-	private String[]				items		=
-													{ "0", "1", "2", "3", "4", "5" };
-	
-	private static final int	CHILDS	= 6;
-	private LinearLayout			list[];
-	private int						index;
-	private boolean				increased;
-	private boolean				decreased;
-	
-	InstanceBean					instance;
-	private Context				context;
-	
-	private int						sectionIndex;
-	private int						fieldIndex;
+	private boolean	increased;
+	private boolean	decreased;
+	InstanceBean		instance;
+	private Context	context;
+	private int			sectionIndex;
+	private int			fieldIndex;
+	private int			numOfSections;
+	private int			numOfFields;
 	
 	public BeanToViewGenerator(Context context, InstanceBean instance)
 	{
 		this.instance = instance;
 		this.context = context;
-		index = 0;
 		sectionIndex = 0;
 		fieldIndex = 0;
+		
+		numOfSections = this.instance.getSections().size();
+		numOfFields = this.instance.getSections().get(sectionIndex).getSectionChildren().size();
+		
 		increased = false;
 		decreased = false;
-		list = new LinearLayout[CHILDS];
-		
-		for (int i = 0; i < CHILDS; i++)
-			list[i] = getLayout();
-		
-		for (int i = 0; i < CHILDS; i++)
-		{
-			list[i].addView(getView(i));
-		}
 		
 	}
 	
@@ -66,7 +60,7 @@ public class BeanToViewGenerator
 		boolean out = false;
 		if (!decreased)
 		{
-			index--;
+			decIndex();
 			out = true;
 		}
 		else
@@ -82,7 +76,7 @@ public class BeanToViewGenerator
 		boolean out = false;
 		if (!increased)
 		{
-			index++;
+			incIndex();
 			out = true;
 		}
 		else
@@ -95,7 +89,7 @@ public class BeanToViewGenerator
 	 */
 	public final boolean canIncreaseIndex()
 	{
-		return index < CHILDS - 1;
+		return sectionIndex < numOfSections - 1 || fieldIndex < numOfFields - 1;
 	}
 	
 	/**
@@ -103,27 +97,7 @@ public class BeanToViewGenerator
 	 */
 	public final boolean canDecreaseIndex()
 	{
-		return index > 0;
-	}
-	
-	/**
-	 * @return
-	 */
-	private final int getNextIndex()
-	{
-		if (index <= CHILDS - 1)
-			return index + 1;
-		return index;
-	}
-	
-	/**
-	 * @return
-	 */
-	private final int getPreviousIndex()
-	{
-		if (index >= 0)
-			return index - 1;
-		return index;
+		return sectionIndex > 0 || fieldIndex > 0;
 	}
 	
 	/**
@@ -131,8 +105,19 @@ public class BeanToViewGenerator
 	 */
 	public final void incIndex()
 	{
-		if (index < CHILDS - 1)
-			index++;
+		if (fieldIndex < numOfFields - 1)
+		{
+			fieldIndex++;
+		}
+		else
+		{
+			if (sectionIndex < numOfSections - 1)
+			{
+				sectionIndex++;
+				fieldIndex = 0;
+				numOfFields = instance.getSections().get(sectionIndex).getSectionChildren().size();
+			}
+		}
 	}
 	
 	/**
@@ -140,41 +125,19 @@ public class BeanToViewGenerator
 	 */
 	public final void decIndex()
 	{
-		if (index > 0)
-			index--;
-	}
-	
-	/**
-	 * @param ind
-	 * @return
-	 */
-	private final boolean validIndex(int ind)
-	{
-		return ind >= 0 && ind < CHILDS;
-	}
-	
-	/**
-	 * @return
-	 */
-	public final View getNextView()
-	{
-		final int ind = getNextIndex();
-		if (validIndex(ind))
-			return list[ind];
+		if (fieldIndex > 0)
+		{
+			fieldIndex--;
+		}
 		else
-			return null;
-	}
-	
-	/**
-	 * @return
-	 */
-	public final View getPrevView()
-	{
-		final int ind = getPreviousIndex();
-		if (validIndex(ind))
-			return list[ind];
-		else
-			return null;
+		{
+			if (sectionIndex > 0)
+			{
+				sectionIndex--;
+				numOfFields = instance.getSections().get(sectionIndex).getSectionChildren().size();
+				fieldIndex = numOfFields - 1;
+			}
+		}
 	}
 	
 	/**
@@ -182,38 +145,157 @@ public class BeanToViewGenerator
 	 */
 	public final View getCurrentView()
 	{
-		return list[index];
+		return getNewFieldView(sectionIndex, fieldIndex);
 	}
 	
 	/**
 	 * @return
 	 */
-	private final LinearLayout getLayout()
+	public final View getNextView()
 	{
-		LinearLayout layout = new LinearLayout(context);
-		layout.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-		layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
-		layout.setBackgroundColor(Color.WHITE);
-		
-		return layout;
-		
+		int field = fieldIndex;
+		int section = sectionIndex;
+		// Estoy enel último campo, el siguiente será null
+		if (section == numOfSections - 1 && field == numOfFields - 1)
+		{
+			return null;
+		}
+		else
+		{
+			if (field == numOfFields - 1)
+			{
+				field = 0;
+				section++;
+			}
+			else
+			{
+				field++;
+			}
+		}
+		return getNewFieldView(section, field);
 	}
 	
 	/**
-	 * @param position
 	 * @return
 	 */
-	private final View getView(int position)
+	public final View getPrevView()
+	{
+		int field = fieldIndex;
+		int section = sectionIndex;
+		// Estoy enel último campo, el siguiente será null
+		if (section == 0 && field == 0)
+		{
+			return null;
+		}
+		else
+		{
+			if (field == 0)
+			{
+				section--;
+				field = instance.getSections().get(section).getSectionChildren().size() - 1;
+			}
+			else
+			{
+				field--;
+			}
+		}
+		return getNewFieldView(section, field);
+	}
+	
+	/**
+	 * @param section
+	 * @param field
+	 * @return
+	 */
+	private final View getNewFieldView(int sectionInd, int fieldInd)
+	{
+		GenericInstanceFieldBean fieldBean = (GenericInstanceFieldBean) instance.getSections().get(sectionInd).getSectionChildren().get(fieldInd);
+		
+		FieldType fieldType = fieldBean.getFormField().getType();
+		View fieldView = null;
+		switch (fieldType)
+		{
+			case TEXT:
+				fieldView = getNewTextFieldView((TextFieldBean) fieldBean);
+				break;
+			case DATE:
+				fieldView = getNewDateFieldView((DateFieldBean) fieldBean);
+				break;
+			default:
+				break;
+		}
+		
+		return fieldView;
+	}
+	
+	/**
+	 * @param fieldBean
+	 * @return
+	 */
+	private View getNewDateFieldView(DateFieldBean dateField)
+	{
+		EditText text = new EditText(context);
+		
+		// text.setText(textField.getValue());
+		text.setText("Texto por defecto...");
+		text.setGravity(Gravity.TOP);
+		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		LinearLayout layout = getLayout();
+		layout.addView(getLabel(dateField.getFormField().getLabel()));
+		layout.addView(text);
+		return layout;
+	}
+	/*	DatePicker datePicker = new DatePicker(context);
+		
+		// text.setText(textField.getValue());
+		datePicker.setForegroundGravity(Gravity.TOP);
+		datePicker.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		LinearLayout layout = getLayout();
+		layout.addView(getLabel(dateField.getFormField().getLabel()));
+		layout.addView(datePicker);
+		return layout;*/
+	/**
+	 * @param fieldBean
+	 * @return
+	 */
+	private View getNewTextFieldView(TextFieldBean textField)
+	{
+		
+	EditText text = new EditText(context);
+		
+		// text.setText(textField.getValue());
+		text.setText("Texto por defecto...");
+		text.setGravity(Gravity.TOP);
+		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		LinearLayout layout = getLayout();
+		layout.addView(getLabel(textField.getFormField().getLabel()));
+		layout.addView(text);
+		return layout;
+	}
+	
+	/**
+	 * @param title
+	 * @return
+	 */
+	private final TextView getLabel(String title)
 	{
 		TextView text = new TextView(context);
-		text.setText(items[position]);
-		text.setTextColor(Color.BLACK);
-		// text.setHeight(height);
-		// text.setWidth(width);
-		text.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-		text.setBackgroundColor(position % 2 == 0 ? Color.WHITE : Color.GRAY);
-		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+		text.setText(title.toString());
+		text.setTextColor(Color.WHITE);
+		text.setGravity(Gravity.TOP);
+		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		return text;
 	}
 	
+	private final LinearLayout getLayout()
+	{
+		LinearLayout layout = new LinearLayout(context);
+		layout.setGravity(Gravity.CENTER_HORIZONTAL);
+		layout.setOrientation(LinearLayout.VERTICAL);
+		layout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+		return layout;
+	}
 }

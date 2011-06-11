@@ -55,11 +55,14 @@ public class EfficientViewFlipper extends FrameLayout
 		 * from the manager
 		 */
 		if (nextView != null)
+		{
 			addView(nextView);
+			nextView.layout(width, nextView.getTop(), 2 * width, nextView.getBottom());
+		}
 		if (currentView != null)
 		{
 			addView(currentView);
-			bringChildToFront(currentView);
+			currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
 		}
 	}
 	
@@ -101,16 +104,27 @@ public class EfficientViewFlipper extends FrameLayout
 			removeAllViews();
 			
 			boolean updated = viewsGenerator.updateBeforeDecrease();
+			
 			nextView = currentView;
 			currentView = previousView;
+			
 			previousView = (LinearLayout) viewsGenerator.getPrevView();
 			if (previousView != null)
+			{
+				previousView.layout(-width, previousView.getTop(), 0, previousView.getBottom());
 				addView(previousView);
-			addView(currentView);
-			if (nextView != null)
-				addView(nextView);
+			}
 			
-			bringChildToFront(currentView);
+			addView(currentView);
+			
+			if (nextView != null)
+			{
+				addView(nextView);
+				nextView.layout(width, nextView.getTop(), 2 * width, nextView.getBottom());
+			}
+			
+			currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
+			
 			if (!updated)
 				viewsGenerator.decIndex();
 		}
@@ -134,14 +148,22 @@ public class EfficientViewFlipper extends FrameLayout
 			
 			previousView = currentView;
 			currentView = nextView;
+			
 			nextView = (LinearLayout) viewsGenerator.getNextView();
 			if (previousView != null)
+			{
+				previousView.layout(-width, previousView.getTop(), 0, previousView.getBottom());
+				
 				addView(previousView);
+			}
 			addView(currentView);
 			if (nextView != null)
+			{
+				nextView.layout(width, nextView.getTop(), 2 * width, nextView.getBottom());
 				addView(nextView);
+			}
 			
-			bringChildToFront(currentView);
+			currentView.layout(0, currentView.getTop(), width, currentView.getBottom());
 			
 			if (!updated)
 				viewsGenerator.incIndex();

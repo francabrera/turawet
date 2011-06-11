@@ -31,13 +31,12 @@ public class TextFieldBean extends GenericInstanceFieldBean
 	/**
 	 * @uml.property name="value"
 	 */
-	private String	value;
-	
+	private String	text;
 	
 	public TextFieldBean(int order, FormFieldBean formField)
 	{
 		super(order, formField);
-		value = "";
+		text = "";
 	}
 	
 	@Override
@@ -46,16 +45,33 @@ public class TextFieldBean extends GenericInstanceFieldBean
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.instancefield.toString());
-		String temp = "<instancefield><id/><value>" + value + "</value><order>" + order + "</order>" + /*
-																																		 * formField
-																																		 * .
-																																		 * toXml
-																																		 * (
-																																		 * writer
-																																		 * )
-																																		 * +
-																																		 */"</instancefield>";
+		String temp = "<instancefield><id/><value>" + text + "</value><order>" + order + "</order>" + /*
+																																	 * formField
+																																	 * .
+																																	 * toXml
+																																	 * (
+																																	 * writer
+																																	 * )
+																																	 * +
+																																	 */"</instancefield>";
 		
+	}
+	
+	/**
+	 * @return the text
+	 */
+	public String getText()
+	{
+		return text;
+	}
+	
+	/**
+	 * @param text
+	 *           the text to set
+	 */
+	public void setText(String text)
+	{
+		this.text = text;
 	}
 	
 }

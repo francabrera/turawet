@@ -46,7 +46,8 @@ public class DownloadFormsActivity extends ListActivity
 		
 		try
 		{
-			// Hacemos la llamada al WS y eliminamos aquellos formularios que ya estén
+			// Hacemos la llamada al WS y eliminamos aquellos formularios que ya
+			// estén
 			// guardadaos en el teléfono, para que no se puedan volver a descargar.
 			List<FormIdentificationBean> avaliablesFormsToDownload = ws.getAllFormPreview();
 			DataBaseManager db = DataBaseManager.getInstance(this);
@@ -136,7 +137,7 @@ public class DownloadFormsActivity extends ListActivity
 		{
 			List<FormInfoBean> formsToSave = new ArrayList<FormInfoBean>();
 			WSClient ws = WSClient.getInstance();
-			
+			boolean errors = false;
 			// Descargamos todos los formularios y los almacenamos
 			for (FormIdentificationBean formId : selectedForms)
 			{
@@ -148,19 +149,22 @@ public class DownloadFormsActivity extends ListActivity
 				catch (Exception e)
 				{
 					AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.error_downloading_form).show();
+					errors = true;
 					e.printStackTrace();
 				}
 			}
-			
-			// Guardamos los formularios en el dispositivo
-			DataBaseManager dbManager = DataBaseManager.getInstance(this);
-			try
+			if (!errors)
 			{
-				dbManager.saveForms(formsToSave);
-			}
-			catch (SQLException s)
-			{
-				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.error_saving_form).show();
+				// Guardamos los formularios en el dispositivo
+				DataBaseManager dbManager = DataBaseManager.getInstance(this);
+				try
+				{
+					dbManager.saveForms(formsToSave);
+				}
+				catch (SQLException s)
+				{
+					AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.error_saving_form).show();
+				}
 			}
 			// Cerramos la activity
 			finish();
