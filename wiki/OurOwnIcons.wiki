@@ -1,0 +1,12 @@
+#summary Deberíamos tener nuestros propios iconos. Faltan en el BeeKeeper admin.
+#labels Phase-Implementation
+
+= Introducción =
+
+Deberíamos tener nuestros propios iconos para evitar problemas de copyright.
+
+= Detalles =
+
+En el BeeKeeper admin estamos utilizando iconos ajenos para "geolocalización" y "estadísticas".
+
+¿Los del modelador son nuestros?
