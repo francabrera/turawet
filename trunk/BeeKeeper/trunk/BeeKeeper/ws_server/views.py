@@ -72,7 +72,7 @@ class SoapService(DjangoSoapService):
             Sending the XML of a selected form by name-version
         '''
         form = Form.objects.get(name = name, version = version)
-        return form
+        return form.xml
 
 
     @soapmethod(Array(Integer), _returns = Array(String))
