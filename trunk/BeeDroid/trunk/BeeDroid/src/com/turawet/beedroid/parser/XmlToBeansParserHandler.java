@@ -3,11 +3,6 @@ package com.turawet.beedroid.parser;
 /**
  * 
  */
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -20,8 +15,7 @@ import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.beans.SectionBean;
 import com.turawet.beedroid.beans.TextFieldBean;
-import com.turawet.beedroid.constants.Cte.FieldTypeMap;
-
+import com.turawet.beedroid.constants.Cte.FieldType;
 
 /**
  * @class FormSaxParserHandler: Our Sax Parser Handler
@@ -37,60 +31,65 @@ public class XmlToBeansParserHandler extends DefaultHandler
 {
 	/**
 	 *
-	 */	
+	 */
 	/* Result */
-	private InstanceBean instance;
+	private InstanceBean					instance;
 	/* Aux */
-    private StringBuilder buffer;
-    private boolean buffering;
-    private boolean inProperty;
-    private boolean inField;
-    private boolean inSection;
-    /* Temp atributes */
-    private FormBean tempForm;
-    private SectionBean tempSection;
-    private FormFieldBean tempFormField;
-    private PropertyBean tempProperty;
-    private GenericInstanceFieldBean tempInstanceField;
-
-
+	private StringBuilder				buffer;
+	private boolean						buffering;
+	private boolean						inProperty;
+	private boolean						inField;
+	private boolean						inSection;
+	/* Temp atributes */
+	private FormBean						tempForm;
+	private SectionBean					tempSection;
+	private FormFieldBean				tempFormField;
+	private PropertyBean					tempProperty;
+	private GenericInstanceFieldBean	tempInstanceField;
 	
 	@Override
-	public void startDocument() throws SAXException	{
+	public void startDocument() throws SAXException
+	{
 		/* Initializing */
 		instance = new InstanceBean();
 		tempForm = new FormBean();
-        buffer = new StringBuilder();
-        buffering = false;
-        inField = false;
-        inSection = false;
+		buffer = new StringBuilder();
+		buffering = false;
+		inField = false;
+		inSection = false;
 	}
 	
 	@Override
-	public void endDocument() throws SAXException {
+	public void endDocument() throws SAXException
+	{
 	}
 	
 	@Override
-	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException	{
+	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException
+	{
 		/* A section is being opened */
-		if (localName.equalsIgnoreCase("section")) {
+		if (localName.equalsIgnoreCase("section"))
+		{
 			inSection = true;
 			tempSection = new SectionBean();
 		}
 		/* A field is being opened */
-		else if (inSection && localName.equalsIgnoreCase("field")) {
+		else if (inSection && localName.equalsIgnoreCase("field"))
+		{
 			inField = true;
 			tempFormField = new FormFieldBean();
 		}
 		/* A field is being opened */
-		else if (inSection && inField && localName.equalsIgnoreCase("property")) {
+		else if (inSection && inField && localName.equalsIgnoreCase("property"))
+		{
 			inProperty = true;
 			tempProperty = new PropertyBean();
 		}
 		/*
 		 * Internal tags
 		 */
-		else {
+		else
+		{
 			buffering = true;
 		}
 	}
@@ -99,116 +98,136 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	public void endElement(String uri, String qName, String localName) throws SAXException
 	{
 		/* Closing Meta */
-		if (localName.equalsIgnoreCase("meta")) {
+		if (localName.equalsIgnoreCase("meta"))
+		{
 			instance.setForm(tempForm);
 		}
 		/* Closing Section */
-		if (localName.equalsIgnoreCase("section")) {
+		if (localName.equalsIgnoreCase("section"))
+		{
 			inSection = false;
-			//NOW WE HAVE TO ADD THE SECTION TO THE INSTANCE
+			// NOW WE HAVE TO ADD THE SECTION TO THE INSTANCE
 			instance.addSection(tempSection);
 		}
 		/* Closing Field */
-		else if (localName.equalsIgnoreCase("field")) {
-			inField= false;
-			FieldTypeMap type;
-			try {
-				type = FieldTypeMap.valueOf((tempFormField.getType()));
+		else if (localName.equalsIgnoreCase("field"))
+		{
+			inField = false;
+			FieldType type;
+			try
+			{
+				type = tempFormField.getType();
 			}
-			catch(Exception e) {
-				type = FieldTypeMap.TEXT;
+			catch (Exception e)
+			{
+				type = FieldType.TEXT;
 			}
-			switch (type) {
-				case TEXT: 
-					//TO-DO: Arguments. This constructor exists in the GenericInstance, but there seems not to be inheritance
+			switch (type)
+			{
+				case TEXT:
+					// TO-DO: Arguments. This constructor exists in the
+					// GenericInstance, but there seems not to be inheritance
 					// the first attribute is the order
 					tempInstanceField = new TextFieldBean(1, tempFormField);
-				break;
-				case DATE: 
-					tempInstanceField = new DateFieldBean(1, tempFormField); // TO-DO: Arguments
-				break;
+					break;
+				case DATE:
+					tempInstanceField = new DateFieldBean(1, tempFormField); // TO-DO:
+																								// Arguments
+					break;
 			}
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
 			tempSection.addChild(tempInstanceField);
 			
 		}
 		/* Closing Property */
-		if (localName.equalsIgnoreCase("property")) {
+		if (localName.equalsIgnoreCase("property"))
+		{
 			inProperty = false;
-			//NOW WE HAVE TO ADD THE PROPERTY TO THE FORMFIELD
+			// NOW WE HAVE TO ADD THE PROPERTY TO THE FORMFIELD
 			tempFormField.addProperty(tempProperty);
 		}
 		/************************************/
 		/* Meta */
-		else if (!inSection && localName.equalsIgnoreCase("id")) {
+		else if (!inSection && localName.equalsIgnoreCase("id"))
+		{
 			String value = buffer.toString().trim();
 			if (!value.isEmpty())
 				tempForm.setId(Integer.parseInt(value));
-			/* ByDefaultID*/
-			else {
+			/* ByDefaultID */
+			else
+			{
 				tempForm.setId(-1);
 			}
 			clearBuffer();
 		}
-		else if (!inSection && localName.equalsIgnoreCase("name")) {
+		else if (!inSection && localName.equalsIgnoreCase("name"))
+		{
 			tempForm.setName(buffer.toString().trim());
 			clearBuffer();
 		}
-		else if (!inSection && localName.equalsIgnoreCase("version")) {
+		else if (!inSection && localName.equalsIgnoreCase("version"))
+		{
 			String value = buffer.toString().trim();
 			if (!value.isEmpty())
 				tempForm.setVersion(Integer.parseInt(value));
 			clearBuffer();
 		}
-		else if (!inSection && localName.equalsIgnoreCase("user")) {
+		else if (!inSection && localName.equalsIgnoreCase("user"))
+		{
 			instance.setAuthoruser(buffer.toString().trim());
 			clearBuffer();
 		}
 		/* Section */
-		else if (inSection && !inField && localName.equalsIgnoreCase("id")) {
+		else if (inSection && !inField && localName.equalsIgnoreCase("id"))
+		{
 			String value = buffer.toString().trim();
 			if (!value.isEmpty())
 				tempSection.setId(Integer.parseInt(value));
 			clearBuffer();
 		}
-		else if (inSection && !inField && localName.equalsIgnoreCase("name")) {
+		else if (inSection && !inField && localName.equalsIgnoreCase("name"))
+		{
 			tempSection.setName(buffer.toString().trim());
 			clearBuffer();
 		}
 		/* Field */
-		else if (inSection && inField && localName.equalsIgnoreCase("id")) {
+		else if (inSection && inField && localName.equalsIgnoreCase("id"))
+		{
 			String value = buffer.toString().trim();
 			if (!value.isEmpty())
 				tempFormField.setId(Integer.parseInt(value));
 			clearBuffer();
 		}
-		else if (inSection && inField && localName.equalsIgnoreCase("label")) {
+		else if (inSection && inField && localName.equalsIgnoreCase("label"))
+		{
 			tempFormField.setLabel(buffer.toString().trim());
 			clearBuffer();
 		}
-		else if (inSection && inField && localName.equalsIgnoreCase("type")) {
-			tempFormField.setType(buffer.toString().trim());
+		else if (inSection && inField && localName.equalsIgnoreCase("type"))
+		{
+			tempFormField.setType(FieldType.valueOf(buffer.toString().trim()));
 			clearBuffer();
 		}
-		else if (inSection && inField && localName.equalsIgnoreCase("required")) {
+		else if (inSection && inField && localName.equalsIgnoreCase("required"))
+		{
 			tempFormField.setRequired(true);
 			clearBuffer();
 		}
 		/* Property */
-		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("name")) {
+		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("name"))
+		{
 			tempProperty.setName(buffer.toString().trim());
 			clearBuffer();
 		}
-		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("value")) {
+		else if (inSection && inField && inProperty && localName.equalsIgnoreCase("value"))
+		{
 			tempProperty.setValue(buffer.toString().trim());
 			clearBuffer();
 		}
 		
-		/* Once finished, we always have to clean the buffer*/
-		clearBuffer();	
+		/* Once finished, we always have to clean the buffer */
+		clearBuffer();
 	}
-
-	
 	
 	/**
 	 * SAX call this method when found text between some tags
@@ -229,12 +248,11 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		buffer.setLength(0);
 	}
 	
-
-	
 	/**
 	 * @return
 	 */
-	public InstanceBean getInstance() {
+	public InstanceBean getInstance()
+	{
 		return instance;
 	}
 }

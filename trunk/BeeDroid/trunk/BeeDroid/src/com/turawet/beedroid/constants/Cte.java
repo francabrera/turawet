@@ -19,7 +19,7 @@ public final class Cte
 	 *
 	 */
 	
-	public static enum FieldTypeMap
+	public static enum FieldType
 	{
 		TEXT, DATE
 	};

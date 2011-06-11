@@ -43,5 +43,5 @@ public abstract class BaseBean
 		this.id = id;
 	}
 	
-	abstract public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException;
+	protected abstract void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException;
 }
