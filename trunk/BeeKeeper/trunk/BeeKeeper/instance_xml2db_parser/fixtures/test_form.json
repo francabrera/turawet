@@ -1,0 +1,34 @@
+[
+  {
+    "model": "db_models.Form",
+    "pk": 1,
+    "fields": {
+    	"name": "Formulario",
+    	"version": 1,
+    	"xml": "<xml>XML</xml>",
+    	"active": true
+  	}
+  },
+  {
+    "model": "db_models.Section",
+    "pk": 1,
+    "fields": {
+    	"name": "Sección",
+    	"order": 1,
+    	"form": 1
+  	}
+  },
+  {
+    "model": "db_models.FormField",
+    "pk": 1,
+    "fields": {
+    	"label": "Etiqueta1",
+    	"section_order": 1,
+    	"section": 1,
+    	"field_group": null,
+    	"field_group_order": null,
+    	"type": "TEXT",
+    	"required": false
+  	}
+  }
+]
