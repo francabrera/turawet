@@ -1,0 +1,12 @@
+#summary ¿Cuál sería el objeto adecuado a devolver por dicho servicio y qué contendría?
+#labels Phase-Implementation,Phase-Design
+
+
+= Introduction =
+
+Tal y como ya comentamos en persona el otro día, el servicio ahora mismo sólo retorna un Boolean que refleja si se ha insertado o no con éxito el formulario generado desde el modelador en la BBDD del Beekeeper.
+
+
+= Details =
+
+Nos deberíamos plantear qué tipo de excepciones debería devolver éste servicio y el formato común de devolución de excepciones para todos los servicios web del Beekeeper. Por ejemplo, ¿devolvemos un código de excepción y el cliente se encarga de mostrar un mensaje o enviamos el código de excepción y además el mensaje en un objeto?.
