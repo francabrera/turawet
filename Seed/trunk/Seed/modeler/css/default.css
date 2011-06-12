@@ -240,13 +240,39 @@ p { margin:0; }
     background-image:url('../images/icons/text2.png');
 }
 
-#form li.file {
-    background-color:#DAF0BD;
+#form li.numeric {
+    background-color:#B0C2FF;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.radio {
+    background-color:#FFD4B0;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.location {
+    background-color:#B0FFFB;
     background-image:url('../images/icons/file.png');
 }
 
-#form li.image-gallery {
+#form li.image {
     background-color:#BDDFF0;
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.checkbox {
+	background-color:#DAF0BD;
+    /*background-color:#E2BDF0;*/
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.combo {
+    background-color:#FAEF78;
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.date {
+    background-color:#D0B0FF;
     background-image:url('../images/icons/image.png');
 }
 /*********************** ----------- ***********************/
@@ -258,7 +284,7 @@ p { margin:0; }
 	width:10%;
     height: 100%;
     font: 10px/1.5 helvetica, arial, san-serif;
-    padding:0;
+    padding:0px;
     margin:0px auto;
     background-color: #F0EDEA;
 }
@@ -269,9 +295,9 @@ p { margin:0; }
 .item {
 	display:block;
 	float:right;
-	width:80px;
-	height:58px;
-	margin:20px auto;
+	width:90px;
+	height:36px;
+	margin:10px auto;
 	text-align:center;
 	text-decoration:none;
 	color: #000;

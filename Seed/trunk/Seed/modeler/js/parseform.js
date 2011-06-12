@@ -11,9 +11,9 @@
 
 function formToXML (name, sections) {
 	var text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-	text += "<form><id/><version>1</version>";
+	text += "<form><meta><id/><version>1</version>";
 	text += "<name>" + name + "</name>";
-	text += "<author><user>turawet</user></author>";
+	text += "<author><user>turawet</user></author></meta>";
 	text += "<sections>";
 	for (i=0;i<sections.length;i++)	
 		text += sections[i].toXMLOrdered();
