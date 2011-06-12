@@ -1,111 +1,10 @@
 /**
-* @fileoverview Definición de clases y variables donde se 
-* 				almacenará el formulario y sus elementos
-* 				así como funciones para la creación, eliminación,
-* 				y manejo de los mismos.
+* @fileoverview Funciones para la creación, eliminación,
+* 				y manejo de los modelos.
 *
 * @author Francisco Jose Cabrera Hernandez, Nicolas Pernas Maradei, Romen Rodriguez Gil
 * @version 0.1
 */
-
-/*****************************************************************/
-/* Form classes                                                  */
-/*****************************************************************/
-/**
- * Clase campo
- */
-function Field(name, order, type) {
-	this.name = name;
-	this.order = order;
-	this.type = type;
-	
-	/**
-	 * Devuelve el XML del campo
-	 */
-	this.toXML = function()
-	{
-		var fieldxml = "<field><id />";
-		fieldxml += "<label>" + this.name + "</label>";
-		fieldxml += "<type>"+ this.type +"</type>";
-		fieldxml += "<properties/></field>";
-		return fieldxml;
-	}
-	
-}
-/* -------------- */
-
-
-/**
- * Clase sección
- */
-function Section(name, order) {
-	this.name = name;
-	this.order = order;
-	this.fields = new Array();
-	
-	/**
-	 * Añadir campo a la sección
-	 */
-	this.addField = function(f)    
-	{
-	    this.fields.push(f);
-	}
-	
-	this.removeField = function(id)    
-	{
-	    delete this.fields[id];
-	}
-	
-	this.changeFieldName = function(id, newlabel)
-	{
-		if (typeof this.fields[id]  != "undefined")
-			this.fields[id].name = newlabel;
-	}
-	
-	/**
-	 * Devuelve el número de campos de la sección
-	 */
-	this.size = function()    
-	{
-	    return this.fields.length;
-	}
-	
-	/**
-	 * Devuelve el XML de la sección con sus campos
-	 */
-	this.toXML = function()
-	{
-		var i;
-		var xml = "<section><id/>";
-		xml += "<name>" + this.name + "</name>";
-		xml += "<fields>";
-		for (i=0;i<this.fields.length;i++)	
-			if (typeof this.fields[i] != "undefined")
-				xml += this.fields[i].toXML();
-		xml += "</fields></section>";
-		return xml;
-	}
-	
-	this.toXMLOrdered = function()
-	{
-		var i;
-		var xml = "<section><id/>";
-		xml += "<name>" + this.name + "</name>";
-		xml += "<fields>";
-		var sectionElems = $("#s" + this.order + " li");
-		for (i=0;i<sectionElems.length;i++) {
-			var fieldElem = sectionElems[i];
-			// Los IDs de los elementos Field serán sX-fX
-			// Nos quedamos con el segundo matching
-			var j = parseInt((fieldElem.id).match(/\d+/g)[1]);
-			xml += this.fields[j].toXML();
-		}
-		xml += "</fields></section>";
-		return xml;
-	}
-		
-}
-/* -------------- */
 
 /*****************************************************************/
 /* Inicializacion                                                */
@@ -173,6 +72,11 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 		$('<div />', {
 	    	class: 'actions'
 		}).prepend(
+				// Botón de requerido/no requerido
+				/*$('<div />', {
+					onClick: 'javascript:setRequired(\''+idField+'\')',
+					class: 'fieldNotRequired'
+				}),*/
 				// Botón de propiedades
 				$('<img />', {
 					src  : 'images/buttons/more.png',
@@ -215,6 +119,27 @@ function deleteField (tagID) {
    deleteParentElement(node, 'li');
 }
 
+// Establecer la obligatoriedad o no del campo
+function setRequired(tagID) {
+   var node = document.querySelector('#'+tagID);
+   var auxIDs = tagID.match(/\d+/g);
+   var sectionID = parseInt(auxIDs[0]);
+   var fieldID = parseInt(auxIDs[1])
+   if ($(node, "div.actions .fieldRequired").length > 0) {
+	   var image = $(node, "div.actions .fieldRequired");
+	   $(image).addClass("fieldNotRequired");
+	   $(image).removeClass("fieldRequired");
+	   formSections[sectionID].fields[fieldID].setRequired(false);
+   }
+   else if ($(node, "div.actions .fieldNotRequired").length > 0) {
+	   var image = $(node, "div.actions .fieldNotRequired");
+	   $(image).addClass("fieldRequired");
+	   $(image).removeClass("fielNotdRequired");
+	   formSections[sectionID].fields[fieldID].setRequired(true);
+   }
+		
+}
+
 //Mostrar propiedades
 function expandField (tagID) {
    var node = document.querySelector('#'+tagID);
@@ -252,6 +177,7 @@ function addSection () {
 	addListenersToSection(newSection);
 }
 
+// Resaltar sección seleccionada
 function selectSection (id) {
 	var selectedSection = $('#s' + id);
 	selectedSection.addClass("selected");
