@@ -8,8 +8,8 @@ Algoritmo base para rellenar una nueva instancia. Todos los pasos a seguir por l
 
 = Detalles =
 
-* La activity llama al parser, este le devuelve el objeto instance. Instancia un BeanManager con ese objeto InstanceBean.
-* La activity instancia al flipper y le pasa el BeanManager.
-* Cuando se pulsa en el menú el botón de acceder a una sección, la activity llama al BeanManager solicitándole la lista de secciones, con su nombre, número de página donde esta comienza. Luego la activity le dice al flipper que haga un smoothScroll a esa página.
-* Cuando se cambia de página, el flipper tiene que actualizar el valor del campo en el objeto instancia (hablamos del campo que esta mostrando).
-* Cuando se le de al botón enviar, el activity llamará al BeanManager y le dirá que traduzca a su instancia.
+  * La activity llama al parser, este le devuelve el objeto instance. Instancia un BeanManager con ese objeto InstanceBean.
+  * La activity instancia al flipper y le pasa el BeanManager.
+  * Cuando se pulsa en el menú el botón de acceder a una sección, la activity llama al BeanManager solicitándole la lista de secciones, con su nombre, número de página donde esta comienza. Luego la activity le dice al flipper que haga un smoothScroll a esa página.
+  * Cuando se cambia de página, el flipper tiene que actualizar el valor del campo en el objeto instancia (hablamos del campo que esta mostrando).
+  * Cuando se le de al botón enviar, el activity llamará al BeanManager y le dirá que traduzca a su instancia.
