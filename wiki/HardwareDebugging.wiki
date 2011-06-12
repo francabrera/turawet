@@ -1,0 +1,15 @@
+#summary Depurar la aplicación desde el teléfono
+#labels Phase-Implementation
+
+= Introducción =
+
+Cómo hacer para depurar la aplicación desde el teléfono.
+
+
+= Details =
+
+En el móvil habilitamos la opción de depuración remota: Aplicaciones > Desarrollo.
+Conectamos el móvil por USB. Seguir los pasos que se muestran en este tutorial para conectarlo http://developer.android.com/guide/developing/device.html
+En el Eclipse, en la configuración del depurador, marcar la búsqueda de los dispositivos manual. Cuando le demos a depurar, debería salir una pantalla de selección del device. Seleccionamos el teléfono.
+
+Todo lo que hagamos en el móvil, se verá en el log que nos muestra adb logcat.
