@@ -122,6 +122,31 @@ p { margin:0; }
     top:-5px;
 }
 
+#form li .actions .fieldRequired {
+    margin: 0px 30px 0px 20px;
+    position:relative;
+    width: 16px;
+    height: 16px;
+    top:-5px;
+    background-image:url('../images/bug.png');
+}
+
+#form li .actions .fieldRequired {
+    margin: 0px 30px 0px 20px;
+    position:relative;
+    padding:16px;
+    top:-5px;
+    background-image:url('../images/send_icon.png');
+}
+
+#form li .actions .fieldNotRequired {
+    margin: 0px 30px 0px 20px;
+    position:relative;
+    padding:16px;
+    top:-5px;
+    background-image:url('../images/bug.png');
+}
+
 #form li div.properties {
     display:none;
     padding:20px;
