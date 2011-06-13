@@ -6,8 +6,9 @@ from django.conf import settings
 
 
 urlpatterns = patterns('',
-    (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_MODELER_ROOT, 'show_indexes': False}),
-    (r'^templates/images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGES_MODELER_ROOT, 'show_indexes': False}),
+    (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_BEEKEEPER_ROOT, 'show_indexes': False}),
+    (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGES_BEEKEEPER_ROOT, 'show_indexes': False}),
+    (r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_BEEKEEPER_ROOT, 'show_indexes': False}),
 )
 
 urlpatterns += patterns('beekeeper.views',

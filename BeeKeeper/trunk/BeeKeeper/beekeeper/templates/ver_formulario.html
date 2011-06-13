@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Formularios{% endblock %}
-{% block dislpayedInfo %}
+{% block mainframe %}
 
 			{% if form %}
-				<h1>Formulario: {{ form.name }}</h1>
+				<h1>Formulario: {{ form.id }}</h1>
 				<h2>{{ form.name }}</h2>
 
 
-				{% for section in sections %}
-					 <ul id="s0" class="section" href="#s0">
+				{% for section in form.section_set.all %}
+					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
 					   <p class="sectionlabel">{{ section.name }}</p>
-					   {% for field in form_fields %}
-	                       <li class="text"><p class="fieldlabel">{{ field.label }}</p><br></li>
+					   {% for field in section.formfield_set.all %}
+	                       <li id="f{{ field.id }}" class="{{ field.type|lower }}">
+								<div class="actions">
+									<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ field.id }}')" class="fieldButton">
+								</div>
+	                       		<p class="fieldlabel">{{ field.label }}</p>
+	                       		<br />
+								<div class="properties">
+							   {% for property in field.property_set.all %}
+									<p>{{ property.name }}: {{ property.value }}</p>		                       		
+							   {% endfor %}
+		                       	</div>
+	                       </li>
 					   {% endfor %}
 					</ul>
 				{% endfor %}
@@ -24,31 +35,45 @@
 
 {% endblock %}
 
-{% block options %}
+{% block sidebar %}
 		    <ul>
 				<li><a class="item" href="#" id="campo1">
-					<img src="../../templates/images/delete.png" />
+					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar formulario</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo2">
-					<img src="../../templates/images/instances.png" />
+					<img src="/beekeeper/images/instances.png" />
 					<div class="label">
 						<p><strong>Instancias</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo3">
-					<img src="../../templates/images/statistics.png" />
+					<img src="/beekeeper/images/statistics.png" />
 					<div class="label">
 						<p><strong>Estad&iacute;sticas</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo4">
-					<img src="../../templates/images/geolocalization.png" />
+					<img src="/beekeeper/images/geolocalization.png" />
 					<div class="label">
 						<p><strong>Geolocalizaci&oacute;n</strong></p>
 					</div>
 				</a></li>			
 			</ul>
+{% endblock %}
+
+
+{% block sectionslinks %}
+	<ul>
+	{% for section in form.section_set.all %}
+		<li id="s{{ section.id }}link">
+			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
+				Sección {{ section.id }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+	
 {% endblock %}

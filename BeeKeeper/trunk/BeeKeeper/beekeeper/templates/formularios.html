@@ -1,27 +1,34 @@
 {% extends "base.html" %}
 {% block title %}Formularios{% endblock %}
-{% block dislpayedInfo %}
+{% block mainframe %}
 
 			{% if forms %}
 				<h1>Formularios</h1>
 				<h2>Lista de formularios</h2>
-				<table id="form{{ forloop.counter0 }}" border="1px" style="width: 60%; ">
+				<table id="formstable">
 				<thead>
-					<td><span class="form">ID</span></td>
-					<td><span class="form">Nombre</span></td>
-					<td><span class="form">Version</span></td>
+					<td><span class="tableelement">ID</span></td>
+					<td><span class="tableelement">Nombre</span></td>
+					<td><span class="tableelement">Version</span></td>
+					<td><span class="tableelement">Acciones</span></td>
 				</thead>
 				<tbody>
 				{% for form in forms %}
 					<tr>
 						<td>
-							<span class="form">{{ form.id }}</span>
+							<span class="tableelement">{{ form.id }}</span>
 						</td>
 						<td>
-							<a href="show_form/{{ form.id }}"><span class="form">{{ form.name }}</span></a>
+							<a href="show_form/{{ form.id }}"><span class="tableelement">{{ form.name }}</span></a>
 						</td>
 						<td>
-							<span class="form">{{ form.version }}</span>
+							<span class="tableelement">{{ form.version }}</span>
+						</td>
+						<td>
+							<a href="#"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>
+							<a href="#"><span class="tableelement">Instancias</span></a>
+							<a href="#"><span class="tableelement">Estad&iacute;sticas</span></a>
+							<a href="#"><span class="tableelement">Geolocalizaciones</span></a>
 						</td>
 					</tr>
 				{% endfor %}
