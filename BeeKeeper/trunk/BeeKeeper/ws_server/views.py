@@ -104,7 +104,7 @@ class SoapService(DjangoSoapService):
         '''
             Receiving an XML (instance) and calling the parser
         '''
-
+        xml = sb64decode(xml)
         parser = InstanceXmldbParser()
         is_inserted = parser.generateModels(xml)
 
