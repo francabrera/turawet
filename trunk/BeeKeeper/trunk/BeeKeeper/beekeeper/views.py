@@ -7,58 +7,39 @@ from django.template import RequestContext
 
 # Imports
 from BeeKeeper.db_models.models import Form, Section, FormField, Instance,\
-    InstanceField
+    InstanceField, Property
 
 
 def showFormList (request):
     
-    forms = Form.objects.all();
+    forms = Form.objects.all()
     
     return render_to_response('formularios.html', {'forms': forms });
 
 
 def showForm (request, formid):
     
-    form = Form.objects.filter(id = formid);
-    if form:
-        sections = Section.objects.filter(form = form)
-        i = 0
-        #form_fields = zeros(len(sections))
-        #for section in sections:
-        #    form_fields[i] = FormField.objects.filter(section=section)
-        #    i += 1
-        form_fields = FormField.objects.filter(form=form, section=sections[0])
-    else:
-        sections = None
-        form_fields = None
+    form = Form.objects.filter(id = formid)
+    form = form[0]
+
     
-    
-    return render_to_response('ver_formulario.html', {'form': form, 'sections': sections, 'form_fields': form_fields });
+    return render_to_response('ver_formulario.html', {'form': form})
 
 
 def showInstanceList (request, formid):
     
-    form = Form.objects.filter(id = formid);
+    form = Form.objects.filter(id = formid)
+    form = form[0]
     if form:
         instances = Instance.objects.filter(form=form);
     
-    return render_to_response('instancias.html', {'instances': instances });
+    return render_to_response('instancias.html', {'instances': instances })
 
 
 def showInstance (request, instanceid):
     
-    instance = Instance.objects.filter(id = instanceid);
-    if instance:
-        sections = Section.objects.filter(form = instance.form)
-        i = 0
-        #form_fields = zeros(len(sections))
-        #for section in sections:
-        #    form_fields[i] = FormField.objects.filter(section=section)
-        #    i += 1
-        instance_fields = InstanceField.objects.filter(instance=instance, section=sections[0])
-    else:
-        sections = None
-        instance_fields = None
+    instance = Instance.objects.filter(id = instanceid)
+    instance = instance[0]
+
     
-    
-    return render_to_response('ver_instancia.html', {'instance': instance, 'sections': sections, 'instance_fields': instance_fields });
+    return render_to_response('ver_instancia.html', {'instance': instance});

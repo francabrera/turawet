@@ -9,11 +9,14 @@ PARENT_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # CSS paths
-CSS_MODELER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper', 'css')
+CSS_BEEKEEPER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper', 'css')
 
 # Images paths
-IMAGES_MODELER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper',
+IMAGES_BEEKEEPER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper',
                                     'templates', 'images')
+
+# JS paths
+JS_BEEKEEPER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper', 'js')
 
 
 

@@ -1,0 +1,340 @@
+/*********************** Generales ***********************/
+
+html {
+	height:100%;
+}
+body {
+    text-align: center;
+	background-color: #2F2C29;
+	background-image:url('../images/turawet_background2.png');
+    background-repeat:no-repeat;
+    background-position:right top;
+	margin:0px auto;
+	padding:0px;
+	font: 13px/1.5 helvetica, arial, san-serif;
+	height: 100%;
+}
+h1, h2, h3 { text-align:center; }
+p { margin:0; }
+
+:link img {
+  border: none;
+}
+
+/*********************** ----------- ***********************/
+
+/*********************** Contenedor global ***********************/
+#containt {
+    position: relative;
+    text-align: left;
+	font: 13px/1.5 helvetica, arial, san-serif;
+  	width:960px;
+	padding:0;
+    margin:0px auto;
+    list-style:none;
+    height: 100%;
+    background-color:#B3AFAA;
+}
+/*********************** ----------- ***********************/
+
+
+#minilogo {
+    position:fixed;
+    bottom:18px;
+    left:18px;
+}
+
+
+/*********************** FORMULARIO ***********************/
+#form {
+    float:left;
+
+    width:90%;
+    height: 90%;
+    overflow: auto;
+}
+
+#form table {
+	font-size: 14px;
+	margin: 15px 0 0 40px;
+}
+
+#form table td {
+	padding: 10px 0 0 20px;
+}
+
+
+    /************************ SECTION ************************/
+#form ul {
+    margin: 0px 30px 20px 30px;
+    padding: 15px 0px 20px 0px;
+    border: 1px dashed #000;
+}
+
+#form ul.selected {
+    border-color: #E01B1B;
+}
+
+#form .sectionlabel {
+    font: bold 14px/1.5 helvetica, arial, san-serif;
+    margin: 0px 0px 0px 10px;
+}
+    /*********************** ----------- ***********************/
+
+    /************************ FIELDS ************************/
+#form li {
+	list-style:none;
+	background-image:url('../images/icons/empty.png');
+    background-repeat:no-repeat;
+    background-position:left top;
+    margin:5px 0px 0px 0px;
+    padding:20px;
+    -moz-border-radius: 12px; /* redondeo de los bordes */
+    border-radius: 12px;
+}
+
+#form li p.fieldlabel {
+	margin:0px 0px 0px 40px;
+}
+
+#form li .actions {
+    float:right;
+}
+
+#form li .actions .fieldButton {
+    margin: 0px 20px;
+    position:relative;
+    top:-5px;
+}
+
+#form li .actions .fieldRequired {
+    margin: 0px 30px 0px 20px;
+    position:relative;
+    width: 16px;
+    height: 16px;
+    top:-5px;
+    background-image:url('../images/bug.png');
+}
+
+#form li .actions .fieldNotRequired {
+    margin: 0px 30px 0px 20px;
+    position:relative;
+    padding:16px;
+    top:-5px;
+    background-image:url('../images/bug.png');
+}
+
+#form li div.properties {
+    display:none;
+    padding:20px;
+    margin: 0px 0px 12px 0px;
+    background-color: #DEDEDE;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+/*    width: 100%;*/
+    position: relative;
+    top: 20px;
+/*    left: -20px;*/   
+}
+    /*********************** ----------- ***********************/
+    
+/*********************** ----------- ***********************/
+
+/************************ SECTIONLINKS ************************/
+#sections {
+	position:absolute;
+	bottom:2px;
+	width:90%;
+	height:10%;
+	background-color: #999691;
+	/*padding:0px 0px 4px 0px;*/
+	}
+	
+#sections ul li {
+	display:inline;
+	}
+
+#sections ul li a {
+	margin:0px 10px 0px 0px;
+	}
+
+#sections ul li a:link { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #F7F0C3;
+    }
+#sections ul li a:visited { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #F7F0C3;
+    }
+#sections ul li a:hover, #sections ul li a:active { 
+    text-decoration: underline; 
+    color: #454545;
+    }
+/*********************** ----------- ***********************/
+
+
+/** Estilos div resultado **/
+/** --------------------- **/
+
+#resultado {
+	width:700px;
+	position:absolute;
+	top:60px;
+	left:50%;
+	margin:0px auto auto -399px;
+	text-align:center;
+	background-color: #BD8F8F;
+	display: none;
+	}
+#resultado img.delete {
+	float:right;
+	}
+	
+.prueba{
+    margin:20px;
+    padding:10px;
+}
+
+.pruebaerror {
+	font-weight: bold;
+	color: #910000;
+	margin-bottom:20px;
+	}
+
+/************************ FIELDTYPES ************************/
+#form li.text {
+    background-color:#F0E4BD;
+    background-image:url('../images/icons/text.png');
+}
+#form li.text div.properties {
+    background-color:#D6CCA9;
+}
+
+#form li.textarea {
+    background-color:#F0BDC0;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.numeric {
+    background-color:#B0C2FF;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.radio {
+    background-color:#FFD4B0;
+    background-image:url('../images/icons/text2.png');
+}
+
+#form li.location {
+    background-color:#B0FFFB;
+    background-image:url('../images/icons/file.png');
+}
+
+#form li.image {
+    background-color:#BDDFF0;
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.checkbox {
+	background-color:#DAF0BD;
+    /*background-color:#E2BDF0;*/
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.combo {
+    background-color:#FAEF78;
+    background-image:url('../images/icons/image.png');
+}
+
+#form li.date {
+    background-color:#D0B0FF;
+    background-image:url('../images/icons/image.png');
+}
+/*********************** ----------- ***********************/
+
+
+/*********************** SideBar FIELDS ***********************/
+#fieldsBar {
+    float:right;
+	width:10%;
+    height: 100%;
+    font: 10px/1.5 helvetica, arial, san-serif;
+    padding:0;
+    margin:0px auto;
+    background-color: #F0EDEA;
+}
+#fieldsBar ul li {
+	display:inline;
+}
+
+#fieldsBar ul li .item {
+	display:block;
+	float:right;
+	width:80px;
+	height:58px;
+	margin:20px auto;
+	text-align:center;
+	text-decoration:none;
+	color: #000;
+	overflow:visible;
+}
+
+#fieldsBar ul li .item img {
+	border:0;
+	margin:4px auto;
+}
+
+#fieldsBar ul li .item div {
+    display:none;
+}
+
+#fieldsBar ul li .item div.label {
+	text-align:center;
+	background: rgba(0, 0, 0, 0.75);
+	position:relative;
+	bottom:36px;
+	left:-80px;
+	color:#f3f3f3;
+	padding:5px;
+	display:none;
+}
+/*********************** ----------- ***********************/
+
+
+/*********************** BUTTONS ***********************/
+.buttons {
+	text-align:center;
+	line-height:40px;
+	}
+.buttons a.button {
+    padding: 7px 10px;
+    background-color: #777;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-shadow: 1px 1px #666;
+    }
+.buttons a.button[class]:hover {
+    background-color: #333;
+    padding: 10px 10px;
+    }
+.buttons a.button[class] img {
+    vertical-align:middle;
+    }
+.buttons a.button.red { background-color: #e50000; }
+.buttons a.button.purple { background-color: #9400bf; }
+.buttons a.button.green { background-color: #58aa00; }
+.buttons a.button.orange { background-color: #ff9c00; }
+.buttons a.button.blue { background-color: #2c6da0; }
+.buttons a.button.black { background-color: #333; }
+.buttons a.button.white { background-color: #fff; color: #000; text-shadow: 1px 1px #fff; }
+.buttons a.button.white:hover { color:#fff; text-shadow: 1px 1px #000;} 
+.buttons a.button.small { font-size: 75%; }
+.buttons a.button.large { font-size: 125%; }
+/*********************** ----------- ***********************/
