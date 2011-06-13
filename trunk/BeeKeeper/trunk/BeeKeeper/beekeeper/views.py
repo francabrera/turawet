@@ -37,9 +37,12 @@ def showInstanceList (request, formid):
 
 
 def showInstance (request, instanceid):
-    
     instance = Instance.objects.filter(id = instanceid)
     instance = instance[0]
-
+    if instance:
+        instance_fields = InstanceField.objects.filter(instance=instance).all()
+    else:
+        instance_fields = None
     
-    return render_to_response('ver_instancia.html', {'instance': instance});
+    
+    return render_to_response('ver_instancia.html', {'instance': instance, 'instance_fields': instance_fields });

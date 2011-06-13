@@ -10,24 +10,27 @@
 				{% for section in instance.form.section_set.all %}
 					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
 					   <p class="sectionlabel">{{ section.name }}</p>
-					   {{ form_fields = section.formfield_set.all }}
-					   {% for field in instance.instancefield_set.all %}
-					   		{{ form_field = form_fields[field.formfield] }}
-					   		{% if form_field %}
-		                       	<li id="f{{ field.id }}" class="{{ field.type|lower }}">
-									<div class="actions">
-										<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ field.id }}')" class="fieldButton">
-									</div>
-		                       		<p class="fieldlabel">{{ form_field.label }}</p>
-		                       		<br />
-									<div class="properties">
-										<p> Valor: {{ field.value }} </p>		 
-									   {% for property in form_field.property_set.all %}
-											<p>{{ property.name }}: {{ property.value }}</p>		                       		
-									   {% endfor %}
-			                       	</div>
-		                       </li>
-	                       {% endif %}
+					   {% for form_field in section.formfield_set.all %}
+					   		{% for instance_field in instance_fields %}
+						   		{% if instance_field.form_field.id == form_field.id %}
+
+			                       	<li id="f{{ instance_field.id }}" class="{{ form_field.type|lower }}">
+										<div class="actions">
+											<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ instance_field.id }}')" class="fieldButton">
+										</div>
+			                       		<p class="fieldlabel">{{ form_field.label }}</p>
+			                       		<br />
+										<div class="properties">
+											<p> Valor: {{ instance_field.cast }} </p>		 
+										   {% for property in form_field.property_set.all %}
+												<p>{{ property.name }}: {{ property.value }}</p>		                       		
+										   {% endfor %}
+				                       	</div>
+			                       </li>
+
+
+		                       {% endif %}
+	                       {% endfor %}
 					   {% endfor %}
 					</ul>
 				{% endfor %}

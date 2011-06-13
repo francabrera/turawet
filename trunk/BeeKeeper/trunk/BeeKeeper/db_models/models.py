@@ -166,9 +166,19 @@ class InstanceField(models.Model):
     instance_order = models.SmallIntegerField()
     form_field = models.ForeignKey(FormField)
 
-    # For inheritance
-    content_type = models.ForeignKey(ContentType,editable=False,null=True)
 
+    real_type = models.ForeignKey(ContentType, editable=False, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.real_type = self._get_real_type()
+        super(InstanceField, self).save(*args, **kwargs)
+
+    def _get_real_type(self):
+        return ContentType.objects.get_for_model(type(self))
+
+    def cast(self):
+        return self.real_type.get_object_for_this_type(pk=self.pk)
 
     class Meta:
         unique_together = ('instance', 'instance_order')
@@ -176,21 +186,7 @@ class InstanceField(models.Model):
         #abstract = True
 
     def __unicode__(self):
-        return u'%s - %s' %(self.form_field.name, self.id)
-
-"""
-    def save(self):
-        if(not self.content_type):
-            self.content_type = ContentType.objects.get_for_model(self.__class__)
-        self.save_base()
-
-    def as_leaf_class(self):
-        content_type = self.content_type
-        model = content_type.model_class()
-        if(model == InstanceField):
-            return self
-        return model.objects.get(id=self.id)
-"""
+        return u'%s - %s' %(self.form_field.label, self.id)
 
 
 
@@ -203,6 +199,9 @@ class TextField(InstanceField):
     def __unicode__(self):
         return unicode(self.value)
     
+    def get_text(self):
+        return unicode(self.value)
+    
     
 class TextAreaField(InstanceField):
     """Class: `TextAreaField`. 
@@ -210,6 +209,9 @@ class TextAreaField(InstanceField):
     value = models.CharField(max_length = 1024)
 
     def __unicode__(self):
+        return unicode(self.value)
+    
+    def get_text(self):
         return unicode(self.value)
 
 
@@ -219,6 +221,9 @@ class NumericField(InstanceField):
     value = models.IntegerField()
 
     def __unicode__(self):
+        return unicode(self.value)
+    
+    def get_text(self):
         return unicode(self.value)
 
 
@@ -231,6 +236,9 @@ class DateField(InstanceField):
 
     def __unicode__(self):
         return unicode(self.value)
+    
+    def get_text(self):
+        return unicode(self.value)
 
 
 class RadioField(InstanceField):
@@ -239,6 +247,9 @@ class RadioField(InstanceField):
     value = models.CharField(max_length = 16) # TIPO DE DATOS ID DE DJANGO
 
     def __unicode__(self):
+        return unicode(self.value)
+    
+    def get_text(self):
         return unicode(self.value)
     
     
@@ -250,6 +261,9 @@ class CheckField(InstanceField):
     def __unicode__(self):
         return unicode(self.value)
     
+    def get_text(self):
+        return unicode(self.value)
+    
     
 class ComboField(InstanceField):
     """Class: `ComboField`. 
@@ -258,7 +272,9 @@ class ComboField(InstanceField):
 
     def __unicode__(self):
         return unicode(self.value)
-
+    
+    def get_text(self):
+        return unicode(self.value)
 
 
 
@@ -269,6 +285,9 @@ class ImageField(InstanceField):
     value = models.ImageField(upload_to = '/')
 
     def __unicode__(self):
+        return unicode(self.value)
+    
+    def get_text(self):
         return unicode(self.value)
 
 
