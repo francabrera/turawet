@@ -30,7 +30,7 @@ class Form(models.Model):
         ordering = ['name']
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.name)
 
 
 
@@ -48,7 +48,7 @@ class Section(models.Model):
         ordering = ['form']
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.name)
 
 
 
@@ -61,7 +61,7 @@ class FieldGroup(models.Model):
     required = models.BooleanField()
 
     def __unicode__(self):
-        return self.label
+        return unicode(self.label)
 
 
 
@@ -94,7 +94,7 @@ class FormField(models.Model):
         ordering = ['section']
 
     def __unicode__(self):
-        return self.label
+        return unicode(self.label)
 
 
 class FieldOption(models.Model):
@@ -112,7 +112,7 @@ class FieldOption(models.Model):
         ordering = ['form_field']
         
     def __unicode__(self):
-        return self.label
+        return unicode(self.label)
 
 
 class Property(models.Model):
@@ -129,9 +129,10 @@ class Property(models.Model):
        
     def __unicode__(self):
         if self.form_field:
-            return self.form_field.label + " - " + self.name
+            return u'%s - %s' %(self.form_field.label, self.name)
         else:
-            return self.group_field.label + " - " + self.name
+            return u'%s - %s' %(self.group_field.label, self.name)
+
 
 
 class Instance(models.Model):
@@ -150,7 +151,7 @@ class Instance(models.Model):
     editable = models.BooleanField()
 
     def __unicode__(self):
-        return self.form.name + " - " + self.id
+        return u'%s - %s' %(self.form.name, self.id)
 
 
 
@@ -175,7 +176,7 @@ class InstanceField(models.Model):
         #abstract = True
 
     def __unicode__(self):
-        return self.form_fields.label
+        return u'%s - %s' %(self.form_field.name, self.id)
 
 """
     def save(self):
@@ -199,8 +200,8 @@ class TextField(InstanceField):
        :param value: The text itself."""
     value = models.CharField(max_length = 128)
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
     
     
 class TextAreaField(InstanceField):
@@ -208,8 +209,8 @@ class TextAreaField(InstanceField):
        :param value: The text itself."""
     value = models.CharField(max_length = 1024)
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
 
 
 class NumericField(InstanceField):
@@ -217,8 +218,8 @@ class NumericField(InstanceField):
        :param value: The text itself."""
     value = models.IntegerField()
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
 
 
 class DateField(InstanceField):
@@ -228,8 +229,8 @@ class DateField(InstanceField):
        :param year_value: The Year."""
     value = models.DateField()
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
 
 
 class RadioField(InstanceField):
@@ -237,8 +238,8 @@ class RadioField(InstanceField):
        :param value: The id of the selected option."""
     value = models.CharField(max_length = 16) # TIPO DE DATOS ID DE DJANGO
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
     
     
 class CheckField(InstanceField):
@@ -246,8 +247,8 @@ class CheckField(InstanceField):
        :param value: True or False (if TRIESTATE property also None)."""
     value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
     
     
 class ComboField(InstanceField):
@@ -255,8 +256,8 @@ class ComboField(InstanceField):
        :param value: The id of the selected option."""
     value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
 
-    def getText(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
 
 
 
@@ -267,8 +268,8 @@ class ImageField(InstanceField):
        :todo ImageField parameters"""
     value = models.ImageField(upload_to = '/')
 
-    def getImage(self):
-        return self.value
+    def __unicode__(self):
+        return unicode(self.value)
 
 
 

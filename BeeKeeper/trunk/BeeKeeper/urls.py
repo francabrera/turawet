@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     (r'^db_models/', include('db_models.urls')),
     
     (r'^form_xml2db_parser/', include('form_xml2db_parser.urls')),
+
+    (r'^instance_xml2db_parser/', include('instance_xml2db_parser.urls')),
     
     (r'^beekeeper/', include('beekeeper.urls')),
     
