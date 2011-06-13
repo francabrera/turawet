@@ -1,17 +1,33 @@
 {% extends "base.html" %}
 {% block title %}Formularios{% endblock %}
-{% block dislpayedInfo %}
+{% block mainframe %}
 
 			{% if instance %}
 				<h1>Instancia: {{ instance.id }}</h1>
-				<h2>Del formulario: {{ instance.form.name }}</h2>
+				<h2>{{ instance.form.name }}</h2>
 
 
-				{% for section in sections %}
-					 <ul id="s0" class="section" href="#s0">
+				{% for section in instance.form.section_set.all %}
+					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
 					   <p class="sectionlabel">{{ section.name }}</p>
-					   {% for field in instance_fields %}
-	                       <li class="text"><p class="fieldlabel">{{ field.label }}</p><br></li>
+					   {{ form_fields = section.formfield_set.all }}
+					   {% for field in instance.instancefield_set.all %}
+					   		{{ form_field = form_fields[field.formfield] }}
+					   		{% if form_field %}
+		                       	<li id="f{{ field.id }}" class="{{ field.type|lower }}">
+									<div class="actions">
+										<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ field.id }}')" class="fieldButton">
+									</div>
+		                       		<p class="fieldlabel">{{ form_field.label }}</p>
+		                       		<br />
+									<div class="properties">
+										<p> Valor: {{ field.value }} </p>		 
+									   {% for property in form_field.property_set.all %}
+											<p>{{ property.name }}: {{ property.value }}</p>		                       		
+									   {% endfor %}
+			                       	</div>
+		                       </li>
+	                       {% endif %}
 					   {% endfor %}
 					</ul>
 				{% endfor %}
@@ -19,24 +35,50 @@
 
 				<br/>
 			{% else %}
-				<h3>No se ha encontrado la instancia en la base de datos.</h3>
+				<h3>No se ha encontrado el instanceulario en la base de datos.</h3>
 			{% endif %}
 
 {% endblock %}
 
-{% block options %}
+{% block sidebar %}
 		    <ul>
 				<li><a class="item" href="#" id="campo1">
-					<img src="../../templates/images/delete.png" />
+					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
-						<p><strong>Eliminar formulario</strong></p>
+						<p><strong>Eliminar instanceulario</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo2">
+					<img src="/beekeeper/images/instances.png" />
+					<div class="label">
+						<p><strong>Instancias</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo3">
+					<img src="/beekeeper/images/statistics.png" />
+					<div class="label">
+						<p><strong>Estad&iacute;sticas</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo4">
-					<img src="../../templates/images/geolocalization.png" />
+					<img src="/beekeeper/images/geolocalization.png" />
 					<div class="label">
 						<p><strong>Geolocalizaci&oacute;n</strong></p>
 					</div>
 				</a></li>			
 			</ul>
+{% endblock %}
+
+
+{% block sectionslinks %}
+	<ul>
+	{% for section in instance.section_set.all %}
+		<li id="s{{ section.id }}link">
+			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
+				Sección {{ section.id }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+	
 {% endblock %}
