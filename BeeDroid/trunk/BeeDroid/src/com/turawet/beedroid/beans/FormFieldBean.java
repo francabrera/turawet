@@ -71,6 +71,7 @@ public class FormFieldBean extends BaseBean
 	{
 		super();
 		properties = new ArrayList<PropertyBean>();
+		fieldOptions = new  ArrayList<FieldOptionBean>();
 	}
 	
 	/* Getter & Setters */
@@ -162,6 +163,14 @@ public class FormFieldBean extends BaseBean
 	public void toXml(Writer writer)
 	{
 		
+	}
+	
+	/**
+	 * @param tempOption
+	 */
+	public void addOption(FieldOptionBean option)
+	{
+		this.fieldOptions.add(option);
 	}
 	
 }

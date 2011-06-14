@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 
 /**
  * @author nicopernas
@@ -105,6 +106,10 @@ public class FieldView extends LinearLayout
 				int month = ((DatePicker) field).getMonth();
 				int year = ((DatePicker) field).getYear();
 				value = new Date(year, month, day);
+				break;
+			case RADIO:
+				Integer radioButtonId = ((RadioGroup) field).getCheckedRadioButtonId();
+				value = radioButtonId;
 				break;
 			default:
 				break;

@@ -11,6 +11,10 @@
 		<creationdate>2011-01-12</creationdate>
 		<modificationdate>2011-01-12</modificationdate>
 		<editable>True</editable>
+		<geolocalization>
+			<latitude>23.516</latitude>
+			<longitude>-49.21</longitude>
+		</geolocalization>
 	</meta>
 	<sections>
 		<section>
@@ -85,15 +89,6 @@
 					</value>
 					<order>9</order>
 					<formfieldid>9</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<latitude>23.516</latitude>
-						<longitude>-49.21</longitude>
-					</value>
-					<order>10</order>
-					<formfieldid>10</formfieldid>
 				</field>
 				<!--  Grupo sin lista, con un groupid que no se repite -->
 				<group>

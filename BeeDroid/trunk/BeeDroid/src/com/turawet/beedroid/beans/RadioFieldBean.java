@@ -2,7 +2,6 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Date;
 
 import android.util.Xml;
 
@@ -25,94 +24,36 @@ import com.turawet.beedroid.constants.Cte.XmlTags;
  * @author Romén Rodríguez Gil
  * 
  */
-public class DateFieldBean extends GenericInstanceFieldBean
+public class RadioFieldBean extends GenericInstanceFieldBean
 {
-	private Date	date;
-
+	private int value;
 	/**
 	 * @param order
 	 * @param formField
 	 */
-	public DateFieldBean(int order, FormFieldBean formField)
+	public RadioFieldBean(int order, FormFieldBean formField)
 	{
 		super(order, formField);
-		date = new Date();
+		value = -1;
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * @return the value
+	 */
+	public int getValue()
+	{
+		return value;
 	}
 
 	/**
-	 * @return the date
+	 * @param value the value to set
 	 */
-	public Date getDate()
+	public void setValue(int value)
 	{
-		return date;
+		this.value = value;
 	}
-	
-	/**
-	 * @param date
-	 *           the date to set
-	 */
-	public void setDate(Date date)
-	{
-		this.date = date;
-	}
-	
-	/**
-	 * @return the dayValue
-	 */
-	public int getDay()
-	{
-		return date.getDate();
-	}
-	
-	/**
-	 * @param dayValue
-	 *           the dayValue to set
-	 */
-	public void setDay(int day)
-	{
-		date.setDate(day);
-	}
-	
-	/**
-	 * @return the monthValue
-	 */
-	public int getMonth()
-	{
-		return date.getMonth() + 1;
-	}
-	
-	/**
-	 * @param monthValue
-	 *           the monthValue to set
-	 */
-	public void setMonth(int month)
-	{
-		date.setMonth(month);
-	}
-	
-	/**
-	 * @return the yearValue
-	 */
-	public int getYear()
-	{
-		return date.getYear();
-	}
-	
-	/**
-	 * @param yearValue
-	 *           the yearValue to set
-	 */
-	public void setYearValue(int year)
-	{
-		date.setYear(year);
-	}
-	
-	public String getLocaleDate()
-	{
-		return date.toLocaleString();
-	}
-	
+
 	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
@@ -121,22 +62,11 @@ public class DateFieldBean extends GenericInstanceFieldBean
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.field.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
+
 		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.value.toString());
-		
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.day.toString());
-		serializer.text(String.valueOf(getDay()));
-		serializer.endTag(XmlTags.namespace, XmlEnumTags.day.toString());
 
-
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.month.toString());
-		serializer.text(String.valueOf(getMonth()));
-		serializer.endTag(XmlTags.namespace, XmlEnumTags.month.toString());
-
-		
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.year.toString());
-		serializer.text(String.valueOf(getYear()));
-		serializer.endTag(XmlTags.namespace, XmlEnumTags.year.toString());
+		serializer.text(getFormField().getFieldOptions().get(value).getValue());
 
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.value.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.order.toString());
