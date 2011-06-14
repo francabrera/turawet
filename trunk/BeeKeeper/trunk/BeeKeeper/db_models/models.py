@@ -24,6 +24,7 @@ class Form(models.Model):
     version = models.SmallIntegerField()
     xml = models.CharField(max_length = 16192)
     active = models.BooleanField()
+    geolocalized = models.BooleanField()
 
     class Meta:
         unique_together = ('name', 'version')
@@ -149,6 +150,8 @@ class Instance(models.Model):
     form = models.ForeignKey(Form)
     georef = models.CharField(max_length = 256)
     editable = models.BooleanField()
+    longitude = models.FloatField(null=True)
+    latitude = models.FloatField(null=True)
 
     def __unicode__(self):
         return u'%s - %s' %(self.form.name, self.id)
