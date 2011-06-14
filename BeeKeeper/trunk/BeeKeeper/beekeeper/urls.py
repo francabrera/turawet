@@ -14,6 +14,8 @@ urlpatterns = patterns('',
 urlpatterns += patterns('beekeeper.views',
     (r'^show_form_list$', 'showFormList'),
     (r'^show_form/(?P<formid>\d+)/$', 'showForm'),
+    (r'^delete_form/(?P<formid>\d+)/$', 'deleteForm'),
     (r'^show_instance_list/(?P<formid>\d+)/$', 'showInstanceList'),
     (r'^show_instance/(?P<instanceid>\d+)/$', 'showInstance'),
+    (r'^delete_instance/(?P<instanceid>\d+)/$', 'deleteInstance'),
 )

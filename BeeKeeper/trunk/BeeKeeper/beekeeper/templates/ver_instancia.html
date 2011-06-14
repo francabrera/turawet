@@ -18,14 +18,24 @@
 										<div class="actions">
 											<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ instance_field.id }}')" class="fieldButton">
 										</div>
-			                       		<p class="fieldlabel">{{ form_field.label }}</p>
+			                       		<p> <span class="fieldlabel">{{ form_field.label }}</span> : <span class="fieldvalue">{{ instance_field.cast }} </p>
 			                       		<br />
-										<div class="properties">
-											<p> Valor: {{ instance_field.cast }} </p>		 
+		
+				                       {% if form_field.property_set.all %}
+											<div class="properties">
 										   {% for property in form_field.property_set.all %}
 												<p>{{ property.name }}: {{ property.value }}</p>		                       		
 										   {% endfor %}
-				                       	</div>
+					                       	</div>
+				                       {% endif %}
+				                       {% if form_field.fieldoption_set.all %}
+											<div class="options">
+										   {% for option in form_field.fieldoption_set.all %}
+												<p>{{ option.label }}: {{ option.value }}</p>		                       		
+										   {% endfor %}
+					                       	</div>
+				                       {% endif %}
+
 			                       </li>
 
 
@@ -45,22 +55,10 @@
 
 {% block sidebar %}
 		    <ul>
-				<li><a class="item" href="#" id="campo1">
+				<li><a class="item" href="/beekeeper/delete_instance/{{ instance.id }}" id="campo1">
 					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar instanceulario</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo2">
-					<img src="/beekeeper/images/instances.png" />
-					<div class="label">
-						<p><strong>Instancias</strong></p>
-					</div>
-				</a></li>
-				<li><a class="item" href="#" id="campo3">
-					<img src="/beekeeper/images/statistics.png" />
-					<div class="label">
-						<p><strong>Estad&iacute;sticas</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="#" id="campo4">
@@ -75,7 +73,7 @@
 
 {% block sectionslinks %}
 	<ul>
-	{% for section in instance.section_set.all %}
+	{% for section in instance.form.section_set.all %}
 		<li id="s{{ section.id }}link">
 			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
 				Sección {{ section.id }}
