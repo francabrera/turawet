@@ -151,7 +151,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		else if (!inSection && localName.equalsIgnoreCase("id"))
 		{
 			String value = buffer.toString().trim();
-			if (!value.isEmpty())
+			if (value != null && !value.equals(""))
 				tempForm.setId(Integer.parseInt(value));
 			/* ByDefaultID */
 			else
@@ -168,7 +168,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		else if (!inSection && localName.equalsIgnoreCase("version"))
 		{
 			String value = buffer.toString().trim();
-			if (!value.isEmpty())
+			if (value != null && !value.equals(""))
 				tempForm.setVersion(Integer.parseInt(value));
 			clearBuffer();
 		}
@@ -181,7 +181,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		else if (inSection && !inField && localName.equalsIgnoreCase("id"))
 		{
 			String value = buffer.toString().trim();
-			if (!value.isEmpty())
+			if (value != null && !value.equals(""))
 				tempSection.setId(Integer.parseInt(value));
 			clearBuffer();
 		}
@@ -194,7 +194,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		else if (inSection && inField && localName.equalsIgnoreCase("id"))
 		{
 			String value = buffer.toString().trim();
-			if (!value.isEmpty())
+			if (value != null && !value.equals(""))
 				tempFormField.setId(Integer.parseInt(value));
 			clearBuffer();
 		}

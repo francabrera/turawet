@@ -36,5 +36,10 @@
     <string name="error_downloading_form">Ha ocurrido un error al intentar descargar el formulario.</string>
 	<string name="error_saving_form">Ha ocurrido un error al intentar los formularios.</string>
 	
+	<string name="save_n_send_instance">Guardar y enviar</string>
+
+	<string name="ok"></string>
+	<string name="saved_sended_ok">Envío completado</string>
+	<string name="saved_sended_not_ok">Hubo un error al guardar la instancia en el repositorio</string>
 	<string name="version">Versión</string>
 </resources>

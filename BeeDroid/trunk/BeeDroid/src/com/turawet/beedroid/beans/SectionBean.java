@@ -102,14 +102,22 @@ public class SectionBean extends BaseBean
 	{
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.section.toString());
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.fields.toString());
+		serializer.flush();
 		
 		for (SectionChildBean section : sectionChildren)
 		{
 			section.toXml(writer);
 		}
-		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.fields.toString());
+
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.section.toString());
+		serializer.flush();
 	}
 	
 }

@@ -3,7 +3,6 @@ package com.turawet.beedroid.beans;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -152,33 +151,36 @@ public class InstanceBean extends BaseBean
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
       serializer.startDocument("UTF-8", null);
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.meta.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.id.toString())
-		.endTag(XmlTags.namespace, XmlEnumTags.id.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.formid.toString())
-		.text(String.valueOf(form.getId()))
-		.endTag(XmlTags.namespace, XmlEnumTags.formid.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.author.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.user.toString())
-		.text(authoruser)
-		.endTag(XmlTags.namespace, XmlEnumTags.user.toString())
-		.endTag(XmlTags.namespace, XmlEnumTags.author.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.creationdate.toString())
-		.text(creationDate)
-		.endTag(XmlTags.namespace, XmlEnumTags.creationdate.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString())
-		.text(modificationDate)
-		.endTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString())
-		.startTag(XmlTags.namespace, XmlEnumTags.editable.toString())
-		.text(String.valueOf(editable))
-		.endTag(XmlTags.namespace, XmlEnumTags.editable.toString())
-		.endTag(XmlTags.namespace, XmlEnumTags.meta.toString());
-
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.meta.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.formid.toString());
+		serializer.text(String.valueOf(form.getId()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.formid.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.author.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.user.toString());
+		serializer.text(authoruser);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.user.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.author.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.creationdate.toString());
+		serializer.text(creationDate);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.creationdate.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString());
+		serializer.text(modificationDate);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.modificationdate.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.editable.toString());
+		serializer.text(String.valueOf(editable));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.editable.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.meta.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.sections.toString());
+		
+		serializer.flush();
 		/* Sections */
 		for(SectionBean section: sections)
 			section.toXml(writer);
 
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.sections.toString());
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.instance.toString());
 		serializer.endDocument();
 	}

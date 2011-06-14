@@ -9,7 +9,7 @@ import java.util.List;
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import com.turawet.beedroid.adapter.SavedFormsEfficientAdapter;
-import com.turawet.beedroid.constants.Cte;
+import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.database.DataBaseManager;
 
 import android.app.ListActivity;
@@ -67,8 +67,8 @@ public class FormsActivity extends ListActivity
 		FormIdentificationBean form = (FormIdentificationBean) l.getItemAtPosition(position);
 		
 		Intent intent = new Intent(FormsActivity.this, FillNewInstanceActivity.class);
-		intent.putExtra(Cte.FormIdentificationBean.name, form.getName());
-		intent.putExtra(Cte.FormIdentificationBean.version, form.getVersion());
+		intent.putExtra(FormWsBean.name, form.getName());
+		intent.putExtra(FormWsBean.version, form.getVersion());
 		startActivity(intent);
 	}
 	

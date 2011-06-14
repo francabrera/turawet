@@ -11,7 +11,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
@@ -68,11 +67,6 @@ public class DataBaseManager
 		ContentValues values = new ContentValues(formsToSave.size());
 		for (FormInfoBean formInfo : formsToSave)
 		{
-			
-			Log.d("DATABASE_MANAGER", "Name    -> " + formInfo.getFormId().getName());
-			Log.d("DATABASE_MANAGER", "Version -> " + formInfo.getFormId().getVersion());
-			Log.d("DATABASE_MANAGER", "Xml     -> " + formInfo.getXml());
-			
 			values.put(Cte.DataBase.NAME, formInfo.getFormId().getName());
 			values.put(Cte.DataBase.VERSION, formInfo.getFormId().getVersion());
 			values.put(Cte.DataBase.XML, formInfo.getXml());
@@ -105,6 +99,7 @@ public class DataBaseManager
 			}
 			while (c.moveToNext());
 		}
+		c.close();
 		return listOfSavedFormsId;
 	}
 	
@@ -127,7 +122,7 @@ public class DataBaseManager
 			int xmlColumn = c.getColumnIndex(Cte.DataBase.XML);
 			xml = c.getString(xmlColumn);
 		}
-		
+		c.close();
 		return new FormInfoBean(form, xml);
 	}
 }

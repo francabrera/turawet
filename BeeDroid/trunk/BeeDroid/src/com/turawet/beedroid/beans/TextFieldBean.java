@@ -44,17 +44,24 @@ public class TextFieldBean extends GenericInstanceFieldBean
 	{
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.instancefield.toString());
-		String temp = "<instancefield><id/><value>" + text + "</value><order>" + order + "</order>" + /*
-																																	 * formField
-																																	 * .
-																																	 * toXml
-																																	 * (
-																																	 * writer
-																																	 * )
-																																	 * +
-																																	 */"</instancefield>";
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.field.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.value.toString());
+		serializer.text(text);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.value.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.order.toString());
+		serializer.text(String.valueOf(order));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.order.toString());
+		
+
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
+		serializer.text(String.valueOf(getFormField().getId()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
+		
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
+		serializer.flush();
 	}
 	
 	/**

@@ -1,7 +1,13 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Date;
+
+import android.util.Xml;
+
+import com.turawet.beedroid.constants.Cte.XmlEnumTags;
+import com.turawet.beedroid.constants.Cte.XmlTags;
 
 /**
  * @class TextFieldBean: Represents a TextField
@@ -22,12 +28,33 @@ import java.util.Date;
 public class DateFieldBean extends GenericInstanceFieldBean
 {
 	private Date	date;
-	
+
+	/**
+	 * @param order
+	 * @param formField
+	 */
 	public DateFieldBean(int order, FormFieldBean formField)
 	{
 		super(order, formField);
 		date = new Date();
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate()
+	{
+		return date;
+	}
+	
+	/**
+	 * @param date
+	 *           the date to set
+	 */
+	public void setDate(Date date)
+	{
+		this.date = date;
 	}
 	
 	/**
@@ -52,7 +79,7 @@ public class DateFieldBean extends GenericInstanceFieldBean
 	 */
 	public int getMonth()
 	{
-		return date.getMonth();
+		return date.getMonth() + 1;
 	}
 	
 	/**
@@ -61,7 +88,7 @@ public class DateFieldBean extends GenericInstanceFieldBean
 	 */
 	public void setMonth(int month)
 	{
-		date.setMonth(month);
+		date.setMonth(month - 1);
 	}
 	
 	/**
@@ -87,18 +114,42 @@ public class DateFieldBean extends GenericInstanceFieldBean
 	}
 	
 	@Override
-	public void toXml(Writer writer)
+	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
-		// TO-DO- If the id is seted we are updating, not creating a new insance
-		String temp = "<instancefield><id/><value>" + "<day>" + date.getDate() + "</day><month>" + date.getMonth() + "</month><year>" + date.getYear() + "</year>" + "</value><order>" + order + "</order>"/*
-																																																																			 * +
-																																																																			 * formField
-																																																																			 * .
-																																																																			 * toXml
-																																																																			 * (
-																																																																			 * )
-																																																																			 */+ "</instancefield>";
+		serializer = Xml.newSerializer();
+		serializer.setOutput(writer);
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.field.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.value.toString());
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.day.toString());
+		serializer.text(String.valueOf(date.getDate()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.day.toString());
+
+
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.month.toString());
+		serializer.text(String.valueOf(date.getMonth()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.month.toString());
+
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.year.toString());
+		serializer.text(String.valueOf(date.getYear()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.year.toString());
+
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.value.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.order.toString());
+		serializer.text(String.valueOf(order));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.order.toString());
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
+		serializer.text(String.valueOf(getFormField().getId()));
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
+		
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
+		serializer.flush();
+
 	}
 	
 }
