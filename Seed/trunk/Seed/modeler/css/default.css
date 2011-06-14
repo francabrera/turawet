@@ -152,11 +152,21 @@ p { margin:0; }
     background-color: #DEDEDE;
     -moz-border-radius: 12px;
     border-radius: 12px;
-/*    width: 100%;*/
     position: relative;
-    top: 20px;
-/*    left: -20px;*/   
-}
+    top: 20px;   
+    }   
+
+#form li div.options {
+    display:none;
+    padding:20px;
+    margin: 0px 0px 12px 0px;
+    background-color: #DEDEDE;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    position: relative;
+    top: 20px;   
+    }
+    
     /*********************** ----------- ***********************/
     
 /*********************** ----------- ***********************/

@@ -7,9 +7,34 @@
 * @version 0.1
 */
 
+// Inheritance
+function surrogateCtor() {}
+
+function extend(base, sub) {
+  surrogateCtor.prototype = base.prototype;
+  sub.prototype = new surrogateCtor();
+  sub.prototype.constructor = sub;
+}
+
 /*****************************************************************/
 /* Form classes                                                  */
 /*****************************************************************/
+/**
+ * Clase opciones de campo
+ */
+function FieldOption (label, value) {
+	this.label = label;
+	this.value = value;
+	
+	this.toXML = function () {
+		var optxml = "<option>";
+		optxml += "<label>" + this.label + "</label>";
+		optxml += "<value>" + this.value + "</value>";
+		optxml += "</option>";
+		return optxml;
+	}
+}
+
 /**
  * Clase campo
  */
@@ -40,6 +65,44 @@ function Field(name, order, type) {
 	
 }
 /* -------------- */
+
+/**
+ * Clase campo radio (Extiende a Field)
+ */
+function Radio (name, order, type) {
+	this.options = new Array();
+	Field.call(this, name, order, type);
+	
+	this.addOption = function (label, value)
+	{
+		var aux = new FieldOption(label, value);
+		return this.options.push(aux) - 1;
+	}
+	
+	this.removeOption = function (id)
+	{
+		delete this.options[id];
+	}
+	
+	/**
+	 * Devuelve el XML del campo
+	 */
+	this.toXML = function()
+	{
+		var fieldxml = "<field><id />";
+		fieldxml += "<label>" + this.name + "</label>";
+		fieldxml += "<type>"+ this.type +"</type>";
+		if (this.required)
+			fieldxml += "<required />";
+		fieldxml += "<properties /><options>";
+		for (i=0;i<this.options.length;i++)
+			if (typeof this.options[i]  != "undefined")
+				fieldxml += this.options[i].toXML();
+		fieldxml += "</options></field>";
+		return fieldxml;
+	}
+}
+extend(Field,Radio);
 
 
 /**
