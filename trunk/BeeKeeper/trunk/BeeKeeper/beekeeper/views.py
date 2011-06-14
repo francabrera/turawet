@@ -26,6 +26,17 @@ def showForm (request, formid):
     return render_to_response('ver_formulario.html', {'form': form})
 
 
+def deleteForm (request, formid):
+    
+    form = Form.objects.filter(id = formid)
+    form = form[0]
+    if form:
+        form.delete()
+    # Once deleted we show the other forms
+    return showFormList(request)
+
+
+
 def showInstanceList (request, formid):
     
     form = Form.objects.filter(id = formid)
@@ -46,3 +57,12 @@ def showInstance (request, instanceid):
     
     
     return render_to_response('ver_instancia.html', {'instance': instance, 'instance_fields': instance_fields });
+
+
+def deleteInstance (request, instanceid):
+    instance = Instance.objects.filter(id = instanceid)
+    instance = instance[0]
+    if instance:
+        instance.delete()
+    # Once deleted we show the other forms
+    return showInstanceList(request, instance.form.id)

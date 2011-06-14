@@ -13,15 +13,27 @@
 					   {% for field in section.formfield_set.all %}
 	                       <li id="f{{ field.id }}" class="{{ field.type|lower }}">
 								<div class="actions">
+									{% if field.required %}
+										<img src="/beekeeper/images/buttons/required.png" class="fieldButton">
+									{% endif %}
 									<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ field.id }}')" class="fieldButton">
 								</div>
 	                       		<p class="fieldlabel">{{ field.label }}</p>
 	                       		<br />
-								<div class="properties">
-							   {% for property in field.property_set.all %}
-									<p>{{ property.name }}: {{ property.value }}</p>		                       		
-							   {% endfor %}
-		                       	</div>
+		                       {% if field.property_set.all %}
+									<div class="properties">
+								   {% for property in field.property_set.all %}
+										<p>{{ property.name }}: {{ property.value }}</p>		                       		
+								   {% endfor %}
+			                       	</div>
+		                       {% endif %}
+		                       {% if field.fieldoption_set.all %}
+									<div class="options">
+								   {% for option in field.fieldoption_set.all %}
+										<p>{{ option.label }}: {{ option.value }}</p>		                       		
+								   {% endfor %}
+			                       	</div>
+		                       {% endif %}
 	                       </li>
 					   {% endfor %}
 					</ul>
@@ -37,13 +49,13 @@
 
 {% block sidebar %}
 		    <ul>
-				<li><a class="item" href="#" id="campo1">
+				<li><a class="item" href="/beekeeper/delete_form/{{ form.id }}" id="campo1">
 					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar formulario</strong></p>
 					</div>
 				</a></li>
-				<li><a class="item" href="#" id="campo2">
+				<li><a class="item" href="/beekeeper/show_instance_list/{{ form.id }}" id="campo2">
 					<img src="/beekeeper/images/instances.png" />
 					<div class="label">
 						<p><strong>Instancias</strong></p>
