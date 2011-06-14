@@ -159,6 +159,8 @@ class InstanceXmldbParser():
             creation_date = parser.findtext('meta/creationdate')
             modification_date = parser.findtext('meta/modificationdate')
             editable = parser.findtext('meta/editable')
+            longitude = parser.findtext('meta/geolocalization/longitude')
+            latitude = parser.findtext('meta/geolocalization/latitude')
             # We get the empty Id of the instance
             id = parser.find('meta/id')
             id_text = parser.findtext('meta/id')
@@ -178,7 +180,7 @@ class InstanceXmldbParser():
                 try:
                     form_model = Form.objects.get(pk=form_id)
                     instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
-                                              form=form_model, editable=editable)
+                                              form=form_model, editable=editable, longitude=longitude, latitude=latitude)
                     instance_model.save()
                     # we set the id value once the instance is saved
                     id.text = str(instance_model.id)

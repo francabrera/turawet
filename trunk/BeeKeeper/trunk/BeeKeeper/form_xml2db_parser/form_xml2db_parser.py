@@ -190,8 +190,11 @@ class FormXmldbParser():
             version = parser.findtext('meta/version')
             name = parser.findtext('meta/name')
             user = parser.findtext('meta/author/user')
+            geolocalized = parser.findtext('meta/geolocalizated')
+            if geolocalized == '': geolocalized = True
+            else: geolocalized = False
             # Form model
-            form_model = Form(version=version, name=name)
+            form_model = Form(version=version, name=name, geolocalized=geolocalized)
             form_model.save()
             id.text = str(form_model.id)
             
