@@ -8,6 +8,7 @@
 package com.turawet.beedroid.activity;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -57,7 +58,10 @@ public class FillNewInstanceActivity extends Activity
 			String version = parameters.getString(FormWsBean.version);
 			FormIdentificationBean form = new FormIdentificationBean(name, version);
 			DataBaseManager db = DataBaseManager.getInstance(this);
-			String xml = db.getFormInfo(form).getXml();
+			//String xml = db.getFormInfo(form).getXml();
+			
+			InputStream xml = getAssets().open("formulario_breve_v1.xml");
+			
 			XmlToBeansParser parser;
 			parser = new XmlToBeansParser(xml);
 			InstanceBean instance = parser.getInstance();
@@ -135,6 +139,7 @@ public class FillNewInstanceActivity extends Activity
 		{
 			instanceManager.readFieldValues(flipper.getChildAt(0));
 			String instanceXml = instanceManager.instanceToXml();
+			Log.d("",instanceXml);
 			WSClient ws = WSClient.getInstance();
 			boolean result = ws.uploadNewInstance(instanceXml);
 			if(result)

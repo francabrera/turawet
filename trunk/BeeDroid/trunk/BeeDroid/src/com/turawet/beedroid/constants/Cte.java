@@ -21,12 +21,12 @@ public final class Cte
 	
 	public static enum FieldType
 	{
-		TEXT, DATE
+		TEXT, DATE, RADIO
 	};
 	
 	public static enum XmlEnumTags
 	{
-		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, field, group, groupid, element, value, order, sections, section, formfieldid, day, month, year
+		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, field, group, groupid, element, value, order, sections, section, formfieldid, day, month, year, property, name, version, type, label, required, option
 	};
 	
 	public static final class XmlTags

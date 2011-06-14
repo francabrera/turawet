@@ -11,8 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.turawet.beedroid.beans.DateFieldBean;
+import com.turawet.beedroid.beans.FieldOptionBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.RadioFieldBean;
 import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.view.FieldView;
@@ -25,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 /**
  * @author nicopernas
@@ -115,6 +119,9 @@ public class InstanceBeanManager
 			case DATE:
 				fieldView = getNewDateFieldView((DateFieldBean) fieldBean);
 				break;
+			case RADIO:
+				fieldView = getNewRadioFieldView((RadioFieldBean) fieldBean);
+				break;
 			default:
 				break;
 		}
@@ -122,6 +129,34 @@ public class InstanceBeanManager
 		return fieldView;
 	}
 	
+	/**
+	 * @param fieldBean
+	 * @return
+	 */
+	private FieldView getNewRadioFieldView(RadioFieldBean radioField)
+	{
+		RadioGroup radioGroup = new RadioGroup(context);
+		
+		List<FieldOptionBean> options = radioField.getFormField().getFieldOptions();
+		int id = 0;
+		for(FieldOptionBean option : options)
+		{
+			RadioButton radio = new RadioButton(context);
+			radio.setText(option.getLabel());
+			radio.setId(id++);
+			radioGroup.addView(radio);
+		}
+		
+		String sectionTitle = instance.getSections().get(sectionIndex).getName();
+		String fieldLabel = radioField.getFormField().getLabel();
+		FieldType type = radioField.getFormField().getType();
+		
+		FieldView fieldView = getNewFieldView(type);
+		fieldView.setSectionTitle(sectionTitle);
+		fieldView.setField(radioGroup, fieldLabel);
+		return fieldView;
+	}
+
 	/**
 	 * @param fieldBean
 	 * @return
@@ -214,6 +249,9 @@ public class InstanceBeanManager
 				break;
 			case DATE:
 				((DateFieldBean) instanceBean).setDate((Date) value);
+				break;
+			case RADIO:
+				((RadioFieldBean) instanceBean).setValue(((Integer)value).intValue());
 				break;
 			default:
 				break;
