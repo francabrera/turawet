@@ -5,8 +5,6 @@ import java.io.Writer;
 
 import org.xmlpull.v1.XmlSerializer;
 
-import android.util.Xml;
-
 /**
  * @class BaseBean: Base class form the XML elements
  * 

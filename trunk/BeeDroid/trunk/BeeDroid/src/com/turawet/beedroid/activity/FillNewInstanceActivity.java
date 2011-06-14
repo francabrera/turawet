@@ -8,43 +8,42 @@
 package com.turawet.beedroid.activity;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.InstanceBean;
-import com.turawet.beedroid.constants.Cte;
+import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.database.DataBaseManager;
 import com.turawet.beedroid.parser.XmlToBeansParser;
-import com.turawet.beedroid.view.EfficientViewFlipper;
+import com.turawet.beedroid.util.AlertMaker;
+import com.turawet.beedroid.view.BeanViewFlipper;
+import com.turawet.beedroid.view.FieldView;
+import com.turawet.beedroid.view.support.InstanceBeanManager;
+import com.turawet.beedroid.wsclient.WSClient;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
-public class FillNewInstanceActivity extends Activity // implements
-// OnGestureListener
+public class FillNewInstanceActivity extends Activity
 {
+	private InstanceBeanManager instanceManager;
+
+	BeanViewFlipper flipper;
 	/**
 	 *
 	 */
-	private final String				TAG	= getClass().getName();
-	private float						oldTouchValue;
-	private static int				WIDTH;
-	private static int				HEIGHT;
-	
-	private EfficientViewFlipper	flipper;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -53,36 +52,36 @@ public class FillNewInstanceActivity extends Activity // implements
 		
 		try
 		{
-			WIDTH = this.getWindowManager().getDefaultDisplay().getWidth();
-			HEIGHT = this.getWindowManager().getDefaultDisplay().getHeight();
 			Bundle parameters = getIntent().getExtras();
-			String name = parameters.getString(Cte.FormIdentificationBean.name);
-			String version = parameters.getString(Cte.FormIdentificationBean.version);
+			String name = parameters.getString(FormWsBean.name);
+			String version = parameters.getString(FormWsBean.version);
 			FormIdentificationBean form = new FormIdentificationBean(name, version);
 			DataBaseManager db = DataBaseManager.getInstance(this);
 			String xml = db.getFormInfo(form).getXml();
 			XmlToBeansParser parser;
 			parser = new XmlToBeansParser(xml);
 			InstanceBean instance = parser.getInstance();
+			instanceManager = new InstanceBeanManager(this, instance);
 			
-			flipper = new EfficientViewFlipper(this, instance);
-			flipper.setWidth(WIDTH);
-			flipper.setHeight(HEIGHT);
+			flipper = new BeanViewFlipper(this);
+			List<FieldView> views = instanceManager.getAllInstanceViews();
+			for (FieldView view : views)
+				flipper.addView(view);
 			setContentView(flipper);
 		}
 		catch (SAXException e1)
 		{
-			// TODO Auto-generated catch block
+			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
 		catch (ParserConfigurationException e1)
 		{
-			// TODO Auto-generated catch block
+			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
 		catch (IOException e1)
 		{
-			// TODO Auto-generated catch block
+			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
 	}
@@ -96,52 +95,78 @@ public class FillNewInstanceActivity extends Activity // implements
 		// que se va a hacer con la nueva instancia (guardar, descartar) si es que
 		// no esta guardada
 		
-		Log.d(TAG, "BACK presionada...");
+		Log.d(getClass().getName(), "BACK presionada...");
 		super.onBackPressed();
 	}
 	
+	/**
+	 * @param menu
+	 * 
+	 */
 	@Override
-	public boolean onTouchEvent(MotionEvent touchEvent)
+	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		int action = touchEvent.getAction();
-		
-		switch (action)
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.instance_menu, menu);
+		return true;
+	}
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		// Handle item selection
+		switch (item.getItemId())
 		{
-			case MotionEvent.ACTION_DOWN:
+			case R.id.save_n_send_instance:
+				return saveAndSendInstance();
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	/**
+	 * @return
+	 */
+	private boolean saveAndSendInstance()
+	{
+		
+		try
+		{
+			instanceManager.readFieldValues(flipper.getChildAt(0));
+			String instanceXml = instanceManager.instanceToXml();
+			WSClient ws = WSClient.getInstance();
+			boolean result = ws.uploadNewInstance(instanceXml);
+			if(result)
 			{
-				oldTouchValue = touchEvent.getX();
-				break;
+				AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok, R.string.saved_sended_ok);
 			}
-			case MotionEvent.ACTION_UP:
+			else
 			{
-				float currentX = touchEvent.getX();
-				// Queremos ver la vista previa
-				if (oldTouchValue < WIDTH / 2 && currentX > WIDTH / 2 && Math.abs(currentX - oldTouchValue) > WIDTH / 2)
-				{
-					// flipper.setInAnimation(inAnimationLeft);
-					// flipper.setOutAnimation(outAnimationLeft);
-					flipper.showPrevious();
-				}
-				// Queremos ver la vista siguiente
-				else if (oldTouchValue > WIDTH / 2 && currentX < WIDTH / 2 && Math.abs(currentX - oldTouchValue) > WIDTH / 2)
-				{
-					// flipper.setInAnimation(inAnimationRight);
-					// flipper.setOutAnimation(outAnimationRight);
-					flipper.showNext();
-				}
-				else
-				{
-					flipper.backToCurrent();
-				}
-				break;
-			}
-			case MotionEvent.ACTION_MOVE:
-			{
-				flipper.move((int) oldTouchValue, (int) touchEvent.getX());
-				break;
+				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.saved_sended_not_ok);
 			}
 		}
-		
+		catch (IllegalArgumentException e)
+		{
+			// TODO Error del toXml
+			e.printStackTrace();
+		}
+		catch (IllegalStateException e)
+		{
+			// TODO Error del toXml
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			// TODO Error del toXml
+			e.printStackTrace();
+		}
+		catch (XmlPullParserException e)
+		{
+			// TODO Error del WS
+			e.printStackTrace();
+		}
+		finish();
 		return true;
 	}
 }

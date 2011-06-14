@@ -26,7 +26,7 @@ public final class Cte
 	
 	public static enum XmlEnumTags
 	{
-		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, instancefield, group, groupid, element
+		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, field, group, groupid, element, value, order, sections, section, formfieldid, day, month, year
 	};
 	
 	public static final class XmlTags
@@ -34,11 +34,11 @@ public final class Cte
 		public static final String	namespace	= "";
 	};
 	
-	public static final class FormIdentificationBean
+	public static final class FormWsBean
 	{
 		public static final String	name		= "name";
 		public static final String	version	= "version";
-		
+		public static final String	xml		= "xml";
 	}
 	
 	public static final class WSClient
@@ -48,7 +48,7 @@ public final class Cte
 		public static final String	URL_TO_WSDL							= "http://" + REPOSITORY_URL + "/ws_server/service.wsdl";
 		public static final String	GET_ALL_FORMS_PREVIEW			= "get_all_forms_preview";
 		public static final String	GET_XMLFORM_BY_NAME_VERSION	= "get_xmlform_by_name_version";
-		public static final String	XML									= "xml";
+		public static final String	UPLOAD_NEW_INSTANCE				= "upload_new_instance";
 		public static final int		TIMEOUT								= 10000;
 	}
 	

@@ -14,11 +14,13 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Base64;
 import android.util.Log;
 
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import com.turawet.beedroid.constants.Cte;
+import com.turawet.beedroid.constants.Cte.FormWsBean;
 
 /**
  * @author nicopernas
@@ -70,8 +72,8 @@ public class WSClient
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
 		// Añadimos los parámetros a la llamada
-		request.addProperty(Cte.FormIdentificationBean.name, formToDownload.getName());
-		request.addProperty(Cte.FormIdentificationBean.version, formToDownload.getVersion());
+		request.addProperty(FormWsBean.name, formToDownload.getName());
+		request.addProperty(FormWsBean.version, formToDownload.getVersion());
 		
 		envelope.setOutputSoapObject(request);
 		
@@ -115,13 +117,33 @@ public class WSClient
 		for (int i = 0; i < countOfFormPreview; i++)
 		{
 			SoapObject formId = (SoapObject) response.getProperty(i);
-			String formName = formId.getProperty(Cte.FormIdentificationBean.name).toString();
-			String formVersion = formId.getProperty(Cte.FormIdentificationBean.version).toString();
+			String formName = formId.getProperty(FormWsBean.name).toString();
+			String formVersion = formId.getProperty(FormWsBean.version).toString();
 			allFormPreview.add(new FormIdentificationBean(formName, formVersion));
 		}
 		
 		return allFormPreview;
 	}
 	
+	public boolean uploadNewInstance(String instanceXml) throws IOException, XmlPullParserException
+	{
+		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.UPLOAD_NEW_INSTANCE);
+		
+		String encodedXml = Base64.encodeToString(instanceXml.getBytes(), Base64.URL_SAFE);
+		
+		request.addProperty(FormWsBean.xml, encodedXml);
+		
+		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		envelope.setOutputSoapObject(request);
+
+		transportSE.debug = true;
+		// Hacemos la llamada al método remoto
+		transportSE.call(Cte.WSClient.UPLOAD_NEW_INSTANCE, envelope);
+
+		// Obtenemos la respuesta del sobre SOAP
+		Object response = envelope.getResponse();
+		
+		return Boolean.valueOf(response.toString());
+	}
 	
 }
