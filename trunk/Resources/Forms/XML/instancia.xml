@@ -2,8 +2,8 @@
 <!DOCTYPE form SYSTEM "instance_def.dtd">
 
 <instance>
+	<id />
 	<meta>
-		<id />
 		<formid>1</formid>
 		<author>
 			<user>turawet</user>
