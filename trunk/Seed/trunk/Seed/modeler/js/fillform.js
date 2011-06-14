@@ -73,10 +73,11 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 	    	class: 'actions'
 		}).prepend(
 				// Botón de requerido/no requerido
-				/*$('<div />', {
-					onClick: 'javascript:setRequired(\''+idField+'\')',
-					class: 'fieldNotRequired'
-				}),*/
+				$('<img />', {
+					src: 'images/buttons/not-required.png',
+					onClick: 'javascript:setRequired(this, \''+idField+'\')',
+					class: 'fieldButton'
+				}),
 				// Botón de propiedades
 				$('<img />', {
 					src  : 'images/buttons/more.png',
@@ -102,8 +103,29 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 	    	text: 'propiedades'
 		})
 	);
-	addListenersToField(newField);
-    var jsField = new Field(name,id,fieldType);
+	// Añadimos los listeners al elemento
+	addListenersToField(newField);    
+	// Variable para almacenar el nuevo campo dado de alta
+	var jsField;
+	// Si se trata de un combo o un radio
+	if ((type == "radio") || (type == "combo")) {
+		// Agregamos las opciones
+		newField.append($('<div />', {
+	    	class: 'options',
+		}).prepend(
+				// Añadir nueva opción
+				$('<img />', {
+					src: 'images/buttons/add.png',
+					onClick: 'javascript:addOptionToField(this.parentNode, \''+idField+'\')',
+					class: 'addOptionButton'
+				})
+		));
+		if (type == "radio")
+			jsField = new Radio(name,id,fieldType);
+	}
+	else { // Cualquier otro tipo de campo
+		jsField = new Field(name,id,fieldType);
+	} 
     formSections[section].addField(jsField);
     return newField;
 }
@@ -120,30 +142,71 @@ function deleteField (tagID) {
 }
 
 // Establecer la obligatoriedad o no del campo
-function setRequired(tagID) {
-   var node = document.querySelector('#'+tagID);
+function setRequired(image, tagID) {
    var auxIDs = tagID.match(/\d+/g);
    var sectionID = parseInt(auxIDs[0]);
-   var fieldID = parseInt(auxIDs[1])
-   if ($(node, "div.actions .fieldRequired").length > 0) {
-	   var image = $(node, "div.actions .fieldRequired");
-	   $(image).addClass("fieldNotRequired");
-	   $(image).removeClass("fieldRequired");
-	   formSections[sectionID].fields[fieldID].setRequired(false);
+   var fieldID = parseInt(auxIDs[1]);
+   var campo = formSections[sectionID].fields[fieldID];
+   if (campo.required == true){   
+	   $(image).attr("src", "images/buttons/not-required.png");
+	   campo.setRequired(false);
    }
-   else if ($(node, "div.actions .fieldNotRequired").length > 0) {
-	   var image = $(node, "div.actions .fieldNotRequired");
-	   $(image).addClass("fieldRequired");
-	   $(image).removeClass("fielNotdRequired");
-	   formSections[sectionID].fields[fieldID].setRequired(true);
+   else {
+	   $(image).attr("src", "images/buttons/required.png")
+	   campo.setRequired(true);
    }
-		
 }
 
-//Mostrar propiedades
+// Hacer etiqueta y valor de la opción editables
+function makeOptionEditable(optag, sID, fID, oID) {
+	//Label de la opción editable
+	var label = $("#" + optag + " .optionlabel");
+	label.inlineEdit({
+			save: function(event, hash) {
+					var option = formSections[sID].fields[fID].options[oID];
+					option.label = hash.value;
+			}
+	});
+	//Value de la opción editable
+	var value = $("#" + optag + " .optionvalue")
+	value.inlineEdit({
+		save: function(event, hash) {
+				var option = formSections[sID].fields[fID].options[oID];
+				option.value = hash.value;
+		}
+	});
+}
+
+// Añadir opción al campo
+function addOptionToField (divOptions, tagID) {
+	var auxIDs = tagID.match(/\d+/g);
+	var sectionID = parseInt(auxIDs[0]);
+	var fieldID = parseInt(auxIDs[1]);
+	var field = formSections[sectionID].fields[fieldID];
+	var opID = field.addOption('label', 'value');
+	var pOptions;
+	var opTag = 's' + sectionID + 'f' + fieldID + 'o' + opID;
+	$(divOptions).append (
+		pOptions = $('<p />', {
+						id: opTag,
+					}).prepend(
+						$('<span />', {
+							text: 'label',
+							class: 'optionlabel',
+						}),
+						$('<span />', {
+							text: 'value',
+							class: 'optionvalue',
+						})
+					)
+	);
+	makeOptionEditable(opTag, sectionID, fieldID, opID)
+}
+
+//Mostrar propiedades (y opciones)
 function expandField (tagID) {
    var node = document.querySelector('#'+tagID);
-   node = $(node).children('.properties');
+   node = $(node).children('.properties, .options');
    $(node).slideToggle('fast');
 }
 
@@ -163,7 +226,7 @@ function addSection () {
 		$('#sections > ul').append(
 			$('<li />', {
 				id: 's' + actualSection + 'link',
-			}).prepend(
+			}).append(
 				$('<a />', {
 					text: 'Sección ' + actualSection,
 					href: '#s' + actualSection,
