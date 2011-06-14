@@ -11,7 +11,7 @@
 
 function formToXML (name, sections) {
 	var text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-	text += "<form><meta><id/><version>1</version>";
+	text += "<form><id/><meta><version>1</version>";
 	text += "<name>" + name + "</name>";
 	text += "<author><user>turawet</user></author></meta>";
 	text += "<sections>";
