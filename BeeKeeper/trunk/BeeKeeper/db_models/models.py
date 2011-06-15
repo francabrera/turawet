@@ -148,7 +148,6 @@ class Instance(models.Model):
     modification_date = models.DateField()
     signature = models.CharField(max_length = 128)
     form = models.ForeignKey(Form)
-    georef = models.CharField(max_length = 256)
     editable = models.BooleanField()
     longitude = models.FloatField(null=True)
     latitude = models.FloatField(null=True)
