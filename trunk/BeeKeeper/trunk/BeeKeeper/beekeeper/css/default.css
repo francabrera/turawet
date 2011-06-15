@@ -307,7 +307,7 @@ img {
     display:none;
 }
 
-#fieldsBar ul li .item pan.label {
+#fieldsBar ul li .item div.label {
 	text-align:center;
 	background: rgba(0, 0, 0, 0.75);
 	position:relative;
