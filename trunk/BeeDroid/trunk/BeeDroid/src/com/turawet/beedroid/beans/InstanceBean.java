@@ -140,12 +140,6 @@ public class InstanceBean extends BaseBean
 	/* Other methods */
 
 	@Override
-	public String toString()
-	{
-		return "Instance: " + id + " Form: " + form.name;
-	}
-
-	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
 		serializer = Xml.newSerializer();

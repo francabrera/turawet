@@ -36,7 +36,6 @@ import com.turawet.beedroid.constants.Cte.FieldType;
  */
 public class FormFieldBean extends BaseBean
 {
-	
 	/**
 	 * @uml.property name="label"
 	 */
@@ -72,6 +71,10 @@ public class FormFieldBean extends BaseBean
 		super();
 		properties = new ArrayList<PropertyBean>();
 		fieldOptions = new  ArrayList<FieldOptionBean>();
+		required = false;
+		label = "";
+		section_order = -1;
+		field_group_order =  -1;
 	}
 	
 	/* Getter & Setters */

@@ -17,18 +17,28 @@ import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.beans.RadioFieldBean;
 import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.FieldType;
+import com.turawet.beedroid.listener.MyLocationListener;
 import com.turawet.beedroid.view.FieldView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 /**
  * @author nicopernas
@@ -57,49 +67,109 @@ public class InstanceBeanManager
 	}
 	
 	/**
-	 * 
+	 * @return
 	 */
-	/*
-	 * public final void incIndex()
-	 * {
-	 * if (fieldIndex < numOfFields - 1)
-	 * {
-	 * fieldIndex++;
-	 * }
-	 * else
-	 * {
-	 * if (sectionIndex < numOfSections - 1)
-	 * {
-	 * sectionIndex++;
-	 * fieldIndex = 0;
-	 * numOfFields =
-	 * instance.getSections().get(sectionIndex).getSectionChildren().size();
-	 * }
-	 * }
-	 * }
-	 */
+	public List<FieldView> getAllInstanceViews()
+	{
+		List<FieldView> views = new ArrayList<FieldView>();
+		int numberOfSections = instance.getSections().size();
+		for (int section = 0; section < numberOfSections; section++)
+		{
+			int numberOfFields = instance.getSections().get(section).getSectionChildren().size();
+			for (int field = 0; field < numberOfFields; field++)
+			{
+				views.add(getNewFieldView(section, field));
+			}
+		}
+		
+		if (instance.getForm().isGeolocalized())
+		{
+			views.add(getNewGeolocalizedView());
+		}
+		return views;
+	}
+	
 	/**
-	 * 
+	 * @return
 	 */
-	/*
-	 * public final void decIndex()
-	 * {
-	 * if (fieldIndex > 0)
-	 * {
-	 * fieldIndex--;
-	 * }
-	 * else
-	 * {
-	 * if (sectionIndex > 0)
-	 * {
-	 * sectionIndex--;
-	 * numOfFields =
-	 * instance.getSections().get(sectionIndex).getSectionChildren().size();
-	 * fieldIndex = numOfFields - 1;
-	 * }
-	 * }
-	 * }
-	 */
+	private FieldView getNewGeolocalizedView()
+	{
+		final TextView latitudText = new TextView(context);
+		latitudText.setText("Latitud: ");
+		latitudText.setTextColor(Color.WHITE);
+		latitudText.setGravity(Gravity.TOP);
+		latitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		final TextView longitudText = new TextView(context);
+		longitudText.setText("Longitud: ");
+		longitudText.setTextColor(Color.WHITE);
+		longitudText.setGravity(Gravity.TOP);
+		longitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		Button geoButton = new Button(context);
+		
+		geoButton.setText("Obtener posición");
+		// text.setText(textField.getValue());
+		geoButton.setGravity(Gravity.TOP);
+		geoButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		geoButton.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				// Acquire a reference to the system Location Manager
+				final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+				
+				// Define a listener that responds to location updates
+				final LocationListener locationListener = new MyLocationListener();
+				
+				// Register the listener with the Location Manager to receive
+				// location updates
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+				
+				final ProgressDialog pd = ProgressDialog.show(context, "", "Conectando...", true, false);
+				new Thread(new Runnable()
+				{
+					public void run()
+					{
+						while (((MyLocationListener) locationListener).locationIsFounded())
+						{
+							try
+							{
+								Thread.sleep(1000);
+							}
+							catch (InterruptedException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						locationManager.removeUpdates(locationListener);
+						longitudText.setText("Longitud: " + ((MyLocationListener) locationListener).getLongitud());
+						latitudText.setText("Latitud: " + ((MyLocationListener) locationListener).getLatitud());
+						pd.dismiss();
+					}
+				}).start();
+				
+			}
+		});
+		String sectionTitle = "";
+		String fieldLabel = "Geolocalización";
+		
+		FieldView fieldView = new FieldView(context, null);
+		fieldView.setGravity(Gravity.CENTER_HORIZONTAL);
+		fieldView.setOrientation(LinearLayout.VERTICAL);
+		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+		
+		fieldView.setSectionTitle(sectionTitle);
+		fieldView.setField(geoButton, fieldLabel);
+		fieldView.addView(longitudText);
+		fieldView.addView(latitudText);
+		return fieldView;
+	}
+	
 	/**
 	 * @param section
 	 * @param field
@@ -139,7 +209,7 @@ public class InstanceBeanManager
 		
 		List<FieldOptionBean> options = radioField.getFormField().getFieldOptions();
 		int id = 0;
-		for(FieldOptionBean option : options)
+		for (FieldOptionBean option : options)
 		{
 			RadioButton radio = new RadioButton(context);
 			radio.setText(option.getLabel());
@@ -148,15 +218,9 @@ public class InstanceBeanManager
 		}
 		
 		String sectionTitle = instance.getSections().get(sectionIndex).getName();
-		String fieldLabel = radioField.getFormField().getLabel();
-		FieldType type = radioField.getFormField().getType();
-		
-		FieldView fieldView = getNewFieldView(type);
-		fieldView.setSectionTitle(sectionTitle);
-		fieldView.setField(radioGroup, fieldLabel);
-		return fieldView;
+		return getNewFieldView(radioField, sectionTitle, radioGroup);
 	}
-
+	
 	/**
 	 * @param fieldBean
 	 * @return
@@ -170,13 +234,7 @@ public class InstanceBeanManager
 		datePicker.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		String sectionTitle = instance.getSections().get(sectionIndex).getName();
-		String fieldLabel = dateField.getFormField().getLabel();
-		FieldType type = dateField.getFormField().getType();
-		
-		FieldView fieldView = getNewFieldView(type);
-		fieldView.setSectionTitle(sectionTitle);
-		fieldView.setField(datePicker, fieldLabel);
-		return fieldView;
+		return getNewFieldView(dateField, sectionTitle, datePicker);
 	}
 	
 	/**
@@ -194,43 +252,22 @@ public class InstanceBeanManager
 		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		String sectionTitle = instance.getSections().get(sectionIndex).getName();
-		String fieldLabel = textField.getFormField().getLabel();
-		FieldType type = textField.getFormField().getType();
-		
-		FieldView fieldView = getNewFieldView(type);
-		fieldView.setSectionTitle(sectionTitle);
-		fieldView.setField(text, fieldLabel);
-		return fieldView;
+		return getNewFieldView(textField, sectionTitle, text);
 	}
 	
 	/**
 	 * @return
 	 */
-	private final FieldView getNewFieldView(FieldType fieldType)
+	private final FieldView getNewFieldView(GenericInstanceFieldBean fieldBean, String sectionTitle, View field)
 	{
-		FieldView fieldView = new FieldView(context, fieldType);
+		FieldView fieldView = new FieldView(context, fieldBean.getFormField().getType());
 		fieldView.setGravity(Gravity.CENTER_HORIZONTAL);
 		fieldView.setOrientation(LinearLayout.VERTICAL);
 		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+		
+		fieldView.setSectionTitle(sectionTitle);
+		fieldView.setField(field, fieldBean.getFormField().getLabel());
 		return fieldView;
-	}
-	
-	/**
-	 * @return
-	 */
-	public List<FieldView> getAllInstanceViews()
-	{
-		List<FieldView> views = new ArrayList<FieldView>();
-		int numberOfSections = instance.getSections().size();
-		for (int section = 0; section < numberOfSections; section++)
-		{
-			int numberOfFields = instance.getSections().get(section).getSectionChildren().size();
-			for (int field = 0; field < numberOfFields; field++)
-			{
-				views.add(getNewFieldView(section, field));
-			}
-		}
-		return views;
 	}
 	
 	/**
@@ -251,7 +288,7 @@ public class InstanceBeanManager
 				((DateFieldBean) instanceBean).setDate((Date) value);
 				break;
 			case RADIO:
-				((RadioFieldBean) instanceBean).setValue(((Integer)value).intValue());
+				((RadioFieldBean) instanceBean).setValue(((Integer) value).intValue());
 				break;
 			default:
 				break;
@@ -276,4 +313,5 @@ public class InstanceBeanManager
 			}
 		}
 	}
+	
 }

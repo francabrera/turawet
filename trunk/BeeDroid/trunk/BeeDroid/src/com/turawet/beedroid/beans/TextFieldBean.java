@@ -38,7 +38,24 @@ public class TextFieldBean extends GenericInstanceFieldBean
 		super(order, formField);
 		text = "";
 	}
+
+	/**
+	 * @return the text
+	 */
+	public String getText()
+	{
+		return text;
+	}
 	
+	/**
+	 * @param text
+	 *           the text to set
+	 */
+	public void setText(String text)
+	{
+		this.text = text;
+	}
+		
 	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
@@ -63,22 +80,4 @@ public class TextFieldBean extends GenericInstanceFieldBean
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
 		serializer.flush();
 	}
-	
-	/**
-	 * @return the text
-	 */
-	public String getText()
-	{
-		return text;
-	}
-	
-	/**
-	 * @param text
-	 *           the text to set
-	 */
-	public void setText(String text)
-	{
-		this.text = text;
-	}
-	
 }

@@ -35,7 +35,6 @@ public class RadioFieldBean extends GenericInstanceFieldBean
 	{
 		super(order, formField);
 		value = -1;
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

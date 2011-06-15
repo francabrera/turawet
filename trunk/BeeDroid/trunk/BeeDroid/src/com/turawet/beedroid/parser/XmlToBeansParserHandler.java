@@ -111,6 +111,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	@Override
 	public void endElement(String uri, String qName, String localName) throws SAXException
 	{
+		
 		/* Closing Meta */
 		if (localName.equalsIgnoreCase(XmlEnumTags.meta.toString()))
 		{
@@ -190,6 +191,10 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			tempForm.setName(buffer.toString().trim());
 			clearBuffer();
 		}
+		else if (!inSection && localName.equalsIgnoreCase(XmlEnumTags.geolocalized.toString()))
+		{
+			tempForm.setGeolocalized(true);
+		}
 		else if (!inSection && localName.equalsIgnoreCase(XmlEnumTags.version.toString()))
 		{
 			String value = buffer.toString().trim();
@@ -250,7 +255,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			tempProperty.setValue(buffer.toString().trim());
 			clearBuffer();
 		}
-
+		
 		/* Option */
 		else if (inSection && inField && inOption && localName.equalsIgnoreCase(XmlEnumTags.label.toString()))
 		{
@@ -262,7 +267,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 			tempOption.setValue(buffer.toString().trim());
 			clearBuffer();
 		}
-
+		
 		/* Once finished, we always have to clean the buffer */
 		clearBuffer();
 	}
