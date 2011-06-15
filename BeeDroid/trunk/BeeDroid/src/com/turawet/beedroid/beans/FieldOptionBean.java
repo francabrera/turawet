@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
 import java.io.Writer;
 
 /**
@@ -29,11 +30,15 @@ public class FieldOptionBean extends BaseBean
 	 * @uml.property name="value"
 	 */
 	private String	value;
-	
-	@Override
-	public String toString()
+
+	/**
+	 * 
+	 */
+	public FieldOptionBean()
 	{
-		return label;
+		super();
+		label = "";
+		value = "";		
 	}
 	
 	/**
@@ -69,8 +74,7 @@ public class FieldOptionBean extends BaseBean
 	}
 
 	@Override
-	public void toXml(Writer writer)
+	protected void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
 	}
-	
 }

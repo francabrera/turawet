@@ -1,5 +1,6 @@
 package com.turawet.beedroid.beans;
 
+import java.io.IOException;
 import java.io.Writer;
 
 /**
@@ -15,7 +16,7 @@ import java.io.Writer;
  * 
  * @author Francisco José Cabrera Hernández
  * @author Nicolás Pernas Maradei
- * @autor Romén Rodríguez Gil
+ * @author Romén Rodríguez Gil
  * 
  */
 public class PropertyBean extends BaseBean
@@ -29,17 +30,6 @@ public class PropertyBean extends BaseBean
 	 * @uml.property name="value"
 	 */
 	private String	value;
-	
-	/* Getters && Setters */
-	public int getId()
-	{
-		return id;
-	}
-	
-	public void setId(int id)
-	{
-		this.id = id;
-	}
 	
 	public String getName()
 	{
@@ -60,17 +50,13 @@ public class PropertyBean extends BaseBean
 	{
 		this.value = value;
 	}
-	
-	/* Other methods */
+
+	/* (non-Javadoc)
+	 * @see com.turawet.beedroid.beans.BaseBean#toXml(java.io.Writer)
+	 */
 	@Override
-	public String toString()
-	{
-		return name;
-	}
-	
-	@Override
-	public void toXml(Writer writer)
+	protected void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
 	}
-	
+
 }

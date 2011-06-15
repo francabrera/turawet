@@ -1,17 +1,16 @@
 package com.turawet.beedroid.beans;
 
 import java.io.Writer;
-import java.util.Iterator;
-import java.util.List;
-
-import android.test.suitebuilder.annotation.SmallTest;
 
 /**
  * @class FormBean: Represents a form
  * 
- * @param id: The id of the form
- * @param name: The name of the form
- * @param version: The version of the form
+ * @param id
+ *           : The id of the form
+ * @param name
+ *           : The name of the form
+ * @param version
+ *           : The version of the form
  * 
  * @version 1.0
  * 
@@ -20,41 +19,83 @@ import android.test.suitebuilder.annotation.SmallTest;
  * @author Romén Rodríguez Gil
  * 
  */
-public class FormBean extends BaseBean {
+/**
+ * @author nicopernas
+ *
+ */
+public class FormBean extends BaseBean
+{
+	
+	/**
+	 * @uml.property name="name"
+	 */
+	private String		name;
+	
+	/**
+	 * @uml.property name="version"
+	 */
+	private int			version;
+	
+	/**
+	 * @uml.property name="geolocalizated"
+	 */
+	private boolean	geolocalized;
+
+	public FormBean()
+	{
+		super();
+		name = "";
+		version = -1;
+		geolocalized = false;
+	}
 
 	/**
-	 * @uml.property  name="name"
+	 * @return the geolocalizated
 	 */
-	public String name;
+	public boolean isGeolocalized()
+	{
+		return geolocalized;
+	}
+	
 	/**
-	 * @uml.property  name="version"
+	 * @param geolocalized
+	 *           the geolocalized to set
 	 */
-	public int version;
-	
-	
-	/* Getters & Setters*/
-	public String getName() {
-		return name;
+	public void setGeolocalized(boolean geolocalized)
+	{
+		this.geolocalized = geolocalized;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}	
 	
-	
-	/* Methods */	
-	@Override
-	public String toString()
+	/**
+	 * @return
+	 */
+	public String getName()
 	{
 		return name;
+	}
+	
+	/**
+	 * @param name
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	/**
+	 * @return
+	 */
+	public int getVersion()
+	{
+		return version;
+	}
+	
+	/**
+	 * @param version
+	 */
+	public void setVersion(int version)
+	{
+		this.version = version;
 	}
 	
 	@Override

@@ -51,6 +51,8 @@ public class SectionBean extends BaseBean
 	{
 		super();
 		sectionChildren = new ArrayList<SectionChildBean>();
+		name = "";
+		order = -1;
 	}
 	
 	/* Getters y setters */
@@ -90,13 +92,6 @@ public class SectionBean extends BaseBean
 		this.sectionChildren.add(child);
 	}
 	
-	/* Other methods */
-	@Override
-	public String toString()
-	{
-		return name;
-	}
-	
 	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
@@ -115,7 +110,7 @@ public class SectionBean extends BaseBean
 			section.toXml(writer);
 		}
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.fields.toString());
-
+		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.section.toString());
 		serializer.flush();
 	}

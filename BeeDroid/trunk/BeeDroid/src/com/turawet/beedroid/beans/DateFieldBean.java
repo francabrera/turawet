@@ -37,7 +37,6 @@ public class DateFieldBean extends GenericInstanceFieldBean
 	{
 		super(order, formField);
 		date = new Date();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -149,7 +148,5 @@ public class DateFieldBean extends GenericInstanceFieldBean
 		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
 		serializer.flush();
-
 	}
-	
 }
