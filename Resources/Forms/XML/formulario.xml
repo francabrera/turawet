@@ -121,32 +121,6 @@
 					<label>Audio</label>
 					<type>AUDIO</type>
 				</field>
-				<field>
-					<id />
-					<label>Localización</label>
-					<type>LOCATION</type>
-					<properties>
-						<property>
-							<name>type</name>
-							<value>COORDINATES</value>
-						</property>
-					</properties>
-				</field>
-				<group>
-					<id />
-					<label>GRUPO</label>
-					<required />
-					<field>
-						<id />
-						<label>Nombre</label>
-						<type>TEXT</type>
-					</field>
-					<field>
-						<id />
-						<label>Apellido1</label>
-						<type>TEXT</type>
-					</field>
-				</group>
 				<group>
 					<id />
 					<list />
@@ -167,6 +141,28 @@
 						</property>
 					</properties>
 				</group>
+				<group>
+					<id />
+					<list />
+					<label>GRUPO</label>
+					<required />
+					<field>
+						<id />
+						<label>Nombre</label>
+						<type>TEXT</type>
+					</field>
+					<field>
+						<id />
+						<label>Apellido1</label>
+						<type>TEXT</type>
+					</field>
+				</group>
+			</fields>
+		</section>
+		<section>
+			<id />
+			<name>Segunda sección</name>
+			<fields>
 				<field>
 					<id />
 					<label>Número de ventanas</label>
