@@ -117,7 +117,7 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 				$('<img />', {
 					src: 'images/buttons/add.png',
 					onClick: 'javascript:addOptionToField(this.parentNode, \''+idField+'\')',
-					class: 'addOptionButton'
+					class: 'addoptionbutton'
 				})
 		));
 		if (type == "radio")
@@ -191,11 +191,14 @@ function addOptionToField (divOptions, tagID) {
 						id: opTag,
 					}).prepend(
 						$('<span />', {
-							text: 'label',
+							text: 'Opción',
 							class: 'optionlabel',
 						}),
 						$('<span />', {
-							text: 'value',
+							text: ':',
+						}),
+						$('<span />', {
+							text: 'Valor',
 							class: 'optionvalue',
 						})
 					)
