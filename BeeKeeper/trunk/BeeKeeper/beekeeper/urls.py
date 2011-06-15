@@ -6,16 +6,16 @@ from django.conf import settings
 
 
 urlpatterns = patterns('',
-    (r'^css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_BEEKEEPER_ROOT, 'show_indexes': False}),
-    (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGES_BEEKEEPER_ROOT, 'show_indexes': False}),
-    (r'^js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_BEEKEEPER_ROOT, 'show_indexes': False}),
+    (r'css/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.CSS_BEEKEEPER_ROOT, 'show_indexes': False}),
+    (r'images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.IMAGES_BEEKEEPER_ROOT, 'show_indexes': False}),
+    (r'js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_BEEKEEPER_ROOT, 'show_indexes': False}),
 )
 
 urlpatterns += patterns('beekeeper.views',
-    (r'^show_form_list$', 'showFormList'),
-    (r'^show_form/(?P<formid>\d+)/$', 'showForm'),
-    (r'^delete_form/(?P<formid>\d+)/$', 'deleteForm'),
-    (r'^show_instance_list/(?P<formid>\d+)/$', 'showInstanceList'),
-    (r'^show_instance/(?P<instanceid>\d+)/$', 'showInstance'),
-    (r'^delete_instance/(?P<instanceid>\d+)/$', 'deleteInstance'),
+    (r'show_form_list$', 'showFormList'),
+    (r'show_form/(?P<formid>\d+)/$', 'showForm'),
+    (r'delete_form/(?P<formid>\d+)/$', 'deleteForm'),
+    (r'show_instance_list/(?P<formid>\d+)/$', 'showInstanceList'),
+    (r'show_instance/(?P<instanceid>\d+)/$', 'showInstance'),
+    (r'delete_instance/(?P<instanceid>\d+)/$', 'deleteInstance'),
 )

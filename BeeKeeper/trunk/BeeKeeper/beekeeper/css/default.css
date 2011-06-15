@@ -232,12 +232,14 @@ img {
 }
 
 #form li.numeric {
-    background-color:#B0C2FF;
+    /*background-color:#778acb;*/
+    background-color:#9EAEE5;
     background-image:url('../images/icons/text2.png');
 }
 
 #form li.radio {
-    background-color:#FFD4B0;
+    /*background-color:#a25656;*/
+    background-color:#D18787;
     background-image:url('../images/icons/text2.png');
 }
 
@@ -247,7 +249,8 @@ img {
 }
 
 #form li.image {
-    background-color:#BDDFF0;
+    /*background-color:#86b58d;*/
+    background-color:#B0DAB5;
     background-image:url('../images/icons/image.png');
 }
 
@@ -263,7 +266,7 @@ img {
 }
 
 #form li.date {
-    background-color:#D0B0FF;
+    background-color:#a5c2d1;
     background-image:url('../images/icons/image.png');
 }
 /*********************** ----------- ***********************/
@@ -304,7 +307,7 @@ img {
     display:none;
 }
 
-#fieldsBar ul li .item div.label {
+#fieldsBar ul li .item pan.label {
 	text-align:center;
 	background: rgba(0, 0, 0, 0.75);
 	position:relative;
