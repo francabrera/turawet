@@ -53,101 +53,43 @@ class FormXmldbParser():
         return 0
     
     
-    def parse_text_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-        
-        return field_model
-    
-    
-    def parse_textarea_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-        
-        return field_model
-    
-    
-    def parse_numeric_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-        
-        return field_model
-    
-    
-    def parse_date_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-        
-        return field_model
-    
-    
-    def parse_radio_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-        
-        return field_model
-    
-    
-    def parse_combo_field(self, parser, section_model):
-        field_model = FormField(section=section_model)
-                
-        return field_model
-    
-    
-    def parse_check_field(self, parser, section_model):
-        return FormField(section=section_model)
-
-
     def parse_generic_field(self, fields, section_model, i, j, field_group_model=None):
         """
         :attention The loop iterators are:
                    "i" for sections; "j" for fields in sections; "k" for fields in groups
         """
-        ## Data types ##
-        actionSwitch = {
-            'TEXT': self.parse_text_field,
-            'TEXTAREA': self.parse_textarea_field,
-            'NUMERIC': self.parse_numeric_field,
-            'DATE': self.parse_date_field,
-            'RADIO': self.parse_radio_field,
-            'COMBO': self.parse_combo_field,
-            'CHECKBOX': self.parse_check_field
-            }
         # Parsing
         k = 0
         for field in fields:
             id = field.find('id')
             type = field.findtext('type')
-            ok_type = False
-            # TO-DO: Need to check that type is valid
-            # If there is a an error we report it to the logger
-            try:
-                field_model = actionSwitch[type](field, section_model)
-                ok_type = True
-            except:
-                logger.error('Indexing actionSwitch error:'+ str(sys.exc_info()[0]))
-                # We sould rollack the transaction
-            if ok_type:
-                field_model.type = type
-                field_model.section_order = j
-                field_model.label = field.findtext('label')
-                field_model.required = field.findtext('required')
-                if field_model.required == '':
+            # All fields in the form have the same treatment
+            field_model = FormField(section=section_model)
+            field_model.type = type
+            field_model.section_order = j
+            field_model.label = field.findtext('label')
+            field_model.required = field.findtext('required')
+            if field_model.required == '':
+                field_model.required = True
+            else:
+                field_model.required = False
+            # Groups
+            if field_group_model:
+                field_model.field_group  = field_group_model
+                field_model.field_group_order  = k
+                # if the group is required, the fields are required
+                if field_group_model.required:
                     field_model.required = True
-                else:
-                    field_model.required = False
-                # Groups
-                if field_group_model:
-                    field_model.field_group  = field_group_model
-                    field_model.field_group_order  = k
-                    # if the group is required, the fields are required
-                    if field_group_model.required:
-                        field_model.required = True
-                    k += 1
-                field_model.save()
-                id.text = str(field_model.id)
-                # Adding options (if any)
-                options = field.findall("options/option")
-                if (len(options) > 0):
-                    self.parse_field_options(options, field_model)
-                # Adding the field properties
-                properties = field.findall("properties/property")
-                self.parse_field_properties(properties, field_model)
+                k += 1
+            field_model.save()
+            id.text = str(field_model.id)
+            # Adding options (if any)
+            options = field.findall("options/option")
+            if (len(options) > 0):
+                self.parse_field_options(options, field_model)
+            # Adding the field properties
+            properties = field.findall("properties/property")
+            self.parse_field_properties(properties, field_model)
             j += 1
             
         return j
