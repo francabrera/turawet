@@ -166,6 +166,17 @@ p { margin:0; }
     position: relative;
     top: 20px;   
     }
+#form li div.options .optionlabel {
+    margin: 0 0 0 5px;
+    font-weight:bold;       
+    }
+#form li div.options .optionvalue {
+    margin: 0 0 0 20px;       
+    }
+    
+#form li div.options .addoptionbutton {
+    margin: 0 0 10px 0;       
+    }
     
     /*********************** ----------- ***********************/
     
@@ -177,6 +188,7 @@ p { margin:0; }
 	bottom:0px;
 	width:90%;
 	height:7%;
+	min-height:35px;
 	background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%); /* Chrome10+,Safari5.1+ */
@@ -308,8 +320,7 @@ p { margin:0; }
 	display:inline;
 }
 
-.item {
-	display:block;
+#fieldsBar ul li a.item {
 	float:right;
 	width:90px;
 	height:48px;
@@ -319,16 +330,16 @@ p { margin:0; }
 	color: #000;
 	overflow:visible;
 }
-.item img {
+#fieldsBar ul li a.item img {
 	border:0;
 	margin:4px auto;
 }
 
-.item div {
+#fieldsBar ul li a.item div {
     display:none;
 }
 
-.item div.label {
+#fieldsBar ul li a.item div.label {
 	text-align:center;
 	background:rgb(0, 0, 0);
 	background: rgba(0, 0, 0, 0.75);
@@ -348,6 +359,9 @@ p { margin:0; }
 .buttons {
 	text-align:center;
 	line-height:40px;
+	width: 96px;
+	position: absolute;
+	bottom:30px;
 	}
 .buttons a.button {
     padding: 7px 10px;
@@ -370,7 +384,7 @@ p { margin:0; }
     }
 .buttons a.button.red { background-color: #e50000; }
 .buttons a.button.purple { background-color: #9400bf; }
-.buttons a.button.green { background-color: #58aa00; }
+.buttons a.button.green { background-color: #528020; }
 .buttons a.button.orange { background-color: #ff9c00; }
 .buttons a.button.blue { background-color: #2c6da0; }
 .buttons a.button.black { background-color: #333; }
