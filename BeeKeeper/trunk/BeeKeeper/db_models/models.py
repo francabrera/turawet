@@ -285,7 +285,7 @@ class ImageField(InstanceField):
     """Class: `ImageField`. 
        :param value: The image itself.
        :todo ImageField parameters"""
-    value = models.ImageField(upload_to = '/')
+    value = models.ImageField(upload_to = 'beehive/images')
 
     def __unicode__(self):
         return unicode(self.value)
