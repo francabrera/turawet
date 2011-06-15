@@ -2,8 +2,8 @@
 <!DOCTYPE form SYSTEM "instance_def.dtd">
 
 <instance>
+	<id />
 	<meta>
-		<id />
 		<formid>1</formid>
 		<author>
 			<user>turawet</user>
@@ -11,6 +11,10 @@
 		<creationdate>2011-01-12</creationdate>
 		<modificationdate>2011-01-12</modificationdate>
 		<editable>True</editable>
+		<geolocalization>
+			<latitude>23.516</latitude>
+			<longitude>-49.21</longitude>
+		</geolocalization>
 	</meta>
 	<sections>
 		<section>
@@ -86,15 +90,6 @@
 					<order>9</order>
 					<formfieldid>9</formfieldid>
 				</field>
-				<field>
-					<id />
-					<value>
-						<latitude>23.516</latitude>
-						<longitude>-49.21</longitude>
-					</value>
-					<order>10</order>
-					<formfieldid>10</formfieldid>
-				</field>
 				<!--  Grupo sin lista, con un groupid que no se repite -->
 				<group>
 					<groupid>1</groupid>
@@ -103,11 +98,12 @@
 							<id />
 							<ordengrupo>1</ordengrupo>
 							<value>
-								<latitude>23.516</latitude>
-								<longitude>-49.21</longitude>
+								<filename>IMG_001.jpg</filename>
+								<hash>9324F00CD</hash>
+								<binary>12312311323123</binary>
 							</value>
-							<order>11</order>
-							<formfieldid>11</formfieldid>
+							<order>10</order>
+							<formfieldid>10</formfieldid>
 						</field>
 					</element>
 				</group>
@@ -123,15 +119,15 @@
 							<id />
 							<ordengrupo>1</ordengrupo>
 							<value>Prueba</value>
-							<order>12</order>
-							<formfieldid>12</formfieldid>
+							<order>11</order>
+							<formfieldid>11</formfieldid>
 						</field>
 						<field>
 							<id />
 							<ordengrupo>1</ordengrupo>
 							<value>Prueba</value>
-							<order>13</order>
-							<formfieldid>13</formfieldid>
+							<order>12</order>
+							<formfieldid>12</formfieldid>
 						</field>
 					</element>
 					<!-- Segundo elemento de la lista -->
@@ -140,18 +136,29 @@
 							<id />
 							<ordengrupo>2</ordengrupo>
 							<value>Prueba</value>
-							<order>14</order>
-							<formfieldid>12</formfieldid>
+							<order>13</order>
+							<formfieldid>11</formfieldid>
 						</field>
 						<field>
 							<id />
 							<ordengrupo>2</ordengrupo>
 							<value>Prueba</value>
-							<order>15</order>
+							<order>14</order>
 							<formfieldid>12</formfieldid>
 						</field>
 					</element>
 				</group>
+			</fields>
+		</section>
+		<section>
+			<id>2</id>
+			<fields>
+				<field>
+					<id />
+					<value>1</value>
+					<order>15</order>
+					<formfieldid>13</formfieldid>
+				</field>
 			</fields>
 		</section>
 	</sections>

@@ -134,7 +134,8 @@ class InstanceXmldbParser():
                     logger.error('Indexing actionSwitch error:'+ str(sys.exc_info()[0]))
                 if ok_type:
                     # We fill the fields of the instance field
-                    instance_field_model.instance_order = k
+                    #instance_field_model.instance_order = k
+                    instance_field_model.instance_order = field.findtext('order')
                     instance_field_model.form_field = field_model
                     instance_field_model.instance = instance_model
                     ### We save the value in the DDBB ###
@@ -162,8 +163,9 @@ class InstanceXmldbParser():
             longitude = parser.findtext('meta/geolocalization/longitude')
             latitude = parser.findtext('meta/geolocalization/latitude')
             # We get the empty Id of the instance
-            id = parser.find('meta/id')
-            id_text = parser.findtext('meta/id')
+            id = parser.find('id')
+            id_text = parser.findtext('id')
+            # Checking if ot's an update or an insert
             if id_text == '': id_text = 0
             # We create the instance or we modify it
             # TO-DO: Check if the instance already exist in the dataBase
