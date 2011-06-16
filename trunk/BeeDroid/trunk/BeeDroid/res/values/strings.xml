@@ -16,7 +16,7 @@
     <string name="msg_temp_form">Esta es la pantalla de los formularios</string>
     <string name="msg_temp_instance">Esta es la pantalla de las instancias</string>
     <string name="msg_temp_options">Esta es la pantalla de las opciones</string>
-    
+	<string name="empty_string"></string>    
     
     <string name="msg_select_all">Seleccionar todos</string>
     <string name="msg_select_none">Seleccionar ninguno</string>
@@ -42,4 +42,10 @@
 	<string name="saved_sended_ok">Envío completado</string>
 	<string name="saved_sended_not_ok">Hubo un error al guardar la instancia en el repositorio</string>
 	<string name="version">Versión</string>
+	<string name="geo_tittle">Geolocalización</string>
+	
+	<string name="geo_obtaining">Obteniendo posición...</string>
+	<string name="geo_obtain">Obtener posición</string>
+	<string name="geo_latitud">Latitud:</string>
+	<string name="geo_longitud">Longitud:</string>
 </resources>

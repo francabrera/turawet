@@ -83,9 +83,9 @@ public class MyLocationListener implements LocationListener
 	}
 	
 
-	public boolean locationIsFounded()
+	public boolean goodLocationFound()
 	{
-		return locationCount != NUM_OF_LOCATIONS_SEARCH;
+		return locationCount < NUM_OF_LOCATIONS_SEARCH;
 	}
 	
 	/*
@@ -122,7 +122,6 @@ public class MyLocationListener implements LocationListener
 	public void onStatusChanged(String provider, int status, Bundle extras)
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**

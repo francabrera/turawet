@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.DateFieldBean;
 import com.turawet.beedroid.beans.FieldOptionBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
@@ -27,10 +28,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -95,76 +99,69 @@ public class InstanceBeanManager
 	private FieldView getNewGeolocalizedView()
 	{
 		final TextView latitudText = new TextView(context);
-		latitudText.setText("Latitud: ");
 		latitudText.setTextColor(Color.WHITE);
 		latitudText.setGravity(Gravity.TOP);
 		latitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		final TextView longitudText = new TextView(context);
-		longitudText.setText("Longitud: ");
 		longitudText.setTextColor(Color.WHITE);
 		longitudText.setGravity(Gravity.TOP);
 		longitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		Button geoButton = new Button(context);
 		
-		geoButton.setText("Obtener posición");
-		// text.setText(textField.getValue());
+		geoButton.setText(context.getString(R.string.geo_obtain));
 		geoButton.setGravity(Gravity.TOP);
 		geoButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		geoButton.setOnClickListener(new OnClickListener()
 		{
 			@Override
-			public void onClick(View v)
+			public void onClick(final View v)
 			{
 				// Acquire a reference to the system Location Manager
 				final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 				
 				// Define a listener that responds to location updates
-				final LocationListener locationListener = new MyLocationListener();
+				final MyLocationListener locationListener = new MyLocationListener();
 				
 				// Register the listener with the Location Manager to receive
 				// location updates
 				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 				locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 				
-				final ProgressDialog pd = ProgressDialog.show(context, "", "Conectando...", true, false);
-				new Thread(new Runnable()
-				{
-					public void run()
-					{
-						while (((MyLocationListener) locationListener).locationIsFounded())
-						{
-							try
-							{
-								Thread.sleep(1000);
-							}
-							catch (InterruptedException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						locationManager.removeUpdates(locationListener);
-						longitudText.setText("Longitud: " + ((MyLocationListener) locationListener).getLongitud());
-						latitudText.setText("Latitud: " + ((MyLocationListener) locationListener).getLatitud());
-						pd.dismiss();
-					}
-				}).start();
+				final ProgressDialog progressDialog = ProgressDialog.show(context, "", context.getString(R.string.geo_obtaining), true, false);
+				final ProgressThread progressThread = new ProgressThread();
 				
+				final Handler handler = new Handler()
+				{
+					private static final int	LOCATION_TIMEOUT	= 30 * 1000;
+					
+					public void handleMessage(Message msg)
+					{
+						int timeElapsed = msg.arg1;
+						if (locationListener.goodLocationFound() || timeElapsed > LOCATION_TIMEOUT)
+						{
+							locationManager.removeUpdates(locationListener);
+							longitudText.setText(context.getString(R.string.geo_longitud) + " " + locationListener.getLongitud());
+							latitudText.setText(context.getString(R.string.geo_latitud) + " " + locationListener.getLatitud());
+							progressDialog.dismiss();
+							progressThread.setState(ProgressThread.STATE_DONE);
+						}
+					}
+				};
+				progressThread.setHandler(handler);
+				progressThread.start();
 			}
 		});
-		String sectionTitle = "";
-		String fieldLabel = "Geolocalización";
 		
 		FieldView fieldView = new FieldView(context, null);
 		fieldView.setGravity(Gravity.CENTER_HORIZONTAL);
 		fieldView.setOrientation(LinearLayout.VERTICAL);
 		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
 		
-		fieldView.setSectionTitle(sectionTitle);
-		fieldView.setField(geoButton, fieldLabel);
+		fieldView.setSectionTitle(context.getString(R.string.empty_string));
+		fieldView.setField(geoButton, context.getString(R.string.geo_tittle));
 		fieldView.addView(longitudText);
 		fieldView.addView(latitudText);
 		return fieldView;
@@ -314,4 +311,57 @@ public class InstanceBeanManager
 		}
 	}
 	
+	/** Nested class that performs progress calculations (counting) */
+	private class ProgressThread extends Thread
+	{
+		Handler				mHandler;
+		final static int	STATE_DONE		= 0;
+		final static int	STATE_RUNNING	= 1;
+		final static int	ONE_SECOND		= 1000;
+		int					mState;
+		int					timeElapsed;
+		
+		/**
+		 * 
+		 */
+		public ProgressThread()
+		{
+			super();
+		}
+		
+		void setHandler(Handler h)
+		{
+			mHandler = h;
+		}
+		
+		public void run()
+		{
+			mState = STATE_RUNNING;
+			timeElapsed = 0;
+			while (mState == STATE_RUNNING)
+			{
+				try
+				{
+					Thread.sleep(ONE_SECOND);
+				}
+				catch (InterruptedException e)
+				{
+					Log.e("ERROR", "Thread Interrupted");
+				}
+				Message msg = mHandler.obtainMessage();
+				msg.arg1 = timeElapsed;
+				mHandler.sendMessage(msg);
+				timeElapsed += ONE_SECOND;
+			}
+		}
+		
+		/*
+		 * sets the current state for the thread,
+		 * used to stop the thread
+		 */
+		public void setState(int state)
+		{
+			mState = state;
+		}
+	}
 }
