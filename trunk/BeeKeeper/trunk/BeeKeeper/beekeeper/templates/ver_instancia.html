@@ -75,7 +75,7 @@
 	<ul>
 	{% for section in instance.form.section_set.all %}
 		<li id="s{{ section.id }}link">
-			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
+			<a href="#s{{ section.order }}" onclick="selectSection('s{{ section.id }}')">
 				Sección {{ section.id }}
 			</a>
 		</li>
