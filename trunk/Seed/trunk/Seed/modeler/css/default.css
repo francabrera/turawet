@@ -177,6 +177,11 @@ p { margin:0; }
 #form li div.options .addoptionbutton {
     margin: 0 0 10px 0;       
     }
+
+#form li div.options .optionbutton {
+	margin: 0 0 0 25px; 
+    vertical-align:middle;
+    }
     
     /*********************** ----------- ***********************/
     

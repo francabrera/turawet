@@ -200,11 +200,26 @@ function addOptionToField (divOptions, tagID) {
 						$('<span />', {
 							text: 'Valor',
 							class: 'optionvalue',
+						}),
+						// Botón de borrado
+						$('<img />', {
+							src  : 'images/buttons/delete.png',
+							onClick: 'javascript:deleteOption(this.parentNode)',
+							class: 'optionbutton'
 						})
 					)
 	);
 	makeOptionEditable(opTag, sectionID, fieldID, opID)
 }
+
+function deleteOption (pOptions) {
+	var auxIDs = (pOptions.id).match(/\d+/g);
+	var sID = parseInt(auxIDs[0]);
+	var fID = parseInt(auxIDs[1]);
+	var oID = parseInt(auxIDs[2]);
+	formSections[sID].fields[fID].removeOption(oID);
+	deleteParentElement(pOptions, 'p');	
+	}
 
 //Mostrar propiedades (y opciones)
 function expandField (tagID) {

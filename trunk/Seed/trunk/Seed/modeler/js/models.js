@@ -88,17 +88,24 @@ function Radio (name, order, type) {
 	 * Devuelve el XML del campo
 	 */
 	this.toXML = function()
-	{
+	{		
 		var fieldxml = "<field><id />";
 		fieldxml += "<label>" + this.name + "</label>";
 		fieldxml += "<type>"+ this.type +"</type>";
 		if (this.required)
 			fieldxml += "<required />";
-		fieldxml += "<properties /><options>";
-		for (i=0;i<this.options.length;i++)
-			if (typeof this.options[i]  != "undefined")
-				fieldxml += this.options[i].toXML();
-		fieldxml += "</options></field>";
+		fieldxml += "<properties />";
+		if (this.options.length > 0) {				
+			fieldxml += "<options>";
+			for (i=0;i<this.options.length;i++)
+				if (typeof this.options[i]  != "undefined")
+					fieldxml += this.options[i].toXML();
+			fieldxml += "</options>";
+		}
+		else 
+			fieldxml += "<options/>";
+		
+		fieldxml += "</field>";		
 		return fieldxml;
 	}
 }
