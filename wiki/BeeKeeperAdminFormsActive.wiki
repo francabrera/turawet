@@ -1,0 +1,11 @@
+#summary Administrador. ¿Eliminar un formulario o sólo ponerlo como inactivo?
+#labels Phase-Design
+
+= Introducción =
+
+Desde el administrador del repositorio podemos eliminar un formulario. ¿Debe ser esto una eliminación eral (eliminando por consiguiente las instancias) o sólo cambiar el atributo activo?
+
+
+= Detalles =
+
+Creo que quizá podríamos tener 2 acciones. Una que sea desactivar el formulario (lo que nos permite conservar las instancias pero no crear más nuevas) y otra que sea eliminar formulario (que elimina las instancias).
