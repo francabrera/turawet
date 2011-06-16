@@ -1,0 +1,15 @@
+#summary Servidor. FieldBar ser visualiza mal y también el admin de Django
+#labels Phase-Implementation
+
+= Introducción =
+
+Seguramente hay algún parámetro erróneo del Nginx.
+
+
+= Detalles =
+
+He probado en local a enviar un formulario y una instancia del mismo al servidor local. Todo ha ido perfectamente. Varias secciones, todo tipo de campos, etc... Los botones de la "fiedlBar" se visualizaban correctamente.
+
+En el servidor no sucede. La "fieldBar" se visualiza mal, las secciones no se añaden (probablemente error en el modelador, pues he visto que el XML que llega sólo tiene una sección siempre).
+
+He probado a lanzar: _./manage.py runserver 0.0.0.0:8088_ en lugar del Nginx. Pero luego accediendo a http://IpDelDervidor:8080/BeeKeeper... No me accede.
