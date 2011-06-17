@@ -23,7 +23,13 @@ import android.view.View;
 import android.widget.ListView;
 
 /**
- * @author nicopernas
+ * FormsActivity
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @author Romén Rodríguez Gil
  * 
  */
 public class FormsActivity extends ListActivity
@@ -60,17 +66,17 @@ public class FormsActivity extends ListActivity
 	/**
 	 * 
 	 */
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id)
-	{
-		super.onListItemClick(l, v, position, id);
-		FormIdentificationBean form = (FormIdentificationBean) l.getItemAtPosition(position);
-		
-		Intent intent = new Intent(FormsActivity.this, FillNewInstanceActivity.class);
-		intent.putExtra(FormWsBean.name, form.getName());
-		intent.putExtra(FormWsBean.version, form.getVersion());
-		startActivity(intent);
-	}
+//	@Override
+//	protected void onListItemClick(ListView l, View v, int position, long id)
+//	{
+//		super.onListItemClick(l, v, position, id);
+//		FormIdentificationBean form = (FormIdentificationBean) l.getItemAtPosition(position);
+//		
+//		Intent intent = new Intent(FormsActivity.this, FillNewInstanceActivity.class);
+//		intent.putExtra(FormWsBean.name, form.getName());
+//		intent.putExtra(FormWsBean.version, form.getVersion());
+//		startActivity(intent);
+//	}
 	
 	/**
 	 * @param menu
