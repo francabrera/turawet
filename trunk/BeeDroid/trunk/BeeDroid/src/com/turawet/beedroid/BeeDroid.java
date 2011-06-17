@@ -45,18 +45,7 @@ public class BeeDroid extends Activity {
 		
 		setContentView(R.layout.main);
 
-		LinearLayout child = (LinearLayout) findViewById(R.id.widget36);
-		child.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				
-				Log.d("","ID: " + view.getId());
-				loadForms();
-
-			}
-		});
-		LinearLayout child1 = (LinearLayout) findViewById(R.id.widget37);
+		LinearLayout child1 = (LinearLayout) findViewById(R.id.widget36);
 		child1.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -67,7 +56,7 @@ public class BeeDroid extends Activity {
 
 			}
 		});
-		LinearLayout child2 = (LinearLayout) findViewById(R.id.widget34);
+		LinearLayout child2 = (LinearLayout) findViewById(R.id.widget37);
 		child2.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -78,7 +67,7 @@ public class BeeDroid extends Activity {
 
 			}
 		});
-		LinearLayout child3 = (LinearLayout) findViewById(R.id.widget39);
+		LinearLayout child3 = (LinearLayout) findViewById(R.id.widget38);
 		child3.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -89,7 +78,7 @@ public class BeeDroid extends Activity {
 
 			}
 		});
-		LinearLayout child4 = (LinearLayout) findViewById(R.id.widget30);
+		LinearLayout child4 = (LinearLayout) findViewById(R.id.widget39);
 		child4.setOnClickListener(new OnClickListener() {
 
 			@Override
