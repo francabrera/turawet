@@ -19,8 +19,11 @@ import com.turawet.beedroid.beans.RadioFieldBean;
 import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.listener.MyLocationListener;
+import com.turawet.beedroid.util.AlertMaker;
 import com.turawet.beedroid.view.FieldView;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -136,17 +139,27 @@ public class InstanceBeanManager
 				final Handler handler = new Handler()
 				{
 					private static final int	LOCATION_TIMEOUT	= 30 * 1000;
+					private boolean				done					= false;
 					
 					public void handleMessage(Message msg)
 					{
 						int timeElapsed = msg.arg1;
-						if (locationListener.goodLocationFound() || timeElapsed > LOCATION_TIMEOUT)
+						if (!done && (locationListener.maxTriesReached() || timeElapsed > LOCATION_TIMEOUT))
 						{
+							done = true;
 							locationManager.removeUpdates(locationListener);
-							longitudText.setText(context.getString(R.string.geo_longitud) + " " + locationListener.getLongitud());
-							latitudText.setText(context.getString(R.string.geo_latitud) + " " + locationListener.getLatitud());
-							progressDialog.dismiss();
 							progressThread.setState(ProgressThread.STATE_DONE);
+							progressDialog.dismiss();
+							if (locationListener.gotLocation())
+							{
+								longitudText.setText(context.getString(R.string.geo_longitud) + " " + locationListener.getLongitud());
+								latitudText.setText(context.getString(R.string.geo_latitud) + " " + locationListener.getLatitud());
+							}
+							else
+							{
+								AlertMaker.showErrorMessage(new Builder(context), R.string.geo_obtain_error).show();
+							}
+							
 						}
 					}
 				};

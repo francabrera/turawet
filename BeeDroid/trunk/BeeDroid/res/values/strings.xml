@@ -46,6 +46,7 @@
 	
 	<string name="geo_obtaining">Obteniendo posición...</string>
 	<string name="geo_obtain">Obtener posición</string>
+	<string name="geo_obtain_error">No pude obtener la posición</string>
 	<string name="geo_latitud">Latitud:</string>
 	<string name="geo_longitud">Longitud:</string>
 </resources>

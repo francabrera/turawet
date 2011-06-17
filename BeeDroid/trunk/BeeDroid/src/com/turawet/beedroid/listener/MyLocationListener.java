@@ -12,11 +12,11 @@ public class MyLocationListener implements LocationListener
 {
 	private Location				currentBestLocation;
 	private int						locationCount				= 0;
-	private static final int	NUM_OF_LOCATIONS_SEARCH	= 1;
+	private static final int	NUM_OF_LOCATIONS_SEARCH	= 3;
 	
 	protected boolean isBetterLocation(Location location)
 	{
-		Log.d("","Provider " + location.getProvider());
+		Log.d("", "Provider " + location.getProvider());
 		if (currentBestLocation == null)
 		{
 			currentBestLocation = location;
@@ -82,10 +82,14 @@ public class MyLocationListener implements LocationListener
 		}
 	}
 	
-
-	public boolean goodLocationFound()
+	public boolean maxTriesReached()
 	{
-		return locationCount < NUM_OF_LOCATIONS_SEARCH;
+		return locationCount >= NUM_OF_LOCATIONS_SEARCH;
+	}
+	
+	public boolean gotLocation()
+	{
+		return currentBestLocation != null;
 	}
 	
 	/*
@@ -123,7 +127,7 @@ public class MyLocationListener implements LocationListener
 	{
 		// TODO Auto-generated method stub
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -131,7 +135,7 @@ public class MyLocationListener implements LocationListener
 	{
 		return String.valueOf(currentBestLocation.getLatitude());
 	}
-
+	
 	/**
 	 * @return
 	 */
