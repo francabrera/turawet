@@ -4,4 +4,5 @@
 	android:id="@+id/mainGrid" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" 
 	android:numColumns="2" 
-	android:stretchMode="none" android:gravity="center" />
+	android:stretchMode="none" android:gravity="center"
+	android:background="@color/custom_theme_color" />

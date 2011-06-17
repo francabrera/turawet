@@ -4,15 +4,20 @@
 package com.turawet.beedroid.adapter;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.view.FieldView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * MainInitialGridAdapter
@@ -62,8 +67,19 @@ public class MainInitialGridAdapter extends BaseAdapter
 	{
 		
 		ImageView imageView;
+		LinearLayout fieldView;
+		TextView text;
+
 		if (convertView == null)
 		{ // if it's not recycled, initialize some attributes
+			
+			fieldView = new LinearLayout(mContext, null);
+			fieldView.setGravity(Gravity.CENTER_HORIZONTAL);
+			fieldView.setOrientation(LinearLayout.VERTICAL);
+			fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+			/*fieldView.addView(longitudText);
+			fieldView.addView(latitudText);*/
+			
 			imageView = new ImageView(mContext);
 			
 			int width = mDisplay.getWidth() / 2;
@@ -78,13 +94,23 @@ public class MainInitialGridAdapter extends BaseAdapter
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(wPad, hPad, wPad, hPad);
 			imageView.setAdjustViewBounds(true);
+			
+			text = new TextView(mContext);
+			text.setText("Prueba");
+			text.setTextColor(Color.RED);
+			text.setGravity(Gravity.TOP);
+			text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+
+			fieldView.addView(text);
+			fieldView.addView(imageView);
 		}
 		else
 		{
-			imageView = (ImageView) convertView;
+			fieldView = (LinearLayout) convertView;
 		}
 		
-		imageView.setImageResource(iconsIds[position]);
-		return imageView;
+		((ImageView)fieldView.getChildAt(0)).setImageResource(iconsIds[position]);
+		
+		return fieldView;
 	}
 }
