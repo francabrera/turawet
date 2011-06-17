@@ -58,8 +58,9 @@ public class FillNewInstanceActivity extends Activity
 			String version = parameters.getString(FormWsBean.version);
 			FormIdentificationBean form = new FormIdentificationBean(name, version);
 			DataBaseManager db = DataBaseManager.getInstance(this);
+			/* This line loads the selected form */
 			//String xml = db.getFormInfo(form).getXml();
-			
+			/* This line always load the asset form */
 			InputStream xml = getAssets().open("formulario_breve_v1.xml");
 			
 			XmlToBeansParser parser;

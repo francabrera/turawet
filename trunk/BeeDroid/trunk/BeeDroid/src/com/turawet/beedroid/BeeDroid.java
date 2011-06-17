@@ -1,6 +1,7 @@
 package com.turawet.beedroid;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.activity.ContinueInstanceActivity;
 import com.turawet.beedroid.activity.FormsActivity;
 import com.turawet.beedroid.activity.InstanceActivity;
 import com.turawet.beedroid.activity.OptionsActivity;
@@ -20,6 +21,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+
+/**
+ * BeeDroid
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @author Romén Rodríguez Gil
+ * 
+ */
 public class BeeDroid extends Activity
 {
 	/**
@@ -52,12 +64,19 @@ public class BeeDroid extends Activity
 				switch (position)
 				{
 					case 0:
+						/* See forms */
 						loadForms();
 						break;
 					case 1:
-						loadInstance();
+						/* Continue instance */
+						loadToCompleteInstance();
 						break;
 					case 2:
+						/* New instance */
+						loadForNewInstance();
+						break;
+					case 3:
+						/* Options */
 						loadOptions();
 						break;
 					default:
@@ -82,22 +101,22 @@ public class BeeDroid extends Activity
 	/**
 	 * 
 	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		// Handle item selection
-		switch (item.getItemId())
-		{
-			case R.id.forms:
-				return loadForms();
-			case R.id.instance:
-				return loadInstance();
-			case R.id.options:
-				return loadOptions();
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item)
+//	{
+//		// Handle item selection
+//		switch (item.getItemId())
+//		{
+//			case R.id.forms:
+//				return loadForms();
+//			case R.id.instance:
+//				return loadToCompleteInstance();
+//			case R.id.options:
+//				return loadOptions();
+//			default:
+//				return super.onOptionsItemSelected(item);
+//		}
+//	}
 	
 	/**
 	 * 
@@ -109,12 +128,24 @@ public class BeeDroid extends Activity
 		startActivity(myIntent);
 		return true;
 	}
+
+
+	/**
+	 * 
+	 * @return
+	 */
+	private boolean loadToCompleteInstance()
+	{
+		Intent myIntent = new Intent(BeeDroid.this, ContinueInstanceActivity.class);
+		startActivity(myIntent);
+		return true;
+	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	private boolean loadInstance()
+	private boolean loadForNewInstance()
 	{
 		Intent myIntent = new Intent(BeeDroid.this, InstanceActivity.class);
 		startActivity(myIntent);

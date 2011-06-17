@@ -15,7 +15,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 /**
- * @author nicopernas
+ * MainInitialGridAdapter
+ * 
+ * @version 1.0
+ * 
+ * @author Francisco José Cabrera Hernández
+ * @author Nicolás Pernas Maradei
+ * @author Romén Rodríguez Gil
  * 
  */
 public class MainInitialGridAdapter extends BaseAdapter
@@ -27,7 +33,8 @@ public class MainInitialGridAdapter extends BaseAdapter
 	private Display	mDisplay;
 	// references to our images
 	private int[]		iconsIds	=
-										{ R.drawable.icon_portada1, R.drawable.icon_portada2, R.drawable.icon_portada3 };
+										{ R.drawable.icon_portada1, R.drawable.icon_portada2,
+										  R.drawable.icon_portada3, R.drawable.icon_portada4 };
 	
 	public MainInitialGridAdapter(Context c)
 	{
