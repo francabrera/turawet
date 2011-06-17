@@ -5,7 +5,7 @@ import com.turawet.beedroid.activity.ContinueInstanceActivity;
 import com.turawet.beedroid.activity.FormsActivity;
 import com.turawet.beedroid.activity.InstanceActivity;
 import com.turawet.beedroid.activity.OptionsActivity;
-import com.turawet.beedroid.adapter.MainInitialGridAdapter;
+//import com.turawet.beedroid.adapter.MainInitialGridAdapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,10 +17,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.GridView;
-
 
 /**
  * BeeDroid
@@ -32,132 +35,174 @@ import android.widget.GridView;
  * @author Romén Rodríguez Gil
  * 
  */
-public class BeeDroid extends Activity
-{
+public class BeeDroid extends Activity {
 	/**
 	 * Called when the activity is first created.
 	 */
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		GridView mainGrid = (GridView) getLayoutInflater().inflate(R.layout.main, null);
 		
-		// (GridView) findViewById(R.id.mainGrid);
-		int columnWidth = getWindowManager().getDefaultDisplay().getWidth();
-		mainGrid.setColumnWidth(columnWidth / 2);
-		setContentView(mainGrid);
-		
-		GridView gridview = (GridView) findViewById(R.id.mainGrid);
-		gridview.setAdapter(new MainInitialGridAdapter(this));
-		
-		gridview.setOnItemClickListener(new OnItemClickListener()
-		{
-			
+		setContentView(R.layout.main);
+
+		LinearLayout child = (LinearLayout) findViewById(R.id.widget36);
+		child.setOnClickListener(new OnClickListener() {
+
 			@Override
-			public void onItemClick(AdapterView<?> grid, View imageButton, int position, long rowId)
-			{
-				// TODO Auto-generated method stub
+			public void onClick(View view) {
 				
-				Log.d("", "Position = " + position);
-				Log.d("", "RowID = " + rowId);
-				switch (position)
-				{
-					case 0:
-						/* See forms */
-						loadForms();
-						break;
-					case 1:
-						/* Continue instance */
-						loadToCompleteInstance();
-						break;
-					case 2:
-						/* New instance */
-						loadForNewInstance();
-						break;
-					case 3:
-						/* Options */
-						loadOptions();
-						break;
-					default:
-						break;
-				}
+				Log.d("","ID: " + view.getId());
+				loadForms();
+
 			}
 		});
+		LinearLayout child1 = (LinearLayout) findViewById(R.id.widget37);
+		child1.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				
+				Log.d("","ID: " + view.getId());
+				loadToCompleteInstance();
+
+			}
+		});
+		LinearLayout child2 = (LinearLayout) findViewById(R.id.widget34);
+		child2.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				
+				Log.d("","ID: " + view.getId());
+				loadForNewInstance();
+
+			}
+		});
+		LinearLayout child3 = (LinearLayout) findViewById(R.id.widget39);
+		child3.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				
+				Log.d("","ID: " + view.getId());
+				// TODO Auto-generated method stub
+
+			}
+		});
+		LinearLayout child4 = (LinearLayout) findViewById(R.id.widget30);
+		child4.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				
+				Log.d("","ID: " + view.getId());
+				loadOptions();
+
+			}
+		});
+
 	}
-	
+
+	// gridview.setOnItemClickListener(new OnItemClickListener()
+	// {
+	//			
+	// @Override
+	// public void onItemClick(AdapterView<?> grid, View imageButton, int
+	// position, long rowId)
+	// {
+	// // TODO Auto-generated method stub
+	//				
+	// Log.d("", "Position = " + position);
+	// Log.d("", "RowID = " + rowId);
+	// switch (position)
+	// {
+	// case 0:
+	// /* See forms */
+	// loadForms();
+	// break;
+	// case 1:
+	// /* Continue instance */
+	// loadToCompleteInstance();
+	// break;
+	// case 2:
+	// /* New instance */
+	// loadForNewInstance();
+	// break;
+	// case 3:
+	// /* Options */
+	// loadOptions();
+	// break;
+	// default:
+	// break;
+	// }
+	// }
+	// });
+	// }
+
 	/**
 	 * 
 	 */
 	/*
-	 * @Override
-	 * public boolean onCreateOptionsMenu(Menu menu)
-	 * {
-	 * MenuInflater inflater = getMenuInflater();
-	 * inflater.inflate(R.menu.main_menu, menu);
-	 * return true;
-	 * }
+	 * @Override public boolean onCreateOptionsMenu(Menu menu) { MenuInflater
+	 * inflater = getMenuInflater(); inflater.inflate(R.menu.main_menu, menu);
+	 * return true; }
 	 */
 	/**
 	 * 
 	 */
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item)
-//	{
-//		// Handle item selection
-//		switch (item.getItemId())
-//		{
-//			case R.id.forms:
-//				return loadForms();
-//			case R.id.instance:
-//				return loadToCompleteInstance();
-//			case R.id.options:
-//				return loadOptions();
-//			default:
-//				return super.onOptionsItemSelected(item);
-//		}
-//	}
-	
+	// @Override
+	// public boolean onOptionsItemSelected(MenuItem item)
+	// {
+	// // Handle item selection
+	// switch (item.getItemId())
+	// {
+	// case R.id.forms:
+	// return loadForms();
+	// case R.id.instance:
+	// return loadToCompleteInstance();
+	// case R.id.options:
+	// return loadOptions();
+	// default:
+	// return super.onOptionsItemSelected(item);
+	// }
+	// }
+
 	/**
 	 * 
 	 * @return
 	 */
-	private boolean loadForms()
-	{
+	private boolean loadForms() {
 		Intent myIntent = new Intent(BeeDroid.this, FormsActivity.class);
 		startActivity(myIntent);
 		return true;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	private boolean loadToCompleteInstance() {
+		Intent myIntent = new Intent(BeeDroid.this,
+				ContinueInstanceActivity.class);
+		startActivity(myIntent);
+		return true;
+	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	private boolean loadToCompleteInstance()
-	{
-		Intent myIntent = new Intent(BeeDroid.this, ContinueInstanceActivity.class);
-		startActivity(myIntent);
-		return true;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	private boolean loadForNewInstance()
-	{
+	private boolean loadForNewInstance() {
 		Intent myIntent = new Intent(BeeDroid.this, InstanceActivity.class);
 		startActivity(myIntent);
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	private boolean loadOptions()
-	{
+	private boolean loadOptions() {
 		Intent myIntent = new Intent(BeeDroid.this, OptionsActivity.class);
 		startActivity(myIntent);
 		return true;
