@@ -46,6 +46,16 @@ def showInstanceList (request, formid):
     
     return render_to_response('instancias.html', {'instances': instances })
 
+def showInstancesMap (request, formid):
+    
+#    form = Form.objects.filter(id = formid)
+#    form = form[0]
+#    if form:
+#        instances = Instance.objects.filter(form=form);
+#    
+#    return render_to_response('mapa_instancias.html', {'instances': instances })
+    return render_to_response('mapa_instancias.html', {})
+
 
 def showInstance (request, instanceid):
     instance = Instance.objects.filter(id = instanceid)

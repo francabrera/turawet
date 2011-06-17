@@ -38,6 +38,12 @@ img {
 /*********************** ----------- ***********************/
 
 
+#map {
+      width: 90%;
+      height: 450px;
+      margin: 50px 0 0 43px;
+    }
+
 #minilogo {
     position:fixed;
     bottom:18px;
