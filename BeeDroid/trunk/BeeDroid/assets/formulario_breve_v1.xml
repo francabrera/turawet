@@ -7,13 +7,30 @@
 		<author>
 			<user>turawet</user>
 		</author>
-		<geolocalized />
+<!-- 		<geolocalized /> -->
 	</meta>
 	<sections>
 		<section>
 			<id />
 			<name>Primera sección</name>
 			<fields>
+			<field>
+					<id />
+					<label>Fecha1123123</label>
+					<type>DATE</type>
+					<required />
+					<properties>
+						<property>
+							<name>format</name>
+							<value>YYYY/MM/DD</value>
+						</property>
+						<property>
+							<name>calendar</name>
+							<value>MONTH_CALENDAR</value>
+						</property>
+					</properties>
+				</field>
+			
 				<field>
 					<id />
 					<label>Radio1</label>
@@ -53,23 +70,6 @@
 						</property>
 					</properties>
 				</field>
-				<field>
-					<id />
-					<label>Fecha1</label>
-					<type>DATE</type>
-					<required />
-					<properties>
-						<property>
-							<name>format</name>
-							<value>YYYY/MM/DD</value>
-						</property>
-						<property>
-							<name>calendar</name>
-							<value>MONTH_CALENDAR</value>
-						</property>
-					</properties>
-				</field>
-
 			</fields>
 		</section>
 	</sections>

@@ -30,18 +30,21 @@ import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 public class FillNewInstanceActivity extends Activity
 {
-	private InstanceBeanManager instanceManager;
-
-	BeanViewFlipper flipper;
+	private InstanceBeanManager	instanceManager;
+	
+	BeanViewFlipper					flipper;
+	
 	/**
 	 *
 	 */
@@ -59,7 +62,7 @@ public class FillNewInstanceActivity extends Activity
 			FormIdentificationBean form = new FormIdentificationBean(name, version);
 			DataBaseManager db = DataBaseManager.getInstance(this);
 			/* This line loads the selected form */
-			//String xml = db.getFormInfo(form).getXml();
+			// String xml = db.getFormInfo(form).getXml();
 			/* This line always load the asset form */
 			InputStream xml = getAssets().open("formulario_breve_v1.xml");
 			
@@ -72,6 +75,7 @@ public class FillNewInstanceActivity extends Activity
 			List<FieldView> views = instanceManager.getAllInstanceViews();
 			for (FieldView view : views)
 				flipper.addView(view);
+			
 			setContentView(flipper);
 		}
 		catch (SAXException e1)
@@ -89,6 +93,13 @@ public class FillNewInstanceActivity extends Activity
 			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration conf)
+	{
+		super.onConfigurationChanged(conf);
+		flipper.adjustPageWidth();
 	}
 	
 	/**
@@ -116,6 +127,16 @@ public class FillNewInstanceActivity extends Activity
 		return true;
 	}
 	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if (resultCode == Activity.RESULT_OK && requestCode == 0)
+		{
+			Bundle extras = data.getExtras();
+			Bitmap bitmap = (Bitmap) extras.get("data");
+			instanceManager.addImage(bitmap);
+		}
+	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -140,10 +161,10 @@ public class FillNewInstanceActivity extends Activity
 		{
 			instanceManager.readFieldValues(flipper.getChildAt(0));
 			String instanceXml = instanceManager.instanceToXml();
-			Log.d("",instanceXml);
+			Log.d("", instanceXml);
 			WSClient ws = WSClient.getInstance();
 			boolean result = ws.uploadNewInstance(instanceXml);
-			if(result)
+			if (result)
 			{
 				AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok, R.string.saved_sended_ok);
 			}

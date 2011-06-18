@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Usado en el campo tipo galería de imágenes -->
+<resources>
+    <declare-styleable name="Image_Gallery">
+        <attr name="android:galleryItemBackground" />
+    </declare-styleable>
+</resources>

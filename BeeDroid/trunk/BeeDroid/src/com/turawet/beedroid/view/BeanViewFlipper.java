@@ -285,6 +285,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	private void scrollToPage(int page, boolean smooth)
 	{
 		int oldPage = mCurrentPage;
+		Log.d("", "PAGE = " + page + " pageWidth = " + mPageWidth);
 		if (page >= getPageCount() && getPageCount() > 0)
 		{
 			page--;
@@ -490,6 +491,29 @@ public class BeanViewFlipper extends HorizontalScrollView
 				mMostlyScrollingInX = true;
 			}
 		}
+	}
+	
+	public void adjustPageWidth()
+	{
+		// int currentPage = this.getCurrentPage();
+		Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		SCREEN_WIDTH = mPageWidth = (int) (display.getWidth());
+		
+		ViewGroup firstSon = (ViewGroup) this.getChildAt(0);
+		ViewGroup.LayoutParams params = firstSon.getLayoutParams();
+		params.width = mPageWidth;
+		firstSon.setLayoutParams(params);
+		
+		int numOfChilds = firstSon.getChildCount();
+		
+		for (int child = 0; child < numOfChilds; child++)
+		{
+			View viewChild = firstSon.getChildAt(child);
+			params = viewChild.getLayoutParams();
+			params.width = mPageWidth;
+			viewChild.setLayoutParams(params);
+		}
+		smoothScrollToPage(mCurrentPage);
 	}
 	
 	private class SwipeOnTouchListener implements View.OnTouchListener
