@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.turawet.beedroid.R;
+import com.turawet.beedroid.activity.FillNewInstanceActivity;
+import com.turawet.beedroid.adapter.ImageGalleryAdapter;
 import com.turawet.beedroid.beans.DateFieldBean;
 import com.turawet.beedroid.beans.FieldOptionBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
@@ -22,26 +24,25 @@ import com.turawet.beedroid.listener.MyLocationListener;
 import com.turawet.beedroid.util.AlertMaker;
 import com.turawet.beedroid.view.FieldView;
 
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -56,9 +57,11 @@ public class InstanceBeanManager
 	/**
 	 *
 	 */
-	InstanceBean		instance;
-	private Context	context;
-	private int			sectionIndex;
+	InstanceBean						instance;
+	private Context					context;
+	private int							sectionIndex;
+	private ImageGalleryAdapter	galleryAdapter;
+	private Gallery					gallery;
 	
 	public InstanceBeanManager(Context context, InstanceBean instance)
 	{
@@ -79,6 +82,10 @@ public class InstanceBeanManager
 	public List<FieldView> getAllInstanceViews()
 	{
 		List<FieldView> views = new ArrayList<FieldView>();
+		
+		/* Camera */
+		views.add(getNewImageGalleryView());
+		
 		int numberOfSections = instance.getSections().size();
 		for (int section = 0; section < numberOfSections; section++)
 		{
@@ -96,18 +103,66 @@ public class InstanceBeanManager
 		return views;
 	}
 	
+	public void addImage(Bitmap bitmap)
+	{
+		if (galleryAdapter != null)
+		{
+			galleryAdapter.addImage(bitmap);
+			galleryAdapter.notifyDataSetChanged();
+		}
+	}
+	
+	/**
+	 * @return
+	 */
+	private FieldView getNewImageGalleryView()
+	{
+		gallery = new Gallery(context);
+		galleryAdapter = new ImageGalleryAdapter(context);
+		gallery.setAdapter(galleryAdapter);
+		
+		Button button = new Button(context);
+		button.setText("Hacer nueva fotografía");
+		button.setGravity(Gravity.CENTER_HORIZONTAL);
+		button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
+		
+		button.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View view)
+			{
+				
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra("extra", 123);
+				((FillNewInstanceActivity) context).startActivityForResult(intent, 0);
+				
+			}
+		});
+		
+		String sectionTitle = instance.getSections().get(sectionIndex).getName();
+		
+		FieldView fieldView = new FieldView(context);
+		fieldView.setGravity(Gravity.TOP);
+		fieldView.setOrientation(LinearLayout.VERTICAL);
+		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
+		
+		fieldView.setSectionTitle(sectionTitle);
+		fieldView.addView(button);
+		fieldView.addView(gallery);
+		return fieldView;
+	}
+	
 	/**
 	 * @return
 	 */
 	private FieldView getNewGeolocalizedView()
 	{
 		final TextView latitudText = new TextView(context);
-		latitudText.setTextColor(Color.WHITE);
 		latitudText.setGravity(Gravity.TOP);
 		latitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		final TextView longitudText = new TextView(context);
-		longitudText.setTextColor(Color.WHITE);
 		longitudText.setGravity(Gravity.TOP);
 		longitudText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
@@ -168,7 +223,7 @@ public class InstanceBeanManager
 			}
 		});
 		
-		FieldView fieldView = new FieldView(context, null);
+		FieldView fieldView = new FieldView(context);
 		fieldView.setGravity(Gravity.CENTER_HORIZONTAL);
 		fieldView.setOrientation(LinearLayout.VERTICAL);
 		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
@@ -240,7 +295,7 @@ public class InstanceBeanManager
 		DatePicker datePicker = new DatePicker(context);
 		
 		// text.setText(textField.getValue());
-		datePicker.setForegroundGravity(Gravity.TOP);
+		//datePicker.setForegroundGravity(Gravity.TOP);
 		datePicker.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
 		String sectionTitle = instance.getSections().get(sectionIndex).getName();
@@ -256,8 +311,10 @@ public class InstanceBeanManager
 		
 		EditText text = new EditText(context);
 		
-		text.setText(textField.getText());
-		text.setText("Texto por defecto...");
+		//text.setText(textField.getText());
+		text.setHint("Texto...");
+		
+		// text.setText("Texto por defecto...");
 		text.setGravity(Gravity.TOP);
 		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		
@@ -377,4 +434,5 @@ public class InstanceBeanManager
 			mState = state;
 		}
 	}
+	
 }

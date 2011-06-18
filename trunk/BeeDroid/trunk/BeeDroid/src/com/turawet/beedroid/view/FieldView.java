@@ -10,6 +10,7 @@ import com.turawet.beedroid.constants.Cte.FieldType;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Editable;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,20 @@ public class FieldView extends LinearLayout
 	/**
 	 * @param context
 	 */
+	public FieldView(Context context)
+	{
+		super(context);
+	}
+
 	public FieldView(Context context, FieldType fieldType)
 	{
 		super(context);
 		this.fieldType = fieldType;
+	}
+	
+	public FieldView(Context context, AttributeSet attr)
+	{
+		super(context, attr);
 	}
 	
 	/**
@@ -73,7 +84,6 @@ public class FieldView extends LinearLayout
 	{
 		TextView text = new TextView(getContext());
 		text.setText(label.toString());
-		text.setTextColor(Color.WHITE);
 		text.setGravity(Gravity.TOP);
 		text.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0.0F));
 		return text;
