@@ -52,7 +52,7 @@ public class BeeDroid extends Activity {
 			public void onClick(View view) {
 				
 				Log.d("","ID: " + view.getId());
-				loadToCompleteInstance();
+				loadForms();
 
 			}
 		});
@@ -63,7 +63,8 @@ public class BeeDroid extends Activity {
 			public void onClick(View view) {
 				
 				Log.d("","ID: " + view.getId());
-				loadForNewInstance();
+				loadToCompleteInstance();
+				
 
 			}
 		});
@@ -74,7 +75,8 @@ public class BeeDroid extends Activity {
 			public void onClick(View view) {
 				
 				Log.d("","ID: " + view.getId());
-				// TODO Auto-generated method stub
+				loadForNewInstance();
+				
 
 			}
 		});
