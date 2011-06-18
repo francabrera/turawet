@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/widget30" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:orientation="vertical"
-	android:colorBackground="@color/custom_theme_color"
-	android:background="@drawable/fondo_portada_beedroid">
+	android:layout_height="fill_parent" android:colorBackground="@color/custom_theme_color"
+	android:background="@drawable/fondo_portada_beedroid" android:orientation="vertical">
 	<LinearLayout android:id="@+id/widget33"
 		android:layout_width="320dip" android:layout_height="112dip"
 		android:layout_marginTop="100dip" android:layout_marginBottom="50dip">
 		<LinearLayout android:id="@+id/widget36"
 			android:layout_width="100dip" android:layout_height="112dip"
 			android:layout_marginLeft="38dip" android:orientation="vertical"
-			android:layout_gravity="center_horizontal">
+			android:layout_gravity="center_horizontal" android:clickable="true" android:background="@drawable/layout_pressed">
 			<ImageView android:id="@+id/widget41" android:layout_width="48px"
 				android:layout_height="48px" android:src="@drawable/icon_portada1"
 				android:layout_gravity="center_horizontal">
@@ -22,7 +21,7 @@
 		</LinearLayout>
 		<LinearLayout android:id="@+id/widget37"
 			android:layout_width="100dip" android:layout_height="112dip"
-			android:layout_marginLeft="30dip" android:orientation="vertical">
+			android:layout_marginLeft="30dip" android:orientation="vertical" android:clickable="true" android:background="@drawable/layout_pressed">
 			<ImageView android:id="@+id/widget46" android:layout_width="48px"
 				android:layout_height="48px" android:src="@drawable/icon_portada2"
 				android:layout_gravity="center_horizontal">
@@ -37,7 +36,7 @@
 		android:layout_width="320dip" android:layout_height="112dip">
 		<LinearLayout android:id="@+id/widget38"
 			android:layout_width="100dip" android:layout_height="112dip"
-			android:layout_marginLeft="38dip" android:orientation="vertical">
+			android:layout_marginLeft="38dip" android:orientation="vertical" android:clickable="true" android:background="@drawable/layout_pressed">
 			<ImageView android:id="@+id/widget48" android:layout_width="48px"
 				android:layout_height="48px" android:src="@drawable/icon_portada3"
 				android:layout_gravity="center_horizontal">
@@ -49,7 +48,7 @@
 		</LinearLayout>
 		<LinearLayout android:id="@+id/widget39"
 			android:layout_width="100dip" android:layout_height="112dip"
-			android:layout_marginLeft="30dip" android:orientation="vertical">
+			android:layout_marginLeft="30dip" android:orientation="vertical" android:clickable="true" android:background="@drawable/layout_pressed">
 			<ImageView android:id="@+id/widget49" android:layout_width="48px"
 				android:layout_height="48px" android:src="@drawable/icon_portada4"
 				android:layout_gravity="center_horizontal">
