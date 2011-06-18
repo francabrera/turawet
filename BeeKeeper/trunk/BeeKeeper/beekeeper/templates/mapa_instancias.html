@@ -14,12 +14,60 @@
 
 
 {% block extrajs %}
-    <script src="/beekeeper/js/lib/jquery.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script src="/beekeeper/js/gmaps_functions.js"></script>
     {% comment %}
         Aquí se generaría el array Markers a partir de la geolocalización de las instancias
     {% endcomment %}
     <script language="JavaScript">
+	    {% if instances %}
+	        var markers = [
+	        {% for instance in instances %}
+	           {% if instance.latitude %}
+		           {
+	                  'name': '{{ instance.id }}',
+	                  'location': [{{ instance.latitude }}, {{ instance.longitude }}],
+	                  'message': 'Intancia con ID {{ instance.id }}' 
+	               },
+               {% endif %}
+	        {% endfor %}
+	        ];
+	    {% else %}
+	    
+		    // Instancias geolocalizadas
+			var markers = [
+			    {
+			      'name': 'España',
+			      'location': [40.463667, -3.74922],
+			      'message': 'TEXTO2' 
+			   },
+			    {
+			      'name': 'La Svizra',
+			      'location': [46.818188, 8.227512],
+			      'message': 'TEXTO3' 
+			   },
+			    {
+			      'name': 'France',
+			      'location': [46.227638, 2.213749],
+			      'message': 'TEXTO4' 
+			   },
+			    {
+			      'name': 'Ireland',
+			      'location': [53.41291, -8.24389],
+			      'message': 'TEXTO5' 
+			   },
+			    {
+			      'name': 'Italia',
+			      'location': [41.87194, 12.56738],
+			      'message': 'TEXTO6' 
+			   },
+			    {
+			      'name': 'United Kingdom',
+			      'location': [55.378051, -3.435973],
+			      'message': 'TEXTO7' 
+			   },
+			];
+	    {% endif %}
     </script>
+    <script src="/beekeeper/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="/beekeeper/js/gmaps_functions.js"></script>
 {% endblock %}
