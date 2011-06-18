@@ -9,7 +9,7 @@
 	<uses-feature android:name="android.hardware.camera" />
 	<uses-feature android:name="android.hardware.camera.autofocus" />
 	
-	<application android:theme="@android:style/Theme.Light.NoTitleBar"  android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
+	<application android:theme="@style/BeeDroidTheme"  android:icon="@drawable/icon" android:label="@string/app_name" android:debuggable="true">
 	
 		<activity android:name=".BeeDroid" android:label="@string/app_name">
 			<intent-filter>
