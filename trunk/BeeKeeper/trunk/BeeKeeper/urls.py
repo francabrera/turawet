@@ -8,8 +8,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     #(r'^BeeKeeper/', include('BeeKeeper.foo.urls')),
-    (r'^$', include('beekeeper.urls')),
-    
     (r'^db_models/', include('db_models.urls')),
     
     (r'^form_xml2db_parser/', include('form_xml2db_parser.urls')),
@@ -24,4 +22,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    
+    (r'^$', include('beekeeper.urls')),
 )
