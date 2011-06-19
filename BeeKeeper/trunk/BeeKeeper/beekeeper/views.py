@@ -19,6 +19,13 @@ from BeeKeeper.db_models.models import Form, Section, FormField, Instance,\
     InstanceField, Property
 
 
+def showIndex (request):
+    
+    forms = Form.objects.all()
+    
+    return render_to_response('index.html');
+
+
 def showFormList (request):
     
     forms = Form.objects.all()
