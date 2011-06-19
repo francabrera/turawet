@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Formularios{% endblock %}
+{% block mainframe %}
+
+			{% if form %}
+				<h1>Formulario: {{ form.id }}</h1>
+				<h2>{{ form.name }}</h2>
+				<h3>Estad&iacute;sticas</h3>
+				
+				
+				
+				{% for section in form.section_set.all %}
+					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
+					   <p class="sectionlabel">{{ section.name }}</p>
+					   {% for field in section.formfield_set.all %}
+						<p>{{ field.label }}</p>
+						<img src="/beekeeper/create_form_field_statistics/{{ form.id }}/{{ field.id }}" class="statisticImage" />
+					   {% endfor %}
+					</ul>
+				{% endfor %}
+				
+				
+				
+				
+				<!--<img src="/beekeeper/images/{{ filename }}" class="fieldButton" />-->
+				<br/>
+			{% else %}
+				<h3>No se ha encontrado el formulario en la base de datos.</h3>
+			{% endif %}
+
+{% endblock %}
+

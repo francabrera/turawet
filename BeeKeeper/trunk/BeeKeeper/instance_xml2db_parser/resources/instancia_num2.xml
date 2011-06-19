@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form SYSTEM "instance_def.dtd">
+
+<instance>
+	<id />
+	<meta>
+		<formid>1</formid>
+		<author>
+			<user>turawet</user>
+		</author>
+		<creationdate>2011-01-12</creationdate>
+		<modificationdate>2011-01-12</modificationdate>
+		<editable>True</editable>
+		<geolocalization>
+			<latitude>23.516</latitude>
+			<longitude>-49.21</longitude>
+		</geolocalization>
+	</meta>
+	<sections>
+		<section>
+			<id>1</id>
+			<fields>
+				<field>
+					<id />
+					<value>Texto escrito</value>
+					<order>1</order>
+					<formfieldid>1</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>Texto escrito</value>
+					<order>2</order>
+					<formfieldid>2</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>
+						<day>14</day>
+						<month>10</month>
+						<year>1986</year>
+					</value>
+					<order>3</order>
+					<formfieldid>3</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>F</value>
+					<order>4</order>
+					<formfieldid>4</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>O1</value>
+					<order>5</order>
+					<formfieldid>5</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>True</value>
+					<order>6</order>
+					<formfieldid>6</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>
+						<filename>IMG_001.jpg</filename>
+						<hash>9324F00CD</hash>
+						<binary>12312311323123</binary>
+					</value>
+					<order>7</order>
+					<formfieldid>7</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>
+						<filename>AVI_001.avi</filename>
+						<hash>9324F123CD</hash>
+						<binary>123543543511323123</binary>
+					</value>
+					<order>8</order>
+					<formfieldid>8</formfieldid>
+				</field>
+				<field>
+					<id />
+					<value>
+						<filename>MP3_001.mp3</filename>
+						<hash>9324F0032CD</hash>
+						<binary>12312345435323123</binary>
+					</value>
+					<order>9</order>
+					<formfieldid>9</formfieldid>
+				</field>
+				<!--  Grupo sin lista, con un groupid que no se repite -->
+				<group>
+					<groupid>1</groupid>
+					<element>
+						<field>
+							<id />
+							<ordengrupo>1</ordengrupo>
+							<value>
+								<filename>IMG_001.jpg</filename>
+								<hash>9324F00CD</hash>
+								<binary>12312311323123</binary>
+							</value>
+							<order>10</order>
+							<formfieldid>10</formfieldid>
+						</field>
+					</element>
+				</group>
+				<!--
+					A continuación dos elementos de una lista con un mismo groupid y
+					mismo fielid
+				-->
+				<group>
+					<groupid>2</groupid>
+					<!-- Primer elemento de la lista -->
+					<element>
+						<field>
+							<id />
+							<ordengrupo>1</ordengrupo>
+							<value>Prueba</value>
+							<order>11</order>
+							<formfieldid>11</formfieldid>
+						</field>
+						<field>
+							<id />
+							<ordengrupo>1</ordengrupo>
+							<value>Prueba</value>
+							<order>12</order>
+							<formfieldid>12</formfieldid>
+						</field>
+					</element>
+					<!-- Segundo elemento de la lista -->
+					<element>
+						<field>
+							<id />
+							<ordengrupo>2</ordengrupo>
+							<value>Prueba</value>
+							<order>13</order>
+							<formfieldid>11</formfieldid>
+						</field>
+						<field>
+							<id />
+							<ordengrupo>2</ordengrupo>
+							<value>Prueba</value>
+							<order>14</order>
+							<formfieldid>12</formfieldid>
+						</field>
+					</element>
+				</group>
+			</fields>
+		</section>
+		<section>
+			<id>2</id>
+			<fields>
+				<field>
+					<id />
+					<value>1</value>
+					<order>15</order>
+					<formfieldid>13</formfieldid>
+				</field>
+			</fields>
+		</section>
+	</sections>
+</instance>
+

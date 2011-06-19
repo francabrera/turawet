@@ -2,6 +2,15 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
+from django.conf import settings
+
+import io
+
+#Statistics
+import sys
+import cairo
+import pycha.pie
+
 
 #from numpy import zeros
 
@@ -24,6 +33,103 @@ def showForm (request, formid):
 
     
     return render_to_response('ver_formulario.html', {'form': form})
+
+
+def showFormStatistics (request, formid):
+    
+    form = Form.objects.filter(id = formid)
+    form = form[0]
+    
+    return render_to_response('ver_estadisticas_formulario.html', {'form': form})
+
+
+def createFormFieldStatistics (request, formid, formfieldid):
+    
+    #The current form
+    form = Form.objects.filter(id = formid)
+    form = form[0]
+    # The form field for the statistic
+    formfield = FormField.objects.filter(id=formfieldid)
+    formfield = formfield[0]
+    
+    if ((formfield.type == "COMBO") or (formfield.type == "RADIO")):
+        # All the instancefields related to the formfield
+        instancefields = InstanceField.objects.filter(form_field=formfield)
+        
+        #values = {}
+        #for instance in instancefields:
+            #values.append(instance.value)
+            #value[instance.value] = value[instance.value] + 1
+            
+            
+        dataset = []
+        for field in instancefields:
+            i = 0
+            for tempset in dataset:
+                if tempset[0] == field.get_text():
+                    tempset[1][0][1] = tempset[1][0][1] + 1
+                else:
+                    i = i + 1
+            if i == len(dataset):
+                tempset = [field.get_text(), [[0, 1]]]
+                dataset.append(tuple(tempset))
+        dataset = tuple(dataset)
+            
+ #       dataset = ()
+ #       for instance in instancefields:
+  #          i = 0
+   #         for tempset in dataset:
+    #            if tempset[0] == instance.cast:
+     #               tempset[1][1] = tempset[1][1] + 1
+      #          else:
+       #             i = i + 1
+       #     if i == len(dataset):
+        #        tempset = [instance.cast, [0, 1]]
+         #       dataset = dataset, (tempset)
+                
+    
+        #####
+        # We should count the number of ocurrences of the different results
+        ##### 
+    
+        # Generating the statistic graph
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 450, 450)
+    
+        testSet = (
+            ('myFirstDataset', [[0, 3]]),
+            ('mySecondDataset', [[0, 1.4]]),
+            ('myThirdDataset', [[0, 0.46]]),
+            ('myFourthDataset', [[0, 0.3]]),
+            )
+    
+    
+        options = {
+            'axis': {
+                'x': {
+                    #'ticks': [dict(v=i, label=d[0]) for i, d in enumerate(lines)],
+                }
+            },
+            'legend': {
+                'hide': True,
+            },
+            #'title': 'Pie Chart',
+            #'pieRadius': 0.8,
+            #'padding': {'left': 20, 'right': 20, 'top': 20, 'bottom': 20}
+        }
+        chart = pycha.pie.PieChart(surface, options)
+    
+        chart.addDataset(dataset)
+        chart.render()
+    
+        #filename = 'piechart.png'
+        #output = settings.IMAGES_BEEKEEPER_ROOT+'/'+filename
+        
+    output = io.BytesIO()
+    surface.write_to_png(output)
+
+  
+    return HttpResponse(output.getvalue(), mimetype="image/png")
+             
 
 
 def deleteForm (request, formid):
