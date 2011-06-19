@@ -8,8 +8,13 @@
 
 from xml.etree.ElementTree import ElementTree, tostring, XML
 from BeeKeeper.db_models.models import Instance, Section, FormField, Form, TextField, InstanceField, DateField,\
-    RadioField, CheckField, ComboField, TextAreaField, NumericField
+    RadioField, CheckField, ComboField, TextAreaField, NumericField, ImageField
 from BeeKeeper.logger import *
+#from base64 import urlsafe_b64decode as sb64decode
+from binascii import a2b_base64
+from django.core.files import File
+from django.core.files.base import ContentFile
+
 
 import datetime
 import sys
@@ -73,7 +78,15 @@ class InstanceXmldbParser():
         # Need to add the id value after saving the instance_field_model
         
         return instance_field_model
-    
+
+
+    def parse_combo_field(self, parser):
+        value = parser.findtext('value')
+        instance_field_model = ComboField(value=value)
+        # Need to add the id value after saving the instance_field_model
+        
+        return instance_field_model
+
 
     def parse_check_field(self, parser):
         value = parser.findtext('value')
@@ -83,12 +96,16 @@ class InstanceXmldbParser():
         return instance_field_model
 
 
-    def parse_combo_field(self, parser):
-        value = parser.findtext('value')
-        instance_field_model = ComboField(value=value)
+    def parse_image_field(self, parser):
+        filename = parser.findtext('value/filename')
+        binary_image = parser.findtext('value/binary')
+        file_content = ContentFile(a2b_base64(binary_image))
+        #image = StringIO(binary_image2)
+        #image.close()
+        instance_field_model = ImageField()
         # Need to add the id value after saving the instance_field_model
         
-        return instance_field_model
+        return (instance_field_model, filename, file_content)
 
 
     
@@ -105,7 +122,8 @@ class InstanceXmldbParser():
             'DATE': self.parse_date_field,
             'RADIO': self.parse_radio_field,
             'COMBO': self.parse_combo_field,
-            'CHECKBOX': self.parse_check_field
+            'CHECKBOX': self.parse_check_field,
+            'IMAGE': self.parse_image_field
             }
         # Parsing
         k = 0
@@ -128,8 +146,17 @@ class InstanceXmldbParser():
                 ok_type = False
                 try:
                     # We fill the value of this concrete field in the instance
-                    instance_field_model = actionSwitch[field_model.type](field)
-                    ok_type = True
+                    if field_model.type == "IMAGE":
+                        (instance_field_model, filename, file_content) = self.parse_image_field(field)
+                        instance_field_model.instance_order = field.findtext('order')
+                        instance_field_model.form_field = field_model
+                        instance_field_model.instance = instance_model
+                        instance_field_model.value.save(filename, file_content)
+                        instance_field_model.save()
+                        k +=1
+                    else:
+                        instance_field_model = actionSwitch[field_model.type](field)
+                        ok_type = True
                 except:
                     logger.error('Indexing actionSwitch error:'+ str(sys.exc_info()[0]))
                 if ok_type:
@@ -141,6 +168,7 @@ class InstanceXmldbParser():
                     ### We save the value in the DDBB ###
                     instance_field_model.save()
                     k +=1
+                    
             # Next iteration
             j += 1
             

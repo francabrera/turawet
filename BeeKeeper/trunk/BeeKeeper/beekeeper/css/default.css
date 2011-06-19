@@ -218,6 +218,7 @@ img {
 	text-align:center;
 	background-color: #BD8F8F;
 	display: none;
+	vertical-align: center;
 	}
 	
 #resultado img.delete {
