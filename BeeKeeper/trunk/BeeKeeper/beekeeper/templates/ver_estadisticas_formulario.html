@@ -13,8 +13,23 @@
 					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
 					   <p class="sectionlabel">{{ section.name }}</p>
 					   {% for field in section.formfield_set.all %}
-						<p>{{ field.label }}</p>
-						<img src="/beekeeper/create_form_field_statistics/{{ form.id }}/{{ field.id }}" class="statisticImage" />
+					   		{% if field.type == "RADIO" or field.type == "COMBO" %}
+		                       <li id="f{{ field.id }}" class="{{ field.type|lower }}">
+									<div class="actions">
+										<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ field.id }}')" class="fieldButton">
+									</div>
+									<p class="fieldlabel">{{ field.label }}</p>
+									
+			                       {% if field.fieldoption_set.all %}
+										<div class="options">
+											<img class="statistic" src="/beekeeper/create_form_field_statistics/{{ form.id }}/{{ field.id }}" class="statisticImage" />
+										   {% for option in field.fieldoption_set.all %}
+												<p>{{ option.label }}: {{ option.value }}</p>		                       		
+										   {% endfor %}
+				                       	</div>
+			                       {% endif %}
+		                       </li>
+	                       {% endif %}
 					   {% endfor %}
 					</ul>
 				{% endfor %}
@@ -28,5 +43,55 @@
 				<h3>No se ha encontrado el formulario en la base de datos.</h3>
 			{% endif %}
 
+{% endblock %}
+
+
+{% block sidebar %}
+		    <ul>
+				<li><a class="item" href="/beekeeper/show_form/{{ form.id }}" id="campo1">
+					<img src="/beekeeper/images/instances.png" />
+					<div class="label">
+						<p><strong>Ver formulario</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="/beekeeper/delete_form/{{ form.id }}" id="campo2">
+					<img src="/beekeeper/images/delete.png" />
+					<div class="label">
+						<p><strong>Eliminar formulario</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="/beekeeper/show_instance_list/{{ form.id }}" id="campo3">
+					<img src="/beekeeper/images/instances.png" />
+					<div class="label">
+						<p><strong>Instancias</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="#" id="campo4">
+					<img src="/beekeeper/images/statistics.png" />
+					<div class="label">
+						<p><strong>Estad&iacute;sticas</strong></p>
+					</div>
+				</a></li>
+				<li><a class="item" href="/beekeeper/show_instances_map/{{ form.id }}" id="campo5">
+					<img src="/beekeeper/images/geolocalization.png" />
+					<div class="label">
+						<p><strong>Geolocalizaci&oacute;n</strong></p>
+					</div>
+				</a></li>			
+			</ul>
+{% endblock %}
+
+
+{% block sectionslinks %}
+	<ul>
+	{% for section in form.section_set.all %}
+		<li id="s{{ section.id }}link">
+			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
+				Sección {{ section.order }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+	
 {% endblock %}
 

@@ -56,12 +56,9 @@ def createFormFieldStatistics (request, formid, formfieldid):
         # All the instancefields related to the formfield
         instancefields = InstanceField.objects.filter(form_field=formfield)
         
-        #values = {}
-        #for instance in instancefields:
-            #values.append(instance.value)
-            #value[instance.value] = value[instance.value] + 1
-            
-            
+        # Forming the dataset for the chart
+        # Loading the values form the instancefields in the database where
+        # form_field is the one selected
         dataset = []
         for field in instancefields:
             i = 0
@@ -75,34 +72,11 @@ def createFormFieldStatistics (request, formid, formfieldid):
                 dataset.append(tuple(tempset))
         dataset = tuple(dataset)
             
- #       dataset = ()
- #       for instance in instancefields:
-  #          i = 0
-   #         for tempset in dataset:
-    #            if tempset[0] == instance.cast:
-     #               tempset[1][1] = tempset[1][1] + 1
-      #          else:
-       #             i = i + 1
-       #     if i == len(dataset):
-        #        tempset = [instance.cast, [0, 1]]
-         #       dataset = dataset, (tempset)
-                
-    
-        #####
-        # We should count the number of ocurrences of the different results
-        ##### 
     
         # Generating the statistic graph
         surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, 450, 450)
     
-        testSet = (
-            ('myFirstDataset', [[0, 3]]),
-            ('mySecondDataset', [[0, 1.4]]),
-            ('myThirdDataset', [[0, 0.46]]),
-            ('myFourthDataset', [[0, 0.3]]),
-            )
-    
-    
+
         options = {
             'axis': {
                 'x': {
@@ -110,6 +84,9 @@ def createFormFieldStatistics (request, formid, formfieldid):
                 }
             },
             'legend': {
+                'hide': True,
+            },
+            'background': {
                 'hide': True,
             },
             #'title': 'Pie Chart',
