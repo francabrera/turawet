@@ -129,9 +129,10 @@ function Radio (name, order, type) {
 		fieldxml += "<properties />";
 		if (this.options.length > 0) {				
 			fieldxml += "<options>";
-			for (i=0;i<this.options.length;i++)
-				if (typeof this.options[i]  != "undefined")
-					fieldxml += this.options[i].toXML();
+			var oCounter;
+			for (oCounter=0;oCounter<this.options.length;oCounter++)
+				if (typeof this.options[oCounter]  != "undefined")
+					fieldxml += this.options[oCounter].toXML();
 			fieldxml += "</options>";
 		}
 		else 
@@ -188,9 +189,10 @@ function Section(name, order) {
 		var xml = "<section><id/>";
 		xml += "<name>" + this.name + "</name>";
 		xml += "<fields>";
-		for (i=0;i<this.fields.length;i++)	
-			if (typeof this.fields[i] != "undefined")
-				xml += this.fields[i].toXML();
+		var fCounter;
+		for (fCounter=0;fCounter<this.fields.length;fCounter++)	
+			if (typeof this.fields[fCounter] != "undefined")
+				xml += this.fields[fCounter].toXML();
 		xml += "</fields></section>";
 		return xml;
 	}
@@ -202,8 +204,9 @@ function Section(name, order) {
 		xml += "<name>" + this.name + "</name>";
 		xml += "<fields>";
 		var sectionElems = $("#s" + this.order + " li");
-		for (i=0;i<sectionElems.length;i++) {
-			var fieldElem = sectionElems[i];
+		var fCounter;
+		for (fCounter=0;fCounter<sectionElems.length;fCounter++) {
+			var fieldElem = sectionElems[fCounter];
 			// Los IDs de los elementos Field serán sX-fX
 			// Nos quedamos con el segundo matching
 			var j = parseInt((fieldElem.id).match(/\d+/g)[1]);
