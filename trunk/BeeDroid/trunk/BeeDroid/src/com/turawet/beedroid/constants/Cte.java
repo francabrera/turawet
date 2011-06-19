@@ -21,12 +21,12 @@ public final class Cte
 	
 	public static enum FieldType
 	{
-		TEXT, DATE, RADIO, GEO
+		TEXT, DATE, RADIO, GEO, IMAGE, NUMERIC
 	};
 	
 	public static enum XmlEnumTags
 	{
-		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, field, group, groupid, element, value, order, sections, section, formfieldid, day, month, year, property, name, version, type, label, required, option, geolocalized
+		instance, meta, id, formid, author, user, creationdate, modificationdate, editable, fields, field, group, groupid, element, value, order, sections, section, formfieldid, day, month, year, property, name, version, type, label, required, option, geolocalized, filename, binary, geolocalization, longitude, latitude
 	};
 	
 	public static final class XmlTags
@@ -66,6 +66,15 @@ public final class Cte
 		public static final String	NAME					= "NAME";
 		public static final String	VERSION				= "VERSION";
 		public static final String	XML					= "XML";
+	}
+	
+	public static final class InstanceBeanCte
+	{
+		public static final int		SINGLE_IMAGE	= 0x00;
+		public static final int		GALLERY_IMAGE	= 0x01;
+		public static final String	data				= "data";
+		public static final int		JPEG_QUALITY	= 80;
+		public static final String	JPEG_EXTENSION	= ".jpg";
 	}
 	
 	public static final class Parser

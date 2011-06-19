@@ -3,18 +3,23 @@
  */
 package com.turawet.beedroid.view;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.Date;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
+import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.DatePicker;
@@ -43,7 +48,7 @@ public class FieldView extends LinearLayout
 	{
 		super(context);
 	}
-
+	
 	public FieldView(Context context, FieldType fieldType)
 	{
 		super(context);
@@ -73,7 +78,15 @@ public class FieldView extends LinearLayout
 		this.field = field;
 		this.label = getTextView(label);
 		addView(this.label, LABEL);
-		addView(field, FIELD);
+		addView(this.field, FIELD);
+	}
+	
+	/**
+	 * @return
+	 */
+	public View getField()
+	{
+		return this.field;
 	}
 	
 	/**
@@ -111,15 +124,41 @@ public class FieldView extends LinearLayout
 				Editable text = ((EditText) field).getText();
 				value = text.toString();
 				break;
+			case NUMERIC:
+				Editable numeric = ((EditText) field).getText();
+				try
+				{
+					value = new Integer(numeric.toString());
+				}
+				catch (Exception e)
+				{
+					value = new Integer(-1);
+				}
+				break;
 			case DATE:
-				int day = ((DatePicker) field).getDayOfMonth();
-				int month = ((DatePicker) field).getMonth();
-				int year = ((DatePicker) field).getYear();
+				DatePicker datePicker = (DatePicker) field;
+				int day = datePicker.getDayOfMonth();
+				int month = datePicker.getMonth();
+				int year = datePicker.getYear();
 				value = new Date(year, month, day);
 				break;
 			case RADIO:
 				Integer radioButtonId = ((RadioGroup) field).getCheckedRadioButtonId();
 				value = radioButtonId;
+				break;
+			case IMAGE:
+				ImageView image = (ImageView) field;
+				image.setDrawingCacheEnabled(true);
+				Bitmap bitmap = image.getDrawingCache();
+				if (bitmap != null)
+				{
+					OutputStream stream = new ByteArrayOutputStream();
+					bitmap.compress(CompressFormat.JPEG, InstanceBeanCte.JPEG_QUALITY, stream);
+					value = stream;
+				}
+				break;
+			case GEO:
+				value = ((TextView) field).getText();
 				break;
 			default:
 				break;

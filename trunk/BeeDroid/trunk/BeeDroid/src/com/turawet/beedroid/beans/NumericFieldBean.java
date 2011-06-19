@@ -2,11 +2,13 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
-
-import android.util.Xml;
+import java.util.Iterator;
+import java.util.List;
 
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;
+
+import android.util.Xml;
 
 /**
  * @class TextFieldBean: Represents a TextField
@@ -24,37 +26,36 @@ import com.turawet.beedroid.constants.Cte.XmlTags;
  * @author Romén Rodríguez Gil
  * 
  */
-public class RadioFieldBean extends GenericInstanceFieldBean
+public class NumericFieldBean extends GenericInstanceFieldBean
 {
-	private int	value;
-	
 	/**
-	 * @param order
-	 * @param formField
+	 * @uml.property name="value"
 	 */
-	public RadioFieldBean(int order, FormFieldBean formField)
+	private int	number;
+	
+	public NumericFieldBean(int order, FormFieldBean formField)
 	{
 		super(order, formField);
-		value = -1;
+		number = -1;
+	}
+
+	/**
+	 * @return the text
+	 */
+	public int getNumber()
+	{
+		return number;
 	}
 	
 	/**
-	 * @return the value
+	 * @param text
+	 *           the text to set
 	 */
-	public int getValue()
+	public void setNumber(int number)
 	{
-		return value;
+		this.number = number;
 	}
-	
-	/**
-	 * @param value
-	 *           the value to set
-	 */
-	public void setValue(int value)
-	{
-		this.value = value;
-	}
-	
+		
 	@Override
 	public void toXml(Writer writer) throws IllegalArgumentException, IllegalStateException, IOException
 	{
@@ -65,22 +66,18 @@ public class RadioFieldBean extends GenericInstanceFieldBean
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.value.toString());
-		
-		if (value != -1)
-			serializer.text(getFormField().getFieldOptions().get(value).getValue());
-		
+		serializer.text(String.valueOf(number));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.value.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.order.toString());
 		serializer.text(String.valueOf(order));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.order.toString());
 		
+
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
 		serializer.text(String.valueOf(getFormField().getId()));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.formfieldid.toString());
 		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
 		serializer.flush();
-		
 	}
-	
 }

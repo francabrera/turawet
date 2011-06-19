@@ -12,7 +12,7 @@
 		<EditText android:layout_height="wrap_content"
 			android:layout_width="match_parent" android:id="@+id/repo_server_url"
 			android:layout_marginBottom="10dip"
-			android:text="@string/label_repo_server" />
+			android:hint="@string/label_repo_server" />
 	</LinearLayout>
 	
 	<LinearLayout android:orientation="vertical"

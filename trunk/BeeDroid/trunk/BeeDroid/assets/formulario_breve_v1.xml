@@ -7,14 +7,34 @@
 		<author>
 			<user>turawet</user>
 		</author>
-<!-- 		<geolocalized /> -->
+		<geolocalized />
 	</meta>
 	<sections>
 		<section>
 			<id />
 			<name>Primera sección</name>
+
 			<fields>
-			<field>
+				<field>
+					<id />
+					<label>Número de ventanas</label>
+					<type>NUMERIC</type>
+					<required />
+				</field>
+				<field>
+					<id />
+					<label>Imagen</label>
+					<type>IMAGE</type>
+					<required />
+				</field>
+			</fields>
+		</section>
+		<section>
+			<id />
+			<name>Segunda sección</name>
+			<fields>
+
+				<field>
 					<id />
 					<label>Fecha1123123</label>
 					<type>DATE</type>
@@ -30,7 +50,13 @@
 						</property>
 					</properties>
 				</field>
-			
+			</fields>
+		</section>
+		<section>
+			<id />
+			<name>Tercera sección</name>
+			<fields>
+
 				<field>
 					<id />
 					<label>Radio1</label>
@@ -57,8 +83,54 @@
 							<label>Negro</label>
 							<value>N</value>
 						</option>
+						<option>
+							<label>Rojo</label>
+							<value>R</value>
+						</option>
+						<option>
+							<label>Azul</label>
+							<value>A</value>
+						</option>
+						<option>
+							<label>Verde</label>
+							<value>V</value>
+						</option>
+						<option>
+							<label>Marrón</label>
+							<value>M</value>
+						</option>
+						<option>
+							<label>Negro</label>
+							<value>N</value>
+						</option>
+						<option>
+							<label>Rojo</label>
+							<value>R</value>
+						</option>
+						<option>
+							<label>Azul</label>
+							<value>A</value>
+						</option>
+						<option>
+							<label>Verde</label>
+							<value>V</value>
+						</option>
+						<option>
+							<label>Marrón</label>
+							<value>M</value>
+						</option>
+						<option>
+							<label>Negro</label>
+							<value>N</value>
+						</option>
 					</options>
 				</field>
+			</fields>
+		</section>
+		<section>
+			<id />
+			<name>Cuarta sección</name>
+			<fields>
 				<field>
 					<id />
 					<label>Etiqueta2</label>

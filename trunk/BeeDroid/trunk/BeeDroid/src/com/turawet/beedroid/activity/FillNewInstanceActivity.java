@@ -9,6 +9,7 @@ package com.turawet.beedroid.activity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,6 +20,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
+import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import com.turawet.beedroid.database.DataBaseManager;
 import com.turawet.beedroid.parser.XmlToBeansParser;
 import com.turawet.beedroid.util.AlertMaker;
@@ -30,20 +32,28 @@ import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class FillNewInstanceActivity extends Activity
 {
-	private InstanceBeanManager	instanceManager;
-	
-	BeanViewFlipper					flipper;
+	private InstanceBeanManager			instanceManager;
+	private List<Pair<String, Integer>>	sectionsList;
+	private BeanViewFlipper					flipper;
 	
 	/**
 	 *
@@ -62,9 +72,9 @@ public class FillNewInstanceActivity extends Activity
 			FormIdentificationBean form = new FormIdentificationBean(name, version);
 			DataBaseManager db = DataBaseManager.getInstance(this);
 			/* This line loads the selected form */
-			// String xml = db.getFormInfo(form).getXml();
+			String xml = db.getFormInfo(form).getXml();
 			/* This line always load the asset form */
-			InputStream xml = getAssets().open("formulario_breve_v1.xml");
+			// InputStream xml = getAssets().open("formulario_breve_v1.xml");
 			
 			XmlToBeansParser parser;
 			parser = new XmlToBeansParser(xml);
@@ -72,9 +82,11 @@ public class FillNewInstanceActivity extends Activity
 			instanceManager = new InstanceBeanManager(this, instance);
 			
 			flipper = new BeanViewFlipper(this);
-			List<FieldView> views = instanceManager.getAllInstanceViews();
-			for (FieldView view : views)
-				flipper.addView(view);
+			List<FieldView> fields = new ArrayList<FieldView>();
+			sectionsList = new ArrayList<Pair<String, Integer>>();
+			instanceManager.getAllSectionsAndFieldsViews(fields, sectionsList);
+			for (FieldView field : fields)
+				flipper.addView(field);
 			
 			setContentView(flipper);
 		}
@@ -130,11 +142,14 @@ public class FillNewInstanceActivity extends Activity
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if (resultCode == Activity.RESULT_OK && requestCode == 0)
+		if (resultCode == Activity.RESULT_OK)
 		{
 			Bundle extras = data.getExtras();
-			Bitmap bitmap = (Bitmap) extras.get("data");
-			instanceManager.addImage(bitmap);
+			Bitmap bitmap = (Bitmap) extras.get(InstanceBeanCte.data);
+			if (requestCode == InstanceBeanCte.GALLERY_IMAGE)
+				instanceManager.addImageToGallery(bitmap, flipper);
+			else if (requestCode == InstanceBeanCte.SINGLE_IMAGE)
+				instanceManager.addImage(bitmap, flipper);
 		}
 	}
 	
@@ -146,9 +161,46 @@ public class FillNewInstanceActivity extends Activity
 		{
 			case R.id.save_n_send_instance:
 				return saveAndSendInstance();
+			case R.id.list_of_sections_of_instance:
+				return showListOfSections();
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	/**
+	 * @return
+	 */
+	private boolean showListOfSections()
+	{
+		final Dialog sectionsDialog = new Dialog(this);
+		sectionsDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+		sectionsDialog.setTitle("Selecciona una sección");
+		
+		ListView listOfSectionsView = new ListView(this);
+		
+		List<String> sectionsNames = new ArrayList<String>();
+		for (Pair<String, Integer> pair : sectionsList)
+			sectionsNames.add(pair.first);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sectionsNames);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		listOfSectionsView.setAdapter(adapter);
+		
+		listOfSectionsView.setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View view, int position, long id)
+			{
+				int page = sectionsList.get(position).second.intValue();
+				flipper.smoothScrollToPage(page);
+				sectionsDialog.dismiss();
+			}
+		});
+		
+		sectionsDialog.setContentView(listOfSectionsView);
+		sectionsDialog.show();
+		
+		return true;
 	}
 	
 	/**

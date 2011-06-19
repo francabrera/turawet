@@ -4,7 +4,6 @@
 package com.turawet.beedroid.wsclient;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 

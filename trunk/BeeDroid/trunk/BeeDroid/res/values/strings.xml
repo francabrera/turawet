@@ -37,7 +37,8 @@
 	<string name="error_saving_form">Ha ocurrido un error al intentar los formularios.</string>
 	
 	<string name="save_n_send_instance">Guardar y enviar</string>
-
+	<string name="list_of_sections_of_instance">Ir a sección...</string>
+	
 	<string name="ok"></string>
 	<string name="saved_sended_ok">Envío completado</string>
 	<string name="saved_sended_not_ok">Hubo un error al guardar la instancia en el repositorio</string>
@@ -49,4 +50,7 @@
 	<string name="geo_obtain_error">No pude obtener la posición</string>
 	<string name="geo_latitud">Latitud:</string>
 	<string name="geo_longitud">Longitud:</string>
+	
+	
+	
 </resources>
