@@ -194,6 +194,39 @@ function makePropertyEditable(propTag, sID, fID, pID) {
 	});
 }
 
+// Genera el elemento DOM para una propiedad normal
+function addPropertyToDOM (div, propTag, propText, propValue) {
+	$(div).append($('<p />',{
+		class: 'property',
+		id: propTag
+	}).append($('<span />', {
+		text: propText,
+		class: 'propertylabel',
+	}),
+	$('<span />', {
+		text: propValue,
+		class: 'propertyvalue',
+	})
+	));	
+}
+
+function addPropertyCheckToDOM (div, propTag, propText) {
+	var check;
+	$(div).append($('<p />',{
+		class: 'property',
+		id: propTag
+	}).append($('<span />', {
+		text: propText,
+		class: 'propertylabel',
+	}),
+	check = $('<input/>', {
+		type: "checkbox",
+		class: 'propertyvalue',
+	})
+	));
+	return check;
+}
+
 //Añadir propiedades al campo
 function addPropertiesToField (idField, div, type) {
 	var auxIDs = idField.match(/\d+/g);
@@ -202,19 +235,19 @@ function addPropertiesToField (idField, div, type) {
 	if (type == "text") {
 		var pID = formSections[sID].fields[fID].addProperty("MAX_LENGTH", "100");
 		var propTag = 's' + sID + 'f' + fID + 'p' + pID;
-		$(div).append($('<p />',{
-			class: 'property',
-			id: propTag
-		}).append($('<span />', {
-			text: 'Tamaño máximo:',
-			class: 'propertylabel',
-		}),
-		$('<span />', {
-			text: '100',
-			class: 'propertyvalue',
-		})
-		));
-		makePropertyEditable(propTag, sID, fID, pID)
+		addPropertyToDOM(div, propTag, "MAX_LENGTH", "100");
+		makePropertyEditable(propTag, sID, fID, pID);
+		pID = formSections[sID].fields[fID].addPropertyCheck("EMAIL", false);
+		propTag = 's' + sID + 'f' + fID + 'p' + pID;
+		var divCheck = addPropertyCheckToDOM(div, propTag, "EMAIL");
+		$(divCheck).change(function() {
+				var checkTag = this.parentNode.id;
+				var auxIDs = checkTag.match(/\d+/g);
+				var sIDaux = parseInt(auxIDs[0]);
+				var fIDaux = parseInt(auxIDs[1]);
+				var pIDaux = parseInt(auxIDs[2]);
+				formSections[sIDaux].fields[fIDaux].properties[pIDaux].value = $(this).is(':checked');
+			});
 	}
 }
 

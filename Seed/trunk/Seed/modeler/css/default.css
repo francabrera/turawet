@@ -154,14 +154,17 @@ p { margin:0; }
     border-radius: 12px;
     position: relative;
     top: 20px;
-    font-weight:bold;    
+    font-weight:bold;
+    color: #8C8C8C;
     }  
 #form li div.properties .propertylabel {
-    margin: 0 0 0 5px;      
+    margin: 0 0 0 5px;     
+    color: #000; 
     }
 #form li div.properties .propertyvalue {
     margin: 0 0 0 20px; 
-    font-weight:normal;       
+    font-weight:normal;
+    color: #000;       
     }
 
 #form li div.options {
@@ -173,7 +176,8 @@ p { margin:0; }
     border-radius: 12px;
     position: relative;
     top: 20px;   
-    font-weight:bold; 
+    font-weight:bold;
+    color: #8C8C8C;
     }
 #form li div.options .optionlabel {
     margin: 0 0 0 5px;       
