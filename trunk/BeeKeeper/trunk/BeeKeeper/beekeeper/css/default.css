@@ -173,6 +173,10 @@ img {
 #sections ul li {
 	display:inline;
 	}
+	
+#sections ul li .statistic img {
+	align: center;
+	} 
 
 #sections ul li a {
 	margin:0px 10px 0px 0px;
