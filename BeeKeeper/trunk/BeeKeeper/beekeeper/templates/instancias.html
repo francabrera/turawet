@@ -4,7 +4,7 @@
 
 			{% if instances %}
 				<h1>Instancias</h1>
-				<h2>Instancias del formulario: {{ form }}</h2>
+				<h2>Instancias del formulario: {{ instance.form.id }}</h2>
 				<table id="instancestable">
 				<thead>
 					<td><span class="tableelement">Nombre del formulario</span></td>
@@ -25,7 +25,13 @@
 							<a href="/beekeeper/show_instance/{{ instance.id }}"><span class="tableelement">{{ instance.id }}</span></a>
 						</td>
 						<td>
-							<a href="/beekeeper/delete_instance/{{ instance.id }}"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>
+						    <form name="elementDelete" action="/beekeeper/show_instance_list/{{ instance.form.id }}/" method="post">
+						        {% csrf_token %}
+						        <input type="hidden" name="elementToDelete" value="{{ instance.id }}" />
+						        <input type="image" src="/beekeeper/images/buttons/delete.png" name="submit" />
+								<!--<a href="document.elementDelete.submit();"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
+						    </form>
+							<!-- <a href="/beekeeper/delete_instance/{{ instance.id }}"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a> -->
 							<a href="/beekeeper/show_instance_map/{{ instance.id }}"><span class="tableelement">Geolocalizar</span></a>
 						</td>
 					</tr>
@@ -38,4 +44,19 @@
 				<h3>No se ha encontrado ninguna instancia del formulario en la base de datos.</h3>
 			{% endif %}
 
+{% endblock %}
+
+{% block result %}
+	{% if deleting %}
+      <a href="/beekeeper/delete_instance/{{ instanceToDelete }}"><span class="enlaceEliminar">Eliminar instancia.</span></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block extrajs %}
+	{% if deleting %}
+		<script language="JavaScript">
+			$("#resultado").toggle('slow');
+	    </script>
+    {% endif %}
 {% endblock %}

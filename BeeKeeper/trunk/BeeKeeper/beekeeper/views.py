@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.conf import settings
+from BeeKeeper.beekeeper.post_form import NewForm
 
 import io
 
@@ -28,18 +29,37 @@ def showIndex (request):
 
 def showFormList (request):
     
-    forms = Form.objects.all()
+    context = RequestContext(request)
+    # We obtain the forms
+    context["forms"] = Form.objects.all()
+    # If post
+    if request.method == 'POST':
+        postform = NewForm(request.POST)
+        if postform.is_valid() :
+            context["formToDelete"] = postform.cleaned_data['elementToDelete']
+        context["deleting"] = True
+    else:
+        context["deleting"] = False
     
-    return render_to_response('formularios.html', {'forms': forms });
+    return render_to_response('formularios.html', context);
 
 
 def showForm (request, formid):
-    
-    form = Form.objects.filter(id = formid)
-    form = form[0]
 
+    context = RequestContext(request)
+    # We obtain the form
+    form = Form.objects.filter(id = formid)
+    context["form"] = form[0]
+    # If post
+    if request.method == 'POST':
+        postform = NewForm(request.POST)
+        if postform.is_valid() :
+            context["formToDelete"] = postform.cleaned_data['elementToDelete']
+        context["deleting"] = True
+    else:
+        context["deleting"] = False
     
-    return render_to_response('ver_formulario.html', {'form': form})
+    return render_to_response('ver_formulario.html', context);
 
 
 def showFormStatistics (request, formid):
@@ -128,13 +148,23 @@ def deleteForm (request, formid):
 
 
 def showInstanceList (request, formid):
-    
+    context = RequestContext(request)
+    # We obtain the insance
     form = Form.objects.filter(id = formid)
     form = form[0]
     if form:
-        instances = Instance.objects.filter(form=form);
+        context["instances"] = Instance.objects.filter(form=form);
+    # If post
+    if request.method == 'POST':
+        postform = NewForm(request.POST)
+        if postform.is_valid() :
+            context["instanceToDelete"] = postform.cleaned_data['elementToDelete']
+        context["deleting"] = True
+    else:
+        context["deleting"] = False
     
-    return render_to_response('instancias.html', {'instances': instances })
+    
+    return render_to_response('instancias.html', context)
 
 
 
@@ -149,14 +179,36 @@ def showInstancesMap (request, formid):
 
 
 def showInstance (request, instanceid):
+    context = RequestContext(request)
+    # We obtain the insance
     instance = Instance.objects.filter(id = instanceid)
-    instance = instance[0]
+    context["instance"] = instance[0]
     if instance:
-        instance_fields = InstanceField.objects.filter(instance=instance).all()
+        context["instance_fields"] = InstanceField.objects.filter(instance=instance[0]).all()
     else:
-        instance_fields = None
+        context["instance_fields"] = None
+    # If post
+    if request.method == 'POST':
+        postform = NewForm(request.POST)
+        if postform.is_valid() :
+            context["instanceToDelete"] = postform.cleaned_data['elementToDelete']
+        context["deleting"] = True
+    else:
+        context["deleting"] = False
     
-    return render_to_response('ver_instancia.html', {'instance': instance, 'instance_fields': instance_fields });
+    
+    return render_to_response('ver_instancia.html', context)
+
+    
+#    instance = Instance.objects.filter(id = instanceid)
+#    instance = instance[0]
+#    if instance:
+#        instance_fields = InstanceField.objects.filter(instance=instance).all()
+#    else:
+#        instance_fields = None
+    
+#    return render_to_response('ver_instancia.html', {'instance': instance, 'instance_fields': instance_fields });
+
 
 
 def showInstanceMap (request, instanceid):

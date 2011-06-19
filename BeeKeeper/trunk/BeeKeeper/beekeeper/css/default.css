@@ -157,6 +157,12 @@ img {
     top: 20px;  
 }
 
+#form form {
+	float: left;
+	margin: 0 3px 0 0;
+	padding: 0 0 0 0;
+}
+
     /*********************** ----------- ***********************/
     
 /*********************** ----------- ***********************/
@@ -204,6 +210,7 @@ img {
 
 #resultado {
 	width:700px;
+	height: 300px;
 	position:absolute;
 	top:60px;
 	left:50%;
@@ -212,13 +219,14 @@ img {
 	background-color: #BD8F8F;
 	display: none;
 	}
+	
 #resultado img.delete {
 	float:right;
 	}
 	
-.prueba{
-    margin:20px;
-    padding:10px;
+#resultado a{
+    margin-top:250px;
+    text-color: red;
 }
 
 .pruebaerror {

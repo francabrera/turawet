@@ -25,7 +25,13 @@
 							<span class="tableelement">{{ form.version }}</span>
 						</td>
 						<td>
-							<a href="/beekeeper/delete_form/{{ form.id }}"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>
+							<!--<a href="/beekeeper/delete_form/{{ form.id }}"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
+						    <form name="elementDelete" action="/beekeeper/show_form_list/" method="post">
+						        {% csrf_token %}
+						        <input type="hidden" name="elementToDelete" value="{{ form.id }}" />
+						        <input type="image" src="/beekeeper/images/buttons/delete.png" name="submit" />
+								<!--<a href="document.elementDelete.submit();"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
+						    </form>
 							<a href="/beekeeper/show_instance_list/{{ form.id }}"><span class="tableelement">Instancias</span></a>
 							<a href="/beekeeper/show_form_statistics/{{ form.id }}"><span class="tableelement">Estad&iacute;sticas</span></a>
 							<a href="/beekeeper/show_instances_map/{{ form.id }}"><span class="tableelement">Geolocalizaciones</span></a>
@@ -40,4 +46,20 @@
 				<h3>No se ha encontrado ning&uacute;n formulario en la base de datos.</h3>
 			{% endif %}
 
+{% endblock %}
+
+
+{% block result %}
+	{% if deleting %}
+      <a href="/beekeeper/delete_form/{{ formToDelete }}"><span class="enlaceEliminar">Eliminar formulario.</span></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block extrajs %}
+	{% if deleting %}
+		<script language="JavaScript">
+			$("#resultado").toggle('slow');
+	    </script>
+    {% endif %}
 {% endblock %}
