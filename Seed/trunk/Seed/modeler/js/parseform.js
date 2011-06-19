@@ -13,7 +13,10 @@ function formToXML (name, sections) {
 	var text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 	text += "<form><id/><meta><version>1</version>";
 	text += "<name>" + name + "</name>";
-	text += "<author><user>turawet</user></author></meta>";
+	text += "<author><user>turawet</user></author>";
+	if (geolocalized)
+		text += "<geolocalized/>"; 
+	text += "</meta>";
 	text += "<sections>";
 	var sCounter;
 	for (sCounter=0;sCounter<sections.length;sCounter++)	

@@ -10,6 +10,7 @@
 /* Inicializacion                                                */
 /*****************************************************************/
 var formName = "Formulario";
+var geolocalized = false;
 var formSections = new Array();
 formSections[0] = new Section("Nombre sección 0", 0);
 var actualSection = 0;
@@ -55,6 +56,10 @@ $(".formname").inlineEdit({
 		save: function(event, hash) {
 			formName = hash.value;
 		}
+});
+
+$("#geolocalization").change(function() {
+	geolocalized = $(this).is(':checked');
 });
 
 /*****************************************************************/
