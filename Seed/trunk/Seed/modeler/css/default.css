@@ -153,8 +153,16 @@ p { margin:0; }
     -moz-border-radius: 12px;
     border-radius: 12px;
     position: relative;
-    top: 20px;   
-    }   
+    top: 20px;
+    font-weight:bold;    
+    }  
+#form li div.properties .propertylabel {
+    margin: 0 0 0 5px;      
+    }
+#form li div.properties .propertyvalue {
+    margin: 0 0 0 20px; 
+    font-weight:normal;       
+    }
 
 #form li div.options {
     display:none;
@@ -165,13 +173,14 @@ p { margin:0; }
     border-radius: 12px;
     position: relative;
     top: 20px;   
+    font-weight:bold; 
     }
 #form li div.options .optionlabel {
-    margin: 0 0 0 5px;
-    font-weight:bold;       
+    margin: 0 0 0 5px;       
     }
 #form li div.options .optionvalue {
-    margin: 0 0 0 20px;       
+    margin: 0 0 0 20px;
+    font-weight:normal;        
     }
     
 #form li div.options .addoptionbutton {
