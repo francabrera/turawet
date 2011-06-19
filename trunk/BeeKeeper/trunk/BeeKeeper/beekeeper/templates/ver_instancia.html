@@ -55,12 +55,20 @@
 
 {% block sidebar %}
 		    <ul>
-				<li><a class="item" href="/beekeeper/delete_instance/{{ instance.id }}" id="campo1">
+				<li>
+				    <form name="elementDelete" class="item" action="/beekeeper/show_instance/{{ instance.id }}/" method="post">
+				        {% csrf_token %}
+				        <input type="hidden" name="elementToDelete" value="{{ instance.id }}" />
+				        <input type="image" src="/beekeeper/images/delete.png" name="submit" />
+						<!--<a href="document.elementDelete.submit();"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
+				    </form>
+					<!-- <a class="item" href="/beekeeper/delete_instance/{{ instance.id }}" id="campo1"> 
 					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar instanceulario</strong></p>
 					</div>
-				</a></li>
+					</a> -->
+				</li>
 				<li><a class="item" href="/beekeeper/show_instance_map/{{ instance.id }}" id="campo4">
 					<img src="/beekeeper/images/geolocalization.png" />
 					<div class="label">
@@ -82,4 +90,20 @@
 	{% endfor %}
 	</ul>
 	
+{% endblock %}
+
+
+{% block result %}
+	{% if deleting %}
+      <a href="/beekeeper/delete_instance/{{ instanceToDelete }}"><span class="enlaceEliminar">Eliminar instancia.</span></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block extrajs %}
+	{% if deleting %}
+		<script language="JavaScript">
+			$("#resultado").toggle('slow');
+	    </script>
+    {% endif %}
 {% endblock %}

@@ -49,12 +49,24 @@
 
 {% block sidebar %}
 		    <ul>
-				<li><a class="item" href="/beekeeper/delete_form/{{ form.id }}" id="campo1">
+				<li>
+					<form name="elementDelete" class="item" action="/beekeeper/show_form/{{ form.id }}/" method="post">
+						{% csrf_token %}
+					    <input type="hidden" name="elementToDelete" value="{{ form.id }}" />
+					    <input type="image" src="/beekeeper/images/delete.png" name="submit" />
+					   	<div class="label">
+							<p><strong>Eliminar formulario</strong></p>
+						</div>
+						<!--<a href="document.elementDelete.submit();"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
+					</form>
+				</li>
+				
+				<!-- <a class="item" href="/beekeeper/delete_form/{{ form.id }}" id="campo1">
 					<img src="/beekeeper/images/delete.png" />
 					<div class="label">
 						<p><strong>Eliminar formulario</strong></p>
 					</div>
-				</a></li>
+				</a></li> -->
 				<li><a class="item" href="/beekeeper/show_instance_list/{{ form.id }}" id="campo2">
 					<img src="/beekeeper/images/instances.png" />
 					<div class="label">
@@ -88,4 +100,20 @@
 	{% endfor %}
 	</ul>
 	
+{% endblock %}
+
+
+{% block result %}
+	{% if deleting %}
+      <a href="/beekeeper/delete_form/{{ formToDelete }}"><span class="enlaceEliminar">Eliminar formulario.</span></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block extrajs %}
+	{% if deleting %}
+		<script language="JavaScript">
+			$("#resultado").toggle('slow');
+	    </script>
+    {% endif %}
 {% endblock %}
