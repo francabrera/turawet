@@ -12,7 +12,9 @@ import com.turawet.beedroid.beans.FieldOptionBean;
 import com.turawet.beedroid.beans.FormBean;
 import com.turawet.beedroid.beans.FormFieldBean;
 import com.turawet.beedroid.beans.GenericInstanceFieldBean;
+import com.turawet.beedroid.beans.ImageFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.NumericFieldBean;
 import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.beans.RadioFieldBean;
 import com.turawet.beedroid.beans.SectionBean;
@@ -145,11 +147,19 @@ public class XmlToBeansParserHandler extends DefaultHandler
 					// the first attribute is the order
 					tempInstanceField = new TextFieldBean(1, tempFormField);
 					break;
+				case NUMERIC:
+					tempInstanceField = new NumericFieldBean(1, tempFormField);
+					break;
 				case DATE:
 					tempInstanceField = new DateFieldBean(1, tempFormField); // TODO:
 					break;
 				case RADIO:
 					tempInstanceField = new RadioFieldBean(1, tempFormField); // TODO:
+					break;
+				case IMAGE:
+					tempInstanceField = new ImageFieldBean(1, tempFormField); // TODO:
+					break;
+				default:
 					break;
 			}
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION

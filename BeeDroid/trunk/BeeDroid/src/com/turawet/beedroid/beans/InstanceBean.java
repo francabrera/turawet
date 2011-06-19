@@ -59,6 +59,9 @@ public class InstanceBean extends BaseBean
 	 */
 	private List<SectionBean>	sections;
 	
+	private String					latitude;
+	private String					longitud;
+	
 	/* Constructor */
 	public InstanceBean()
 	{
@@ -67,6 +70,8 @@ public class InstanceBean extends BaseBean
 		authoruser = "";
 		creationDate = "";
 		modificationDate = "";
+		latitude = "";
+		longitud = "";
 		editable = true;
 	}
 	
@@ -137,6 +142,40 @@ public class InstanceBean extends BaseBean
 		this.sections.add(section);
 	}
 	
+	/**
+	 * @return the latitude
+	 */
+	public String getLatitude()
+	{
+		return latitude;
+	}
+	
+	/**
+	 * @param latitude
+	 *           the latitude to set
+	 */
+	public void setLatitude(String latitude)
+	{
+		this.latitude = latitude;
+	}
+	
+	/**
+	 * @return the longitud
+	 */
+	public String getLongitud()
+	{
+		return longitud;
+	}
+	
+	/**
+	 * @param longitud
+	 *           the longitud to set
+	 */
+	public void setLongitud(String longitud)
+	{
+		this.longitud = longitud;
+	}
+	
 	/* Other methods */
 
 	@Override
@@ -144,7 +183,7 @@ public class InstanceBean extends BaseBean
 	{
 		serializer = Xml.newSerializer();
 		serializer.setOutput(writer);
-      serializer.startDocument("UTF-8", null);
+		serializer.startDocument("UTF-8", null);
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.meta.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
@@ -166,17 +205,30 @@ public class InstanceBean extends BaseBean
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.editable.toString());
 		serializer.text(String.valueOf(editable));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.editable.toString());
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.geolocalization.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.latitude.toString());
+		
+		serializer.text(latitude);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.latitude.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.longitude.toString());
+		
+		serializer.text(longitud);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.longitude.toString());
+		
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.geolocalization.toString());
+		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.meta.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.sections.toString());
 		
 		serializer.flush();
 		/* Sections */
-		for(SectionBean section: sections)
+		for (SectionBean section : sections)
 			section.toXml(writer);
-
+		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.sections.toString());
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.instance.toString());
 		serializer.endDocument();
 	}
-
+	
 }

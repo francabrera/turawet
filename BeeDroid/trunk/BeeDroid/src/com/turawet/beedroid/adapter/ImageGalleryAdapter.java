@@ -33,9 +33,9 @@ public class ImageGalleryAdapter extends BaseAdapter
 		a.recycle();
 	}
 	
-	public void addImage(Bitmap b)
+	public boolean addImage(Bitmap b)
 	{
-		images.add(b);
+		return images.add(b);
 	}
 	
 	@Override

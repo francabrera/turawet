@@ -1,10 +1,17 @@
+/**
+ * 
+ */
 package com.turawet.beedroid.beans;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Date;
 
+import android.util.Base64;
 import android.util.Xml;
 
+import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;
 
@@ -24,35 +31,32 @@ import com.turawet.beedroid.constants.Cte.XmlTags;
  * @author Romén Rodríguez Gil
  * 
  */
-public class RadioFieldBean extends GenericInstanceFieldBean
+public class ImageFieldBean extends GenericInstanceFieldBean
 {
-	private int	value;
+	private String	imageBase64Encoded;
+	private String	imageName;
 	
 	/**
 	 * @param order
 	 * @param formField
 	 */
-	public RadioFieldBean(int order, FormFieldBean formField)
+	public ImageFieldBean(int order, FormFieldBean formField)
 	{
 		super(order, formField);
-		value = -1;
-	}
-	
-	/**
-	 * @return the value
-	 */
-	public int getValue()
-	{
-		return value;
+		imageBase64Encoded = "";
+		imageName = "";
 	}
 	
 	/**
 	 * @param value
-	 *           the value to set
 	 */
-	public void setValue(int value)
+	public void setValue(ByteArrayOutputStream value)
 	{
-		this.value = value;
+		if (value != null)
+		{
+			imageBase64Encoded = Base64.encodeToString(value.toByteArray(), Base64.URL_SAFE);
+			imageName = String.valueOf(System.currentTimeMillis()) + InstanceBeanCte.JPEG_EXTENSION;
+		}
 	}
 	
 	@Override
@@ -66,8 +70,13 @@ public class RadioFieldBean extends GenericInstanceFieldBean
 		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.value.toString());
 		
-		if (value != -1)
-			serializer.text(getFormField().getFieldOptions().get(value).getValue());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.filename.toString());
+		serializer.text(imageName);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.filename.toString());
+		
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.binary.toString());
+		serializer.text(imageBase64Encoded);
+		serializer.endTag(XmlTags.namespace, XmlEnumTags.binary.toString());
 		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.value.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.order.toString());
@@ -80,7 +89,5 @@ public class RadioFieldBean extends GenericInstanceFieldBean
 		
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.field.toString());
 		serializer.flush();
-		
 	}
-	
 }

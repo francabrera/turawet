@@ -22,14 +22,11 @@ package com.turawet.beedroid.view;
  * 
  */
 
-import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.view.PageControl.OnPageControlClickListener;
-import com.turawet.beedroid.view.support.InstanceBeanManager;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -285,7 +282,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	private void scrollToPage(int page, boolean smooth)
 	{
 		int oldPage = mCurrentPage;
-		Log.d("", "PAGE = " + page + " pageWidth = " + mPageWidth);
+
 		if (page >= getPageCount() && getPageCount() > 0)
 		{
 			page--;

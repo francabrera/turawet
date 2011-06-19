@@ -2,6 +2,6 @@
 <resources>
 	<color name="custom_theme_color">#E0E0E0</color>
     <style name="BeeDroidTheme" parent="android:Theme.Light.NoTitleBar">
-        <item name="android:background">@drawable/layout_pressed</item>
+<!--         <item name="android:background">@drawable/layout_pressed</item> -->
     </style>
 </resources>

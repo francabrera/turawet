@@ -12,7 +12,7 @@ public class MyLocationListener implements LocationListener
 {
 	private Location				currentBestLocation;
 	private int						locationCount				= 0;
-	private static final int	NUM_OF_LOCATIONS_SEARCH	= 3;
+	private static final int	NUM_OF_LOCATIONS_SEARCH	= 1;
 	
 	protected boolean isBetterLocation(Location location)
 	{
