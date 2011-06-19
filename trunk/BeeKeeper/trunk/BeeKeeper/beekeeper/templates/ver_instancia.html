@@ -18,7 +18,7 @@
 										<div class="actions">
 											<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ instance_field.id }}')" class="fieldButton">
 										</div>
-			                       		<p> <span class="fieldlabel">{{ form_field.label }}</span> : <span class="fieldvalue">{{ instance_field.cast }} </p>
+			                       		<p> <span class="fieldlabel">{{ form_field.label }}</span> : <span class="fieldvalue">{{ instance_field.get_text }} </p>
 			                       		<br />
 		
 				                       {% if form_field.property_set.all %}
