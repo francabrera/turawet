@@ -7,6 +7,8 @@
 # Imports
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.query import QuerySet
+
 
 #from django.core.management.validation import max_length
 
@@ -157,6 +159,25 @@ class Instance(models.Model):
 
 
 
+class SubclassingQuerySet(QuerySet):
+    def __getitem__(self, k):
+        result = super(SubclassingQuerySet, self).__getitem__(k)
+        if isinstance(result, models.Model) :
+            return result.as_leaf_class()
+        else :
+            return result
+    def __iter__(self):
+        for item in super(SubclassingQuerySet, self).__iter__():
+            yield item.as_leaf_class()
+
+
+class InstanceFieldManager(models.Manager):
+    def get_query_set(self):
+        return SubclassingQuerySet(self.model)
+
+
+
+
 class InstanceField(models.Model):
     """Class: `InstanceField`. 
        :param instance: Instance which this field (value) is related to.
@@ -167,20 +188,22 @@ class InstanceField(models.Model):
     instance = models.ForeignKey(Instance)
     instance_order = models.SmallIntegerField()
     form_field = models.ForeignKey(FormField)
+    objects = InstanceFieldManager()
 
 
-    real_type = models.ForeignKey(ContentType, editable=False, null=True)
+    content_type = models.ForeignKey(ContentType,editable=False,null=True)
 
     def save(self, *args, **kwargs):
-        if not self.id:
-            self.real_type = self._get_real_type()
-        super(InstanceField, self).save(*args, **kwargs)
+        if(not self.content_type):
+            self.content_type = ContentType.objects.get_for_model(self.__class__)
+            super(InstanceField, self).save(*args, **kwargs)
 
-    def _get_real_type(self):
-        return ContentType.objects.get_for_model(type(self))
-
-    def cast(self):
-        return self.real_type.get_object_for_this_type(pk=self.pk)
+    def as_leaf_class(self):
+        content_type = self.content_type
+        model = content_type.model_class()
+        if (model == InstanceField):
+            return self
+        return model.objects.get(id=self.id)
 
     class Meta:
         unique_together = ('instance', 'instance_order')
@@ -197,6 +220,7 @@ class TextField(InstanceField):
     """Class: `TextField`. 
        :param value: The text itself."""
     value = models.CharField(max_length = 128)
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -209,6 +233,7 @@ class TextAreaField(InstanceField):
     """Class: `TextAreaField`. 
        :param value: The text itself."""
     value = models.CharField(max_length = 1024)
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -221,6 +246,7 @@ class NumericField(InstanceField):
     """Class: `TextField`. 
        :param value: The text itself."""
     value = models.IntegerField()
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -235,6 +261,7 @@ class DateField(InstanceField):
        :param month_value: The Month.
        :param year_value: The Year."""
     value = models.DateField()
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -247,6 +274,7 @@ class RadioField(InstanceField):
     """Class: `RadioField`. 
        :param value: The id of the selected option."""
     value = models.CharField(max_length = 16) # TIPO DE DATOS ID DE DJANGO
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -259,6 +287,7 @@ class CheckField(InstanceField):
     """Class: `CheckField`. 
        :param value: True or False (if TRIESTATE property also None)."""
     value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -271,6 +300,7 @@ class ComboField(InstanceField):
     """Class: `ComboField`. 
        :param value: The id of the selected option."""
     value = models.CharField(max_length = 5) # TIPO DE DATOS ID DE DJANGO
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
@@ -285,6 +315,7 @@ class ImageField(InstanceField):
        :param value: The image itself.
        :todo ImageField parameters"""
     value = models.ImageField(upload_to = 'beehive/images')
+    objects = InstanceFieldManager()
 
     def __unicode__(self):
         return unicode(self.value)
