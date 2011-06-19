@@ -15,8 +15,9 @@ function formToXML (name, sections) {
 	text += "<name>" + name + "</name>";
 	text += "<author><user>turawet</user></author></meta>";
 	text += "<sections>";
-	for (i=0;i<sections.length;i++)	
-		text += sections[i].toXMLOrdered();
+	var sCounter;
+	for (sCounter=0;sCounter<sections.length;sCounter++)	
+		text += sections[sCounter].toXMLOrdered();
 	text += "</sections></form>";
 	/*if (window.DOMParser) {
 		parser=new DOMParser();
