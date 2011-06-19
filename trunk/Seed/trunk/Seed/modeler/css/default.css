@@ -72,7 +72,12 @@ p { margin:0; }
 
 #form .formname {
 	/*color: #FFF;*/
+	color: #4A4A4A;
 	}
+#labelgeo {
+    color: #4A4A4A;
+    margin: 0 0 0 35px;
+    }
 	
     /************************ SECTION ************************/
 #form ul {
@@ -180,11 +185,13 @@ p { margin:0; }
     color: #8C8C8C;
     }
 #form li div.options .optionlabel {
-    margin: 0 0 0 5px;       
+    margin: 0 0 0 5px;
+    color: #000;      
     }
 #form li div.options .optionvalue {
     margin: 0 0 0 20px;
-    font-weight:normal;        
+    font-weight:normal;
+    color: #000;      
     }
     
 #form li div.options .addoptionbutton {
