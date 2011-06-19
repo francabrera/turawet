@@ -36,6 +36,22 @@ function FieldOption (label, value) {
 }
 
 /**
+ * Clase propiedad de campo
+ */
+function FieldProperty (name, value) {
+	this.name = name;
+	this.value = value;
+	
+	this.toXML = function () {
+		var propxml = "<property>";
+		propxml += "<name>" + this.name + "</name>";
+		propxml += "<value>" + this.value + "</value>";
+		propxml += "</property>";
+		return propxml;
+	}
+}
+
+/**
  * Clase campo
  */
 function Field(name, order, type) {
@@ -43,10 +59,17 @@ function Field(name, order, type) {
 	this.order = order;
 	this.type = type;
 	this.required = false;
+	this.properties = new Array();
 	
 	this.setRequired = function (req)
 	{
 		this.required = req;
+	}
+	
+	this.addProperty = function (name, value)
+	{
+		var aux = new FieldProperty(name, value);
+		return this.properties.push(aux) - 1;
 	}
 	
 	/**
@@ -59,7 +82,16 @@ function Field(name, order, type) {
 		fieldxml += "<type>"+ this.type +"</type>";
 		if (this.required)
 			fieldxml += "<required />";
-		fieldxml += "<properties /></field>";
+		if (this.properties.length > 0) {				
+			fieldxml += "<properties>";
+			for (i=0;i<this.properties.length;i++)
+				if (typeof this.properties[i]  != "undefined")
+					fieldxml += this.properties[i].toXML();
+			fieldxml += "</properties>";
+		}
+		else 
+			fieldxml += "<properties/>";
+		fieldxml += "</field>";
 		return fieldxml;
 	}
 	

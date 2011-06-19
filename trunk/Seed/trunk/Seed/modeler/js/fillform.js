@@ -63,6 +63,7 @@ $(".formname").inlineEdit({
 function createNewField(id, name, section, idDrag, type, fieldType) {
 	// Componemos el id del nuevo campo
 	var idField = 's' + section + '-f' + formSections[section].size();
+	var properties;
 	var newField = $('<li />', {
         class: type,
         id: idField,
@@ -98,13 +99,13 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 	    }),
 	    $('<br />'),
 	    // Propiedades
-		$('<div />', {
+		properties = $('<div />', {
 	    	class: 'properties',
-	    	text: 'propiedades'
+	    	text: 'PROPIEDADES'
 		})
 	);
 	// Añadimos los listeners al elemento
-	addListenersToField(newField);    
+	addListenersToField(newField);
 	// Variable para almacenar el nuevo campo dado de alta
 	var jsField;
 	// Si se trata de un combo o un radio
@@ -112,7 +113,9 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 		// Agregamos las opciones
 		newField.append($('<div />', {
 	    	class: 'options',
-		}).prepend(
+	    	text: 'OPCIONES'
+		}).append(
+				$('<br />'),
 				// Añadir nueva opción
 				$('<img />', {
 					src: 'images/buttons/add.png',
@@ -127,6 +130,8 @@ function createNewField(id, name, section, idDrag, type, fieldType) {
 		jsField = new Field(name,id,fieldType);
 	} 
     formSections[section].addField(jsField);
+	// Añadimos las propiedades al campo
+	addPropertiesToField(idField, properties, type);
     return newField;
 }
 
@@ -177,18 +182,56 @@ function makeOptionEditable(optag, sID, fID, oID) {
 	});
 }
 
+//Hacer etiqueta y valor de la opción editables
+function makePropertyEditable(propTag, sID, fID, pID) {
+	//Value de la propiedad editable
+	var value = $("#" + propTag + " .propertyvalue")
+	value.inlineEdit({
+		save: function(event, hash) {
+				var property = formSections[sID].fields[fID].properties[pID];
+				property.value = hash.value;
+		}
+	});
+}
+
+//Añadir propiedades al campo
+function addPropertiesToField (idField, div, type) {
+	var auxIDs = idField.match(/\d+/g);
+	var sID = parseInt(auxIDs[0]);
+	var fID = parseInt(auxIDs[1]);
+	if (type == "text") {
+		var pID = formSections[sID].fields[fID].addProperty("MAX_LENGTH", "100");
+		var propTag = 's' + sID + 'f' + fID + 'p' + pID;
+		$(div).append($('<p />',{
+			class: 'property',
+			id: propTag
+		}).append($('<span />', {
+			text: 'Tamaño máximo:',
+			class: 'propertylabel',
+		}),
+		$('<span />', {
+			text: '100',
+			class: 'propertyvalue',
+		})
+		));
+		makePropertyEditable(propTag, sID, fID, pID)
+	}
+}
+
+
 // Añadir opción al campo
 function addOptionToField (divOptions, tagID) {
 	var auxIDs = tagID.match(/\d+/g);
-	var sectionID = parseInt(auxIDs[0]);
-	var fieldID = parseInt(auxIDs[1]);
-	var field = formSections[sectionID].fields[fieldID];
+	var sID = parseInt(auxIDs[0]);
+	var fID = parseInt(auxIDs[1]);
+	var field = formSections[sID].fields[fID];
 	var opID = field.addOption('label', 'value');
 	var pOptions;
-	var opTag = 's' + sectionID + 'f' + fieldID + 'o' + opID;
+	var opTag = 's' + sID + 'f' + fID + 'o' + opID;
 	$(divOptions).append (
 		pOptions = $('<p />', {
 						id: opTag,
+						class: "option"
 					}).prepend(
 						$('<span />', {
 							text: 'Opción',
@@ -209,7 +252,7 @@ function addOptionToField (divOptions, tagID) {
 						})
 					)
 	);
-	makeOptionEditable(opTag, sectionID, fieldID, opID)
+	makeOptionEditable(opTag, sID, fID, opID)
 }
 
 function deleteOption (pOptions) {
