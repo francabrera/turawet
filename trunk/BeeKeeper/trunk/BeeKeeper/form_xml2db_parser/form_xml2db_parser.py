@@ -144,7 +144,7 @@ class FormXmldbParser():
             sections = parser.findall("sections/section")
             i = 0;
             for section in sections:
-                #id = section.find('id')
+                id = section.find('id')
                 name = section.findtext("name")
                 # NAME ES NULL ahora mismo y LA 'i' NO VALE
                 section_model = Section(name=name, order=i, form=form_model)
