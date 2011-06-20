@@ -211,8 +211,12 @@ class InstanceXmldbParser():
                 # TO-DO: What if we go into the except. No instance created?
                 try:
                     form_model = Form.objects.get(pk=form_id)
-                    instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
-                                              form=form_model, editable=editable, longitude=longitude, latitude=latitude)
+                    if longitude != None:
+                        instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
+                                                  form=form_model, editable=editable, longitude=longitude, latitude=latitude)
+                    else:
+                        instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
+                                                  form=form_model, editable=editable)
                     instance_model.save()
                     # we set the id value once the instance is saved
                     id.text = str(instance_model.id)
