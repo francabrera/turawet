@@ -30,13 +30,13 @@
             <filename/>
             <binary/>
           </value>
-          <order>1</order>
+          <order>2</order>
           <formfieldid>2</formfieldid>
         </field>
         <field>
           <id/>
           <value/>
-          <order>1</order>
+          <order>3</order>
           <formfieldid>3</formfieldid>
         </field>
       </fields>
@@ -51,7 +51,7 @@
             <month>6</month>
             <year>2011</year>
           </value>
-          <order>1</order>
+          <order>4</order>
           <formfieldid>4</formfieldid>
         </field>
       </fields>
@@ -62,7 +62,7 @@
         <field>
           <id/>
           <value>-1</value>
-          <order>1</order>
+          <order>5</order>
           <formfieldid>5</formfieldid>
         </field>
       </fields>
