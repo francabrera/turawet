@@ -189,9 +189,9 @@ class InstanceXmldbParser():
             modification_date = parser.findtext('meta/modificationdate')
             editable = parser.findtext('meta/editable')
             longitude = parser.findtext('meta/geolocalization/longitude')
-            if longitude == '': longitude = 23.2
+            if longitude == '': longitude = None
             latitude = parser.findtext('meta/geolocalization/latitude')
-            if latitude == '': latitude = 23.2
+            if latitude == '': latitude = None
             # We get the empty Id of the instance
             id = parser.find('id')
             id_text = parser.findtext('id')
@@ -211,12 +211,8 @@ class InstanceXmldbParser():
                 # TO-DO: What if we go into the except. No instance created?
                 try:
                     form_model = Form.objects.get(pk=form_id)
-                    if longitude != None:
-                        instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
-                                                  form=form_model, editable=editable, longitude=longitude, latitude=latitude)
-                    else:
-                        instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
-                                                  form=form_model, editable=editable)
+                    instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
+                                              form=form_model, editable=editable, longitude=longitude, latitude=latitude)
                     instance_model.save()
                     # we set the id value once the instance is saved
                     id.text = str(instance_model.id)
