@@ -11,7 +11,7 @@ def try_instance_xml2db_parser (request):
     # Creationg a parser
     parser = InstanceXmldbParser()
     # XML Sample
-    xmlpath = os.path.dirname(__file__) + '/resources/instancia.xml'
+    xmlpath = os.path.dirname(__file__) + '/resources/instancia_vacia.xml'
     f = open(xmlpath, "r")
     xml = f.read()
     f.close()
