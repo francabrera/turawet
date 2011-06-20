@@ -2,7 +2,11 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -68,8 +72,12 @@ public class InstanceBean extends BaseBean
 		super();
 		sections = new ArrayList<SectionBean>();
 		authoruser = "";
-		creationDate = "";
-		modificationDate = "";
+		Date date = new Date();
+		SimpleDateFormat simpleDateformat=new SimpleDateFormat("yyyy-MM-dd");
+		modificationDate = simpleDateformat.format(date);
+		if (creationDate == null || creationDate.equals("")) {
+			creationDate = modificationDate;
+		}
 		latitude = "";
 		longitud = "";
 		editable = true;
@@ -185,9 +193,9 @@ public class InstanceBean extends BaseBean
 		serializer.setOutput(writer);
 		serializer.startDocument("UTF-8", null);
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.instance.toString());
-		serializer.startTag(XmlTags.namespace, XmlEnumTags.meta.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.startTag(XmlTags.namespace, XmlEnumTags.meta.toString());
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.formid.toString());
 		serializer.text(String.valueOf(form.getId()));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.formid.toString());
