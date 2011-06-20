@@ -100,6 +100,7 @@ public class SectionBean extends BaseBean
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.section.toString());
 		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.id.toString());
+		serializer.text(String.valueOf(id));
 		serializer.endTag(XmlTags.namespace, XmlEnumTags.id.toString());
 		
 		serializer.startTag(XmlTags.namespace, XmlEnumTags.fields.toString());

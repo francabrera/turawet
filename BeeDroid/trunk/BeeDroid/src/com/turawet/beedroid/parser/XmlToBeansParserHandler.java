@@ -42,6 +42,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	/* Aux */
 	private StringBuilder				buffer;
 	private boolean						buffering;
+	private int							order;
 	private boolean						inProperty;
 	private boolean						inField;
 	private boolean						inSection;
@@ -62,6 +63,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 		tempForm = new FormBean();
 		buffer = new StringBuilder();
 		buffering = false;
+		order = 1;
 		inField = false;
 		inSection = false;
 		inProperty = false;
@@ -145,25 +147,26 @@ public class XmlToBeansParserHandler extends DefaultHandler
 					// TODO: Arguments. This constructor exists in the
 					// GenericInstance, but there seems not to be inheritance
 					// the first attribute is the order
-					tempInstanceField = new TextFieldBean(1, tempFormField);
+					tempInstanceField = new TextFieldBean(order, tempFormField);
 					break;
 				case NUMERIC:
-					tempInstanceField = new NumericFieldBean(1, tempFormField);
+					tempInstanceField = new NumericFieldBean(order, tempFormField);
 					break;
 				case DATE:
-					tempInstanceField = new DateFieldBean(1, tempFormField); // TODO:
+					tempInstanceField = new DateFieldBean(order, tempFormField); // TODO:
 					break;
 				case RADIO:
-					tempInstanceField = new RadioFieldBean(1, tempFormField); // TODO:
+					tempInstanceField = new RadioFieldBean(order, tempFormField); // TODO:
 					break;
 				case IMAGE:
-					tempInstanceField = new ImageFieldBean(1, tempFormField); // TODO:
+					tempInstanceField = new ImageFieldBean(order, tempFormField); // TODO:
 					break;
 				default:
 					break;
 			}
 			// NOW WE HAVE TO ADD THE NEW INSTANCEFIELD TO THE CURRENT SECTION
 			tempSection.addChild(tempInstanceField);
+			order++;
 			
 		}
 		/* Closing Property */
