@@ -189,7 +189,9 @@ class InstanceXmldbParser():
             modification_date = parser.findtext('meta/modificationdate')
             editable = parser.findtext('meta/editable')
             longitude = parser.findtext('meta/geolocalization/longitude')
+            if longitude == '': longitude = None
             latitude = parser.findtext('meta/geolocalization/latitude')
+            if latitude == '': latitude = None
             # We get the empty Id of the instance
             id = parser.find('id')
             id_text = parser.findtext('id')
