@@ -82,7 +82,7 @@ $.inlineEdit.defaults = {
     hover: 'ui-state-hover',
     value: '',
     save: '',
-    buttons: '<button class="save">save</button> <button class="cancel">cancel</button>',
+    buttons: '<button class="save">Guardar</button> <button class="cancel">Cancelar</button>',
     placeholder: 'Click to edit',
     control: 'input',
     cancelOnBlur: false

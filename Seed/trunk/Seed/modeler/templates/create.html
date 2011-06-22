@@ -8,7 +8,7 @@
 	<p id="labelgeo"><input type="checkbox" id="geolocalization"> Geolocalizado</p>
 	<h2>Arrastra los campos al formulario</h2>
 	<ul id="s0" class="section" href="#s0">
-	  <p class="sectionlabel">Nombre sección 0</p>
+	  <p class="sectionlabel">Nombre de la secci&oacute;n 0</p>
 	  <!--<li class="toEnd">
 	      <p id="toEndText">Arrastra aqu&iacute; para a&ntilde;adir al final</p>
 	  </li>-->
@@ -17,7 +17,7 @@
 		
 {% block serviceresult %}
     {% if wsresponse %}
-      <p class="prueba">Enviado:<br/>{{prueba}}</p>
+      <!--<p class="prueba">Enviado:<br/>{{prueba}}</p>-->
       <p class="prueba">Formulario Guardado!</p>
     {% else %}
       <p class="prueba">Enviado:<br/>{{prueba}}</p>
@@ -110,7 +110,7 @@
 
 {% block buttonssidebar %}
 	<a onclick="addSection(); return false" class="button white">
-	    New Section
+	    Nueva Secci&oacute;n
 	</a>
     <br/>
     <form class="sendform" action="/modeler/" method="post">
@@ -118,7 +118,7 @@
         <input type="hidden" name="fieldList" id="id_fieldList" />
         <!-- <button type="submit" name="sendButton" class="positive">-->
         <a class="button large green" onclick="fillForm(); this.parentNode.submit(); return false">
-           Send
+           Enviar
         </a>
         <!--<a class="button large red" onclick="showResults(); return false">
            <img src="images/bug.png"/>
