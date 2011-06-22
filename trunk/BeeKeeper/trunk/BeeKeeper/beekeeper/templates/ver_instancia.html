@@ -60,11 +60,17 @@
 
 {% block sidebar %}
 		    <ul>
+				<li><a class="item" href="/beekeeper/show_instance_list/{{ instance.form.id }}" id="campo0">
+					<img src="/beekeeper/images/tw_back.png" />
+					<div class="label">
+						<p><strong>Volver atr&aacute;s</strong></p>
+					</div>
+				</a></li>	
 				<li>
 				    <form name="elementDelete" class="item" action="/beekeeper/show_instance/{{ instance.id }}/" method="post">
 				        {% csrf_token %}
 				        <input type="hidden" name="elementToDelete" value="{{ instance.id }}" />
-				        <input type="image" src="/beekeeper/images/delete.png" name="submit" />
+				        <input type="image" src="/beekeeper/images/tw_delete.png" name="submit" />
 						<!--<a href="document.elementDelete.submit();"><span class="tableelement"><img class="delete" src="/beekeeper/images/buttons/delete.png" /></span></a>-->
 				    </form>
 					<!-- <a class="item" href="/beekeeper/delete_instance/{{ instance.id }}" id="campo1"> 
@@ -75,7 +81,7 @@
 					</a> -->
 				</li>
 				<li><a class="item" href="/beekeeper/show_instance_map/{{ instance.id }}" id="campo4">
-					<img src="/beekeeper/images/geolocalization.png" />
+					<img src="/beekeeper/images/tw_geolocalization.png" />
 					<div class="label">
 						<p><strong>Geolocalizaci&oacute;n</strong></p>
 					</div>
