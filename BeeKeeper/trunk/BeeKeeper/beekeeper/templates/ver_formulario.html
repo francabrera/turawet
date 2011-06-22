@@ -49,11 +49,17 @@
 
 {% block sidebar %}
 		    <ul>
+				<li><a class="item" href="/beekeeper/show_form_list/" id="campo0">
+					<img src="/beekeeper/images/tw_back.png" />
+					<div class="label">
+						<p><strong>Volver atr&aacute;s</strong></p>
+					</div>
+				</a></li>	
 				<li>
 					<form name="elementDelete" class="item" action="/beekeeper/show_form/{{ form.id }}/" method="post">
 						{% csrf_token %}
 					    <input type="hidden" name="elementToDelete" value="{{ form.id }}" />
-					    <input type="image" src="/beekeeper/images/delete.png" name="submit" />
+					    <input type="image" src="/beekeeper/images/tw_delete.png" name="submit" />
 					   	<div class="label">
 							<p><strong>Eliminar formulario</strong></p>
 						</div>
@@ -68,19 +74,19 @@
 					</div>
 				</a></li> -->
 				<li><a class="item" href="/beekeeper/show_instance_list/{{ form.id }}" id="campo2">
-					<img src="/beekeeper/images/instances.png" />
+					<img src="/beekeeper/images/tw_instances.png" />
 					<div class="label">
 						<p><strong>Instancias</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="/beekeeper/show_form_statistics/{{ form.id }}" id="campo3">
-					<img src="/beekeeper/images/statistics.png" />
+					<img src="/beekeeper/images/tw_statistics.png" />
 					<div class="label">
 						<p><strong>Estad&iacute;sticas</strong></p>
 					</div>
 				</a></li>
 				<li><a class="item" href="/beekeeper/show_instances_map/{{ form.id }}" id="campo4">
-					<img src="/beekeeper/images/geolocalization.png" />
+					<img src="/beekeeper/images/tw_geolocalization.png" />
 					<div class="label">
 						<p><strong>Geolocalizaci&oacute;n</strong></p>
 					</div>

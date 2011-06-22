@@ -46,8 +46,8 @@ img {
 
 #minilogo {
     position:fixed;
-    bottom:18px;
-    left:18px;
+    bottom:25px;
+    left:25px;
 }
 
 
@@ -97,6 +97,10 @@ img {
     padding:20px;
     -moz-border-radius: 12px; /* redondeo de los bordes */
     border-radius: 12px;
+}
+
+#form li p.fieldlabel {
+	margin:0px 0px 0px 40px;
 }
 
 #form li span.fieldlabel {
@@ -239,7 +243,7 @@ img {
 /************************ FIELDTYPES ************************/
 #form li.text {
     background-color:#F0E4BD;
-    background-image:url('../images/icons/text.png');
+    background-image:url('../images/fields/tw_icon_text.png');
 }
 #form li.text div.properties {
     background-color:#D6CCA9;
@@ -247,46 +251,41 @@ img {
 
 #form li.textarea {
     background-color:#F0BDC0;
-    background-image:url('../images/icons/text2.png');
+    background-image:url('../images/fields/tw_icon_text.png');
 }
 
 #form li.numeric {
     /*background-color:#778acb;*/
     background-color:#9EAEE5;
-    background-image:url('../images/icons/text2.png');
+    background-image:url('../images/fields/tw_icon_numeric.png');
 }
 
 #form li.radio {
     /*background-color:#a25656;*/
     background-color:#D18787;
-    background-image:url('../images/icons/text2.png');
-}
-
-#form li.location {
-    background-color:#B0FFFB;
-    background-image:url('../images/icons/file.png');
+    background-image:url('../images/fields/tw_icon_radio.png');
 }
 
 #form li.image {
     /*background-color:#86b58d;*/
     background-color:#B0DAB5;
-    background-image:url('../images/icons/image.png');
+    background-image:url('../images/fields/tw_icon_image.png');
 }
 
 #form li.checkbox {
 	background-color:#DAF0BD;
     /*background-color:#E2BDF0;*/
-    background-image:url('../images/icons/image.png');
+    background-image:url('../images/fields/tw_icon_check.png');
 }
 
 #form li.combo {
     background-color:#FAEF78;
-    background-image:url('../images/icons/image.png');
+    background-image:url('../images/fields/tw_icon_combo.png');
 }
 
 #form li.date {
     background-color:#a5c2d1;
-    background-image:url('../images/icons/image.png');
+    background-image:url('../images/fields/tw_icon_date.png');
 }
 /*********************** ----------- ***********************/
 
