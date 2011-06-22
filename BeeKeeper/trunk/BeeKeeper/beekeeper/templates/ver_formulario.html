@@ -111,7 +111,7 @@
 
 {% block result %}
 	{% if deleting %}
-      <a href="/beekeeper/delete_form/{{ formToDelete }}"><span class="enlaceEliminar">Eliminar formulario.</span></a>
+      <p class="enlaceeliminar">¿Desea eliminar el formulario? <br /><a href="/beekeeper/delete_form/{{ formToDelete }}">Sí, eliminar formulario.</a></p>
     {% endif %}
 {% endblock %}
 

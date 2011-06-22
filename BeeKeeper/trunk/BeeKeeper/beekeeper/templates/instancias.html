@@ -61,7 +61,7 @@
 
 {% block result %}
 	{% if deleting %}
-      <a href="/beekeeper/delete_instance/{{ instanceToDelete }}"><span class="enlaceEliminar">Eliminar instancia.</span></a>
+      <p class="enlaceeliminar">¿Desea eliminar la instancia? <br /><a href="/beekeeper/delete_instance/{{ instanceToDelete }}">Sí, eliminar la instancia.</a></p>
     {% endif %}
 {% endblock %}
 
