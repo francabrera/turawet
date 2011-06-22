@@ -286,7 +286,6 @@ img {
 
 /************************ FIELDTYPES ************************/
 #form li.text {
-	margin: 10px 0 0 10px;
     background-color:#F0E4BD;
     background-image:url('../images/fields/tw_icon_text.png');
 }
@@ -295,53 +294,45 @@ img {
 }
 
 #form li.textarea {
-	margin: 10px 0 0 10px;
     background-color:#F0BDC0;
     background-image:url('../images/fields/tw_icon_text.png');
 }
 
 #form li.numeric {
-	margin: 10px 0 0 10px;
     /*background-color:#778acb;*/
     background-color:#9EAEE5;
     background-image:url('../images/fields/tw_icon_numeric.png');
 }
 
 #form li.radio {
-	margin: 10px 0 0 10px;
     /*background-color:#a25656;*/
     background-color:#D18787;
     background-image:url('../images/fields/tw_icon_radio.png');
 }
 
 #form li.location {
-	margin: 10px 0 0 10px;
     background-color:#B0FFFB;
     background-image:url('../images/fields/tw_icon_location.png');
 }
 
 #form li.image {
-	margin: 10px 0 0 10px;
     /*background-color:#86b58d;*/
     background-color:#B0DAB5;
     background-image:url('../images/fields/tw_icon_image.png');
 }
 
 #form li.checkbox {
-	margin: 10px 0 0 10px;
 	background-color:#DAF0BD;
     /*background-color:#E2BDF0;*/
     background-image:url('../images/fields/tw_icon_check.png');
 }
 
 #form li.combo {
-	margin: 10px 0 0 10px;
     background-color:#FAEF78;
     background-image:url('../images/fields/tw_icon_combo.png');
 }
 
 #form li.date {
-	margin: 10px 0 0 10px;
     background-color:#a5c2d1;
     background-image:url('../images/fields/tw_icon_date.png');
 }
