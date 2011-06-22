@@ -311,7 +311,7 @@ function expandField (tagID) {
 
 // Añadir una nueva sección
 function addSection () {
-	var name = 'Nombre sección ' + (++actualSection);
+	var name = 'Nombre de la secci&oacute;n ' + (++actualSection);
 	formSections[actualSection] = new Section(name, actualSection);
 	var newSection =  $('<ul />', {
     	id: 's' + actualSection,
