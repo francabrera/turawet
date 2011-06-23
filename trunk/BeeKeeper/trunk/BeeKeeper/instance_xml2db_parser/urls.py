@@ -5,5 +5,6 @@ from django.conf.urls.defaults import *
 # admin.autodiscover()
 
 urlpatterns = patterns('instance_xml2db_parser.views',
-    (r'instance_xml2db_parser', 'try_instance_xml2db_parser'),
+    (r'big', 'instance_xml2db_parser_xml_big'),
+    (r'p1', 'instance_xml2db_parser_xml_p1'),
 )
