@@ -26,7 +26,7 @@ def instance_xml2db_parser_xml_p1 (request):
     # Creationg a parser
     parser = InstanceXmldbParser()
     # XML Sample
-    xmlpath = os.path.dirname(__file__) + '/resources/instancia.xml'
+    xmlpath = os.path.dirname(__file__) + '/resources/instancia_prototipo1.xml'
     f = open(xmlpath, "r")
     xml = f.read()
     f.close()
