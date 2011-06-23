@@ -151,8 +151,8 @@ class Instance(models.Model):
     signature = models.CharField(max_length = 128)
     form = models.ForeignKey(Form)
     editable = models.BooleanField()
-    longitude = models.FloatField(null=True)
-    latitude = models.FloatField(null=True)
+    longitude = models.CharField(max_length = 32, null=True)
+    latitude = models.CharField(max_length = 32, null=True)
 
     def __unicode__(self):
         return u'%s - %s' %(self.form.name, self.id)
