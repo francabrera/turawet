@@ -1,70 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE form SYSTEM "instance_def.dtd">
-
 <instance>
-	<id />
-	<meta>
-		<formid>2</formid>
-		<author>
-			<user>turawet</user>
-		</author>
-		<creationdate>2011-01-12</creationdate>
-		<modificationdate>2011-01-12</modificationdate>
-		<editable>True</editable>
-		<geolocalization>
-			<latitude>23.516</latitude>
-			<longitude>-49.21</longitude>
-		</geolocalization>
-	</meta>
-	<sections>
-		<section>
-			<id>1</id>
-			<fields>
-				<field>
-					<id />
-					<value>Texto escrito</value>
-					<order>1</order>
-					<formfieldid>1</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>Texto escrito</value>
-					<order>2</order>
-					<formfieldid>2</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<day>14</day>
-						<month>10</month>
-						<year>1986</year>
-					</value>
-					<order>3</order>
-					<formfieldid>3</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>M</value>
-					<order>4</order>
-					<formfieldid>4</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>O1</value>
-					<order>5</order>
-					<formfieldid>5</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>True</value>
-					<order>6</order>
-					<formfieldid>6</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>prueba.png</filename>
-						<binary>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAALVWlUWHRYTUw6Y29tLmFkb2JlLnht
+  <id/>
+  <meta>
+    <formid>1</formid>
+    <author>
+      <user>turawet</user>
+    </author>
+    <creationdate>2011-06-20</creationdate>
+    <modificationdate>2011-06-20</modificationdate>
+    <editable>true</editable>
+    <geolocalization>
+      <latitude>28.353685</latitude>
+      <longitude>-16.371717</longitude>
+    </geolocalization>
+  </meta>
+  <sections>
+    <section>
+      <id>1</id>
+      <fields>
+        <field>
+          <id/>
+          <value>Alberto</value>
+          <order>1</order>
+          <formfieldid>1</formfieldid>
+        </field>
+        <field>
+          <id/>
+          <value>
+            <filename>mifotografia.png</filename>
+            <binary>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAALVWlUWHRYTUw6Y29tLmFkb2JlLnht
 cAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQi
 Pz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1Q
 IENvcmUgNC4yLjItYzA2MyA1My4zNTI2MjQsIDIwMDgvMDcvMzAtMTg6MTI6MTggICAgICAgICI+
@@ -124,101 +88,43 @@ hy69m4HneWOQlfbkoNg/nU4/vd/YNE3Utq0mAzOZqxx0/uAeQOyL//2P8/n8oXLA5G6IjuMs0BZt
 n6+2W5Ylc12XD7ykoJndOqCp4tYctteBtIUySF9Bv+4tkm3bd4tU1zUDJ3ewAzcbnIFlWRlujp50
 EJGu9yDDMDLTNDmwALbCv3258wVPeU56dUXfgRs5Go3G8D8BLnKcYuJFnJGe/D8BBgD5UgmPkw6X
 TAAAAABJRU5ErkJggg==</binary>
-					</value>
-					<order>7</order>
-					<formfieldid>7</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>AVI_001.avi</filename>
-						<hash>9324F123CD</hash>
-						<binary>123543543511323123</binary>
-					</value>
-					<order>8</order>
-					<formfieldid>8</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>MP3_001.mp3</filename>
-						<hash>9324F0032CD</hash>
-						<binary>12312345435323123</binary>
-					</value>
-					<order>9</order>
-					<formfieldid>9</formfieldid>
-				</field>
-				<!--  Grupo sin lista, con un groupid que no se repite -->
-				<group>
-					<groupid>1</groupid>
-					<element>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>
-								<filename>IMG_001.jpg</filename>
-								<hash>9324F00CD</hash>
-								<binary>12312311323123</binary>
-							</value>
-							<order>10</order>
-							<formfieldid>10</formfieldid>
-						</field>
-					</element>
-				</group>
-				<!--
-					A continuación dos elementos de una lista con un mismo groupid y
-					mismo fielid
-				-->
-				<group>
-					<groupid>2</groupid>
-					<!-- Primer elemento de la lista -->
-					<element>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>Prueba</value>
-							<order>11</order>
-							<formfieldid>11</formfieldid>
-						</field>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>Prueba</value>
-							<order>12</order>
-							<formfieldid>12</formfieldid>
-						</field>
-					</element>
-					<!-- Segundo elemento de la lista -->
-					<element>
-						<field>
-							<id />
-							<ordengrupo>2</ordengrupo>
-							<value>Prueba</value>
-							<order>13</order>
-							<formfieldid>11</formfieldid>
-						</field>
-						<field>
-							<id />
-							<ordengrupo>2</ordengrupo>
-							<value>Prueba</value>
-							<order>14</order>
-							<formfieldid>12</formfieldid>
-						</field>
-					</element>
-				</group>
-			</fields>
-		</section>
-		<section>
-			<id>2</id>
-			<fields>
-				<field>
-					<id />
-					<value>1</value>
-					<order>15</order>
-					<formfieldid>13</formfieldid>
-				</field>
-			</fields>
-		</section>
-	</sections>
+          </value>
+          <order>2</order>
+          <formfieldid>2</formfieldid>
+        </field>
+        <field>
+          <id/>
+          <value>R</value>
+          <order>3</order>
+          <formfieldid>3</formfieldid>
+        </field>
+      </fields>
+    </section>
+    <section>
+      <id>2</id>
+      <fields>
+        <field>
+          <id/>
+          <value>
+            <day>19</day>
+            <month>6</month>
+            <year>2011</year>
+          </value>
+          <order>4</order>
+          <formfieldid>4</formfieldid>
+        </field>
+      </fields>
+    </section>
+    <section>
+      <id>3</id>
+      <fields>
+        <field>
+          <id/>
+          <value>10</value>
+          <order>5</order>
+          <formfieldid>5</formfieldid>
+        </field>
+      </fields>
+    </section>
+  </sections>
 </instance>
-

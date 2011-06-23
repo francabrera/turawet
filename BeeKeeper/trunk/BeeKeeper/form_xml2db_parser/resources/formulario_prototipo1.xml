@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <id>1</id>
+  <meta>
+    <version>1</version>
+    <name>Ejemplo prototipo 1</name>
+    <author>
+      <user>turawet</user>
+    </author>
+    <geolocalized/>
+  </meta>
+  <sections>
+    <section>
+      <id>1</id>
+      <name>Información personal</name>
+      <fields>
+        <field>
+          <id>1</id>
+          <label>Nombre</label>
+          <type>TEXT</type>
+          <required/>
+          <properties>
+            <property>
+              <name>MAX_LENGTH</name>
+              <value>100</value>
+            </property>
+          </properties>
+        </field>
+        <field>
+          <id>2</id>
+          <label>Fotografía</label>
+          <type>IMAGE</type>
+          <properties/>
+        </field>
+      </fields>
+    </section>
+    <section>
+      <id>2</id>
+      <name>Preferencias</name>
+      <fields>
+        <field>
+          <id>3</id>
+          <label>Color favorito</label>
+          <type>RADIO</type>
+          <required/>
+          <properties/>
+          <options>
+            <option>
+              <label>Rojo</label>
+              <value>R</value>
+            </option>
+            <option>
+              <label>Verde</label>
+              <value>V</value>
+            </option>
+            <option>
+              <label>Azul</label>
+              <value>A</value>
+            </option>
+          </options>
+        </field>
+        <field>
+          <id>4</id>
+          <label>Fecha favorita</label>
+          <type>DATE</type>
+          <properties/>
+        </field>
+      </fields>
+    </section>
+    <section>
+      <id>3</id>
+      <name>Información familiar</name>
+      <fields>
+        <field>
+          <id>5</id>
+          <label>Número de hijos</label>
+          <type>NUMERIC</type>
+          <properties/>
+        </field>
+      </fields>
+    </section>
+  </sections>
+</form>
