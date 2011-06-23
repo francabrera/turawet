@@ -1,0 +1,11 @@
+#summary Primero recibe longitud y luego latitud al revés que nuestros metadatos
+#labels Phase-Implementation
+
+= Introdución =
+
+Nuestros metadatos están en el orden inverso a los que recibe Google.
+
+
+= Detalles =
+
+Escribo esto sólo para que lo tengamos en cuenta. Hay que cambiar el xml_p1 de las instancas dándole la vuelta a las coordenadas.
