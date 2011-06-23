@@ -54,7 +54,7 @@ public class ImageFieldBean extends GenericInstanceFieldBean
 	{
 		if (value != null)
 		{
-			imageBase64Encoded = Base64.encodeToString(value.toByteArray(), Base64.URL_SAFE);
+			imageBase64Encoded = Base64.encodeToString(value.toByteArray(), Base64.DEFAULT);
 			imageName = String.valueOf(System.currentTimeMillis()) + InstanceBeanCte.JPEG_EXTENSION;
 		}
 	}
