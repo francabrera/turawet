@@ -538,7 +538,7 @@ public class InstanceBeanManager
 	 * @return
 	 *         A fieldView with an editable text field
 	 */
-	private FieldView getNewTextFieldView(TextFieldBean textField, int section)
+	public FieldView getNewTextFieldView(TextFieldBean textField, int section)
 	{
 		EditText text = new EditText(context);
 		text.setHint("Texto...");
