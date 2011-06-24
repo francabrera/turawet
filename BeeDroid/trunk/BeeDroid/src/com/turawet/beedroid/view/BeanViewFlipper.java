@@ -22,7 +22,7 @@ package com.turawet.beedroid.view;
  * 
  */
 
-import com.turawet.beedroid.view.PageControl.OnPageControlClickListener;
+//import com.turawet.beedroid.view.PageControl.OnPageControlClickListener;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -53,7 +53,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	private OnPageChangedListener	mOnPageChangedListener			= null;
 	private SwipeOnTouchListener	mSwipeOnTouchListener;
 	private View.OnTouchListener	mOnTouchListener;
-	private PageControl				mPageControl						= null;
+//	private PageControl				mPageControl						= null;
 	
 	/**
 	 * {@inheritDoc}
@@ -107,25 +107,25 @@ public class BeanViewFlipper extends HorizontalScrollView
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public boolean onTrackballEvent(MotionEvent event)
-	{
-		return true;
-	}
-	
-	@Override
-	protected boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect)
-	{
-		// this will now pass trackball events down to onTrackballEvent
-		return false;
-	}
-	
-	@Override
-	public void requestChildFocus(View child, View focused)
-	{
-		// this will now pass trackball events down to onRequestFocusInDescendants
-		requestFocus();
-	}
+//	@Override
+//	public boolean onTrackballEvent(MotionEvent event)
+//	{
+//		return true;
+//	}
+//	
+//	@Override
+//	protected boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect)
+//	{
+//		// this will now pass trackball events down to onTrackballEvent
+//		return false;
+//	}
+//	
+//	@Override
+//	public void requestChildFocus(View child, View focused)
+//	{
+//		// this will now pass trackball events down to onRequestFocusInDescendants
+//		requestFocus();
+//	}
 	
 	/**
 	 * {@inheritDoc}
@@ -179,25 +179,25 @@ public class BeanViewFlipper extends HorizontalScrollView
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b)
-	{
-		super.onLayout(changed, l, t, r, b);
-		if (mCallScrollToPageInOnLayout)
-		{
-			scrollToPage(mCurrentPage);
-			mCallScrollToPageInOnLayout = false;
-		}
-	}
+//	@Override
+//	protected void onLayout(boolean changed, int l, int t, int r, int b)
+//	{
+//		super.onLayout(changed, l, t, r, b);
+//		if (mCallScrollToPageInOnLayout)
+//		{
+//			scrollToPage(mCurrentPage);
+//			mCallScrollToPageInOnLayout = false;
+//		}
+//	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public void setOnTouchListener(View.OnTouchListener onTouchListener)
-	{
-		mOnTouchListener = onTouchListener;
-	}
+//	@Override
+//	public void setOnTouchListener(View.OnTouchListener onTouchListener)
+//	{
+//		mOnTouchListener = onTouchListener;
+//	}
 	
 	/**
 	 * Get the View object that contains all the children of this SwipeView. The
@@ -209,10 +209,10 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @return linearLayout The View object that contains all the children of
 	 *         this view
 	 */
-	public LinearLayout getChildContainer()
-	{
-		return mLinearLayout;
-	}
+//	public LinearLayout getChildContainer()
+//	{
+//		return mLinearLayout;
+//	}
 	
 	/**
 	 * Get the swiping threshold distance to make the screens change
@@ -220,10 +220,10 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @return swipeThreshold The minimum distance the finger should move to
 	 *         allow the screens to change
 	 */
-	public int getSwipeThreshold()
-	{
-		return DEFAULT_SWIPE_THRESHOLD;
-	}
+//	public int getSwipeThreshold()
+//	{
+//		return DEFAULT_SWIPE_THRESHOLD;
+//	}
 	
 	/**
 	 * Set the swiping threshold distance to make the screens change
@@ -232,10 +232,10 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 *           The minimum distance the finger should move to allow the screens
 	 *           to change
 	 */
-	public void setSwipeThreshold(int swipeThreshold)
-	{
-		DEFAULT_SWIPE_THRESHOLD = swipeThreshold;
-	}
+//	public void setSwipeThreshold(int swipeThreshold)
+//	{
+//		DEFAULT_SWIPE_THRESHOLD = swipeThreshold;
+//	}
 	
 	/**
 	 * Get the current page the SwipeView is on
@@ -306,12 +306,13 @@ public class BeanViewFlipper extends HorizontalScrollView
 		{
 			mOnPageChangedListener.onPageChanged(oldPage, page);
 		}
-		if (mPageControl != null && oldPage != page)
-		{
-			mPageControl.setCurrentPage(page);
-		}
+//		if (mPageControl != null && oldPage != page)
+//		{
+//			mPageControl.setCurrentPage(page);
+//		}
 		
 		mCallScrollToPageInOnLayout = !mCallScrollToPageInOnLayout;
+		
 	}
 	
 	/**
@@ -326,11 +327,11 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @return An integer to add to the left margin of the first child and the
 	 *         right margin of the last child
 	 */
-	public int setPageWidth(int pageWidth)
-	{
-		mPageWidth = pageWidth;
-		return (SCREEN_WIDTH - mPageWidth) / 2;
-	}
+//	public int setPageWidth(int pageWidth)
+//	{
+//		mPageWidth = pageWidth;
+//		return (SCREEN_WIDTH - mPageWidth) / 2;
+//	}
 	
 	/**
 	 * Set the width of each page by using the layout parameters of a child. Call
@@ -346,10 +347,10 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @return An integer to add to the left margin of the first child and the
 	 *         right margin of the last child
 	 */
-	public int calculatePageSize(MarginLayoutParams childLayoutParams)
-	{
-		return setPageWidth(childLayoutParams.leftMargin + childLayoutParams.width + childLayoutParams.rightMargin);
-	}
+//	public int calculatePageSize(MarginLayoutParams childLayoutParams)
+//	{
+//		return setPageWidth(childLayoutParams.leftMargin + childLayoutParams.width + childLayoutParams.rightMargin);
+//	}
 	
 	/**
 	 * Return the current width of each page
@@ -368,35 +369,35 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @param pageControl
 	 *           The PageControl object to assign
 	 */
-	public void setPageControl(PageControl pageControl)
-	{
-		mPageControl = pageControl;
-		
-		pageControl.setPageCount(getPageCount());
-		pageControl.setCurrentPage(mCurrentPage);
-		pageControl.setOnPageControlClickListener(new OnPageControlClickListener()
-		{
-			public void goForwards()
-			{
-				smoothScrollToPage(mCurrentPage + 1);
-			}
-			
-			public void goBackwards()
-			{
-				smoothScrollToPage(mCurrentPage - 1);
-			}
-		});
-	}
+//	public void setPageControl(PageControl pageControl)
+//	{
+//		mPageControl = pageControl;
+//		
+//		pageControl.setPageCount(getPageCount());
+//		pageControl.setCurrentPage(mCurrentPage);
+//		pageControl.setOnPageControlClickListener(new OnPageControlClickListener()
+//		{
+//			public void goForwards()
+//			{
+//				smoothScrollToPage(mCurrentPage + 1);
+//			}
+//			
+//			public void goBackwards()
+//			{
+//				smoothScrollToPage(mCurrentPage - 1);
+//			}
+//		});
+//	}
 	
 	/**
 	 * Return the current PageControl object
 	 * 
 	 * @return Returns the current PageControl object
 	 */
-	public PageControl getPageControl()
-	{
-		return mPageControl;
-	}
+//	public PageControl getPageControl()
+//	{
+//		return mPageControl;
+//	}
 	
 	/**
 	 * Implement this listener to listen for page change events
@@ -423,21 +424,21 @@ public class BeanViewFlipper extends HorizontalScrollView
 	 * @param onPageChangedListener
 	 *           The OnPageChangedListener object
 	 */
-	public void setOnPageChangedListener(OnPageChangedListener onPageChangedListener)
-	{
-		mOnPageChangedListener = onPageChangedListener;
-	}
+//	public void setOnPageChangedListener(OnPageChangedListener onPageChangedListener)
+//	{
+//		mOnPageChangedListener = onPageChangedListener;
+//	}
 	
 	/**
 	 * Get the current OnPageChangeListsner
 	 * 
 	 * @return The current OnPageChangedListener
 	 */
-	public OnPageChangedListener getOnPageChangedListener()
-	{
-		return mOnPageChangedListener;
-	}
-	
+//	public OnPageChangedListener getOnPageChangedListener()
+//	{
+//		return mOnPageChangedListener;
+//	}
+//	
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev)
 	{
@@ -496,16 +497,15 @@ public class BeanViewFlipper extends HorizontalScrollView
 		Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		SCREEN_WIDTH = mPageWidth = (int) (display.getWidth());
 		
-		ViewGroup firstSon = (ViewGroup) this.getChildAt(0);
-		ViewGroup.LayoutParams params = firstSon.getLayoutParams();
+		ViewGroup.LayoutParams params = mLinearLayout.getLayoutParams();
 		params.width = mPageWidth;
-		firstSon.setLayoutParams(params);
+		mLinearLayout.setLayoutParams(params);
 		
-		int numOfChilds = firstSon.getChildCount();
+		int numOfChilds = mLinearLayout.getChildCount();
 		
 		for (int child = 0; child < numOfChilds; child++)
 		{
-			View viewChild = firstSon.getChildAt(child);
+			View viewChild = mLinearLayout.getChildAt(child);
 			params = viewChild.getLayoutParams();
 			params.width = mPageWidth;
 			viewChild.setLayoutParams(params);

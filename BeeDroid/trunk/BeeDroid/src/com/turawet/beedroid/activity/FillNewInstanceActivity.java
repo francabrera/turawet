@@ -19,6 +19,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.InstanceBean;
+import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import com.turawet.beedroid.database.DataBaseManager;
@@ -47,6 +48,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class FillNewInstanceActivity extends Activity
@@ -89,6 +92,14 @@ public class FillNewInstanceActivity extends Activity
 				flipper.addView(field);
 			
 			setContentView(flipper);
+//			FieldView fieldView = instanceManager.getNewTextFieldView((TextFieldBean)instance.getSections().get(0).getSectionChildren().get(0), 0);
+//			LinearLayout linear = new LinearLayout(this);
+//			linear.addView(fieldView);
+//
+//			HorizontalScrollView horizontal = new HorizontalScrollView(this);
+//			horizontal.addView(linear);
+//			setContentView(horizontal);
+
 		}
 		catch (SAXException e1)
 		{
