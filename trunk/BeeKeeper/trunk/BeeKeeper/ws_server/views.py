@@ -23,7 +23,7 @@ from base64 import urlsafe_b64decode as sb64decode
 class SoapService(DjangoSoapService):
 
     ##TODO La IP deberia ser calculada y que no este a mano.
-    __tns__ = 'http://193.145.110.236/ws_server/'
+    __tns__ = 'http://turawetproject.org/ws_server/'
 
 
     """
