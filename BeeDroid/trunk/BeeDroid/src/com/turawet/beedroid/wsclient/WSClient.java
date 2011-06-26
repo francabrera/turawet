@@ -70,8 +70,10 @@ public class WSClient
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		
+		String encodedName = Base64.encodeToString(formToDownload.getName().getBytes(), Base64.URL_SAFE);
+		
 		// Añadimos los parámetros a la llamada
-		request.addProperty(FormWsBean.name, formToDownload.getName());
+		request.addProperty(FormWsBean.name, encodedName);
 		request.addProperty(FormWsBean.version, formToDownload.getVersion());
 		
 		envelope.setOutputSoapObject(request);
