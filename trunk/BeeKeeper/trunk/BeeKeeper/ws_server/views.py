@@ -71,6 +71,7 @@ class SoapService(DjangoSoapService):
         '''
             Sending the XML of a selected form by name-version
         '''
+        name = sb64decode(name)
         form = Form.objects.get(name = name, version = version)
         return form.xml
 
