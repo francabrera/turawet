@@ -13,6 +13,7 @@ import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -148,8 +149,8 @@ public class FieldView extends LinearLayout
 				break;
 			case IMAGE:
 				ImageView image = (ImageView) field;
-				image.setDrawingCacheEnabled(true);
-				Bitmap bitmap = image.getDrawingCache();
+				BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
+				Bitmap bitmap = drawable.getBitmap();
 				if (bitmap != null)
 				{
 					OutputStream stream = new ByteArrayOutputStream();
