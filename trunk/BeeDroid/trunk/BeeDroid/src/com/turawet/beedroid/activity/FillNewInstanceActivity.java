@@ -34,6 +34,7 @@ import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -92,14 +93,16 @@ public class FillNewInstanceActivity extends Activity
 				flipper.addView(field);
 			
 			setContentView(flipper);
-//			FieldView fieldView = instanceManager.getNewTextFieldView((TextFieldBean)instance.getSections().get(0).getSectionChildren().get(0), 0);
-//			LinearLayout linear = new LinearLayout(this);
-//			linear.addView(fieldView);
-//
-//			HorizontalScrollView horizontal = new HorizontalScrollView(this);
-//			horizontal.addView(linear);
-//			setContentView(horizontal);
-
+			// FieldView fieldView =
+			// instanceManager.getNewTextFieldView((TextFieldBean)instance.getSections().get(0).getSectionChildren().get(0),
+			// 0);
+			// LinearLayout linear = new LinearLayout(this);
+			// linear.addView(fieldView);
+			//
+			// HorizontalScrollView horizontal = new HorizontalScrollView(this);
+			// horizontal.addView(linear);
+			// setContentView(horizontal);
+			
 		}
 		catch (SAXException e1)
 		{
@@ -167,6 +170,7 @@ public class FillNewInstanceActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
+		item.setEnabled(false);
 		// Handle item selection
 		switch (item.getItemId())
 		{
@@ -219,22 +223,23 @@ public class FillNewInstanceActivity extends Activity
 	 */
 	private boolean saveAndSendInstance()
 	{
-		
 		try
 		{
 			instanceManager.readFieldValues(flipper.getChildAt(0));
 			String instanceXml = instanceManager.instanceToXml();
-			Log.d("", instanceXml);
+			//Log.d("", instanceXml);
 			WSClient ws = WSClient.getInstance();
 			boolean result = ws.uploadNewInstance(instanceXml);
+			/*
 			if (result)
 			{
-				AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok, R.string.saved_sended_ok);
+				AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok, R.string.saved_sended_ok).show();
 			}
 			else
 			{
-				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.saved_sended_not_ok);
+				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.saved_sended_not_ok).show();
 			}
+			*/
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -256,7 +261,11 @@ public class FillNewInstanceActivity extends Activity
 			// TODO Error del WS
 			e.printStackTrace();
 		}
-		finish();
+		finally
+		{
+			finish();		
+		}
+	
 		return true;
 	}
 }

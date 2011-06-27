@@ -140,6 +140,7 @@ public class InstanceBeanManager
 		if (instance.getForm().isGeolocalized())
 		{
 			fields.add(getNewGeolocalizedView());
+			sectionsList.add(new Pair<String, Integer>("Geolocalizar", page));
 		}
 	}
 	
@@ -418,9 +419,9 @@ public class InstanceBeanManager
 		fieldView.setOrientation(LinearLayout.VERTICAL);
 		fieldView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, 0.0F));
 		
-		fieldView.setSectionTitle("");
+		fieldView.setSectionTitle(context.getString(R.string.geo_tittle));
 		// fieldView.setField(geoButton, context.getString(R.string.geo_tittle));
-		fieldView.setField(locationText, context.getString(R.string.geo_tittle));
+		fieldView.setField(locationText, "");
 		fieldView.addView(geoButton);
 		return fieldView;
 	}
