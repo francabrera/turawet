@@ -27,14 +27,18 @@
     <script language="JavaScript">
 	    {% if instances %}
 	        var markers = [
-	        {% for instance in instances %}
-	           {% if instance.latitude %}
+	        {% for instance, image in instances %}
+                {% if instance.latitude %}
 		           {
 	                  'name': '{{ instance.id }}',
 	                  'location': [{{ instance.latitude }}, {{ instance.longitude }}],
-	                  'message': 'Intancia con ID {{ instance.id }}' 
+	                  {% if image %}
+	                       'message': '<p class="message" align="center"><a href="/beekeeper/show_instance/{{ instance.id }}">Ver intancia nº {{ instance.id }} completa</a> <br/> <br/> <img src="/beekeeper/media/{{ image.get_text }}"/></p>'
+	                  {% else %}
+	                       'message': '<p class="message" align="center"><a href="/beekeeper/show_instance/{{ instance.id }}">Ver intancia nº {{ instance.id }} completa</a></p>'
+	                  {% endif %}
 	               },
-               {% endif %}
+	            {% endif %}
 	        {% endfor %}
 	        ];
 	    {% else %}
