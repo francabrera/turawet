@@ -32,7 +32,7 @@
 		           {
 	                  'name': '{{ instance.id }}',
 	                  'location': [{{ instance.latitude }}, {{ instance.longitude }}],
-	                  {% if image %}
+	                  {% if image.value %}
 	                       'message': '<p class="message" align="center"><a href="/beekeeper/show_instance/{{ instance.id }}">Ver intancia nº {{ instance.id }} completa</a> <br/> <br/> <img src="/beekeeper/media/{{ image.get_text }}"/></p>'
 	                  {% else %}
 	                       'message': '<p class="message" align="center"><a href="/beekeeper/show_instance/{{ instance.id }}">Ver intancia nº {{ instance.id }} completa</a></p>'
