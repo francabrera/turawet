@@ -18,7 +18,7 @@
 										<div class="actions">
 											<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ instance_field.id }}')" class="fieldButton">
 										</div>
-										{% if instance_field.form_field.type == "IMAGE" %}
+										{% if instance_field.form_field.type == "IMAGE" && instance_field.get_text %}
 											<p> <span class="fieldlabel">{{ form_field.label }}</span>: <span class="fieldvalue"><img src="/beekeeper/media/{{ instance_field.get_text }}" /></span></p>
 										{% else %}
 											<p> <span class="fieldlabel">{{ form_field.label }}</span> : <span class="fieldvalue">{{ instance_field.get_text }} </span></p>
