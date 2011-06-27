@@ -12,12 +12,9 @@ import sys
 import cairo
 import pycha.pie
 
-
-#from numpy import zeros
-
 # Imports
 from BeeKeeper.db_models.models import Form, Section, FormField, Instance,\
-    InstanceField, Property
+    InstanceField, Property, ImageField
 
 
 def showIndex (request):
@@ -172,10 +169,14 @@ def showInstancesMap (request, formid):
     
     form = Form.objects.filter(id = formid)
     form = form[0]
+    instances_images = []
     if form:
         instances = Instance.objects.filter(form=form);
+        for instance in instances:
+            auximage = ImageField.objects.filter(instance=instance)[0]
+            instances_images.append((instance, auximage))                
     
-    return render_to_response('mapa_instancias.html', {'instances': instances})
+    return render_to_response('mapa_instancias.html', {'instances': instances_images})
 
 
 def showInstance (request, instanceid):
@@ -215,8 +216,9 @@ def showInstanceMap (request, instanceid):
     
     instance = Instance.objects.filter(id = instanceid)
     instance = instance[0]   
+    auximage = ImageField.objects.filter(instance=instance)[0]
      
-    return render_to_response('mapa_instancias.html', {'instances': [instance]})
+    return render_to_response('mapa_instancias.html', {'instances': [(instance,auximage)]})
 
 
 def deleteInstance (request, instanceid):
