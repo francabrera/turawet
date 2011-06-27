@@ -13,9 +13,11 @@ import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +69,9 @@ public class FieldView extends LinearLayout
 	public void setSectionTitle(String title)
 	{
 		sectionTitle = getTextView(title);
+		sectionTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		sectionTitle.setPadding(0, 0, 0, 15);
+		sectionTitle.setTypeface(Typeface.DEFAULT_BOLD);
 		addView(sectionTitle, SECTION);
 	}
 	
@@ -78,6 +83,8 @@ public class FieldView extends LinearLayout
 	{
 		this.field = field;
 		this.label = getTextView(label);
+		this.label.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+		this.label.setPadding(0, 0, 0, 5);
 		addView(this.label, LABEL);
 		addView(this.field, FIELD);
 	}
@@ -150,12 +157,15 @@ public class FieldView extends LinearLayout
 			case IMAGE:
 				ImageView image = (ImageView) field;
 				BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
-				Bitmap bitmap = drawable.getBitmap();
-				if (bitmap != null)
+				if (drawable != null)
 				{
-					OutputStream stream = new ByteArrayOutputStream();
-					bitmap.compress(CompressFormat.JPEG, InstanceBeanCte.JPEG_QUALITY, stream);
-					value = stream;
+					Bitmap bitmap = drawable.getBitmap();
+					if (bitmap != null)
+					{
+						OutputStream stream = new ByteArrayOutputStream();
+						bitmap.compress(CompressFormat.JPEG, InstanceBeanCte.JPEG_QUALITY, stream);
+						value = stream;
+					}
 				}
 				break;
 			case GEO:
