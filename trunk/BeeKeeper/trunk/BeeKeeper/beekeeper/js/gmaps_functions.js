@@ -5,7 +5,7 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: new google.maps.LatLng(38, 15),
     zoom: 2,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.SATELLITE
   });
   // Icono de la marca
   var image = '/beekeeper/images/logo_geolocalization.png';
