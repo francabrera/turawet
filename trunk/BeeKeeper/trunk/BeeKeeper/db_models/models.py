@@ -22,11 +22,13 @@ class Form(models.Model):
        :param version: form version.
        :param xml: form XML.
        :todo: Add the schema_path to the XML"""
+    descripcion = models.CharField(max_length = 2048, null=True)
     name = models.CharField(max_length = 256)
     version = models.SmallIntegerField()
-    xml = models.CharField(max_length = 16192)
+    xml = models.CharField(max_length = 16192, unique=True)
     active = models.BooleanField()
     geolocalized = models.BooleanField()
+    creation_date = models.DateField()
 
     class Meta:
         unique_together = ('name', 'version')
@@ -47,7 +49,7 @@ class Section(models.Model):
     form = models.ForeignKey(Form)
 
     class Meta:
-        unique_together = ('name', 'form')
+        unique_together = (('name', 'form'), ('order', 'form'))
         ordering = ['form']
 
     def __unicode__(self):
@@ -111,7 +113,7 @@ class FieldOption(models.Model):
     form_field = models.ForeignKey(FormField, null = True)
 
     class Meta:
-        unique_together = ('label', 'form_field')
+        unique_together = (('label', 'form_field'), ('value', 'form_field'))
         ordering = ['form_field']
         
     def __unicode__(self):
@@ -148,11 +150,13 @@ class Instance(models.Model):
        :todo Signature"""
     creation_date = models.DateField()
     modification_date = models.DateField()
-    signature = models.CharField(max_length = 128)
-    form = models.ForeignKey(Form)
-    editable = models.BooleanField()
+    signature = models.CharField(max_length = 128, null=True)
+    imei = models.CharField(max_length = 16, null=True)
     longitude = models.CharField(max_length = 32, null=True)
     latitude = models.CharField(max_length = 32, null=True)
+    form = models.ForeignKey(Form)
+    completa = models.BooleanField()
+    xml = models.CharField(max_length = 16192)
 
     def __unicode__(self):
         return u'%s - %s' %(self.form.name, self.id)
@@ -190,8 +194,8 @@ class InstanceField(models.Model):
     form_field = models.ForeignKey(FormField)
     objects = InstanceFieldManager()
 
-
     content_type = models.ForeignKey(ContentType,editable=False,null=True)
+
 
     def save(self, *args, **kwargs):
         if(not self.content_type):
