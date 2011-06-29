@@ -187,11 +187,13 @@ class InstanceXmldbParser():
             user = parser.findtext('meta/author/user')
             creation_date = parser.findtext('meta/creationdate')
             modification_date = parser.findtext('meta/modificationdate')
-            editable = parser.findtext('meta/editable')
             longitude = parser.findtext('meta/geolocalization/longitude')
             if longitude == '': longitude = None
             latitude = parser.findtext('meta/geolocalization/latitude')
             if latitude == '': latitude = None
+            completa = parser.findtext('meta/completa')
+            if completa == '': completa = True
+            else: completa = False
             # We get the empty Id of the instance
             id = parser.find('id')
             id_text = parser.findtext('id')
@@ -204,7 +206,7 @@ class InstanceXmldbParser():
                 instance_model = Instance.objects.get(pk=id_text)
                 # We update the necessary fields
                 instance_model.modification_date = modification_date
-                instance_model.editable = editable
+                instance_model.completa = completa
                 instance_model.save()
             except Instance.DoesNotExist:
                 logger.error('Instance: does not exist. we should insert it. Details:'+ str(sys.exc_info()[0]))
@@ -212,7 +214,7 @@ class InstanceXmldbParser():
                 try:
                     form_model = Form.objects.get(pk=form_id)
                     instance_model = Instance(creation_date=creation_date, modification_date=modification_date,
-                                              form=form_model, editable=editable, longitude=longitude, latitude=latitude)
+                                              form=form_model, completa=completa, longitude=longitude, latitude=latitude)
                     instance_model.save()
                     # we set the id value once the instance is saved
                     id.text = str(instance_model.id)
@@ -244,6 +246,10 @@ class InstanceXmldbParser():
                     # Parsing the groups
                     groups = section.findall("fields/group")
                 #####j = self.parse_generic_group(groups, instance_model, j)
+            
+            # Saving the XML    
+            instance_model.xml = tostring(parser)
+            instance_model.save()
             
             return True
             

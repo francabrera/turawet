@@ -132,11 +132,18 @@ class FormXmldbParser():
             version = parser.findtext('meta/version')
             name = parser.findtext('meta/name')
             user = parser.findtext('meta/author/user')
-            geolocalized = parser.findtext('meta/geolocalizated')
+            geolocalized = parser.findtext('meta/geolocalized')
             if geolocalized == '': geolocalized = True
             else: geolocalized = False
+            active = parser.findtext('meta/active')
+            if active == '': active = True
+            else: active = False
+            creation_date = parser.findtext('meta/creationdate')
+            if creation_date == None:
+                creation_date = '2011-01-12'
             # Form model
-            form_model = Form(version=version, name=name, geolocalized=geolocalized)
+            form_model = Form(version=version, name=name, geolocalized=geolocalized,
+                              active=active, xml=xml, creation_date=creation_date)
             form_model.save()
             id.text = str(form_model.id)
             
