@@ -136,7 +136,7 @@ class FormXmldbParser():
             if geolocalized == '': geolocalized = True
             else: geolocalized = False
             active = parser.findtext('meta/active')
-            if active == '': active = True
+            if active != 'false': active = True
             else: active = False
             creation_date = parser.findtext('meta/creationdate')
             if creation_date == None:
