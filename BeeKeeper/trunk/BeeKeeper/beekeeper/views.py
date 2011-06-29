@@ -173,10 +173,14 @@ def showInstancesMap (request, formid):
     if form:
         instances = Instance.objects.filter(form=form);
         for instance in instances:
-            auximage = ImageField.objects.filter(instance=instance)[0]
-            instances_images.append((instance, auximage))                
+            auximage = ImageField.objects.filter(instance=instance)
+            if auximage:
+                auximage = auximage[0]
+                instances_images.append((instance, auximage))
+            else:
+                instances_images.append((instance, None))
     
-    return render_to_response('mapa_instancias.html', {'instances': instances_images})
+    return render_to_response('mapa_instancias.html', {'form': form, 'instances': instances_images})
 
 
 def showInstance (request, instanceid):
@@ -216,9 +220,12 @@ def showInstanceMap (request, instanceid):
     
     instance = Instance.objects.filter(id = instanceid)
     instance = instance[0]   
-    auximage = ImageField.objects.filter(instance=instance)[0]
+    auximage = ImageField.objects.filter(instance=instance)
+    if auximage:
+        auximage = auximage[0]
+
      
-    return render_to_response('mapa_instancias.html', {'instances': [(instance,auximage)]})
+    return render_to_response('mapa_instancias.html', {'form': None, 'instances': [(instance,auximage)]})
 
 
 def deleteInstance (request, instanceid):

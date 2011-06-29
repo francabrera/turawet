@@ -6,6 +6,17 @@
 				<h1>Formulario: {{ form.id }}</h1>
 				<h2>{{ form.name }}</h2>
 
+				<ul id="s-1" class="section" href="#s-1">
+				   <p class="sectionlabel">Metadatos</p>
+				   	{% if form.creation_date %}
+					  	<p class="metadata">Fecha de creaci&oacute;n: <span class="metavalue">{{ form.creation_date }}</span></p>
+					{% endif %}
+				   	{% if form.geolocalized %}
+					  	<p class="metadata">Geolocalizado <span class="metavalue"><input type="checkbox" id="geolocalization" disabled="disabled" checked="checked" /></span></p>
+					{% else%}
+						<p class="metadata">Geolocalizado <span class="metavalue"><input type="checkbox" id="geolocalization" disabled="disabled" /></span></p>
+					{% endif %}
+		 		</ul>
 
 				{% for section in form.section_set.all %}
 					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
@@ -97,6 +108,11 @@
 
 {% block sectionslinks %}
 	<ul>
+		<li id="s-1link">
+			<a href="#s-1" onclick="selectSection('s-1')">
+				Metadatos
+			</a>
+		</li>
 	{% for section in form.section_set.all %}
 		<li id="s{{ section.id }}link">
 			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">

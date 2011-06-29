@@ -7,6 +7,22 @@
 				<h2>{{ instance.form.name }}</h2>
 
 
+				<ul id="s-1" class="section" href="#s-1">
+				   <p class="sectionlabel">Metadatos</p>
+				   	{% if instance.creation_date %}
+					  	<p class="metadata">Fecha de creaci&oacute;n: <span class="metavalue">{{ instance.creation_date }}</span></p>
+					  	<p class="metadata">Fecha de modificaci&oacute;n: <span class="metavalue">{{ instance.modification_date }}</span></p>
+					{% endif %}
+				   	{% if instance.latitude %}
+				   		<p class="metadata">Geolocalizaci&oacute;n</p>
+					  	<p class="metadataSub">Latitud: <span class="metavalue">{{ instance.latitude }}</span></p>
+						<p class="metadataSub">Longitud: <span class="metavalue">{{ instance.longitude }}</span></p>
+					{% endif %}
+				   	{% if instance.imei %}
+					  	<p class="metadata">Imei</strong>: {{ instance.imei }}</p>
+					{% endif %}
+		 		</ul>
+
 				{% for section in instance.form.section_set.all %}
 					 <ul id="s{{ section.id }}" class="section" href="#s{{ section.id }}">
 					   <p class="sectionlabel">{{ section.name }}</p>
@@ -18,7 +34,7 @@
 										<div class="actions">
 											<img src="/beekeeper/images/buttons/more.png" onclick="javascript:expandField('f{{ instance_field.id }}')" class="fieldButton">
 										</div>
-										{% if instance_field.form_field.type == "IMAGE" and instance_field.get_text %}
+										{% if instance_field.form_field.type == "IMAGE" %}
 											<p> <span class="fieldlabel">{{ form_field.label }}</span>: <span class="fieldvalue"><img src="/beekeeper/media/{{ instance_field.get_text }}" /></span></p>
 										{% else %}
 											<p> <span class="fieldlabel">{{ form_field.label }}</span> : <span class="fieldvalue">{{ instance_field.get_text }} </span></p>
@@ -92,6 +108,11 @@
 
 {% block sectionslinks %}
 	<ul>
+		<li id="s-1link">
+			<a href="#s-1" onclick="selectSection('s-1')">
+				Metadatos
+			</a>
+		</li>
 	{% for section in instance.form.section_set.all %}
 		<li id="s{{ section.id }}link">
 			<a href="#s{{ section.id }}" onclick="selectSection('s{{ section.id }}')">
