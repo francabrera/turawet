@@ -18,8 +18,8 @@
               <xsd:element name="creationdate" type="xsd:string" />
               <xsd:element name="modificationdate" type="xsd:string" />
               <xsd:element name="completed" type="xsd:boolean" />
-              <xsd:element name="imei" minOccurs="0" />
-              <xsd:element name="signature" minOccurs="0" />
+              <xsd:element name="imei" type="xsd:string" minOccurs="0" />
+              <xsd:element name="signature" type="xsd:string" minOccurs="0" />
               <xsd:element name="geolocalization" minOccurs="0">
                 <xsd:complexType>
                   <xsd:sequence>
