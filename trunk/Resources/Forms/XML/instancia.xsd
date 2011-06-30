@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="instance">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="id" type="xsd:string" />
+        <xsd:element name="meta">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="formid" type="xsd:int" />
+              <xsd:element name="author">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="user" type="xsd:string" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="creationdate" type="xsd:string" />
+              <xsd:element name="modificationdate" type="xsd:string" />
+              <xsd:element name="completed" type="xsd:boolean" />
+              <xsd:element name="imei" minOccurs="0" />
+              <xsd:element name="signature" minOccurs="0" />
+              <xsd:element name="geolocalization" minOccurs="0">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="latitude" type="xsd:decimal" />
+                    <xsd:element name="longitude" type="xsd:decimal" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element name="sections">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element maxOccurs="unbounded" name="section">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="id" type="xsd:int" />
+                    <xsd:element name="fields">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element maxOccurs="unbounded" name="field">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="id" type="xsd:string" />
+                                <xsd:element name="value" type="xsd:string" />
+                                <xsd:element name="order" type="xsd:int" />
+                                <xsd:element name="formfieldid" type="xsd:int" />
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                          <xsd:element minOccurs="0" maxOccurs="unbounded" name="group">
+                            <xsd:complexType>
+                              <xsd:sequence>
+                                <xsd:element name="groupid" type="xsd:int" />
+                                <xsd:element  maxOccurs="unbounded" name="element">
+                                  <xsd:complexType>
+                                    <xsd:sequence>
+                                      <xsd:element maxOccurs="unbounded" name="field">
+                                        <xsd:complexType>
+                                          <xsd:sequence>
+                                            <xsd:element name="id" type="xsd:string" />
+                                            <xsd:element name="ordengrupo" type="xsd:int" />
+                                            <xsd:element name="value" type="xsd:string" />
+                                            <xsd:element name="order" type="xsd:int" />
+                                            <xsd:element name="formfieldid" type="xsd:int" />
+                                          </xsd:sequence>
+                                        </xsd:complexType>
+                                      </xsd:element>
+                                    </xsd:sequence>
+                                  </xsd:complexType>
+                                </xsd:element>
+                              </xsd:sequence>
+                            </xsd:complexType>
+                          </xsd:element>
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
