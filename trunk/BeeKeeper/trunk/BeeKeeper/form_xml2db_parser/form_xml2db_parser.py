@@ -11,6 +11,7 @@ from BeeKeeper.db_models.models import Section, Form, FormField, FieldOption, Pr
 from BeeKeeper.logger import *
 
 import sys
+import datetime
 
 
 ### GLOBAL VARIABLE ###
@@ -140,7 +141,7 @@ class FormXmldbParser():
             else: active = False
             creation_date = parser.findtext('meta/creationdate')
             if creation_date == None:
-                creation_date = '2011-01-12'
+                creation_date = datetime.date.today()
             # Form model
             form_model = Form(version=version, name=name, geolocalized=geolocalized,
                               active=active, xml=xml, creation_date=creation_date)
