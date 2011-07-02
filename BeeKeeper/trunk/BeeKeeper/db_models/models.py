@@ -155,7 +155,7 @@ class Instance(models.Model):
     longitude = models.CharField(max_length = 32, null=True)
     latitude = models.CharField(max_length = 32, null=True)
     form = models.ForeignKey(Form)
-    completa = models.BooleanField()
+    completed = models.BooleanField()
     xml = models.CharField(max_length = 16192)
 
     def __unicode__(self):
