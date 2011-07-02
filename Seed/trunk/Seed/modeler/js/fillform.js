@@ -9,7 +9,7 @@
 /*****************************************************************/
 /* Inicializacion                                                */
 /*****************************************************************/
-var formName = "Formulario";
+var formName = "Nombre del formulario";
 var geolocalized = false;
 var formSections = new Array();
 formSections[0] = new Section("Nombre sección 0", 0);
