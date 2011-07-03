@@ -139,10 +139,8 @@ class FormXmldbParser():
             active = parser.findtext('meta/active')
             if active != 'false': active = True
             else: active = False
-            creation_date = parser.findtext('meta/creationdate')
-            if creation_date == '':
-                creation_date = datetime.date.today()
-                creation_date_tosave = parser.find('meta/creationdate')
+            creation_date_tosave = parser.find('meta/creationdate')
+            creation_date = datetime.date.today()
             # Form model
             form_model = Form(version=version, name=name, geolocalized=geolocalized,
                               active=active, xml=xml, creation_date=creation_date)
