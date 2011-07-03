@@ -14,7 +14,6 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
@@ -31,7 +30,7 @@ public class WSClient
 	private HttpTransportSE	transportSE;
 	
 	/**
-	 * Cons
+	 * Private constructor
 	 */
 	private WSClient()
 	{
@@ -39,7 +38,7 @@ public class WSClient
 	}
 	
 	/**
-	 * 
+	 * Create the instance only if already not created
 	 */
 	private synchronized static void createInstance()
 	{
@@ -49,12 +48,11 @@ public class WSClient
 	
 	/**
 	 * 
-	 * @return
+	 * @return WSClient instance
 	 */
 	public static WSClient getInstance()
 	{
-		if (wsClient == null)
-			createInstance();
+		createInstance();
 		return wsClient;
 	}
 	
@@ -136,11 +134,11 @@ public class WSClient
 		
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(request);
-
+		
 		transportSE.debug = true;
 		// Hacemos la llamada al método remoto
 		transportSE.call(Cte.WSClient.UPLOAD_NEW_INSTANCE, envelope);
-
+		
 		// Obtenemos la respuesta del sobre SOAP
 		Object response = envelope.getResponse();
 		
