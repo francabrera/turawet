@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 
 
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -8,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     #(r'^BeeKeeper/', include('BeeKeeper.foo.urls')),
+    
     (r'^db_models/', include('db_models.urls')),
     
     (r'^form_xml2db_parser/', include('form_xml2db_parser.urls')),
