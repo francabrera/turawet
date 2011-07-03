@@ -5,7 +5,9 @@ import re
 class SiteLogin:
     "This middleware requires a login for every view"
     def process_request(self, request):
-        if re.search('beekeeper', request.path) and request.path != '/beekeeper/accounts/login/' and request.user.is_anonymous():
+        if re.search('beekeeper', request.path) and (not re.search('images', request.path)) and \
+           (not re.search('css', request.path)) and (not re.search('js', request.path)) and \
+           request.path != '/beekeeper/accounts/login/' and request.user.is_anonymous():
             if request.POST:
                 return login(request)
             else:
