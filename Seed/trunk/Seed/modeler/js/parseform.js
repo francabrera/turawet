@@ -16,6 +16,7 @@ function formToXML (name, sections) {
 	text += "<author><user>turawet</user></author>";
 	if (geolocalized)
 		text += "<geolocalized/>"; 
+	text += "<creationdate/>";
 	text += "</meta>";
 	text += "<sections>";
 	var sCounter;
