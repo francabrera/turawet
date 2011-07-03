@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.conf import settings
 from BeeKeeper.beekeeper.post_form import NewForm
 
+
 import io
 
 #Statistics
@@ -25,6 +26,10 @@ def showIndex (request):
 
 
 def showFormList (request):
+    
+    ##
+    ## if request.user.is_autenticated
+    ##
     
     context = RequestContext(request)
     # We obtain the forms
@@ -132,7 +137,6 @@ def createFormFieldStatistics (request, formid, formfieldid):
     return HttpResponse(output.getvalue(), mimetype="image/png")
              
 
-
 def deleteForm (request, formid):
     
     form = Form.objects.filter(id = formid)
@@ -141,7 +145,6 @@ def deleteForm (request, formid):
         form.delete()
     # Once deleted we show the other forms
     return showFormList(request)
-
 
 
 def showInstanceList (request, formid):
@@ -162,7 +165,6 @@ def showInstanceList (request, formid):
     
     
     return render_to_response('instancias.html', context)
-
 
 
 def showInstancesMap (request, formid):
@@ -213,7 +215,6 @@ def showInstance (request, instanceid):
 #        instance_fields = None
     
 #    return render_to_response('ver_instancia.html', {'instance': instance, 'instance_fields': instance_fields });
-
 
 
 def showInstanceMap (request, instanceid):

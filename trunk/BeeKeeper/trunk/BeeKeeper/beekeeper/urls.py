@@ -1,6 +1,7 @@
 
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.contrib.auth.views import login, logout
 
 # Uncomment the next two lines to enable the admin:
 
@@ -13,6 +14,9 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('beekeeper.views',
+    (r'^accounts/login/$',  login),
+    (r'^accounts/logout/$', logout),
+    
     (r'show_form_list/$', 'showFormList'),
     (r'show_form/(?P<formid>\d+)/$', 'showForm'),
     (r'show_form_statistics/(?P<formid>\d+)/$', 'showFormStatistics'),
