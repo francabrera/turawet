@@ -140,7 +140,7 @@ class FormXmldbParser():
             if active != 'false': active = True
             else: active = False
             creation_date = parser.findtext('meta/creationdate')
-            if creation_date == None:
+            if creation_date == '':
                 creation_date = datetime.date.today()
                 creation_date_tosave = parser.find('meta/creationdate')
             # Form model
