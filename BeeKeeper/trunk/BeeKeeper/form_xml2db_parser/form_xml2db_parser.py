@@ -149,8 +149,7 @@ class FormXmldbParser():
             form_model.save()
             id.text = str(form_model.id)
             # If creation date was setted
-            if creation_date_tosave: 
-                creation_date_tosave.text = str(form_model.creation_date)
+            creation_date_tosave.text = str(form_model.creation_date)
             
             #Section
             sections = parser.findall("sections/section")
