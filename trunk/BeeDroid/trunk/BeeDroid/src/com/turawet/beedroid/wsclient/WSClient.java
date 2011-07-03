@@ -57,9 +57,11 @@ public class WSClient
 	}
 	
 	/**
+	 * Returns a form definition from its identifier
 	 * 
 	 * @param formToDownload
-	 * @return
+	 *           Identifier containing the form name and version
+	 * @return FormInfoBean
 	 * @throws XmlPullParserException
 	 * @throws IOException
 	 */
@@ -70,7 +72,6 @@ public class WSClient
 		
 		String encodedName = Base64.encodeToString(formToDownload.getName().getBytes(), Base64.URL_SAFE);
 		
-		// Añadimos los parámetros a la llamada
 		request.addProperty(FormWsBean.name, encodedName);
 		request.addProperty(FormWsBean.version, formToDownload.getVersion());
 		
