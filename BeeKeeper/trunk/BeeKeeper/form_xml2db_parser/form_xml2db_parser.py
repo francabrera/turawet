@@ -142,11 +142,15 @@ class FormXmldbParser():
             creation_date = parser.findtext('meta/creationdate')
             if creation_date == None:
                 creation_date = datetime.date.today()
+                creation_date_tosave = parser.find('meta/creationdate')
             # Form model
             form_model = Form(version=version, name=name, geolocalized=geolocalized,
                               active=active, xml=xml, creation_date=creation_date)
             form_model.save()
             id.text = str(form_model.id)
+            # If creation date was setted
+            if creation_date_tosave: 
+                creation_date_tosave.text = str(form_model.creation_date)
             
             #Section
             sections = parser.findall("sections/section")
