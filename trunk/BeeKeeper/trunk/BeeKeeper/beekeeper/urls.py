@@ -27,5 +27,5 @@ urlpatterns += patterns('beekeeper.views',
     (r'show_instance/(?P<instanceid>\d+)/$', 'showInstance'),
     (r'show_instance_map/(?P<instanceid>\d+)/$', 'showInstanceMap'),
     (r'delete_instance/(?P<instanceid>\d+)/$', 'deleteInstance'),
-    (r'^$', 'showIndex'),
+    (r'^$', 'showFormList'),
 )
