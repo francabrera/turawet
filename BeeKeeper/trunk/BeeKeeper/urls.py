@@ -16,7 +16,7 @@ urlpatterns = patterns('',
 
     (r'^instance_xml2db_parser/', include('instance_xml2db_parser.urls')),
     
-    (r'^beekeeper/', include('beekeeper.urls')),
+    #(r'^beekeeper/', include('beekeeper.urls')),
     
     (r'^ws_server/', include('ws_server.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
