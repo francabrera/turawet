@@ -6,8 +6,6 @@ import django
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 PROJECT_DIR = os.path.dirname(os.path.realpath(__file__))
 
-
-
 # CSS paths
 CSS_BEEKEEPER_ROOT = os.path.join(PROJECT_DIR, 'beekeeper', 'css')
 
@@ -47,7 +45,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
 
 """
 DATABASES = {
@@ -119,7 +116,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
-
+"""
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -128,7 +125,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 
 )
-
+"""
 ROOT_URLCONF = 'BeeKeeper.urls'
 
 
