@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     (r'js/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.JS_BEEKEEPER_ROOT, 'show_indexes': False}),
 )
 
-urlpatterns += patterns('beekeeper.views',
+urlpatterns += patterns('BeeKeeper.beekeeper.views',
     (r'^accounts/login/$',  login),
     (r'^accounts/logout/$', logout),
     
