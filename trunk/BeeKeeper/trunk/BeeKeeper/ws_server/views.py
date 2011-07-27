@@ -8,9 +8,7 @@
 from django.views.decorators.csrf import csrf_exempt
 from soaplib.service import soapmethod
 from soaplib.serializers.primitive import Array, Integer, String, Boolean
-#from soaplib.serializers.binary import Attachment
 from soaplib_handler import DjangoSoapService
-#from os.path import exists
 #from dummy import Dummy, DummyWs
 
 from BeeKeeper.db_models.models import Form
