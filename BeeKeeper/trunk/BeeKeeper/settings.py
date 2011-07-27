@@ -46,19 +46,18 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-"""
 DATABASES = {
     'default': {
-        'ENGINE':   'django.db.backends.oracle',
-        'NAME':     'xe',
-        'USER':     'turawet',
-        'PASSWORD': '4b3j45n3gr45',
-        'HOST':     '10.209.5.109',
-        'PORT':     '5432',
+        'ENGINE':   'django.db.backends.mysql',
+        'NAME':     'turawetbbdd',
+        'USER':     'ubuntu',
+        'PASSWORD': 'D474B453P455W0RD',
+        'HOST':     'localhost',
+        #'PORT':     '',
     },
 }
-"""
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -69,7 +68,7 @@ DATABASES = {
         'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
-
+"""
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

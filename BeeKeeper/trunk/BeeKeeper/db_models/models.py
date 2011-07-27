@@ -25,7 +25,7 @@ class Form(models.Model):
     descripcion = models.CharField(max_length = 2048, null=True)
     name = models.CharField(max_length = 256)
     version = models.SmallIntegerField()
-    xml = models.CharField(max_length = 16192, unique=True)
+    xml = models.CharField(max_length = 16192)#, unique=True)
     active = models.BooleanField()
     geolocalized = models.BooleanField()
     creation_date = models.DateField()

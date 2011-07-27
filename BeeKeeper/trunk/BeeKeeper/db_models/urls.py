@@ -4,6 +4,6 @@ from django.conf.urls.defaults import *
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('db_models.views',
+urlpatterns = patterns('BeeKeeper.db_models.views',
     (r'form_details', 'form_details'),
 )
