@@ -27,5 +27,6 @@ urlpatterns = patterns('',
     
     (r'^accounts/', include('BeeKeeper.beekeeper.urls')),
 
+    # Se supone que acá va a ir la web
     (r'^$', include('BeeKeeper.beekeeper.urls')),
 )

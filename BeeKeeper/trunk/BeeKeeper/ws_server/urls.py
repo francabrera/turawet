@@ -11,5 +11,5 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^service.wsdl$', 'BeeKeeper.ws_server.views.service'),
-    (r'^service$', 'BeeKeeper.ws_server.views.service'),
+ #   (r'^service$', 'BeeKeeper.ws_server.views.service'),
 )
