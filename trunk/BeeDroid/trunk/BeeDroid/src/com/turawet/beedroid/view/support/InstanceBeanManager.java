@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -101,13 +102,13 @@ public class InstanceBeanManager
 	 * @return
 	 *         A list of all FieldViews of the instance
 	 */
-	public void getAllSectionsAndFieldsViews(List<FieldView> fields, List<Pair<String, Integer>> sectionsList) throws NullPointerException
+	public List<FieldView> getAllSectionsAndFieldsViews(List<Pair<String, Integer>> sectionsList) throws NullPointerException
 	{
 		/*
 		 * Camera
 		 */
 		// views.add(getNewImageGalleryFieldView());
-		
+		List<FieldView> fields = new ArrayList<FieldView>();
 		/*
 		 * Go trough all the sections and fields and create the asociated view
 		 */
@@ -142,6 +143,7 @@ public class InstanceBeanManager
 			fields.add(getNewGeolocalizedView());
 			sectionsList.add(new Pair<String, Integer>("Geolocalizar", page));
 		}
+		return fields;
 	}
 	
 	/**

@@ -8,7 +8,6 @@
 package com.turawet.beedroid.activity;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +18,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.beans.InstanceBean;
-import com.turawet.beedroid.beans.TextFieldBean;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
 import com.turawet.beedroid.database.DataBaseManager;
 import com.turawet.beedroid.parser.XmlToBeansParser;
-import com.turawet.beedroid.util.AlertMaker;
 import com.turawet.beedroid.view.BeanViewFlipper;
 import com.turawet.beedroid.view.FieldView;
 import com.turawet.beedroid.view.support.InstanceBeanManager;
@@ -32,9 +29,7 @@ import com.turawet.beedroid.wsclient.WSClient;
 import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -49,8 +44,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class FillNewInstanceActivity extends Activity
@@ -70,28 +63,10 @@ public class FillNewInstanceActivity extends Activity
 		
 		try
 		{
-			Bundle parameters = getIntent().getExtras();
-			String name = parameters.getString(FormWsBean.name);
-			String version = parameters.getString(FormWsBean.version);
-			FormIdentificationBean form = new FormIdentificationBean(name, version);
-			DataBaseManager db = DataBaseManager.getInstance(this);
-			/* This line loads the selected form */
-			String xml = db.getFormInfo(form).getXml();
-			/* This line always load the asset form */
-			// InputStream xml = getAssets().open("formulario_breve_v1.xml");
-			
-			XmlToBeansParser parser;
-			parser = new XmlToBeansParser(xml);
-			InstanceBean instance = parser.getInstance();
-			instanceManager = new InstanceBeanManager(this, instance);
-			
-			flipper = new BeanViewFlipper(this);
-			List<FieldView> fields = new ArrayList<FieldView>();
-			sectionsList = new ArrayList<Pair<String, Integer>>();
-			instanceManager.getAllSectionsAndFieldsViews(fields, sectionsList);
+			initialize();
+			List<FieldView> fields = instanceManager.getAllSectionsAndFieldsViews(sectionsList);
 			for (FieldView field : fields)
 				flipper.addView(field);
-			
 			setContentView(flipper);
 			// FieldView fieldView =
 			// instanceManager.getNewTextFieldView((TextFieldBean)instance.getSections().get(0).getSectionChildren().get(0),
@@ -119,6 +94,53 @@ public class FillNewInstanceActivity extends Activity
 			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * 
+	 */
+	private void initialize() throws SAXException, ParserConfigurationException, IOException
+	{
+		instanceManager = new InstanceBeanManager(this, getEmptyInstanceFromXmlDefinitionForm());
+		flipper = new BeanViewFlipper(this);
+		sectionsList = new ArrayList<Pair<String, Integer>>();
+	}
+	
+	/**
+	 * @return
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 */
+	private InstanceBean getEmptyInstanceFromXmlDefinitionForm() throws SAXException, ParserConfigurationException, IOException
+	{
+		// InputStream xml = getAssets().open("formulario_breve_v1.xml");
+		XmlToBeansParser parser = new XmlToBeansParser(getXmlFormDefinition());
+		return parser.getInstance();
+	}
+	
+	/**
+	 * @return
+	 */
+	private String getXmlFormDefinition()
+	{
+		FormIdentificationBean form = createFormFromParameters();
+		DataBaseManager db = DataBaseManager.getInstance(this);
+		return db.getFormInfo(form).getXml();
+	}
+	
+	/**
+	 * @return
+	 */
+	private FormIdentificationBean createFormFromParameters()
+	{
+		Bundle parameters = getIntent().getExtras();
+		String name = parameters.getString(FormWsBean.name);
+		String version = parameters.getString(FormWsBean.version);
+		return new FormIdentificationBean(name, version);
 	}
 	
 	@Override
@@ -227,19 +249,21 @@ public class FillNewInstanceActivity extends Activity
 		{
 			instanceManager.readFieldValues(flipper.getChildAt(0));
 			String instanceXml = instanceManager.instanceToXml();
-			//Log.d("", instanceXml);
+			// Log.d("", instanceXml);
 			WSClient ws = WSClient.getInstance();
 			boolean result = ws.uploadNewInstance(instanceXml);
 			/*
-			if (result)
-			{
-				AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok, R.string.saved_sended_ok).show();
-			}
-			else
-			{
-				AlertMaker.showErrorMessage(new AlertDialog.Builder(this), R.string.saved_sended_not_ok).show();
-			}
-			*/
+			 * if (result)
+			 * {
+			 * AlertMaker.showMessage(new AlertDialog.Builder(this), R.string.ok,
+			 * R.string.saved_sended_ok).show();
+			 * }
+			 * else
+			 * {
+			 * AlertMaker.showErrorMessage(new AlertDialog.Builder(this),
+			 * R.string.saved_sended_not_ok).show();
+			 * }
+			 */
 		}
 		catch (IllegalArgumentException e)
 		{
@@ -263,9 +287,9 @@ public class FillNewInstanceActivity extends Activity
 		}
 		finally
 		{
-			finish();		
+			finish();
 		}
-	
+		
 		return true;
 	}
 }
