@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/forms" android:title="@string/menu_forms" android:icon="@drawable/empty_form"></item>
+    <item android:id="@+id/instance" android:title="@string/menu_instance" android:icon="@drawable/instance"></item>
+    <item android:id="@+id/options" android:title="@string/menu_options" android:icon="@drawable/icon"></item>
+</menu>
