@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- <!DOCTYPE form SYSTEM 'form_def.dtd'> -->
+<form>
+	<meta>
+		<id />
+		<version>1</version>
+		<name>Formulario de prueba</name>
+		<author>
+			<user>turawet</user>
+		</author>
+		<geolocalized />
+	</meta>
+	<sections>
+		<section>
+			<id />
+			<name>Cuarta sección</name>
+			<fields>
+				<field>
+					<id />
+					<label>Etiqueta2</label>
+					<type>TEXT</type>
+					<properties>
+						<property>
+							<name>font</name>
+							<value>Arial</value>
+						</property>
+					</properties>
+				</field>
+			</fields>
+		</section>
+	</sections>
+</form>
