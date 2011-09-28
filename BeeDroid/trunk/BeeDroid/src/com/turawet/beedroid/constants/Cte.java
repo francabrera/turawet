@@ -43,7 +43,7 @@ public final class Cte
 	
 	public static final class WSClient
 	{
-		public static final String	REPOSITORY_URL						= "193.145.110.236";
+		public static final String	REPOSITORY_URL						= "ec2-50-18-94-108.us-west-1.compute.amazonaws.com";
 		public static final String	NAMESPACE							= "http://" + REPOSITORY_URL + "/ws_server/";
 		public static final String	URL_TO_WSDL							= "http://" + REPOSITORY_URL + "/ws_server/service.wsdl";
 		public static final String	GET_ALL_FORMS_PREVIEW			= "get_all_forms_preview";
@@ -84,5 +84,26 @@ public final class Cte
 		public static final String	TEXT		= "text";
 		public static final String	DATE		= "date";
 		public static final String	NAME		= "name";
+	}
+	
+	public static final class MainIcon
+	{
+		public static final class Id
+		{
+			public static final int	FORMULARIO				= 0x00;
+			public static final int	COMPLETAR_INSTANCIA	= 0x01;
+			public static final int	CREAR_INTSANCIA		= 0x02;
+			public static final int	OPCIONES					= 0x03;
+			
+		}
+		
+		public static final class Name
+		{
+			public static final String	FORMULARIO				= "Formularios";
+			public static final String	COMPLETAR_INSTANCIA	= "Completar instancia";
+			public static final String	CREAR_INTSANCIA		= "Crear instancia";
+			public static final String	OPCIONES					= "Opciones";
+			
+		}
 	}
 }
