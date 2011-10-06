@@ -14,10 +14,9 @@
 			<id />
 			<name>Cuarta sección</name>
 			<fields>
-				<field>
+				<field type="TEXT">
 					<id />
 					<label>Etiqueta2</label>
-					<type>TEXT</type>
 					<properties>
 						<property>
 							<name>font</name>

@@ -11,7 +11,7 @@ import com.turawet.beedroid.R;
 import com.turawet.beedroid.adapter.DownloadFormsEfficientAdapter;
 import com.turawet.beedroid.database.DataBaseManager;
 import com.turawet.beedroid.util.AlertMaker;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.wsclient.WSClient;
 
@@ -49,9 +49,9 @@ public class DownloadFormsActivity extends ListActivity
 			// Hacemos la llamada al WS y eliminamos aquellos formularios que ya
 			// estén
 			// guardadaos en el teléfono, para que no se puedan volver a descargar.
-			List<FormIdentificationBean> avaliablesFormsToDownload = ws.getAllFormPreview();
+			List<FormIdentification> avaliablesFormsToDownload = ws.getAllFormPreview();
 			DataBaseManager db = DataBaseManager.getInstance(this);
-			List<FormIdentificationBean> savedForms = db.getSavedFormsIdentification();
+			List<FormIdentification> savedForms = db.getSavedFormsIdentification();
 			avaliablesFormsToDownload.removeAll(savedForms);
 			if (avaliablesFormsToDownload.isEmpty())
 				gotAnyFormToDownload = false;
@@ -126,7 +126,7 @@ public class DownloadFormsActivity extends ListActivity
 	private boolean downloadAllSelectedForms()
 	{
 		// Obtenemos los formularios seleccionados para descargarse
-		List<FormIdentificationBean> selectedForms = ((DownloadFormsEfficientAdapter) getListAdapter()).getSelectedFormsToDownload();
+		List<FormIdentification> selectedForms = ((DownloadFormsEfficientAdapter) getListAdapter()).getSelectedFormsToDownload();
 		
 		// Comprobamos que la lista no sea vacía
 		if (selectedForms.isEmpty())
@@ -139,7 +139,7 @@ public class DownloadFormsActivity extends ListActivity
 			WSClient ws = WSClient.getInstance();
 			boolean errors = false;
 			// Descargamos todos los formularios y los almacenamos
-			for (FormIdentificationBean formId : selectedForms)
+			for (FormIdentification formId : selectedForms)
 			{
 				try
 				{

@@ -7,7 +7,7 @@ package com.turawet.beedroid.wsclient.beans;
  * @author nicopernas
  * 
  */
-public class FormIdentificationBean
+public class FormIdentification
 {
 	/**
 	 *
@@ -18,7 +18,7 @@ public class FormIdentificationBean
 	/**
 	 * 
 	 */
-	public FormIdentificationBean(String name, String version)
+	public FormIdentification(String name, String version)
 	{
 		this.name = name;
 		this.version = version;
@@ -68,12 +68,13 @@ public class FormIdentificationBean
 	 * 
 	 */
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object object)
 	{
 		boolean result = false;
-		if (o instanceof FormIdentificationBean)
+		if (object instanceof FormIdentification)
 		{
-			result = ((FormIdentificationBean) o).getName().equals(name) && ((FormIdentificationBean) o).getVersion().equals(version);
+			FormIdentification form = (FormIdentification) object;
+			result = form.getName().equals(name) && form.getVersion().equals(version);
 		}
 		return result;
 	}

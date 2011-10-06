@@ -2,8 +2,6 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
-import java.util.List;
 
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;

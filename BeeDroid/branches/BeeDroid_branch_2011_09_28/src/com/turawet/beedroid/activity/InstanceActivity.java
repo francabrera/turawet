@@ -10,9 +10,8 @@ import com.turawet.beedroid.R;
 import com.turawet.beedroid.adapter.SavedFormsEfficientAdapter;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.database.DataBaseManager;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +45,7 @@ public class InstanceActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.forms);
-		setListAdapter(new SavedFormsEfficientAdapter(this, android.R.layout.simple_list_item_2, new ArrayList<FormIdentificationBean>()));
+		setListAdapter(new SavedFormsEfficientAdapter(this, android.R.layout.simple_list_item_2, new ArrayList<FormIdentification>()));
 	}
 	
 	/**
@@ -57,11 +56,11 @@ public class InstanceActivity extends ListActivity
 	{
 		super.onStart();
 		DataBaseManager db = DataBaseManager.getInstance(this);
-		List<FormIdentificationBean> savedForms = db.getSavedFormsIdentification();
+		List<FormIdentification> savedForms = db.getSavedFormsIdentification();
 		
 		SavedFormsEfficientAdapter adapter = (SavedFormsEfficientAdapter) getListAdapter();
 		adapter.clear();
-		for (FormIdentificationBean savedForm : savedForms)
+		for (FormIdentification savedForm : savedForms)
 			adapter.add(savedForm);
 	}
 	
@@ -72,7 +71,7 @@ public class InstanceActivity extends ListActivity
 	protected void onListItemClick(ListView l, View v, int position, long id)
 	{
 		super.onListItemClick(l, v, position, id);
-		FormIdentificationBean form = (FormIdentificationBean) l.getItemAtPosition(position);
+		FormIdentification form = (FormIdentification) l.getItemAtPosition(position);
 		
 		Intent intent = new Intent(InstanceActivity.this, FillNewInstanceActivity.class);
 		intent.putExtra(FormWsBean.name, form.getName());

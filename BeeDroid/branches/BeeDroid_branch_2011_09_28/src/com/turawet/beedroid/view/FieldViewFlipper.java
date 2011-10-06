@@ -3,26 +3,7 @@
  */
 package com.turawet.beedroid.view;
 
-/*
- * Copyright (C) 2011 Jason Fry
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @author Jason Fry - jasonfry.co.uk
- * @version 1.1.8
- * 
- */
-
-//import com.turawet.beedroid.view.PageControl.OnPageControlClickListener;
+import com.turawet.beedroid.field.view.FieldViewCollection;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -35,7 +16,7 @@ import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-public class BeanViewFlipper extends HorizontalScrollView
+public class FieldViewFlipper extends HorizontalScrollView
 {
 	private static int				DEFAULT_SWIPE_THRESHOLD			= 60;
 	
@@ -53,12 +34,13 @@ public class BeanViewFlipper extends HorizontalScrollView
 	private OnPageChangedListener	mOnPageChangedListener			= null;
 	private SwipeOnTouchListener	mSwipeOnTouchListener;
 	private View.OnTouchListener	mOnTouchListener;
-//	private PageControl				mPageControl						= null;
+	
+	// private PageControl mPageControl = null;
 	
 	/**
 	 * {@inheritDoc}
 	 */
-	public BeanViewFlipper(Context context)
+	public FieldViewFlipper(Context context)
 	{
 		super(context);
 		mContext = context;
@@ -68,7 +50,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	/**
 	 * {@inheritDoc}
 	 */
-	public BeanViewFlipper(Context context, AttributeSet attrs)
+	public FieldViewFlipper(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		mContext = context;
@@ -78,7 +60,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	/**
 	 * {@inheritDoc}
 	 */
-	public BeanViewFlipper(Context context, AttributeSet attrs, int defStyle)
+	public FieldViewFlipper(Context context, AttributeSet attrs, int defStyle)
 	{
 		super(context, attrs, defStyle);
 		mContext = context;
@@ -119,7 +101,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 		// this will now pass trackball events down to onTrackballEvent
 		return false;
 	}
-		
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -182,7 +164,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 			mCallScrollToPageInOnLayout = false;
 		}
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -275,7 +257,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	private void scrollToPage(int page, boolean smooth)
 	{
 		int oldPage = mCurrentPage;
-
+		
 		if (page >= getPageCount() && getPageCount() > 0)
 		{
 			page--;
@@ -299,7 +281,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 		{
 			mOnPageChangedListener.onPageChanged(oldPage, page);
 		}
-
+		
 		mCallScrollToPageInOnLayout = !mCallScrollToPageInOnLayout;
 	}
 	
@@ -349,7 +331,7 @@ public class BeanViewFlipper extends HorizontalScrollView
 	{
 		return mPageWidth;
 	}
-		
+	
 	/**
 	 * Implement this listener to listen for page change events
 	 * 
@@ -625,5 +607,14 @@ public class BeanViewFlipper extends HorizontalScrollView
 			
 			return true;
 		}
+	}
+	
+	/**
+	 * @param viewsCollection
+	 */
+	public void setFieldViewsToShow(FieldViewCollection viewsCollection)
+	{
+		for (View view : viewsCollection)
+			addView(view);
 	}
 }

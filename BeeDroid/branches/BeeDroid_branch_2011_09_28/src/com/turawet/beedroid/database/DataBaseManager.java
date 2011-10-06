@@ -12,7 +12,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
 import com.turawet.beedroid.constants.Cte;
 
@@ -79,9 +80,9 @@ public class DataBaseManager
 	 * 
 	 * @return
 	 */
-	public List<FormIdentificationBean> getSavedFormsIdentification()
+	public List<FormIdentification> getSavedFormsIdentification()
 	{
-		List<FormIdentificationBean> listOfSavedFormsId = new ArrayList<FormIdentificationBean>();
+		List<FormIdentification> listOfSavedFormsId = new ArrayList<FormIdentification>();
 		
 		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
 		Cursor c = sqliteDatabase.query(Cte.DataBase.FORMS_INFO_TABLE, new String[]
@@ -94,8 +95,8 @@ public class DataBaseManager
 			{
 				String name = c.getString(nameColumn);
 				String version = c.getString(versionColumn);
-				FormIdentificationBean formIdentificationBean = new FormIdentificationBean(name, version);
-				listOfSavedFormsId.add(formIdentificationBean);
+				FormIdentification FormIdentification = new FormIdentification(name, version);
+				listOfSavedFormsId.add(FormIdentification);
 			}
 			while (c.moveToNext());
 		}
@@ -107,7 +108,7 @@ public class DataBaseManager
 	 * @param form
 	 * @return
 	 */
-	public FormInfoBean getFormInfo(FormIdentificationBean form)
+	public FormInfoBean getFormInfo(FormIdentification form)
 	{
 		SQLiteDatabase sqliteDatabase = dbAccessor.getReadableDatabase();
 		String selection = Cte.DataBase.NAME + " = ? AND " + Cte.DataBase.VERSION + " = ?";

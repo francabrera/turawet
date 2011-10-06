@@ -42,7 +42,7 @@ public class XmlToBeansParserHandler extends DefaultHandler
 	/* Aux */
 	private StringBuilder				buffer;
 	private boolean						buffering;
-	private int							order;
+	private int								order;
 	private boolean						inProperty;
 	private boolean						inField;
 	private boolean						inSection;
