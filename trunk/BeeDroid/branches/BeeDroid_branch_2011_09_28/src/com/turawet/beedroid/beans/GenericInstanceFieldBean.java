@@ -2,8 +2,6 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @class GenericInstanceFieldBean: Represents a Generic instance field

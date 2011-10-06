@@ -21,7 +21,7 @@ public final class Cte
 	
 	public static enum FieldType
 	{
-		TEXT, DATE, RADIO, GEO, IMAGE, NUMERIC
+		TEXT, DATE, RADIO, GEO, IMAGE, NUMERIC, COMBO, CHECKBOX
 	};
 	
 	public static enum XmlEnumTags

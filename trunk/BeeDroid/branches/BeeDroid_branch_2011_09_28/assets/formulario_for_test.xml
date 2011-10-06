@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form>
+	<id>12345</id>
+	<meta>
+		<version>1</version>
+		<name>Formulario de prueba</name>
+		<author>
+			<user>turawet</user>
+		</author>
+		<geolocalized />
+		<creationdate />
+	</meta>
+	<sections>
+		<section>
+			<id>111</id>
+			<name>Primera sección</name>
+			<fields>
+				<field type="TEXT">
+					<id>1111</id>
+					<label>Label del primer campo</label>
+					<required />
+					<properties>
+						<property>
+							<name>max_length</name>
+							<value>10</value>
+						</property>
+					</properties>
+				</field>
+
+				<field type="TEXT">
+					<id />
+					<label>Label del segundo campo</label>
+					<properties>
+						<property>
+							<name>font</name>
+							<value>Arial</value>
+						</property>
+					</properties>
+				</field>
+				<field type="DATE">
+					<id />
+					<label>Fecha</label>
+					<required />
+					<properties>
+						<property>
+							<name>format</name>
+							<value>YYYY/MM/DD</value>
+						</property>
+						<property>
+							<name>calendar</name>
+							<value>MONTH_CALENDAR</value>
+						</property>
+					</properties>
+				</field>
+				<field type="RADIO">
+					<id>132</id>
+					<label>Radio</label>
+					<required />
+					<options>
+						<option>
+							<label>Masculino</label>
+							<value>M</value>
+						</option>
+						<option>
+							<label>Femenino</label>
+							<value>F</value>
+						</option>
+					</options>
+				</field>
+				<field type="COMBO">
+					<id>4321</id>
+					<label>Combo1</label>
+					<options>
+						<option>
+							<label>Opción 1</label>
+							<value>O1</value>
+							<!-- <default /> -->
+						</option>
+						<option>
+							<label>Opción 2</label>
+							<value>O2</value>
+						</option>
+					</options>
+					<properties>
+						<property>
+							<name>size</name>
+							<value>30</value>
+						</property>
+					</properties>
+				</field>
+				<field type="CHECKBOX">
+					<id>14</id>
+					<label>Check1</label>
+					<required />
+					<properties>
+						<property>
+							<name>widget</name>
+							<value>TRISTATE</value>
+						</property>
+					</properties>
+				</field>
+				<field type="IMAGE">
+					<id />
+					<label>Imagen</label>
+					<required />
+				</field>
+				<field type="NUMERIC">
+					<id>246</id>
+					<label>Número de ventanas</label>
+					<required />
+				</field>
+				<!-- <field type="VIDEO"> -->
+				<!-- <id /> -->
+				<!-- <label>Vídeo</label> -->
+				<!-- </field> -->
+				<!-- <field type="AUDIO"> -->
+				<!-- <id /> -->
+				<!-- <label>Audio</label> -->
+				<!-- </field> -->
+				<!-- <group> -->
+				<!-- <id /> -->
+				<!-- <list /> -->
+				<!-- <label>Galería de imágenes</label> -->
+				<!-- <field type="IMAGE_GALLERY"> -->
+				<!-- <id /> -->
+				<!-- <label>Imágenes</label> -->
+				<!-- </field> -->
+				<!-- <properties> -->
+				<!-- <property> -->
+				<!-- <name>max_photos</name> -->
+				<!-- <value>6</value> -->
+				<!-- </property> -->
+				<!-- <property> -->
+				<!-- <name>max_file_size</name> -->
+				<!-- <value>128</value> -->
+				<!-- </property> -->
+				<!-- </properties> -->
+				<!-- </group> -->
+				<!-- <group> -->
+				<!-- <id /> -->
+				<!-- <list /> -->
+				<!-- <label>GRUPO</label> -->
+				<!-- <required /> -->
+				<!-- <field type="TEXT"> -->
+				<!-- <id /> -->
+				<!-- <label>Nombre</label> -->
+				<!-- </field> -->
+				<!-- <field type="TEXT"> -->
+				<!-- <id /> -->
+				<!-- <label>Apellido1</label> -->
+				<!-- </field> -->
+				<!-- </group> -->
+			</fields>
+		</section>
+		<section>
+			<id>222</id>
+			<name>Segunda sección</name>
+			<fields>
+				<field type="TEXT">
+					<id>543</id>
+					<label>Número de ventanas</label>
+					<required />
+				</field>
+			</fields>
+
+		</section>
+	</sections>
+</form>

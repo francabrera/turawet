@@ -12,10 +12,10 @@ public class FormInfoBean
 	/**
 	 *
 	 */
-	private FormIdentificationBean	formId;
-	private String				xml;
+	private FormIdentification	formId;
+	private String					xml;
 	
-	public FormInfoBean(FormIdentificationBean formId, String xml)
+	public FormInfoBean(FormIdentification formId, String xml)
 	{
 		this.formId = formId;
 		this.xml = xml;
@@ -24,7 +24,7 @@ public class FormInfoBean
 	/**
 	 * @return the formId
 	 */
-	public FormIdentificationBean getFormId()
+	public FormIdentification getFormId()
 	{
 		return formId;
 	}
@@ -33,7 +33,7 @@ public class FormInfoBean
 	 * @param formId
 	 *           the formId to set
 	 */
-	public void setFormId(FormIdentificationBean formId)
+	public void setFormId(FormIdentification formId)
 	{
 		this.formId = formId;
 	}

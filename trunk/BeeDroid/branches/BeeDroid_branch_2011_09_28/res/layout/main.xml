@@ -11,6 +11,5 @@
     android:stretchMode="columnWidth"
     android:gravity="center"
     android:listSelector="@android:color/transparent"
-    android:background="@drawable/fondo_portada_beedroid"
 />
-
+<!--     android:background="@drawable/fondo_portada_beedroid" -->

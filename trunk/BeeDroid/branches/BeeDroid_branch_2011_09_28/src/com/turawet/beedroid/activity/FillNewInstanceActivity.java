@@ -7,35 +7,30 @@
  */
 package com.turawet.beedroid.activity;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.beans.InstanceBean;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
-import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
+import com.turawet.beedroid.dao.Instance;
 import com.turawet.beedroid.database.DataBaseManager;
-import com.turawet.beedroid.parser.XmlToBeansParser;
-import com.turawet.beedroid.view.BeanViewFlipper;
-import com.turawet.beedroid.view.FieldView;
-import com.turawet.beedroid.view.support.InstanceBeanManager;
+import com.turawet.beedroid.exception.IllegalFieldTypeException;
+import com.turawet.beedroid.parser.XmlToInstanceParser;
+import com.turawet.beedroid.view.FieldViewFlipper;
+import com.turawet.beedroid.view.support.SectionBookmarksCollection;
 import com.turawet.beedroid.wsclient.WSClient;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,9 +43,8 @@ import android.widget.ListView;
 
 public class FillNewInstanceActivity extends Activity
 {
-	private InstanceBeanManager			instanceManager;
-	private List<Pair<String, Integer>>	sectionsList;
-	private BeanViewFlipper					flipper;
+	private Instance				instance;
+	private FieldViewFlipper	flipper;
 	
 	/**
 	 *
@@ -63,21 +57,10 @@ public class FillNewInstanceActivity extends Activity
 		
 		try
 		{
-			initialize();
-			List<FieldView> fields = instanceManager.getAllSectionsAndFieldsViews(sectionsList);
-			for (FieldView field : fields)
-				flipper.addView(field);
+			instance = getInstanceFromXmlDefinitionForm();
+			flipper = new FieldViewFlipper(this);
+			flipper.setFieldViewsToShow(instance.getFieldAsViews(this));
 			setContentView(flipper);
-			// FieldView fieldView =
-			// instanceManager.getNewTextFieldView((TextFieldBean)instance.getSections().get(0).getSectionChildren().get(0),
-			// 0);
-			// LinearLayout linear = new LinearLayout(this);
-			// linear.addView(fieldView);
-			//
-			// HorizontalScrollView horizontal = new HorizontalScrollView(this);
-			// horizontal.addView(linear);
-			// setContentView(horizontal);
-			
 		}
 		catch (SAXException e1)
 		{
@@ -94,19 +77,11 @@ public class FillNewInstanceActivity extends Activity
 			// TODO Mostrar errores al usuario
 			e1.printStackTrace();
 		}
-	}
-	
-	/**
-	 * @throws IOException
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * 
-	 */
-	private void initialize() throws SAXException, ParserConfigurationException, IOException
-	{
-		instanceManager = new InstanceBeanManager(this, getEmptyInstanceFromXmlDefinitionForm());
-		flipper = new BeanViewFlipper(this);
-		sectionsList = new ArrayList<Pair<String, Integer>>();
+		catch (IllegalFieldTypeException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -115,19 +90,27 @@ public class FillNewInstanceActivity extends Activity
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 */
-	private InstanceBean getEmptyInstanceFromXmlDefinitionForm() throws SAXException, ParserConfigurationException, IOException
+	private Instance getInstanceFromXmlDefinitionForm() throws SAXException, ParserConfigurationException, IOException
 	{
-		// InputStream xml = getAssets().open("formulario_breve_v1.xml");
-		XmlToBeansParser parser = new XmlToBeansParser(getXmlFormDefinition());
+		XmlToInstanceParser parser = new XmlToInstanceParser();
+		parser.parse(getXmlFormDefinitionAsInputStream());
 		return parser.getInstance();
 	}
 	
+	private InputStream getXmlFormDefinitionAsInputStream() throws IOException
+	{
+		return getAssets().open("formulario_breve_v1.xml");
+
+//		String xml = getXmlFormDefinitionFromDB();
+//		return new ByteArrayInputStream(xml.getBytes());
+	}
+	
 	/**
 	 * @return
 	 */
-	private String getXmlFormDefinition()
+	private String getXmlFormDefinitionFromDB()
 	{
-		FormIdentificationBean form = createFormFromParameters();
+		FormIdentification form = createFormFromParameters();
 		DataBaseManager db = DataBaseManager.getInstance(this);
 		return db.getFormInfo(form).getXml();
 	}
@@ -135,12 +118,12 @@ public class FillNewInstanceActivity extends Activity
 	/**
 	 * @return
 	 */
-	private FormIdentificationBean createFormFromParameters()
+	private FormIdentification createFormFromParameters()
 	{
 		Bundle parameters = getIntent().getExtras();
 		String name = parameters.getString(FormWsBean.name);
 		String version = parameters.getString(FormWsBean.version);
-		return new FormIdentificationBean(name, version);
+		return new FormIdentification(name, version);
 	}
 	
 	@Override
@@ -175,20 +158,20 @@ public class FillNewInstanceActivity extends Activity
 		return true;
 	}
 	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		if (resultCode == Activity.RESULT_OK)
-		{
-			Bundle extras = data.getExtras();
-			Bitmap bitmap = (Bitmap) extras.get(InstanceBeanCte.data);
-			if (requestCode == InstanceBeanCte.GALLERY_IMAGE)
-				instanceManager.addImageToGallery(bitmap, flipper);
-			else if (requestCode == InstanceBeanCte.SINGLE_IMAGE)
-				instanceManager.addImage(bitmap, flipper);
-		}
-	}
-	
+	// @Override
+	// public void onActivityResult(int requestCode, int resultCode, Intent data)
+	// {
+	// if (resultCode == Activity.RESULT_OK)
+	// {
+	// Bundle extras = data.getExtras();
+	// Bitmap bitmap = (Bitmap) extras.get(InstanceBeanCte.data);
+	// if (requestCode == InstanceBeanCte.GALLERY_IMAGE)
+	// instanceManager.addImageToGallery(bitmap, flipper);
+	// else if (requestCode == InstanceBeanCte.SINGLE_IMAGE)
+	// instanceManager.addImage(bitmap, flipper);
+	// }
+	// }
+	//
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -216,10 +199,9 @@ public class FillNewInstanceActivity extends Activity
 		
 		ListView listOfSectionsView = new ListView(this);
 		
-		List<String> sectionsNames = new ArrayList<String>();
-		for (Pair<String, Integer> pair : sectionsList)
-			sectionsNames.add(pair.first);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sectionsNames);
+		final SectionBookmarksCollection sectionBookmarksCollection = instance.getSectionBookmarks();
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sectionBookmarksCollection.sectionsNames());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 		listOfSectionsView.setAdapter(adapter);
 		
@@ -228,7 +210,7 @@ public class FillNewInstanceActivity extends Activity
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int position, long id)
 			{
-				int page = sectionsList.get(position).second.intValue();
+				int page = sectionBookmarksCollection.getSectionPageAt(position);
 				flipper.smoothScrollToPage(page);
 				sectionsDialog.dismiss();
 			}
@@ -247,11 +229,11 @@ public class FillNewInstanceActivity extends Activity
 	{
 		try
 		{
-			instanceManager.readFieldValues(flipper.getChildAt(0));
-			String instanceXml = instanceManager.instanceToXml();
+			// instance.readFieldValues(flipper.getChildAt(0));
+			// String instanceXml = instanceManager.instanceToXml();
 			// Log.d("", instanceXml);
-			WSClient ws = WSClient.getInstance();
-			boolean result = ws.uploadNewInstance(instanceXml);
+			// WSClient ws = WSClient.getInstance();
+			// boolean result = ws.uploadNewInstance(instanceXml);
 			/*
 			 * if (result)
 			 * {
@@ -275,16 +257,16 @@ public class FillNewInstanceActivity extends Activity
 			// TODO Error del toXml
 			e.printStackTrace();
 		}
-		catch (IOException e)
-		{
-			// TODO Error del toXml
-			e.printStackTrace();
-		}
-		catch (XmlPullParserException e)
-		{
-			// TODO Error del WS
-			e.printStackTrace();
-		}
+		// catch (IOException e)
+		// {
+		// // TODO Error del toXml
+		// e.printStackTrace();
+		// }
+		// catch (XmlPullParserException e)
+		// {
+		// // TODO Error del WS
+		// e.printStackTrace();
+		// }
 		finally
 		{
 			finish();

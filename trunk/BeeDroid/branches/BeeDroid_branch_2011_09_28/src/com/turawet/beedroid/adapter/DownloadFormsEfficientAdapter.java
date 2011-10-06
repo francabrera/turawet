@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 
 /**
  * @author nicopernas
@@ -23,11 +23,11 @@ import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
  */
 public class DownloadFormsEfficientAdapter extends BaseAdapter
 {
-	private LayoutInflater						mInflater;
-	private List<FormIdentificationBean>	listOfForms;
-	private boolean[]								checkedItemList;
+	private LayoutInflater				mInflater;
+	private List<FormIdentification>	listOfForms;
+	private boolean[]						checkedItemList;
 	
-	public DownloadFormsEfficientAdapter(Context context, List<FormIdentificationBean> listOfForms)
+	public DownloadFormsEfficientAdapter(Context context, List<FormIdentification> listOfForms)
 	{
 		this.mInflater = LayoutInflater.from(context);
 		this.listOfForms = listOfForms;
@@ -94,7 +94,7 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 			rowItem = (DownloadsFormItemList) convertView.getTag();
 		}
 		
-		FormIdentificationBean formId = listOfForms.get(position);
+		FormIdentification formId = listOfForms.get(position);
 		rowItem.formName.setText(formId.getName());
 		rowItem.formVersion.setText(formId.getVersion());
 		rowItem.checked.setChecked(checkedItemList[position]);
@@ -105,9 +105,9 @@ public class DownloadFormsEfficientAdapter extends BaseAdapter
 	 * 
 	 * @return
 	 */
-	public List<FormIdentificationBean> getSelectedFormsToDownload()
+	public List<FormIdentification> getSelectedFormsToDownload()
 	{
-		List<FormIdentificationBean> selectedFormsToDownload = new ArrayList<FormIdentificationBean>();
+		List<FormIdentification> selectedFormsToDownload = new ArrayList<FormIdentification>();
 		for (int i = 0; i < checkedItemList.length; i++)
 		{
 			if (checkedItemList[i])

@@ -6,7 +6,6 @@ package com.turawet.beedroid.parser;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -16,15 +15,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.turawet.beedroid.beans.GenericInstanceFieldBean;
 import com.turawet.beedroid.beans.InstanceBean;
-import com.turawet.beedroid.beans.PropertyBean;
-import com.turawet.beedroid.beans.SectionBean;
-import com.turawet.beedroid.beans.SectionChildBean;
-
-
-import android.util.Log;
-
 
 /**
  * @class XmlToViewsParser
@@ -80,25 +71,25 @@ public class XmlToBeansParser
 	 * Método que mostrará todo el proceso de parsing por el LOG
 	 * -------- BORRAR AL FINAL ------
 	 */
-	public void showParse()
-	{
-		InstanceBean instance = handler.getInstance();
-		List<SectionBean> sections = instance.getSections();
-        for (SectionBean section : sections) {
-        	List<SectionChildBean> sectionChildren = section.getSectionChildren();
-        	/* Must differ if it is a group or a field */
-        	for (SectionChildBean sectionChild : sectionChildren) {
-                Log.d("Campo de la instancia: ", sectionChild.toString());
-                GenericInstanceFieldBean field = (GenericInstanceFieldBean)sectionChild;
-            	List<PropertyBean> properties = field.getFormField().getProperties();
-            	/* Must differ if it is a group or a field */
-            	for (PropertyBean property : properties) {
-                    Log.d("Propiedad del campo: ", property.toString());
-            	}
-        	}
-        }
-
-		
-	}
+//	public void showParse()
+//	{
+//		InstanceBean instance = handler.getInstance();
+//		List<SectionBean> sections = instance.getSections();
+//        for (SectionBean section : sections) {
+//        	List<SectionChildBean> sectionChildren = section.getSectionChildren();
+//        	/* Must differ if it is a group or a field */
+//        	for (SectionChildBean sectionChild : sectionChildren) {
+//                Log.d("Campo de la instancia: ", sectionChild.toString());
+//                GenericInstanceFieldBean field = (GenericInstanceFieldBean)sectionChild;
+//            	List<PropertyBean> properties = field.getFormField().getProperties();
+//            	/* Must differ if it is a group or a field */
+//            	for (PropertyBean property : properties) {
+//                    Log.d("Propiedad del campo: ", property.toString());
+//            	}
+//        	}
+//        }
+//
+//		
+//	}
 	
 }

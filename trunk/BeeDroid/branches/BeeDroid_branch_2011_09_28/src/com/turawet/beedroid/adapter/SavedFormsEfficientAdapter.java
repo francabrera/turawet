@@ -6,7 +6,7 @@ package com.turawet.beedroid.adapter;
 import java.util.List;
 
 import com.turawet.beedroid.R;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,7 +19,7 @@ import android.widget.TextView;
  * @author nicopernas
  * 
  */
-public class SavedFormsEfficientAdapter extends ArrayAdapter<FormIdentificationBean>
+public class SavedFormsEfficientAdapter extends ArrayAdapter<FormIdentification>
 {
 	
 	private LayoutInflater	mInflater;
@@ -30,7 +30,7 @@ public class SavedFormsEfficientAdapter extends ArrayAdapter<FormIdentificationB
 	 * @param textViewResourceId
 	 * @param objects
 	 */
-	public SavedFormsEfficientAdapter(Context context, int resource, List<FormIdentificationBean> objects)
+	public SavedFormsEfficientAdapter(Context context, int resource, List<FormIdentification> objects)
 	{
 		super(context, resource, objects);
 		mInflater = LayoutInflater.from(context);
@@ -58,7 +58,7 @@ public class SavedFormsEfficientAdapter extends ArrayAdapter<FormIdentificationB
 			rowItem = (SavedFormItemList) convertView.getTag();
 		}
 		
-		FormIdentificationBean formId = getItem(position);
+		FormIdentification formId = getItem(position);
 		rowItem.formName.setText(formId.getName());
 		rowItem.formVersion.setText(formId.getVersion());
 		return convertView;

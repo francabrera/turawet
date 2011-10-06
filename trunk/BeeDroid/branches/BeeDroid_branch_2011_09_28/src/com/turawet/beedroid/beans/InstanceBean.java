@@ -2,20 +2,17 @@ package com.turawet.beedroid.beans;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.xmlpull.v1.XmlSerializer;
-
-import com.turawet.beedroid.constants.Cte;
-
 import android.util.Xml;
+
+import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;
+import com.turawet.beedroid.field.view.FieldView;
 
 /**
  * @class InstanceBean: Represents a instance
@@ -73,9 +70,10 @@ public class InstanceBean extends BaseBean
 		sections = new ArrayList<SectionBean>();
 		authoruser = "";
 		Date date = new Date();
-		SimpleDateFormat simpleDateformat=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat simpleDateformat = new SimpleDateFormat("yyyy-MM-dd");
 		modificationDate = simpleDateformat.format(date);
-		if (creationDate == null || creationDate.equals("")) {
+		if (creationDate == null || creationDate.equals(""))
+		{
 			creationDate = modificationDate;
 		}
 		latitude = "";
@@ -132,11 +130,6 @@ public class InstanceBean extends BaseBean
 	public void setEditable(boolean editable)
 	{
 		this.editable = editable;
-	}
-	
-	public List<SectionBean> getSections()
-	{
-		return sections;
 	}
 	
 	public void setSections(List<SectionBean> sections)
@@ -239,4 +232,58 @@ public class InstanceBean extends BaseBean
 		serializer.endDocument();
 	}
 	
+	public int getNumberOfSections()
+	{
+		return sections.size();
+	}
+	
+	public SectionBean getSection(int section)
+	{
+		// TODO Auto-generated method stub
+		return sections.get(section);
+	}
+	
+	public GenericInstanceFieldBean getFieldBeanBySectionAndField(int sectionIdx, int fieldIdx)
+	{
+		return (GenericInstanceFieldBean) sections.get(sectionIdx).getSectionChildren().get(fieldIdx);
+	}
+	
+	public boolean isGeolocalized()
+	{
+		return form.isGeolocalized();
+	}
+
+	public List<GenericInstanceFieldBean> getAllFieldBeans()
+	{
+		// TODO Auto-generated method stub
+		
+		/*
+		 * Go trough all the sections and fields and create the asociated view
+		 */
+//		int numberOfSections = instance.getNumberOfSections();
+//		int page = 0;
+//		for (int section = 0; section < numberOfSections; section++)
+//		{
+//			sectionBookmarks.addNewBookmark(instance.getSection(section).getName(), page);
+//			int numberOfFields = instance.getSection(section).getSectionChildren().size();
+//			for (int field = 0; field < numberOfFields; field++)
+//			{
+//				/*
+//				 * Add the asociated view to the concrete field and section
+//				 */
+//
+//				GenericInstanceFieldBean fieldBean = instance.getFieldBeanBySectionAndField(section, field);
+//				
+//				FieldType fieldType = fieldBean.getFormField().getType();
+//				
+//				FormFieldView formFieldView = formFieldViewFactory.makeFormFieldView(fieldType);
+//				
+//				page++;
+//				fields.add(formFieldView);
+//			}
+//			
+//		}
+//		
+		return null;
+	}
 }

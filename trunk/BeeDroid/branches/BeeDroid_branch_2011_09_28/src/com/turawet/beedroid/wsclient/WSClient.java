@@ -15,8 +15,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Base64;
 
+import com.turawet.beedroid.wsclient.beans.FormIdentification;
 import com.turawet.beedroid.wsclient.beans.FormInfoBean;
-import com.turawet.beedroid.wsclient.beans.FormIdentificationBean;
 import com.turawet.beedroid.constants.Cte;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
 
@@ -65,7 +65,7 @@ public class WSClient
 	 * @throws XmlPullParserException
 	 * @throws IOException
 	 */
-	public FormInfoBean getFormByNameVersion(FormIdentificationBean formToDownload) throws IOException, XmlPullParserException
+	public FormInfoBean getFormByNameVersion(FormIdentification formToDownload) throws IOException, XmlPullParserException
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_XMLFORM_BY_NAME_VERSION);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -95,14 +95,14 @@ public class WSClient
 	 * @throws IOException
 	 * 
 	 */
-	public List<FormIdentificationBean> getAllFormPreview() throws IOException, XmlPullParserException
+	public List<FormIdentification> getAllFormPreview() throws IOException, XmlPullParserException
 	{
 		SoapObject request = new SoapObject(Cte.WSClient.NAMESPACE, Cte.WSClient.GET_ALL_FORMS_PREVIEW);
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(request);
 		
 		// Lista de previas de formularios que vamos a devolver
-		List<FormIdentificationBean> allFormPreview = new ArrayList<FormIdentificationBean>();
+		List<FormIdentification> allFormPreview = new ArrayList<FormIdentification>();
 		
 		// Hacemos la llamada al método remoto
 		transportSE.call(Cte.WSClient.GET_ALL_FORMS_PREVIEW, envelope);
@@ -119,7 +119,7 @@ public class WSClient
 			SoapObject formId = (SoapObject) response.getProperty(i);
 			String formName = formId.getProperty(FormWsBean.name).toString();
 			String formVersion = formId.getProperty(FormWsBean.version).toString();
-			allFormPreview.add(new FormIdentificationBean(formName, formVersion));
+			allFormPreview.add(new FormIdentification(formName, formVersion));
 		}
 		
 		return allFormPreview;
