@@ -8,7 +8,7 @@ import java.io.OutputStream;
 import java.util.Date;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
-import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
+import com.turawet.beedroid.constants.Cte.InstanceCte;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -163,7 +163,7 @@ public class FieldView extends LinearLayout
 					if (bitmap != null)
 					{
 						OutputStream stream = new ByteArrayOutputStream();
-						bitmap.compress(CompressFormat.JPEG, InstanceBeanCte.JPEG_QUALITY, stream);
+						bitmap.compress(CompressFormat.JPEG, InstanceCte.JPEG_QUALITY, stream);
 						value = stream;
 					}
 				}

@@ -55,6 +55,7 @@ public class MainGridAdapter extends BaseAdapter
 		View currentIcon;
 		if (convertView == null)
 		{
+			// TODO: pasar la lógica de traducción del ícono a la clase MainIcon
 			currentIcon = inflater.inflate(R.layout.main_icon, null);
 			
 			MainIcon mainIcon = icons.get(position);

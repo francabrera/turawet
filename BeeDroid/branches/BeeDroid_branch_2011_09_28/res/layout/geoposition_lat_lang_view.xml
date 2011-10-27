@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+   
+		<TextView  
+		    android:id="@+id/no_connection_msg"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" 
+			android:textColor="@color/red"
+			android:textSize="20sp"
+			android:gravity="center_horizontal"
+			android:layout_marginTop="20sp"
+			android:layout_marginRight="5sp"
+			android:layout_marginLeft="5sp"
+			android:textStyle="italic"
+			android:background="@drawable/error_alert_background"
+			android:text="@string/no_connection_enabled_msg" />
+		    		    
+	    
+		<TextView android:id="@+id/geo_longitude_label"
+		    android:layout_below="@id/no_connection_msg"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 
+			android:textColor="@color/label_color"
+			android:textSize="20sp"
+			android:layout_marginTop="20sp"
+			android:layout_marginRight="5sp"
+			android:layout_marginLeft="5sp"
+			android:textStyle="italic"
+			android:text="@string/geo_longitud" />
+			
+	
+		<TextView android:id="@+id/geo_latitude_label"
+		    android:layout_below="@id/geo_longitude_label" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/label_color"
+			android:textSize="20sp"
+			android:layout_marginTop="10sp"
+			android:layout_marginRight="5sp"
+			android:layout_marginLeft="5sp"
+			android:textStyle="italic"
+			android:text="@string/geo_latitud" />
+		
+</RelativeLayout>

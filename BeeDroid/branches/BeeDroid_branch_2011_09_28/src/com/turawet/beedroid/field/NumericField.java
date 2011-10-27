@@ -4,37 +4,44 @@ import android.content.Context;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
+import com.turawet.beedroid.exception.IllegalValueForFieldException;
+import com.turawet.beedroid.exception.NullFieldLabelException;
+import com.turawet.beedroid.exception.NullSectionTitleExcpetion;
 import com.turawet.beedroid.field.view.FieldView;
 
 public class NumericField extends Field
 {
-
-	@Override
-	public void setValue(Object value)
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	private Integer				number;
+	
 	@Override
 	public Object getValue()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return number;
 	}
-
+	
 	@Override
 	public FieldType getType()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return FieldType.NUMERIC;
 	}
-
+	
 	@Override
-	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException
+	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException, NullSectionTitleExcpetion, NullFieldLabelException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		view = obtainAViewForThisField(context);
+		view.setSectionTitle(getSection().getName());
+		view.setFieldLabel(getLabel());
+		return view.performView();
+	}
+	
+	@Override
+	public void readValue() throws IllegalValueForFieldException
+	{
+		Object value = view.getValue();
+		if (value instanceof Integer)
+			number = (Integer) value;
+		else
+			throw new IllegalValueForFieldException("NumericField value must be a Integer, got " + value.getClass().getName());
 	}
 	
 }

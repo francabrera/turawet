@@ -5,22 +5,13 @@ import android.content.Context;
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
 import com.turawet.beedroid.exception.IllegalValueForFieldException;
+import com.turawet.beedroid.exception.NullFieldLabelException;
+import com.turawet.beedroid.exception.NullSectionTitleExcpetion;
 import com.turawet.beedroid.field.view.FieldView;
-import com.turawet.beedroid.field.view.TextFieldView;
 
 public class TextField extends Field
 {
 	private String				text;
-	private TextFieldView	textView;
-	
-	@Override
-	public void setValue(Object text) throws IllegalValueForFieldException
-	{
-		if (text instanceof String)
-			this.text = (String) text;
-		else
-			throw new IllegalValueForFieldException(text.getClass().getName() + " isn't valid for " + getClass().getName() + " value. A java.lang.String value was expected.");
-	}
 	
 	@Override
 	public String getValue()
@@ -35,10 +26,22 @@ public class TextField extends Field
 	}
 	
 	@Override
-	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException
+	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException, NullSectionTitleExcpetion, NullFieldLabelException
 	{
-		textView = (TextFieldView) obtainAViewForThisField(context);
-		return null;
+		view = obtainAViewForThisField(context);
+		view.setSectionTitle(getSection().getName());
+		view.setFieldLabel(getLabel());
+		return view.performView();
+	}
+	
+	@Override
+	public void readValue() throws IllegalValueForFieldException
+	{
+		Object value = view.getValue();
+		if (value instanceof String)
+			text = (String) value;
+		else
+			throw new IllegalValueForFieldException("TextField value must be a String, got " + value.getClass().getName());
 	}
 	
 }

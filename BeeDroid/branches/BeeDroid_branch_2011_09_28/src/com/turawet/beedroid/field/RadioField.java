@@ -4,23 +4,21 @@ import android.content.Context;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
+import com.turawet.beedroid.exception.IllegalValueForFieldException;
+import com.turawet.beedroid.exception.NullFieldLabelException;
+import com.turawet.beedroid.exception.NullSectionTitleExcpetion;
 import com.turawet.beedroid.field.view.FieldView;
+import com.turawet.beedroid.field.view.RadioFieldView;
 
 public class RadioField extends OptionField
 {
 	
-	@Override
-	public void setValue(Object value)
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	private Integer	choice;
 	
 	@Override
 	public Object getValue()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return getOptionAt(choice);
 	}
 	
 	@Override
@@ -28,12 +26,25 @@ public class RadioField extends OptionField
 	{
 		return FieldType.RADIO;
 	}
-
+	
 	@Override
-	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException
+	public FieldView getFieldAsView(Context context) throws IllegalFieldTypeException, NullSectionTitleExcpetion, NullFieldLabelException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		view = (RadioFieldView) obtainAViewForThisField(context);
+		view.setSectionTitle(getSection().getName());
+		view.setFieldLabel(getLabel());
+		((RadioFieldView) view).addOptions(getOptions());
+		return view.performView();
 	}
-
+	
+	@Override
+	public void readValue() throws IllegalValueForFieldException
+	{
+		Object value = view.getValue();
+		if (value instanceof String)
+			choice = (Integer) value;
+		else
+			throw new IllegalValueForFieldException("RadioField value must be a Integer, got " + value.getClass().getName());
+	}
+	
 }

@@ -15,18 +15,18 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import com.google.android.maps.MapActivity;
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
 import com.turawet.beedroid.dao.Instance;
 import com.turawet.beedroid.database.DataBaseManager;
-import com.turawet.beedroid.exception.IllegalFieldTypeException;
+import com.turawet.beedroid.exception.IllegalValueForFieldException;
 import com.turawet.beedroid.parser.XmlToInstanceParser;
 import com.turawet.beedroid.view.FieldViewFlipper;
 import com.turawet.beedroid.view.support.SectionBookmarksCollection;
 import com.turawet.beedroid.wsclient.WSClient;
 import com.turawet.beedroid.wsclient.beans.FormIdentification;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -41,7 +41,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class FillNewInstanceActivity extends Activity
+public class FillNewInstanceActivity extends MapActivity
 {
 	private Instance				instance;
 	private FieldViewFlipper	flipper;
@@ -57,33 +57,23 @@ public class FillNewInstanceActivity extends Activity
 		
 		try
 		{
-			instance = getInstanceFromXmlDefinitionForm();
-			flipper = new FieldViewFlipper(this);
-			flipper.setFieldViewsToShow(instance.getFieldAsViews(this));
-			setContentView(flipper);
+			initialize();
 		}
-		catch (SAXException e1)
+		catch (Exception e)
 		{
 			// TODO Mostrar errores al usuario
-			e1.printStackTrace();
-		}
-		catch (ParserConfigurationException e1)
-		{
-			// TODO Mostrar errores al usuario
-			e1.printStackTrace();
-		}
-		catch (IOException e1)
-		{
-			// TODO Mostrar errores al usuario
-			e1.printStackTrace();
-		}
-		catch (IllegalFieldTypeException e)
-		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	private void initialize() throws Exception
+	{
+		instance = getInstanceFromXmlDefinitionForm();
+		instance.setContext(this);
+		flipper = new FieldViewFlipper(this);
+		flipper.setFieldViewsToShow(instance.getFieldAsViews());
+		setContentView(flipper);
+	}
 	/**
 	 * @return
 	 * @throws IOException
@@ -99,10 +89,10 @@ public class FillNewInstanceActivity extends Activity
 	
 	private InputStream getXmlFormDefinitionAsInputStream() throws IOException
 	{
-		return getAssets().open("formulario_breve_v1.xml");
-
-//		String xml = getXmlFormDefinitionFromDB();
-//		return new ByteArrayInputStream(xml.getBytes());
+		return getAssets().open("formulario_for_test.xml");
+		
+		// String xml = getXmlFormDefinitionFromDB();
+		// return new ByteArrayInputStream(xml.getBytes());
 	}
 	
 	/**
@@ -224,14 +214,14 @@ public class FillNewInstanceActivity extends Activity
 	
 	/**
 	 * @return
+	 * @throws IOException
 	 */
 	private boolean saveAndSendInstance()
 	{
 		try
 		{
-			// instance.readFieldValues(flipper.getChildAt(0));
-			// String instanceXml = instanceManager.instanceToXml();
-			// Log.d("", instanceXml);
+			String instanceXml = instance.getFieldValuesAsXml();
+			Log.d("", instanceXml);
 			// WSClient ws = WSClient.getInstance();
 			// boolean result = ws.uploadNewInstance(instanceXml);
 			/*
@@ -267,11 +257,27 @@ public class FillNewInstanceActivity extends Activity
 		// // TODO Error del WS
 		// e.printStackTrace();
 		// }
+		catch (IllegalValueForFieldException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		finally
 		{
 			finish();
 		}
 		
 		return true;
+	}
+	
+	@Override
+	protected boolean isRouteDisplayed()
+	{
+		return false;
 	}
 }

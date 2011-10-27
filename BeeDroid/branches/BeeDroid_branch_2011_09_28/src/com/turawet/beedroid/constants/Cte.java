@@ -68,7 +68,7 @@ public final class Cte
 		public static final String	XML					= "XML";
 	}
 	
-	public static final class InstanceBeanCte
+	public static final class InstanceCte
 	{
 		public static final int		SINGLE_IMAGE	= 0x00;
 		public static final int		GALLERY_IMAGE	= 0x01;
@@ -106,4 +106,12 @@ public final class Cte
 			
 		}
 	}
+	
+	public static final class Field
+	{
+		public static final String	DATE_FORMAT	= "dd/MM/aaaa";
+		public static final String	GEO_API_KEY	= "0ttw8pLwIVlLWo1sglWCkC2d4vuQ662Cpt7XTQA";
+		public static final int		GEO_ZOOM		= 13;
+	}
+	
 }
