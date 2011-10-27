@@ -6,6 +6,8 @@ import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.dao.Section;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
 import com.turawet.beedroid.exception.IllegalValueForFieldException;
+import com.turawet.beedroid.exception.NullFieldLabelException;
+import com.turawet.beedroid.exception.NullSectionTitleExcpetion;
 import com.turawet.beedroid.field.misc.Properties;
 import com.turawet.beedroid.field.misc.Property;
 import com.turawet.beedroid.field.view.FieldView;
@@ -83,12 +85,11 @@ public abstract class Field
 		return FieldViewFactory.makeFormFieldView(context, getType());
 	}
 	
-	public abstract FieldView getFieldAsView(Context context) throws IllegalFieldTypeException;
-	
-	public abstract void setValue(Object value) throws IllegalValueForFieldException;
+	public abstract FieldView getFieldAsView(Context context) throws IllegalFieldTypeException, NullSectionTitleExcpetion, NullFieldLabelException;
 	
 	public abstract Object getValue();
 	
 	public abstract FieldType getType();
 	
+	public abstract void readValue() throws IllegalValueForFieldException;
 }

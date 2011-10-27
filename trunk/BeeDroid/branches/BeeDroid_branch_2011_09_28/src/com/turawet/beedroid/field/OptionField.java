@@ -23,4 +23,8 @@ public abstract class OptionField extends Field
 		return options.getOptionAt(position);
 	}
 	
+	public Options getOptions()
+	{
+		return options;
+	}
 }

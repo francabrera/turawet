@@ -4,17 +4,11 @@ import android.content.Context;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
+import com.turawet.beedroid.exception.IllegalValueForFieldException;
 import com.turawet.beedroid.field.view.FieldView;
 
 public class ComboField extends OptionField
 {
-	
-	@Override
-	public void setValue(Object value)
-	{
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public Object getValue()
@@ -34,5 +28,12 @@ public class ComboField extends OptionField
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void readValue() throws IllegalValueForFieldException
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

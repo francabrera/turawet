@@ -4,10 +4,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.turawet.beedroid.beans.PropertyBean;
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
-import com.turawet.beedroid.dao.Form;
 import com.turawet.beedroid.dao.Instance;
 import com.turawet.beedroid.dao.Section;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
@@ -60,6 +58,7 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 	@Override
 	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException
 	{
+		// TODO: eliminar todos los if, dejar solamente un clear buffer 
 		if (!insideSectionTag && localName.equals(XmlEnumTags.id.toString()))
 		{
 			buffering = true;

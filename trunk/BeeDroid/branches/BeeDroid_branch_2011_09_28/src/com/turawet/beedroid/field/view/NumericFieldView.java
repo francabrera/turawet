@@ -11,10 +11,17 @@ public class NumericFieldView extends FieldView
 	}
 
 	@Override
-	protected void generateView()
+	public TextFieldView performView()
 	{
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+
+	@Override
+	public Object getValue()
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

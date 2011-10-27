@@ -48,8 +48,10 @@
 	<string name="geo_obtaining">Obteniendo posición...</string>
 	<string name="geo_obtain">Obtener posición</string>
 	<string name="geo_obtain_error">No pude obtener la posición</string>
-	<string name="geo_latitud">Latitud:</string>
-	<string name="geo_longitud">Longitud:</string>
+	<string name="geo_latitud">Latitud: </string>
+	<string name="geo_longitud">Longitud: </string>
+	<string name="no_connection_enabled_msg">No puedo mostrar el mapa, debido a que la conexión a internet no esta activa.</string>
+	<string name="geo_field_title">Ubicación</string>
 	
 	
 	

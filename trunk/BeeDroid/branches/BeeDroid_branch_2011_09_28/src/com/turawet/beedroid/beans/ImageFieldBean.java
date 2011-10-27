@@ -11,7 +11,7 @@ import java.util.Date;
 import android.util.Base64;
 import android.util.Xml;
 
-import com.turawet.beedroid.constants.Cte.InstanceBeanCte;
+import com.turawet.beedroid.constants.Cte.InstanceCte;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
 import com.turawet.beedroid.constants.Cte.XmlTags;
 
@@ -55,7 +55,7 @@ public class ImageFieldBean extends GenericInstanceFieldBean
 		if (value != null)
 		{
 			imageBase64Encoded = Base64.encodeToString(value.toByteArray(), Base64.DEFAULT);
-			imageName = String.valueOf(System.currentTimeMillis()) + InstanceBeanCte.JPEG_EXTENSION;
+			imageName = String.valueOf(System.currentTimeMillis()) + InstanceCte.JPEG_EXTENSION;
 		}
 	}
 	

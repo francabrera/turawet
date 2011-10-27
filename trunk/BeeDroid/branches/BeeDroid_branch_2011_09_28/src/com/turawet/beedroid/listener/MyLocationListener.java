@@ -92,6 +92,22 @@ public class MyLocationListener implements LocationListener
 		return currentBestLocation != null;
 	}
 	
+	/**
+	 * @return
+	 */
+	public double getLatitud()
+	{
+		return currentBestLocation.getLatitude();
+	}
+	
+	/**
+	 * @return
+	 */
+	public double getLongitud()
+	{
+		return currentBestLocation.getLongitude();
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -100,8 +116,6 @@ public class MyLocationListener implements LocationListener
 	@Override
 	public void onProviderDisabled(String provider)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/*
@@ -112,8 +126,6 @@ public class MyLocationListener implements LocationListener
 	@Override
 	public void onProviderEnabled(String provider)
 	{
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/*
@@ -125,23 +137,6 @@ public class MyLocationListener implements LocationListener
 	@Override
 	public void onStatusChanged(String provider, int status, Bundle extras)
 	{
-		// TODO Auto-generated method stub
-	}
-	
-	/**
-	 * @return
-	 */
-	public String getLatitud()
-	{
-		return String.valueOf(currentBestLocation.getLatitude());
-	}
-	
-	/**
-	 * @return
-	 */
-	public String getLongitud()
-	{
-		return String.valueOf(currentBestLocation.getLongitude());
 	}
 	
 }

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>     
-    <color name="black">#000000</color> 
+<resources>
+
+    <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="red">#FE2E2E</color>
+    <color name="light_red">#F78181</color>
     <color name="pressedcolor">#cccccc</color>
     <color name="focusedcolor">#cccccc</color>
+    <color name="background">#1474c0</color>
+    <color name="field_background">#1474c0</color>
+    <color name="section_title_gradient_start">#5FB404</color>
+    <color name="section_title_gradient_center">#D0F5A9</color>
+    <color name="section_title_gradient_end">#4B8A08</color>
+    <color name="section_title_color">#444444</color>
+    <color name="label_color">#434343</color>
+
 </resources>
