@@ -28,16 +28,16 @@
 					</properties>
 				</field>
 
-<!-- 				<field type="TEXT"> -->
-<!-- 					<id /> -->
-<!-- 					<label>Label del segundo campo</label> -->
-<!-- 					<properties> -->
-<!-- 						<property> -->
-<!-- 							<name>font</name> -->
-<!-- 							<value>Arial</value> -->
-<!-- 						</property> -->
-<!-- 					</properties> -->
-<!-- 				</field> -->
+				<!-- <field type="TEXT"> -->
+				<!-- <id /> -->
+				<!-- <label>Label del segundo campo</label> -->
+				<!-- <properties> -->
+				<!-- <property> -->
+				<!-- <name>font</name> -->
+				<!-- <value>Arial</value> -->
+				<!-- </property> -->
+				<!-- </properties> -->
+				<!-- </field> -->
 				<field type="DATE">
 					<id />
 					<label>Fecha</label>
@@ -53,63 +53,95 @@
 						</property>
 					</properties>
 				</field>
-<!-- 				<field type="RADIO"> -->
-<!-- 					<id>132</id> -->
-<!-- 					<label>Radio</label> -->
-<!-- 					<required /> -->
-<!-- 					<options> -->
-<!-- 						<option> -->
-<!-- 							<label>Masculino</label> -->
-<!-- 							<value>M</value> -->
-<!-- 						</option> -->
-<!-- 						<option> -->
-<!-- 							<label>Femenino</label> -->
-<!-- 							<value>F</value> -->
-<!-- 						</option> -->
-<!-- 					</options> -->
-<!-- 				</field> -->
-<!-- 				<field type="COMBO"> -->
-<!-- 					<id>4321</id> -->
-<!-- 					<label>Combo1</label> -->
-<!-- 					<options> -->
-<!-- 						<option> -->
-<!-- 							<label>Opción 1</label> -->
-<!-- 							<value>O1</value> -->
-<!-- 							<default /> -->
-<!-- 						</option> -->
-<!-- 						<option> -->
-<!-- 							<label>Opción 2</label> -->
-<!-- 							<value>O2</value> -->
-<!-- 						</option> -->
-<!-- 					</options> -->
-<!-- 					<properties> -->
-<!-- 						<property> -->
-<!-- 							<name>size</name> -->
-<!-- 							<value>30</value> -->
-<!-- 						</property> -->
-<!-- 					</properties> -->
-<!-- 				</field> -->
-<!-- 				<field type="CHECKBOX"> -->
-<!-- 					<id>14</id> -->
-<!-- 					<label>Check1</label> -->
-<!-- 					<required /> -->
-<!-- 					<properties> -->
-<!-- 						<property> -->
-<!-- 							<name>widget</name> -->
-<!-- 							<value>TRISTATE</value> -->
-<!-- 						</property> -->
-<!-- 					</properties> -->
-<!-- 				</field> -->
-<!-- 				<field type="IMAGE"> -->
-<!-- 					<id /> -->
-<!-- 					<label>Imagen</label> -->
-<!-- 					<required /> -->
-<!-- 				</field> -->
-<!-- 				<field type="NUMERIC"> -->
-<!-- 					<id>246</id> -->
-<!-- 					<label>Número de ventanas</label> -->
-<!-- 					<required /> -->
-<!-- 				</field> -->
+				<field type="RADIO">
+					<id>132</id>
+					<label>Radio</label>
+					<required />
+					<options>
+						<option>
+							<label>Masculino</label>
+							<value>M</value>
+						</option>
+						<option>
+							<label>Femenino</label>
+							<value>F</value>
+						</option>
+						<option>
+							<label>Rojo</label>
+							<value>R</value>
+						</option>
+						<option>
+							<label>Azul</label>
+							<value>A</value>
+						</option>
+						<option>
+							<label>Verde</label>
+							<value>V</value>
+						</option>
+						<option>
+							<label>Marrón</label>
+							<value>Ma</value>
+						</option>
+						<option>
+							<label>Marrón2</label>
+							<value>Ma2</value>
+						</option>
+						<option>
+							<label>Marrón3</label>
+							<value>Ma3</value>
+						</option>
+						<option>
+							<label>Marrón4</label>
+							<value>Ma4</value>
+						</option>
+						<option>
+							<label>Marrón5</label>
+							<value>Ma5</value>
+						</option>
+					</options>
+				</field>
+				<!-- <field type="COMBO"> -->
+				<!-- <id>4321</id> -->
+				<!-- <label>Combo1</label> -->
+				<!-- <options> -->
+				<!-- <option> -->
+				<!-- <label>Opción 1</label> -->
+				<!-- <value>O1</value> -->
+				<!-- <default /> -->
+				<!-- </option> -->
+				<!-- <option> -->
+				<!-- <label>Opción 2</label> -->
+				<!-- <value>O2</value> -->
+				<!-- </option> -->
+				<!-- </options> -->
+				<!-- <properties> -->
+				<!-- <property> -->
+				<!-- <name>size</name> -->
+				<!-- <value>30</value> -->
+				<!-- </property> -->
+				<!-- </properties> -->
+				<!-- </field> -->
+				<!-- <field type="CHECKBOX"> -->
+				<!-- <id>14</id> -->
+				<!-- <label>Check1</label> -->
+				<!-- <required /> -->
+				<!-- <properties> -->
+				<!-- <property> -->
+				<!-- <name>widget</name> -->
+				<!-- <value>TRISTATE</value> -->
+				<!-- </property> -->
+				<!-- </properties> -->
+				<!-- </field> -->
+				<!-- <field type="IMAGE"> -->
+				<!-- <id /> -->
+				<!-- <label>Imagen</label> -->
+				<!-- <required /> -->
+				<!-- </field> -->
+				<!-- <field type="NUMERIC"> -->
+				<!-- <id>246</id> -->
+				<!-- <label>Número de ventanas</label> -->
+				<!-- <required /> -->
+				<!-- </field> -->
 				<!-- <field type="VIDEO"> -->
 				<!-- <id /> -->
 				<!-- <label>Vídeo</label> -->

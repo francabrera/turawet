@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.turawet.beedroid.dao.Form;
+import com.turawet.beedroid.forms.Form;
 
 public class FormTest
 {

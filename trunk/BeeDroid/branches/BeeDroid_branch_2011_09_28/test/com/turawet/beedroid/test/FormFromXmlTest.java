@@ -15,8 +15,8 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import com.turawet.beedroid.dao.Form;
-import com.turawet.beedroid.parser.XmlToBeansParserHandler;
+import com.turawet.beedroid.forms.Form;
+import com.turawet.beedroid.xml.parser.XmlToBeansParserHandler;
 
 public class FormFromXmlTest
 {
