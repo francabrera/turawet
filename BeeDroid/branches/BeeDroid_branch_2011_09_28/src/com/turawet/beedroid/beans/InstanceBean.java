@@ -17,7 +17,7 @@ import com.turawet.beedroid.field.view.FieldView;
 /**
  * @class InstanceBean: Represents a instance
  * 
- * @param id
+ * @param instanceFieldId
  *           : The id of the instance
  * @version 1.0
  * 

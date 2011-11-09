@@ -1,4 +1,4 @@
-package com.turawet.beedroid.parser;
+package com.turawet.beedroid.xml.parser;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -6,8 +6,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.constants.Cte.XmlEnumTags;
-import com.turawet.beedroid.dao.Instance;
-import com.turawet.beedroid.dao.Section;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
 import com.turawet.beedroid.field.Field;
 import com.turawet.beedroid.field.FieldFactory;
@@ -15,11 +13,13 @@ import com.turawet.beedroid.field.FieldFactoryImpl;
 import com.turawet.beedroid.field.OptionField;
 import com.turawet.beedroid.field.misc.Option;
 import com.turawet.beedroid.field.misc.Property;
+import com.turawet.beedroid.forms.FormInstance;
+import com.turawet.beedroid.forms.Section;
 
 public class XmlToInstanceParserHandler extends DefaultHandler
 {
 	
-	private Instance			instance;
+	private FormInstance			instance;
 	private Section			currentSection;
 	private Field				currentField;
 	private FieldFactory		fieldFactory;
@@ -32,17 +32,19 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 	private boolean			insidePropertyTag;
 	private boolean			insideOptionTag;
 	private Option				currentOption;
+	private int					order;
 	
 	public void startDocument() throws SAXException
 	{
 		buffer = new StringBuilder();
-		instance = new Instance();
+		instance = new FormInstance();
 		fieldFactory = new FieldFactoryImpl();
 		
 		insideSectionTag = false;
 		insideFieldTag = false;
 		insidePropertyTag = false;
 		insideOptionTag = false;
+		order = 0;
 	}
 	
 	@Override
@@ -58,7 +60,7 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 	@Override
 	public void startElement(String uri, String qName, String localName, Attributes attributes) throws SAXException
 	{
-		// TODO: eliminar todos los if, dejar solamente un clear buffer 
+		// TODO: eliminar todos los if, dejar solamente un clear buffer
 		if (!insideSectionTag && localName.equals(XmlEnumTags.id.toString()))
 		{
 			buffering = true;
@@ -159,7 +161,7 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 		
 		else if (insideSectionTag && insideFieldTag && localName.equals(XmlEnumTags.id.toString()))
 		{
-			currentField.setId(buffer.toString());
+			currentField.setFormFieldId(buffer.toString());
 			clearBuffer();
 		}
 		else if (insideFieldTag && !insideOptionTag && localName.equals(XmlEnumTags.label.toString()))
@@ -217,6 +219,7 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 		try
 		{
 			currentField = fieldFactory.makeField(FieldType.valueOf(attributes.getValue(XmlEnumTags.type.toString())));
+			currentField.setOrder(order++);
 		}
 		catch (IllegalFieldTypeException e)
 		{
@@ -224,7 +227,7 @@ public class XmlToInstanceParserHandler extends DefaultHandler
 		}
 	}
 	
-	public Instance getInstance()
+	public FormInstance getInstance()
 	{
 		return instance;
 	}

@@ -24,4 +24,9 @@ public class Option
 	{
 		this.value = value;
 	}
+
+	public int getId()
+	{
+		return value.hashCode();
+	}
 }

@@ -1,57 +1,35 @@
 package com.turawet.beedroid.field.misc;
 
 import com.google.android.maps.GeoPoint;
-import com.turawet.beedroid.exception.NotInitializatedPositionException;
 
 public class Position
 {
 	private final static double	MILLON	= 1E6;
 	private GeoPoint					position;
-	private double						latitude;
-	private double						longitud;
 	
 	public Position()
 	{
-		latitude = 0;
-		longitud = 0;
+		position = new GeoPoint(0, 0);
 	}
 	
-	private void createGeoPointFromPosition() throws NotInitializatedPositionException
+	public GeoPoint getPositionAsGeoPoint()
 	{
-		if (position == null)
-		{
-			if (longitud == 0 || latitude == 0)
-				throw new NotInitializatedPositionException();
-			position = new GeoPoint((int) (latitude * MILLON), (int) (longitud * MILLON));
-		}
-	}
-	
-	public GeoPoint getPositionAsGeoPoint() throws NotInitializatedPositionException
-	{
-		createGeoPointFromPosition();
 		return position;
 	}
 	
-	public String getLatitude() throws NotInitializatedPositionException
+	public String getLatitude()
 	{
-		createGeoPointFromPosition();
 		return String.valueOf((double) position.getLatitudeE6() / MILLON);
 	}
 	
-	public String getLongitud() throws NotInitializatedPositionException
+	public String getLongitud()
 	{
-		createGeoPointFromPosition();
 		return String.valueOf((double) position.getLongitudeE6() / MILLON);
 	}
 	
-	public void setLatitude(double latitude)
+	public void setPosition(double latitude, double longitude)
 	{
-		this.latitude = latitude;
-	}
-	
-	public void setLongitud(double longitud)
-	{
-		this.longitud = longitud;
+		position = new GeoPoint((int) (latitude * MILLON), (int) (longitude * MILLON));
 	}
 	
 }

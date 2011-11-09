@@ -11,12 +11,12 @@ import com.turawet.beedroid.field.view.FieldView;
 
 public class NumericField extends Field
 {
-	private Integer				number;
+	private Integer	number;
 	
 	@Override
-	public Object getValue()
+	public String getValue()
 	{
-		return number;
+		return number.toString();
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class NumericField extends Field
 	}
 	
 	@Override
-	public void readValue() throws IllegalValueForFieldException
+	public void readValueFromView() throws IllegalValueForFieldException
 	{
 		Object value = view.getValue();
 		if (value instanceof Integer)
@@ -43,5 +43,5 @@ public class NumericField extends Field
 		else
 			throw new IllegalValueForFieldException("NumericField value must be a Integer, got " + value.getClass().getName());
 	}
-	
+		
 }

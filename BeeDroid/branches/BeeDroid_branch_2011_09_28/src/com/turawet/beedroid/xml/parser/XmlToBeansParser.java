@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.turawet.beedroid.parser;
+package com.turawet.beedroid.xml.parser;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

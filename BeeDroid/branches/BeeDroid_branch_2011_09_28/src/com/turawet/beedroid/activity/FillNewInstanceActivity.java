@@ -18,14 +18,15 @@ import org.xml.sax.SAXException;
 import com.google.android.maps.MapActivity;
 import com.turawet.beedroid.R;
 import com.turawet.beedroid.constants.Cte.FormWsBean;
-import com.turawet.beedroid.dao.Instance;
+import com.turawet.beedroid.constants.Cte.XmlTags;
 import com.turawet.beedroid.database.DataBaseManager;
-import com.turawet.beedroid.exception.IllegalValueForFieldException;
-import com.turawet.beedroid.parser.XmlToInstanceParser;
+import com.turawet.beedroid.forms.FormInstance;
 import com.turawet.beedroid.view.FieldViewFlipper;
 import com.turawet.beedroid.view.support.SectionBookmarksCollection;
 import com.turawet.beedroid.wsclient.WSClient;
 import com.turawet.beedroid.wsclient.beans.FormIdentification;
+import com.turawet.beedroid.xml.XmlConverter;
+import com.turawet.beedroid.xml.parser.XmlToInstanceParser;
 
 import android.app.Dialog;
 import android.content.res.Configuration;
@@ -43,7 +44,7 @@ import android.widget.ListView;
 
 public class FillNewInstanceActivity extends MapActivity
 {
-	private Instance				instance;
+	private FormInstance				instance;
 	private FieldViewFlipper	flipper;
 	
 	/**
@@ -74,13 +75,14 @@ public class FillNewInstanceActivity extends MapActivity
 		flipper.setFieldViewsToShow(instance.getFieldAsViews());
 		setContentView(flipper);
 	}
+	
 	/**
 	 * @return
 	 * @throws IOException
 	 * @throws ParserConfigurationException
 	 * @throws SAXException
 	 */
-	private Instance getInstanceFromXmlDefinitionForm() throws SAXException, ParserConfigurationException, IOException
+	private FormInstance getInstanceFromXmlDefinitionForm() throws SAXException, ParserConfigurationException, IOException
 	{
 		XmlToInstanceParser parser = new XmlToInstanceParser();
 		parser.parse(getXmlFormDefinitionAsInputStream());
@@ -220,7 +222,11 @@ public class FillNewInstanceActivity extends MapActivity
 	{
 		try
 		{
-			String instanceXml = instance.getFieldValuesAsXml();
+			XmlConverter converter = new XmlConverter(XmlTags.namespace.toString());
+			instance.makeFieldsReadValuesFromViews();
+			instance.convertToXml(converter);
+			String instanceXml = converter.endDocumentAndGetTranslation();
+//			String instanceXml = instance.translateToXml();
 			Log.d("", instanceXml);
 			// WSClient ws = WSClient.getInstance();
 			// boolean result = ws.uploadNewInstance(instanceXml);
@@ -237,32 +243,7 @@ public class FillNewInstanceActivity extends MapActivity
 			 * }
 			 */
 		}
-		catch (IllegalArgumentException e)
-		{
-			// TODO Error del toXml
-			e.printStackTrace();
-		}
-		catch (IllegalStateException e)
-		{
-			// TODO Error del toXml
-			e.printStackTrace();
-		}
-		// catch (IOException e)
-		// {
-		// // TODO Error del toXml
-		// e.printStackTrace();
-		// }
-		// catch (XmlPullParserException e)
-		// {
-		// // TODO Error del WS
-		// e.printStackTrace();
-		// }
-		catch (IllegalValueForFieldException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e)
+		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

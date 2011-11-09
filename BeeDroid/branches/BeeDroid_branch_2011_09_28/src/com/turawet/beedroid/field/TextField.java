@@ -1,7 +1,6 @@
 package com.turawet.beedroid.field;
 
 import android.content.Context;
-
 import com.turawet.beedroid.constants.Cte.FieldType;
 import com.turawet.beedroid.exception.IllegalFieldTypeException;
 import com.turawet.beedroid.exception.IllegalValueForFieldException;
@@ -11,7 +10,7 @@ import com.turawet.beedroid.field.view.FieldView;
 
 public class TextField extends Field
 {
-	private String				text;
+	private String	text;
 	
 	@Override
 	public String getValue()
@@ -35,7 +34,7 @@ public class TextField extends Field
 	}
 	
 	@Override
-	public void readValue() throws IllegalValueForFieldException
+	public void readValueFromView() throws IllegalValueForFieldException
 	{
 		Object value = view.getValue();
 		if (value instanceof String)
@@ -43,5 +42,4 @@ public class TextField extends Field
 		else
 			throw new IllegalValueForFieldException("TextField value must be a String, got " + value.getClass().getName());
 	}
-	
 }
