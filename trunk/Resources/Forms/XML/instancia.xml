@@ -15,209 +15,60 @@
 			<longitude>-49.21</longitude>
 		</geolocalization>
 	</meta>
-	<sections>
-		<section>
-			<id>1</id>
-			<fields>
-				<field>
-					<id />
-					<value>Texto escrito</value>
-					<order>1</order>
-					<formfieldid>1</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>Texto escrito</value>
-					<order>2</order>
-					<formfieldid>2</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<day>14</day>
-						<month>10</month>
-						<year>1986</year>
-					</value>
-					<order>3</order>
-					<formfieldid>3</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>M</value>
-					<order>4</order>
-					<formfieldid>4</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>O1</value>
-					<order>5</order>
-					<formfieldid>5</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>True</value>
-					<order>6</order>
-					<formfieldid>6</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>prueba.png</filename>
-						<binary>iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAALVWlUWHRYTUw6Y29tLmFkb2JlLnht
-cAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQi
-Pz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1Q
-IENvcmUgNC4yLjItYzA2MyA1My4zNTI2MjQsIDIwMDgvMDcvMzAtMTg6MTI6MTggICAgICAgICI+
-CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5
-bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczpwaG90
-b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICB4bWxuczpJcHRj
-NHhtcENvcmU9Imh0dHA6Ly9pcHRjLm9yZy9zdGQvSXB0YzR4bXBDb3JlLzEuMC94bWxucy8iCiAg
-ICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICB4bWxuczp4bXBN
-TT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRw
-Oi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpk
-Yz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczp4bXBSaWdodHM9
-Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9yaWdodHMvIgogICBwaG90b3Nob3A6QXV0aG9y
-c1Bvc2l0aW9uPSJBcnQgRGlyZWN0b3IiCiAgIHBob3Rvc2hvcDpDcmVkaXQ9Ind3dy5nZW50bGVm
-YWNlLmNvbSIKICAgcGhvdG9zaG9wOkRhdGVDcmVhdGVkPSIyMDEwLTAxLTAxIgogICBJcHRjNHht
-cENvcmU6SW50ZWxsZWN0dWFsR2VucmU9InBpY3RvZ3JhbSIKICAgeG1wOk1ldGFkYXRhRGF0ZT0i
-MjAxMC0wMS0wM1QyMTozMzoxNCswMTowMCIKICAgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4
-bXAuZGlkOkUzRjgxMzNEODFGN0RFMTE5RUFCOTBENzA3OEFGOTRBIgogICB4bXBNTTpEb2N1bWVu
-dElEPSJ4bXAuZGlkOkUzRjgxMzNEODFGN0RFMTE5RUFCOTBENzA3OEFGOTRBIgogICB4bXBNTTpJ
-bnN0YW5jZUlEPSJ4bXAuaWlkOjY3MUE3RTM3QTdGOERFMTE4MjFDRTRCMkM3RTM2RDcwIj4KICAg
-PElwdGM0eG1wQ29yZTpDcmVhdG9yQ29udGFjdEluZm8KICAgIElwdGM0eG1wQ29yZTpDaUFkckNp
-dHk9IlByYWd1ZSIKICAgIElwdGM0eG1wQ29yZTpDaUFkclBjb2RlPSIxNjAwMCIKICAgIElwdGM0
-eG1wQ29yZTpDaUFkckN0cnk9IkN6ZWNoIFJlcHVibGljIgogICAgSXB0YzR4bXBDb3JlOkNpRW1h
-aWxXb3JrPSJrYUBnZW50bGVmYWNlLmNvbSIKICAgIElwdGM0eG1wQ29yZTpDaVVybFdvcms9Ind3
-dy5nZW50bGVmYWNlLmNvbSIvPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAg
-IDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6aW5zdGFuY2VJ
-RD0ieG1wLmlpZDpFM0Y4MTMzRDgxRjdERTExOUVBQjkwRDcwNzhBRjk0QSIKICAgICAgc3RFdnQ6
-d2hlbj0iMjAxMC0wMS0wMlQxMDoyODo1MSswMTowMCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iL21l
-dGFkYXRhIi8+CiAgICAgPHJkZjpsaQogICAgICBzdEV2dDphY3Rpb249InNhdmVkIgogICAgICBz
-dEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjQ2Q0Q3NDAzREJGN0RFMTFBOTAwODNFMEExMjUzQkZE
-IgogICAgICBzdEV2dDp3aGVuPSIyMDEwLTAxLTAyVDIxOjExOjMwKzAxOjAwIgogICAgICBzdEV2
-dDpjaGFuZ2VkPSIvbWV0YWRhdGEiLz4KICAgICA8cmRmOmxpCiAgICAgIHN0RXZ0OmFjdGlvbj0i
-c2F2ZWQiCiAgICAgIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NjcxQTdFMzdBN0Y4REUxMTgy
-MUNFNEIyQzdFMzZENzAiCiAgICAgIHN0RXZ0OndoZW49IjIwMTAtMDEtMDNUMjE6MzM6MTQrMDE6
-MDAiCiAgICAgIHN0RXZ0OmNoYW5nZWQ9Ii9tZXRhZGF0YSIvPgogICAgPC9yZGY6U2VxPgogICA8
-L3htcE1NOkhpc3Rvcnk+CiAgIDxkYzp0aXRsZT4KICAgIDxyZGY6QWx0PgogICAgIDxyZGY6bGkg
-eG1sOmxhbmc9IngtZGVmYXVsdCI+Z2VudGxlZmFjZS5jb20gZnJlZSBpY29uIHNldDwvcmRmOmxp
-PgogICAgPC9yZGY6QWx0PgogICA8L2RjOnRpdGxlPgogICA8ZGM6c3ViamVjdD4KICAgIDxyZGY6
-QmFnPgogICAgIDxyZGY6bGk+aWNvbjwvcmRmOmxpPgogICAgIDxyZGY6bGk+cGljdG9ncmFtPC9y
-ZGY6bGk+CiAgICA8L3JkZjpCYWc+CiAgIDwvZGM6c3ViamVjdD4KICAgPGRjOmRlc2NyaXB0aW9u
-PgogICAgPHJkZjpBbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ij5UaGlzIGlz
-IHRoZSBpY29uIGZyb20gR2VudGxlZmFjZS5jb20gZnJlZSBpY29ucyBzZXQuIDwvcmRmOmxpPgog
-ICAgPC9yZGY6QWx0PgogICA8L2RjOmRlc2NyaXB0aW9uPgogICA8ZGM6Y3JlYXRvcj4KICAgIDxy
-ZGY6U2VxPgogICAgIDxyZGY6bGk+QWxleGFuZGVyIEtpc2VsZXY8L3JkZjpsaT4KICAgIDwvcmRm
-OlNlcT4KICAgPC9kYzpjcmVhdG9yPgogICA8ZGM6cmlnaHRzPgogICAgPHJkZjpBbHQ+CiAgICAg
-PHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ij5DcmVhdGl2ZSBDb21tb25zIEF0dHJpYnV0aW9u
-IE5vbi1Db21tZXJjaWFsIE5vIERlcml2YXRpdmVzPC9yZGY6bGk+CiAgICA8L3JkZjpBbHQ+CiAg
-IDwvZGM6cmlnaHRzPgogICA8eG1wUmlnaHRzOlVzYWdlVGVybXM+CiAgICA8cmRmOkFsdD4KICAg
-ICA8cmRmOmxpIHhtbDpsYW5nPSJ4LWRlZmF1bHQiPkNyZWF0aXZlIENvbW1vbnMgQXR0cmlidXRp
-b24gTm9uLUNvbW1lcmNpYWwgTm8gRGVyaXZhdGl2ZXM8L3JkZjpsaT4KICAgIDwvcmRmOkFsdD4K
-ICAgPC94bXBSaWdodHM6VXNhZ2VUZXJtcz4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJE
-Rj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5fyimoAAAAGXRFWHRTb2Z0d2FyZQBB
-ZG9iZSBJbWFnZVJlYWR5ccllPAAAAXFJREFUeNqEUkGOgkAQZBDCgYPCnSzhZsIB+cDyBH6AP3Cf
-4A/WJ7gvWJ7AfkA9mHhcNx68EfbACXS22gybccA4SaW7q6uHnqaZppw4jscwb0Cx2Wy+JP4VJgFW
-4H87XlcvuFwuBbAEVF4TfCHzTA7CMHyBOYqwEF/U1Hi/37PBC+hMp9MtTKQ9PrvD4TDrAmPgCSnn
-/PioWtf1pPeEIAi+yaJwCQG1uoafqMWMMcql1+uVcnPEiSEKEyoGVkhWsDlNG6ik+gnNAEU7WB82
-hy69m4HneWOQlfbkoNg/nU4/vd/YNE3Utq0mAzOZqxx0/uAeQOyL//2P8/n8oXLA5G6IjuMs0BZt
-n6+2W5Ylc12XD7ykoJndOqCp4tYctteBtIUySF9Bv+4tkm3bd4tU1zUDJ3ewAzcbnIFlWRlujp50
-EJGu9yDDMDLTNDmwALbCv3258wVPeU56dUXfgRs5Go3G8D8BLnKcYuJFnJGe/D8BBgD5UgmPkw6X
-TAAAAABJRU5ErkJggg==</binary>
-					</value>
-					<order>7</order>
-					<formfieldid>7</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>AVI_001.avi</filename>
-						<hash>9324F123CD</hash>
-						<binary>123543543511323123</binary>
-					</value>
-					<order>8</order>
-					<formfieldid>8</formfieldid>
-				</field>
-				<field>
-					<id />
-					<value>
-						<filename>MP3_001.mp3</filename>
-						<hash>9324F0032CD</hash>
-						<binary>12312345435323123</binary>
-					</value>
-					<order>9</order>
-					<formfieldid>9</formfieldid>
-				</field>
-				<!--  Grupo sin lista, con un groupid que no se repite -->
-				<group>
-					<groupid>1</groupid>
-					<element>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>
-								<filename>IMG_001.jpg</filename>
-								<hash>9324F00CD</hash>
-								<binary>12312311323123</binary>
-							</value>
-							<order>10</order>
-							<formfieldid>10</formfieldid>
-						</field>
-					</element>
-				</group>
-				<!--
-					A continuación dos elementos de una lista con un mismo groupid y
-					mismo fielid
-				-->
-				<group>
-					<groupid>2</groupid>
-					<!-- Primer elemento de la lista -->
-					<element>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>Prueba</value>
-							<order>11</order>
-							<formfieldid>11</formfieldid>
-						</field>
-						<field>
-							<id />
-							<ordengrupo>1</ordengrupo>
-							<value>Prueba</value>
-							<order>12</order>
-							<formfieldid>12</formfieldid>
-						</field>
-					</element>
-					<!-- Segundo elemento de la lista -->
-					<element>
-						<field>
-							<id />
-							<ordengrupo>2</ordengrupo>
-							<value>Prueba</value>
-							<order>13</order>
-							<formfieldid>11</formfieldid>
-						</field>
-						<field>
-							<id />
-							<ordengrupo>2</ordengrupo>
-							<value>Prueba</value>
-							<order>14</order>
-							<formfieldid>12</formfieldid>
-						</field>
-					</element>
-				</group>
-			</fields>
-		</section>
-		<section>
-			<id>2</id>
-			<fields>
-				<field>
-					<id />
-					<value>1</value>
-					<order>15</order>
-					<formfieldid>13</formfieldid>
-				</field>
-			</fields>
-		</section>
-	</sections>
+	<fields>
+		<field>
+			<id />
+			<sectionid>111</sectionid>
+			<value>Texto escrito</value>
+			<order>1</order>
+			<formfieldid>1</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>111</sectionid>
+			<value>Texto escrito</value>
+			<order>2</order>
+			<formfieldid>2</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>111</sectionid>
+			<value>
+				<day>14</day>
+				<month>10</month>
+				<year>1986</year>
+			</value>
+			<order>3</order>
+			<formfieldid>3</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>111</sectionid>
+			<value>M</value>
+			<order>4</order>
+			<formfieldid>4</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>222</sectionid>
+			<value>1</value>
+			<order>15</order>
+			<formfieldid>13</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>222</sectionid>
+			<value>O1</value>
+			<order>5</order>
+			<formfieldid>5</formfieldid>
+		</field>
+		<field>
+			<id />
+			<sectionid>222</sectionid>
+			<value>True</value>
+			<order>6</order>
+			<formfieldid>6</formfieldid>
+		</field>
+	</fields>
 </instance>
 
