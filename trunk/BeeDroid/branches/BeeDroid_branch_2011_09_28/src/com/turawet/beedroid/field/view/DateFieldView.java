@@ -31,7 +31,7 @@ public class DateFieldView extends FieldView
 	
 	private void addDatePicker()
 	{
-		datePicker = (DatePicker) viewInflater.inflate(R.layout.date_picker, null);
+		datePicker = (DatePicker) inflateViewById(R.layout.date_picker);
 		addView(datePicker);
 	}
 	

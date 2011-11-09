@@ -1,4 +1,4 @@
-package com.turawet.beedroid.parser;
+package com.turawet.beedroid.xml.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +11,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.turawet.beedroid.dao.Instance;
+import com.turawet.beedroid.forms.FormInstance;
 
 public class XmlToInstanceParser
 {
@@ -33,7 +33,7 @@ public class XmlToInstanceParser
 		xmlReader.parse(inputSource);
 	}
 
-	public Instance getInstance()
+	public FormInstance getInstance()
 	{
 		return handler.getInstance();
 	}

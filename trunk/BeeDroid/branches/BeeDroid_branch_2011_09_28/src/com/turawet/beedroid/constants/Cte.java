@@ -31,7 +31,9 @@ public final class Cte
 	
 	public static final class XmlTags
 	{
-		public static final String	namespace	= "";
+		public static final String	namespace	= "http://turawetproject.org/2011/v1/turawet";
+		public static final String	utf8			= "UTF-8";
+		public static final String	prefix		= "tw";
 	};
 	
 	public static final class FormWsBean

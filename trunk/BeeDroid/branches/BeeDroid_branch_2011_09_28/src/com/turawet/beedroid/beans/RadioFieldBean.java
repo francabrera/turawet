@@ -11,7 +11,7 @@ import com.turawet.beedroid.constants.Cte.XmlTags;
 /**
  * @class TextFieldBean: Represents a TextField
  * 
- * @param id
+ * @param instanceFieldId
  *           : [Inherited] The id of the Field
  * @param value
  *           : the text

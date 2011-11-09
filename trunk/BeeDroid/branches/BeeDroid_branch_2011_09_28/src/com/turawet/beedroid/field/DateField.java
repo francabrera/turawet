@@ -20,10 +20,11 @@ public class DateField extends Field
 	private Date	date;
 	
 	@Override
-	public Object getValue()
+	public String getValue()
 	{
-		DateFormat.format(Cte.Field.DATE_FORMAT, date);
-		return null;
+		// TODO cambiar el Cte.Field.DATE_FORMAT por el formato definido en la
+		// propieddad obtenida del formulario
+		return DateFormat.format(Cte.Field.DATE_FORMAT, date).toString();
 	}
 	
 	@Override
@@ -42,7 +43,7 @@ public class DateField extends Field
 	}
 	
 	@Override
-	public void readValue() throws IllegalValueForFieldException
+	public void readValueFromView() throws IllegalValueForFieldException
 	{
 		Object value = view.getValue();
 		if (value instanceof Date)

@@ -1,4 +1,4 @@
-package com.turawet.beedroid.parser;
+package com.turawet.beedroid.xml.parser;
 
 /**
  * 

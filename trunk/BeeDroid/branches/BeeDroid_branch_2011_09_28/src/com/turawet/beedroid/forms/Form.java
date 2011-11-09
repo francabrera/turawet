@@ -1,4 +1,4 @@
-package com.turawet.beedroid.dao;
+package com.turawet.beedroid.forms;
 
 import java.util.Date;
 
@@ -81,8 +81,4 @@ public class Form
 		this.creationDate = creationDate;
 	}
 	
-	// @Override
-	// public void toXml(Writer writer)
-	// {
-	// }
 }

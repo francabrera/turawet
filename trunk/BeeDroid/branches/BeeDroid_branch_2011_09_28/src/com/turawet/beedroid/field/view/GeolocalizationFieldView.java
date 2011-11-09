@@ -45,7 +45,7 @@ public class GeolocalizationFieldView extends FieldView implements OnPositionUpd
 	
 	private void addGeoView()
 	{
-		RelativeLayout geoFrame = (RelativeLayout) viewInflater.inflate(R.layout.geoposition_frame, null);
+		RelativeLayout geoFrame = (RelativeLayout) inflateViewById(R.layout.geoposition_frame);
 		positionButton = (Button) geoFrame.findViewById(R.id.geo_position_button);
 		positionButton.setOnClickListener(obtainPositionListener);
 		geoFrame.addView(positionView.getView(), 0);
@@ -79,8 +79,7 @@ public class GeolocalizationFieldView extends FieldView implements OnPositionUpd
 	@Override
 	public void onPositionUpdated(double latitude, double longitud) throws NotInitializatedPositionException
 	{
-		position.setLatitude(latitude);
-		position.setLongitud(longitud);
+		position.setPosition(latitude, longitud);
 		positionView.showPosition(position);
 	}
 }

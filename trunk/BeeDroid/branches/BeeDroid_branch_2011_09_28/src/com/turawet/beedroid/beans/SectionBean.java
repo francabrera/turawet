@@ -14,7 +14,7 @@ import android.util.Xml;
 /**
  * @class SectionBean: Represents a section
  * 
- * @param id
+ * @param instanceFieldId
  *           : The id of the form
  * @param name
  *           : The name of the form

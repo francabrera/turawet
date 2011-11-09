@@ -11,7 +11,7 @@ import android.util.Xml;
 /**
  * @class TextFieldBean: Represents a TextField
  * 
- * @param id
+ * @param instanceFieldId
  *           : [Inherited] The id of the Field
  * @param value
  *           : the text

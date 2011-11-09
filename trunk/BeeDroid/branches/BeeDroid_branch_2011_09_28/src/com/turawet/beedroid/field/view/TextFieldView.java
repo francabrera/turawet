@@ -19,7 +19,7 @@ public class TextFieldView extends FieldView
 	
 	private void addTextInput()
 	{
-		textInput = (EditText) viewInflater.inflate(R.layout.edit_text, null);
+		textInput = (EditText) inflateViewById(R.layout.edit_text);
 		textInput.setHint("texto...");
 		addView(textInput);
 	}

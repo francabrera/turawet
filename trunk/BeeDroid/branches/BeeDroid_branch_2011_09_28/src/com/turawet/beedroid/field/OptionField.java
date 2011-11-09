@@ -1,30 +1,37 @@
 package com.turawet.beedroid.field;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.turawet.beedroid.field.misc.Option;
-import com.turawet.beedroid.field.misc.Options;
 
 public abstract class OptionField extends Field
 {
 	
-	protected Options	options;
+	protected List<Option>	options;
 	
 	public OptionField()
 	{
-		this.options = new Options();
+		this.options = new ArrayList<Option>();
 	}
 	
 	public boolean addOption(Option option)
 	{
-		return options.addOption(option);
+		return options.add(option);
 	}
 	
 	public Option getOptionAt(int position)
 	{
-		return options.getOptionAt(position);
+		return options.get(position);
 	}
 	
-	public Options getOptions()
+	public List<Option> getOptions()
 	{
 		return options;
+	}
+	
+	public int numberOfOptions()
+	{
+		return options.size();
 	}
 }

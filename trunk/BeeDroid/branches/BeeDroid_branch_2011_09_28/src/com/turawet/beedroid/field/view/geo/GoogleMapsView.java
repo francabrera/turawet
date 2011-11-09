@@ -12,18 +12,19 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-public class GoogleMapsView  implements GeoPositionView
+public class GoogleMapsView implements GeoPositionView
 {
-	private MapView mapView;
-	private Context context;
+	private MapView	mapView;
+	private Context	context;
+	
 	public GoogleMapsView(Context context)
 	{
 		super();
 		this.context = context;
 		mapView = new MapView(context, Cte.Field.GEO_API_KEY);
 		mapView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		mapView.setClickable(true);
 	}
-
 	
 	@Override
 	public void showPosition(Position position) throws NotInitializatedPositionException
@@ -45,7 +46,7 @@ public class GoogleMapsView  implements GeoPositionView
 		controller.animateTo(position.getPositionAsGeoPoint());
 		controller.setZoom(Cte.Field.GEO_ZOOM);
 	}
-
+	
 	@Override
 	public View getView()
 	{
